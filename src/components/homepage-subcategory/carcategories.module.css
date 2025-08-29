@@ -1,0 +1,833 @@
+.subcategorySlider {
+  padding: 3rem 1rem;
+  /* background-color: #f9f9f9; */
+}
+
+.subcategoryHeading {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.subcategorySubheading {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.subcategoryDescription {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 2.5rem;
+  text-align: left;
+  max-width: 900px;
+}
+
+/* Standard Card Design (for Hatchback, Sedan, SUV, Off-road, Sports) */
+.carCard {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100%;
+  background-color: #fff;
+  position: relative;
+}
+
+.carCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  margin-bottom: 1rem; /* Gap between image and title */
+}
+
+.cardTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 0.25rem; /* Reduced margin since titleDetails will add spacing */
+  text-align: left;
+}
+
+.titleDetails {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem; /* Gap between title section and features */
+}
+
+.optionBadge {
+  background-color: #ADD8E6; /* Light blue background */
+  color: #fff; /* Match Special Offer badge text color */
+  padding: 0.25rem 0.5rem; /* Match Special Offer badge padding */
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: bold; /* Match Special Offer badge font weight */
+  display: flex;
+  align-items: center;
+}
+
+.optionBadge svg {
+  margin-right: 0.3rem;
+  font-size: 1.2em; /* Slightly smaller icon for the badge */
+  filter: brightness(1.5) contrast(1.5);
+}
+
+.carTypeContainer {
+  margin-top: 0.5rem;
+}
+
+.carType {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff0000;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  z-index: 1;
+}
+
+.categoryHeading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #000;
+  margin-top: 2rem; /* Gap above the heading */
+  margin-bottom: 1rem; /* Gap below the heading */
+  text-align: left;
+}
+
+.categoryDescription {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 1.5rem; /* Gap below the paragraph */
+  text-align: left;
+  max-width: 900px;
+}
+
+.issueBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.providerAndLocation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem; /* Space between rows */
+  background-color: #f5f5f5; /* Light grey background for standard cards */
+  padding: 0.5rem; /* Add padding for better appearance */
+  border-radius: 5px; /* Optional: Add slight border radius */
+}
+
+.providerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.locationRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.providerContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.providerPlaceholder {
+  width: 50px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.providerLogo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.greenDot {
+  width: 8px;
+  height: 8px;
+  background-color: #28a745;
+  border-radius: 50%;
+}
+
+.features {
+  display: flex;
+  /* justify-content: flex-start; */
+  margin-bottom: 1rem; /* Gap between features and charges */
+  flex-wrap: nowrap !important;
+  /* gap: 0.1rem; */
+  /* overflow-x: auto; */
+  -webkit-overflow-scrolling: touch;
+  min-width: 0;
+  align-items: center;
+}
+
+.featureItem {
+  font-size: 0.8rem;
+  color: #000;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0 0.2rem;
+}
+.luxuryFeatureItem {
+  font-size: 0.8rem;
+  color: white;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  padding: 0 0.2rem;
+}
+
+.featureItem svg {
+  font-size: 1.8em;
+  margin-right: 0.1em;
+  vertical-align: middle;
+  filter: brightness(1.5) contrast(1.3);
+  color: #000;
+  vector-effect: non-scaling-stroke;
+}
+.LuxuryFeatureItem svg {
+  font-size: 1.8em;
+  margin-right: 0.1em;
+  vertical-align: middle;
+  filter: brightness(1.5) contrast(1.3);
+  color: white;
+  vector-effect: non-scaling-stroke;
+}
+
+.chargesContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem; /* Gap between charges and inquiry buttons */
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.chargeItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 0.3rem;
+  flex: 1;
+}
+
+.chargeLabel {
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.chargePrice {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.chargeCurrency {
+  font-size: 0.7rem;
+  color: #666;
+}
+
+.inquiryButtons {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  flex-wrap: nowrap !important;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  min-width: 0;
+  margin-bottom: 1rem;
+}
+
+.callButton {
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  color: #000;
+  transition: color 0.3s;
+  padding: 0;
+}
+
+.callButton:hover {
+  background: transparent;
+  color: #feb321;
+}
+
+.callButton svg {
+  font-size: 1.8em;
+  margin-right: 0;
+  color: #000;
+  filter: brightness(1.4) contrast(1.2);
+  vector-effect: non-scaling-stroke;
+}
+
+.whatsappButton {
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  color: #25D366;
+  transition: color 0.3s;
+  padding: 0;
+}
+
+.whatsappButton:hover {
+  background: transparent;
+  color: #1eb554;
+}
+
+.whatsappButton svg {
+  font-size: 1.8em;
+  margin-right: 0;
+  color: #25D366;
+  filter: brightness(1.4) contrast(1.2);
+  vector-effect: non-scaling-stroke;
+}
+
+.icon {
+  font-size: 1.8rem;
+}
+
+.bookNowButton {
+  background-color: #0080F6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  height: 40px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.bookNowButton:hover {
+  background-color: #42C3F7;
+  color: #fff;
+}
+
+/* Location Icons for Standard Cards */
+.locationIcons {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.locationIcon {
+  font-size: 1.5em;
+  color: #000;
+  filter: brightness(1.4) contrast(1.2);
+  vector-effect: non-scaling-stroke;
+}
+
+.locationText {
+  font-size: 0.75rem;
+  color: #000;
+  margin-left: 0.2rem;
+}
+
+/* Luxury Card Design */
+.luxuryCard {
+  border: 3px solid #FFD700;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(135deg, #1a1a1a, #333);
+  color: #fff;
+  height: 100%;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.luxuryCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.luxuryImageContainer {
+  position: relative;
+  width: 100%;
+  height: 300px;
+  margin-bottom: 1rem;
+}
+
+.luxuryCardBody {
+  padding: 1.2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.luxuryCardTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 0.25rem; /* Reduced margin since titleDetails will add spacing */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: left;
+}
+
+.luxuryTitleDetails {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem; /* Gap between title section and features */
+}
+
+.luxuryOptionBadge {
+  background-color: #ADD8E6; /* Light blue background */
+  color: #fff; /* Match Special Offer badge text color */
+  padding: 0.25rem 0.5rem; /* Match Special Offer badge padding */
+  border-radius: 5px;
+  font-size: 0.8rem;
+  font-weight: bold; /* Match Special Offer badge font weight */
+  display: flex;
+  align-items: center;
+}
+
+.luxuryOptionBadge svg {
+  margin-right: 0.3rem;
+  font-size: 1.2em; /* Slightly smaller icon for the badge */
+  filter: brightness(1.5) contrast(1.5);
+}
+
+.luxuryProviderContainer {
+  margin-top: 0.5rem;
+}
+
+/* Override providerAndLocation for luxury cards */
+.luxuryCard .providerAndLocation {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+
+.luxuryLocationIcons {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.luxuryLocationIcon {
+  font-size: 1.5em;
+  margin-right: 0.05em;
+  color: #fff;
+  filter: brightness(1.4) contrast(1.2);
+  vector-effect: non-scaling-stroke;
+}
+
+.luxuryLocationText {
+  font-size: 0.75rem;
+  color: #fff;
+  margin-left: 0.2rem;
+}
+
+.luxuryFeatures {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+  flex-wrap: nowrap !important;
+  gap: 0.2rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  min-width: 0;
+  align-items: center;
+}
+
+.luxuryChargesContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: auto;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 1rem;
+}
+
+.luxuryChargeItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 0.5rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  flex: 1;
+  min-width: 100px;
+}
+
+.luxuryChargeLabel {
+  font-size: 0.8rem;
+  color: #ccc;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.luxuryChargePrice {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.luxuryChargeCurrency {
+  font-size: 0.8rem;
+  color: #ccc;
+}
+
+.luxuryCard .inquiryButtons {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  justify-content: flex-start;
+}
+
+.luxuryCard .callButton {
+  border: none;
+  color: #feb321;
+}
+
+.luxuryCard .callButton:hover {
+  background: transparent;
+  color: #e5a21e;
+}
+
+.luxuryCard .callButton svg {
+  color: #feb321;
+  font-size: 1.8em;
+  margin-right: 0;
+  filter: brightness(1.4) contrast(1.2);
+  vector-effect: non-scaling-stroke;
+}
+
+.luxuryBookButton {
+  background-color: #0080F6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  height: 40px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.luxuryBookButton:hover {
+  background-color: #42C3F7;
+}
+
+.featuredBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ffd700 !important;
+  color: #000 !important;
+  font-weight: bold;
+  z-index: 2;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.featuredBadge svg {
+  margin-right: 0.3rem;
+  font-size: 1.5em;
+  filter: brightness(1.5) contrast(1.5);
+}
+
+.specialOffersBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #003A6B !important;
+  color: #fff !important;
+  font-weight: bold;
+  z-index: 2;
+  padding: 0.25rem 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.specialOffersBadge svg {
+  margin-right: 0.3rem;
+  font-size: 1.5em;
+  filter: brightness(1.5) contrast(1.5);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+  .subcategorySlider {
+    padding: 2rem 0.75rem;
+  }
+
+  .subcategoryHeading {
+    font-size: 2rem;
+  }
+
+  .subcategorySubheading {
+    font-size: 1.5rem;
+  }
+
+  .subcategoryDescription {
+    font-size: 1rem;
+    max-width: 100%;
+  }
+
+  .categoryHeading {
+    font-size: 1.8rem;
+  }
+
+  .categoryDescription {
+    font-size: 1rem;
+  }
+
+  .luxuryImageContainer {
+    height: 250px;
+  }
+
+  .luxuryFeatures {
+    gap: 0.2rem;
+  }
+
+  .features {
+    gap: 0.2rem;
+  }
+
+  .luxuryChargeItem {
+    min-width: 90px;
+  }
+
+  .luxuryLocationIcon {
+    font-size: 1.3em;
+  }
+
+  .locationIcon {
+    font-size: 1.3em;
+  }
+}
+
+@media (max-width: 768px) {
+  .subcategorySlider {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .subcategoryHeading {
+    font-size: 1.8rem;
+  }
+
+  .subcategorySubheading {
+    font-size: 1.3rem;
+  }
+
+  .subcategoryDescription {
+    font-size: 0.9rem;
+  }
+
+  .categoryHeading {
+    font-size: 1.6rem;
+  }
+
+  .categoryDescription {
+    font-size: 0.9rem;
+  }
+
+  .carCard,
+  .luxuryCard {
+    margin-bottom: 1.5rem;
+  }
+
+  .col {
+    flex: 0 0 100% !important;
+    max-width: 100% !important;
+  }
+
+  .callButton,
+  .whatsappButton {
+    width: 35px;
+    height: 35px;
+  }
+
+  .bookNowButton,
+  .luxuryBookButton {
+    width: 90px;
+    height: 35px;
+    font-size: 0.8rem;
+  }
+
+  .luxuryCardTitle {
+    font-size: 1.3rem;
+  }
+
+  .luxuryChargePrice {
+    font-size: 1.3rem;
+  }
+
+  .luxuryBookButton {
+    font-size: 0.8rem;
+  }
+
+  .luxuryFeatures {
+    flex-wrap: nowrap;
+    gap: 0.1rem;
+  }
+
+  .features {
+    flex-wrap: nowrap;
+    gap: 0.1rem;
+  }
+
+  .luxuryLocationIcons {
+    flex-wrap: nowrap;
+  }
+}
+
+@media (max-width: 576px) {
+  .subcategorySlider {
+    padding: 1rem 0.5rem;
+  }
+
+  .subcategoryHeading {
+    font-size: 1.5rem;
+  }
+
+  .subcategorySubheading {
+    font-size: 1.2rem;
+  }
+
+  .subcategoryDescription {
+    font-size: 0.85rem;
+  }
+
+  .categoryHeading {
+    font-size: 1.4rem;
+  }
+
+  .categoryDescription {
+    font-size: 0.85rem;
+  }
+
+  .cardTitle,
+  .luxuryCardTitle {
+    font-size: 1rem;
+  }
+
+  .carType {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
+  }
+
+  .chargeItem,
+  .luxuryChargeItem {
+    padding: 0.2rem;
+  }
+
+  .chargePrice,
+  .luxuryChargePrice {
+    font-size: 1rem;
+  }
+
+  .callButton,
+  .whatsappButton {
+    width: 30px;
+    height: 30px;
+  }
+
+  .bookNowButton,
+  .luxuryBookButton {
+    width: 80px;
+    height: 30px;
+    font-size: 0.7rem;
+  }
+
+  .imageContainer {
+    height: 150px;
+  }
+
+  .luxuryImageContainer {
+    height: 200px;
+  }
+
+  .luxuryFeatures {
+    gap: 0.1rem;
+    font-size: 0.7rem;
+  }
+
+  .features {
+    gap: 0.1rem;
+    font-size: 0.7rem;
+  }
+
+  .luxuryFeatureItem svg {
+    font-size: 1.5em;
+  }
+
+  .featureItem svg {
+    font-size: 1.5em;
+  }
+
+  .luxuryLocationIcon {
+    font-size: 1.2em;
+  }
+
+  .locationIcon {
+    font-size: 1.2em;
+  }
+
+  .locationText {
+    font-size: 0.65rem;
+  }
+
+  .luxuryLocationText {
+    font-size: 0.65rem;
+  }
+
+  .callButton svg,
+  .whatsappButton svg {
+    font-size: 1.5em;
+  }
+}

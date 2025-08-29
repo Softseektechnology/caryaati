@@ -1,0 +1,157 @@
+.footer {
+  background-color: #121212;
+  color: #ddd;
+  padding: 50px 8% 20px;
+}
+
+.footerTop {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 40px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 30px;
+}
+
+.footerCol h4 {
+  position: relative;
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 18px;
+  padding-bottom: 5px;
+}
+
+.footerCol h4::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 40px;
+  height: 2px;
+  background: #f39c12;
+}
+
+.footerCol p,
+.footerCol a {
+  font-size: 14px;
+  line-height: 1.8;
+  color: #bbb;
+  text-decoration: none;
+  display: block;
+}
+
+.footerCol a:hover {
+  color: #f39c12;
+  transform: translateX(3px);
+  transition: 0.3s;
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.contactItem img {
+  width: 20px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.subscribeBox {
+  display: flex;
+  background: #1e1e1e;
+  border-radius: 30px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.subscribeBox input {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  background: none;
+  color: #fff;
+  font-size: 14px;
+}
+
+.subscribeBox button {
+  padding: 10px 20px;
+  background: #f39c12;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.subscribeBox button:hover {
+  background: #d98009;
+}
+
+.socialLinks {
+  margin-top: 15px;
+}
+
+.socialLinks a {
+  display: inline-block;
+  margin-right: 10px;
+  width: 34px;
+  height: 34px;
+  background: #1e1e1e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.socialLinks a:hover {
+  background: #f39c12;
+  transform: scale(1.1);
+}
+
+.socialLinks img {
+  width: 18px;
+}
+
+.footerBottom {
+  display: flex;
+  justify-content: space-between; /* text left, icons right */
+  align-items: center;
+  padding-top: 15px;
+  font-size: 13px;
+  color: #888;
+}
+
+.footerBottom a {
+  color: #f39c12;
+  text-decoration: none;
+}
+
+/* keep your existing socialLinks styles */
+.socialLinks {
+  display: flex;
+}
+
+.socialLinks a {
+  display: inline-block;
+  margin-left: 10px; /* space between icons */
+  width: 34px;
+  height: 34px;
+  background: #1e1e1e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.socialLinks a:hover {
+  background: #f39c12;
+  transform: scale(1.1);
+}
+
+.socialLinks img {
+  width: 18px;
+}

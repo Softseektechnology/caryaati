@@ -1,0 +1,117 @@
+.container {
+    display: flex;
+    width: 100%;
+    max-width: 800px;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bookingSection, .detailsSection {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .bookingSection {
+    border-right: 1px solid #ddd;
+  }
+  
+  .heading {
+    & {
+      text-align: center;
+      color: #333;
+    }
+  }
+  
+  .carInfo {
+    margin-bottom: 20px;
+    position: relative;
+  }
+  
+  .dropdown {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background: white;
+  }
+  
+  .dropdown img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .dropdown span {
+    flex: 1;
+  }
+  
+  .dropdown::after {
+    content: '▼';
+    position: absolute;
+    right: 10px;
+  }
+  
+  .dropdownContent {
+    position: absolute;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    z-index: 1;
+  }
+  
+  .option {
+    display: flex;
+    align-items: center;
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .option:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .option img {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+  }
+  
+  .formGroup {
+    margin-bottom: 15px;
+  }
+  
+  .formGroup label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+  }
+  
+  .formGroup input,
+  .formGroup select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .updateBtn {
+    background-color: #ff6200;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .updateBtn:hover {
+    background-color: #e65c00;
+  }

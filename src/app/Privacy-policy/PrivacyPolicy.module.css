@@ -1,0 +1,70 @@
+.privacyContainer {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .header {
+    background-color: #003087;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .nav {
+    margin-top: 10px;
+  }
+  
+  .nav a {
+    color: #fff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 14px;
+  }
+  
+  .nav a:hover {
+    text-decoration: underline;
+  }
+  
+  .mainContent {
+    padding: 20px;
+    color: #333;
+  }
+  
+  .mainContent h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  
+  .mainContent p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+  
+  .mainContent h3 {
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .mainContent h4 {
+    font-size: 16px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  
+  .mainContent hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 20px 0;
+  }

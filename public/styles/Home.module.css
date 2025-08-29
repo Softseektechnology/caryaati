@@ -1,0 +1,353 @@
+/* public/styles/Home.module.css */
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.3s ease;
+  position: relative;
+  margin: 0;
+  width: 100%;
+}
+
+.noImage {
+  background-color: #f5f5f5;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.sidebar.expanded ~ .container {
+  margin-left: 250px;
+}
+
+.searchSection {
+  padding: 1rem 0;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Background color section */
+.backgroundSection {
+  background-color: #0080F6;
+  width: 100%; /* Changed from 100vw to 100% to prevent horizontal scroll */
+  margin: 0;
+  padding: 20px 0;
+  position: relative;
+  top: 0;
+  margin-top: -71px;
+  padding-top: 91px;
+}
+
+.mainHeading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 1rem;
+  z-index: 2;
+  position: relative;
+  text-align: center;
+  max-width: 100%;
+}
+
+.mobileOnly {
+  display: none;
+}
+
+.desktopOnly {
+  display: block;
+}
+
+.textSection {
+  margin-top: 2rem;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.textSection h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.textSection p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.category-row {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  padding-bottom: 15px;
+  min-width: 120%;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+  justify-content: flex-start;
+}
+
+.category-row::-webkit-scrollbar {
+  height: 8px;
+}
+
+.category-row::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.category-row::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.category-row::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.category-row .col {
+  flex: 0 0 auto !important;
+  width: 120px !important;
+  max-width: none !important;
+  margin-right: 10px;
+}
+
+.category-card {
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.mobileCarousel {
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.mobileCarousel .carousel .slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .mainContent {
+    padding: 0;
+  }
+
+  .mainHeading {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .searchSection {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .mobileOnly {
+    display: block;
+  }
+
+  .desktopOnly {
+    display: none;
+  }
+
+  .sidebar.expanded ~ .container {
+    margin-left: 200px;
+  }
+
+  .textSection {
+    margin-top: 1rem;
+  }
+
+  .textSection h2 {
+    font-size: 1.2rem;
+  }
+
+  .textSection p {
+    font-size: 0.9rem;
+  }
+
+  .backgroundSection {
+    padding: 15px 0;
+    padding-top: 86px;
+    margin-top: -71px;
+  }
+}
+
+@media (max-width: 576px) {
+  .mainHeading {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .searchSection {
+    padding: 0.5rem 0;
+  }
+
+  .mobileCarousel .carousel .slide {
+    padding: 0.3rem;
+  }
+
+  .backgroundSection {
+    padding: 10px 0;
+    padding-top: 81px;
+    margin-top: -71px;
+  }
+/* public/styles/Home.module.css */
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0;
+}
+
+.mainContent {
+  padding-top: 0;
+}
+
+.backgroundSection {
+  background: linear-gradient(135deg, #feb321 0%, #ffcc00 100%); /* Gradient background */
+  padding: 4rem 0;
+  position: relative;
+  /* overflow: hidden; */
+  animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.contentWrapper {
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  max-width: 900px; /* Limit width for better centering */
+  margin: 0 auto;
+  margin-top: 60px;
+}
+
+.mainHeading {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #333, #666); /* Gradient text */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 2rem;
+  position: relative;
+  font-family: 'Poppins', sans-serif; /* Modern font */
+  animation: slideIn 0.5s ease-out; /* Slide-in animation */
+}
+
+.mainHeading::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, #333, #666); /* Gradient underline */
+  border-radius: 2px;
+}
+
+.componentWrapper {
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover transition */
+  animation: slideIn 0.5s ease-out forwards; /* Slide-in animation */
+  opacity: 0; /* Start hidden for animation */
+}
+
+/* Delay animations for each component */
+.componentWrapper:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.componentWrapper:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.componentWrapper:hover {
+  transform: translateY(-5px); /* Lift effect on hover */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Stronger shadow on hover */
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .backgroundSection {
+    padding: 3rem 0;
+  }
+
+  .contentWrapper {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .mainHeading {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .mainHeading::after {
+    width: 80px;
+    height: 3px;
+  }
+
+  .componentWrapper {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .backgroundSection {
+    padding: 2rem 0;
+  }
+
+  .contentWrapper {
+    padding: 1rem;
+    max-width: 95%;
+  }
+
+  .mainHeading {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .mainHeading::after {
+    width: 60px;
+    height: 2px;
+  }
+
+  .componentWrapper {
+    margin-bottom: 1rem;
+  }
+}
+}

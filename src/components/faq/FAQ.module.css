@@ -1,0 +1,70 @@
+/* components/FAQ/FAQ.css */
+.questionText {
+  color: #333;
+  font-size: 1rem;
+  font-weight: 400;
+  transition: color 0.2s;
+}
+
+.questionText:hover {
+  color: #000;
+}
+
+.toggleIcon {
+  font-size: 1.2rem;
+  color: #333;
+  transition: transform 0.2s;
+}
+
+.toggleIcon:hover {
+  color: #000;
+}
+/* 
+button:focus {
+  outline: none;
+  box-shadow: none;
+} */
+/* 
+button:hover {
+  background-color: #f8f9fa;
+} */
+
+.faq-container {
+  padding: 2rem 0;
+}
+
+.faq-container h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.faq-section {
+  margin-bottom: 1.5rem;
+}
+
+.faq-section h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.faq-section .border-bottom {
+  border-bottom: 1px solid #ddd;
+}
+
+.faq-section button {
+  width: 100%;
+  text-align: left;
+  padding: 1rem 0;
+  background: transparent;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.faq-section .text-muted {
+  color: #666;
+  padding-bottom: 1rem;
+}

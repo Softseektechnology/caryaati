@@ -1,0 +1,25 @@
+/* components/Filters/Filters.css */
+.filters-container {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .filters-container h4 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  
+  .filters-container .form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .filters-container .form-label {
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  .filters-container .form-text {
+    font-size: 0.8rem;
+    color: #666;
+  }

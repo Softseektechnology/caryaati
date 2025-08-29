@@ -1,0 +1,132 @@
+/* components/Sidebar/Sidebar.css */
+.sidebar {
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 60px;
+    height: calc(100vh - 70px);
+    background: #fff;
+    border-right: 1px solid #ddd;
+    padding: 1rem 0;
+    transition: width 0.3s ease;
+    z-index: 9999;
+  }
+  
+ .submenu {
+  padding-left: 2.2rem;
+  margin-top: 6px;
+  transition: all;
+  transition-duration: 0.2s;
+}
+
+.submenu li {
+  list-style: none;
+  margin: 1px 0;
+}
+
+.submenu li a {
+  font-size: 13px;
+  font-weight: 500;
+  color: #444;
+  display: block;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.submenu li a:hover {
+  color: #0070f3;
+}
+
+
+.dropdownToggle {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+}
+
+  .sidebar.expanded {
+    width: 250px;
+  }
+  
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sidebar li a {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    color: #000;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .sidebar li a:hover {
+    color: #feb321;
+    background-color: #f0f0f0;
+    text-decoration: none;
+  }
+  
+  .sidebar li a i {
+    font-size: 1.2rem;
+    margin-right: 0.5rem;
+  }
+  
+  .sidebar .hamburgerIcon {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+  }
+  
+  .sidebar .hamburgerIcon:hover {
+    background-color: #f0f0f0;
+  }
+  
+  .closeBtn {
+    padding: 5px 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #000;
+  }
+  
+  .closeBtn:hover {
+    color: #feb321;
+  }
+  
+  .menuText {
+    display: none;
+    white-space: nowrap;
+  }
+  
+  .sidebar.expanded .menuText {
+    display: inline;
+  }
+  
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  .sidebar.expanded + .overlay {
+    display: block;
+  }
+  
+  @media (max-width: 768px) {
+    .sidebar {
+      top: 60px;
+      height: calc(100vh - 60px);
+    }
+  
+    .sidebar.expanded {
+      width: 200px;
+    }
+  }

@@ -1,0 +1,586 @@
+/* components/search-engine/search-console.module.css */
+.searchSection {
+  padding: 3rem 0 2rem;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  animation: fadeIn 1s ease-in-out;
+  /* Fade-in animation */
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.tabs {
+  width: 70%;
+  max-width: 1200px;
+  margin: 0 auto 10px auto;
+  display: flex;
+  justify-content: center;
+  /* Center the tabs */
+}
+
+.tabList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.tabItem {
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  background: #f0f0f0;
+  transition: background-color 0.3s, transform 0.3s;
+  font-family: 'Poppins', sans-serif;
+  /* Modern font */
+  color: #333;
+}
+
+.tabItem.active {
+  background: #003A6B;
+  /* Gradient for active tab */
+  color: #fff;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+  /* Slight lift for active tab */
+}
+
+.tabItem:hover {
+  background: #3b6180;
+  transform: translateY(-2px);
+  color: white;
+  /* Lift on hover */
+}
+
+.searchBarContainer {
+  width: 70%;
+  max-width: 1200px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  margin: 0 auto;
+  animation: slideIn 0.5s ease-out;
+  /* Slide-in animation */
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.searchForm {
+  margin: 0;
+  width: 100%;
+}
+
+.searchFormInner {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+.formGroup {
+  flex: 5 0 auto;
+  position: relative;
+}
+
+.formGroup:first-child {
+  width: 400px;
+}
+
+.advancedSearchContainer {
+  width: 100%;
+}
+
+.advancedFirstRow {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.advancedColumn {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.advancedSearchRow {
+  display: flex;
+  align-items: stretch;
+  gap: 15px;
+  width: 100%;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.advancedField {
+  flex: 1;
+  min-width: 150px;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.advancedLabel {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+  background: #fff;
+  padding: 0 4px;
+  z-index: 1;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.priceRangeContainer {
+  flex: 1;
+  position: relative;
+  min-width: 150px;
+}
+
+.priceRangeTrigger {
+  border: 1px solid #ddd !important;
+  height: 50px !important;
+  padding: 0 12px;
+  padding-top: 8px;
+  font-size: 1rem;
+  border-radius: 4px !important;
+  color: #333 !important;
+  background: #f9f9f9;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.priceRangeTrigger.hasValues {
+  font-weight: 600;
+  color: #feb321;
+}
+
+.priceRangeTrigger:hover,
+.priceRangeTrigger:focus {
+  outline: none;
+  background: #fff;
+  border-color: #feb321 !important;
+  transform: scale(1.02);
+}
+
+.priceRangeInputs {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  margin-top: 10px;
+}
+
+.priceRangeInputs.active {
+  display: flex;
+}
+
+.priceInputWrapper {
+  flex: 1;
+  position: relative;
+}
+
+.priceInput {
+  border: 1px solid #ddd !important;
+  border-right: none !important;
+  height: 50px !important;
+  padding: 0 12px;
+  padding-top: 8px;
+  font-size: 1rem;
+  border-radius: 4px 0 0 4px !important;
+  color: #333 !important;
+  background: #f9f9f9;
+  transition: background 0.3s, border-color 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.priceInput:last-child {
+  border-radius: 0 4px 4px 0 !important;
+  border-right: 1px solid #ddd !important;
+}
+
+.priceInput:focus {
+  outline: none;
+  background: #fff;
+  border-color: #feb321 !important;
+}
+
+.priceDash {
+  margin: 0 5px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.priceUnderline {
+  height: 2px;
+  background-color: #feb321;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: none;
+}
+
+.priceRangeContainer.active .priceUnderline {
+  display: block;
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.searchButton {
+  background: #0080F6;
+  border: none;
+  border-radius: 8px;
+  padding: 0 0px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  gap: 8px;
+  width: 130px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.searchButton:hover {
+  background: #42C3F7;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+.searchButton:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.searchInput,
+.advancedInput {
+  border: 1px solid #ddd !important;
+  height: 50px !important;
+  padding: 0 12px;
+  padding-top: 8px;
+  font-size: 1rem;
+  border-radius: 4px !important;
+  color: #333 !important;
+  background: #f9f9f9 !important;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dateRangePicker {
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  height: 50px !important;
+  padding: 0 12px;
+  padding-top: 8px;
+  font-size: 1rem !important;
+  background: #f9f9f9 !important;
+  transition: background 0.3s, border-color 0.3s, transform 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  align-items: center;
+}
+
+.dateRangePicker:focus {
+  outline: none;
+  background: #fff;
+  border-color: #feb321 !important;
+  transform: scale(1.02);
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-top: 5px;
+}
+
+.dropdownGroup {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.dropdownTitle {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 5px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.dropdownItem {
+  padding: 8px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  transition: background 0.3s;
+}
+
+.dropdownItem:hover {
+  background: #f0f0f0;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+  .formGroup:first-child {
+    width: 40%;
+  }
+
+  .searchButton {
+    width: 120px;
+  }
+
+  .advancedSearchRow {
+    flex-wrap: wrap;
+  }
+
+  .advancedField {
+    flex: 1 1 40%;
+  }
+
+  .priceRangeInputs {
+    flex-wrap: wrap;
+  }
+
+  .priceInputWrapper {
+    flex: 1 1 45%;
+  }
+
+  .buttonRow {
+    justify-content: center;
+  }
+
+  .dateRangePicker {
+    width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  .searchFormInner {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .formGroup:first-child {
+    width: 100%;
+  }
+
+  .searchButton {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .advancedDate {
+    width: 100%;
+  }
+
+  .advancedFirstRow {
+    flex-wrap: wrap;
+  }
+
+  .advancedColumn {
+    flex: 1 1 100%;
+  }
+
+  .advancedSearchRow {
+    flex-wrap: wrap;
+  }
+
+  .advancedField {
+    flex: 1 1 100%;
+  }
+
+  .priceRangeInputs {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .priceInputWrapper {
+    flex: 1 1 100%;
+  }
+
+  .priceDash {
+    display: none;
+  }
+
+  .buttonRow {
+    justify-content: center;
+  }
+
+  .dateRangePicker {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .searchSection {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .tabs {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .tabList {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .tabItem {
+    flex: 1;
+    text-align: center;
+  }
+
+  .searchBarContainer {
+    padding: 15px;
+    width: 100%;
+    border-radius: 8px;
+    margin: 0 auto;
+  }
+
+  .searchFormInner {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .formGroup:first-child {
+    width: 100%;
+  }
+
+  .advancedFirstRow {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .advancedColumn {
+    flex: 1 1 100%;
+  }
+
+  .searchInput,
+  .advancedInput,
+  .priceRangeTrigger,
+  .priceInput {
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    height: 48px !important;
+    padding: 0 12px;
+    padding-top: 8px;
+    font-size: 0.85rem !important;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    width: 100%;
+  }
+
+  .dateRangePicker {
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    height: 48px !important;
+    padding: 0 12px;
+    padding-top: 8px;
+    font-size: 0.85rem !important;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    width: 100%;
+  }
+
+  .searchButton {
+    border-radius: 6px;
+    height: 48px;
+    width: 100%;
+    padding: 0 20px;
+    font-size: 1rem;
+  }
+
+  .advancedSearchRow {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .advancedField {
+    flex: 1 1 100%;
+  }
+
+  .priceRangeInputs {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .priceInputWrapper {
+    flex: 1 1 100%;
+  }
+
+  .priceDash {
+    display: none;
+  }
+
+  .buttonRow {
+    justify-content: center;
+  }
+
+  .advancedLabel {
+    font-size: 0.75rem;
+    top: -8px;
+    left: 10px;
+  }
+}

@@ -1,0 +1,116 @@
+.searchSection {
+  padding: 3rem 0 2rem;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.desktopOnly {
+  display: block;
+}
+
+.mobileOnly {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .desktopOnly {
+    display: none;
+  }
+  .mobileOnly {
+    display: block;
+  }
+  .searchSection {
+    padding: 2rem 0.5rem 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .searchSection {
+    padding: 1.5rem 0 1rem;
+  }
+}
+
+/* Desktop Layout */
+.categoryContainer {
+  display: flex;
+  margin: auto;
+  flex-wrap: nowrap;
+  gap: 30px; /* Increased gap for better spacing */
+  padding: 10px;
+  width: 58%;
+  /* -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x mandatory; Snap to items */
+}
+/* 
+.categoryContainer::-webkit-scrollbar {
+  height: 8px;
+}
+
+.categoryContainer::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.categoryContainer::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.categoryContainer::-webkit-scrollbar-thumb:hover {
+  background: #555;
+} */
+
+.categoryCard {
+  transition: transform 0.2s;
+  cursor: pointer;
+  flex: 0 0 90px; /* Fixed width to fit 80px image + padding/margins */
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  /* scroll-snap-align: start; Snap to start of each card */
+}
+
+/* .categoryCard:hover {
+  transform: scale(1.05);
+} */
+
+.imagePlaceholder {
+  width: 110px;
+  height: 50px;
+  overflow: hidden;
+  position: relative;
+}
+
+.categoryName {
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: white;
+}
+
+/* Mobile Carousel Layout */
+.mobileCarousel {
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.carouselItem {
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 10px; /* Increased margin to prevent overlap */
+}
+
+.carouselItem:hover {
+  transform: scale(1.05);
+}

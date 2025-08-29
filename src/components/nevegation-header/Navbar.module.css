@@ -1,0 +1,268 @@
+/* components/Navbar/Navbar.module.css */
+.hamburger {
+  margin-right: 10px;
+  padding: 5px;
+  border: none;
+  background: none;
+  z-index: 1002;
+}
+
+.hamburger i {
+  color: #000;
+  font-size: 28px;
+  transition: color 0.3s ease;
+}
+
+.hamburger:hover i {
+  color: #feb321;
+}
+
+.navbar-brand {
+  margin-left: 10px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 10px 0;
+}
+
+.navbarSearchForm {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto;
+  max-width: 900px;
+  width: 100%;
+  /* padding: 2px 18px; */
+  background: #ffffff;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbarSearchForm:hover {
+  /* transform: translateY(-2px); */
+  /* box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1); */
+}
+
+.navbarSearchInput {
+  border: 1px solid #ddd !important;
+  height: 48px !important;
+  padding: 0 16px;
+  font-size: 1rem;
+  border-radius: 8px !important;
+  color: #333 !important;
+  background: #f9f9f9;
+  transition: all 0.3s ease;
+  flex: 1;
+  min-width: 250px;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.navbarSearchInput:focus {
+  outline: none;
+  border-color: #feb321 !important;
+  background: #fff;
+  transform: scale(1.01);
+  box-shadow: 0 0 8px rgba(254, 179, 33, 0.3);
+}
+
+.navbarSearchInput::placeholder {
+  color: #999 !important;
+}
+
+.navbarDatePicker {
+  border: 1px solid #ddd !important;
+  height: 48px !important;
+  padding: 0 16px;
+  font-size: 1rem;
+  border-radius: 8px !important;
+  color: #333 !important;
+  background: #f9f9f9;
+  transition: all 0.3s ease;
+  flex: 1;
+  min-width: 300px;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+}
+
+.navbarDatePicker:focus,
+.flatpickr-input:focus {
+  outline: none;
+  background: #fff;
+  border-color: #feb321 !important;
+  transform: scale(1.01);
+  box-shadow: 0 0 8px rgba(254, 179, 33, 0.3);
+}
+
+.flatpickr-input {
+  border: 1px solid #ddd !important;
+  height: 48px !important;
+  padding: 0 16px;
+  font-size: 1rem;
+  border-radius: 8px !important;
+  color: #333 !important;
+  background: #f9f9f9;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.flatpickr-calendar {
+  font-family: 'Montserrat', sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  position: absolute;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange,
+.flatpickr-day.selected.inRange,
+.flatpickr-day.startRange.inRange,
+.flatpickr-day.endRange.inRange {
+  background: #feb321 !important;
+  color: #fff !important;
+  border-color: #feb321 !important;
+}
+
+.flatpickr-day.inRange {
+  background: rgba(254, 179, 33, 0.2) !important;
+  border-color: transparent !important;
+}
+
+.flatpickr-time {
+  display: block !important;
+}
+
+.flatpickr-time input {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 100%;
+}
+
+.flatpickr-time .flatpickr-am-pm {
+  display: block;
+}
+
+.navbarSearchButton {
+  background:#0080F6;
+  border-radius: 8px;
+  justify-items: center;
+  height: 48px;
+  text-align: center;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.navbarSearchButton:hover {
+  background: #42C3F7;
+  /* transform: translateY(-2px); */
+  /* box-shadow: 0 4px 15px rgba(0, 128, 246, 0.3); */
+}
+
+.navbarSearchButton:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.openSearch{
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+@media (min-width: 768px) {
+  .openSearchInput {
+    margin-left: 30px;
+  }
+  .openSearchDate {
+    margin-left: 30px;
+  }
+}
+/* Desktop Layout (min-width: 577px) */ 
+@media (min-width: 900px) {
+  .openSearchDate {
+    margin-left: 0px;
+  }
+}
+@media (max-width: 900px) {
+  .openSearchForm {
+    flex-direction: column;
+  }
+}
+
+@media (min-width: 577px) {
+  .navbarSearchForm {
+    flex-wrap: nowrap;
+    justify-content: center;
+  }
+  
+  .navbarSearchInput {
+    min-width: 300px;
+    font-size: 0.9rem;
+    padding: 14px 8px;
+  }
+  .navbarDatePicker {
+    min-width: 350px;
+  }
+  .navbarSearchButton {
+    min-width: 150px;
+  }
+}
+
+/* Mobile Layout (max-width: 576px) */
+@media (max-width: 576px) {
+  .navbarSearchForm {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    max-width: 100%;
+    padding: 12px;
+    margin: 10px auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  }
+  .navbarSearchInput {
+    width: 100%;
+    min-width: 150px;
+    /* height: 40px; */
+    font-size: 0.9rem;
+    padding: 14px 8px;
+    border-radius: 6px !important;
+  }
+  .navbarDatePicker {
+    width: 100%;
+    height: 44px !important;
+    font-size: 0.95rem;
+    border-radius: 6px !important;
+  }
+  .navbarSearchButton {
+    width: 100%;
+    height: 44px !important;
+    font-size: 0.95rem;
+    border-radius: 6px;
+  }
+  .flatpickr-input {
+    height: 44px !important;
+    font-size: 0.95rem !important;
+  }
+  .flatpickr-calendar {
+    width: 100%;
+    max-width: 95vw;
+    font-size: 0.9rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}

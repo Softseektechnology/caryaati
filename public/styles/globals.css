@@ -1,0 +1,107 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: 'Montserrat', 'Roboto', -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+    background-color: #f0f3f5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.form-container {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+  text-align: left !important;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.form-row {
+  align-items: flex-end;
+}
+
+.react-datepicker-wrapper,
+.react-datepicker__input-container,
+.select__control {
+  width: 100%;
+  min-height: 38px;
+}
+
+.select__menu {
+  z-index: 1050;
+}
+
+.category-card {
+  transition: transform 0.2s;
+}
+
+.category-card:hover {
+  transform: scale(1.05);
+}
+
+.category-row {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  padding-bottom: 15px;
+  min-width: 100%;
+  scrollbar-width: thin;
+  scrollbar-color: #888 #f1f1f1;
+}
+
+.category-row::-webkit-scrollbar {
+  height: 8px;
+}
+
+.category-row::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.category-row::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.category-row::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.category-row .col {
+  flex: 0 0 auto !important;
+  width: 120px !important;
+  max-width: none !important;
+  margin-right: 10px;
+}
+
+@media (max-width: 992px) {
+  .form-row .col {
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .form-container {
+    padding: 15px;
+  }
+  .form-title {
+    font-size: 1.25rem;
+  }
+  .form-row .col {
+    margin-bottom: 1rem;
+  }
+}
