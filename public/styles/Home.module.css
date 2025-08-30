@@ -186,6 +186,9 @@
   }
 }
 
+@media (max-width: 1347px) {
+
+}
 @media (max-width: 576px) {
   .mainHeading {
     font-size: 1.5rem;

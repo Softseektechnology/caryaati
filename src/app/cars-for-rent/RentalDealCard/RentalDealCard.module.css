@@ -940,38 +940,58 @@ input:checked+.sliderBox:before {
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 1420px) {
+  .left{
+    width: 250px;
+  }
+  .features{
+    font-size: 11px;
+  }
+}
+@media (max-width: 767px) {
   .carCard {
     margin-left: 0px;
   }
-
+  
   .left {
     width: 100%;
   }
 }
-
-@media (min-width: 1280px) {
+@media (max-width: 1347px) {
   .carCard {
     position: relative;
-    left: -15px;
+    /* margin-right: 10px; */
+
+  }
+  .detailBtnMore{
+    right: 0;
+  }
+  .detailBtnBack{
+    left: 0;
   }
 
 
 
 }
 
-/* @media (max-width: 1280px) {
+
+/* @media (max-width: 1347px) {
   .middle {
     width: 100%;
   }
 } */
 
 @media (max-width: 1280px) {
-  .carCard {
-    /* flex-direction: column; */
-    width: 90vw;
-    position: relative;
+  .carCard{
     justify-self: center;
+  }
+}
+@media (max-width: 1347px) {
+  .carCard {
+    width: 85vw;
+    /* position: relative; */
+    /* justify-self: center; */
+    /* margin-left: 55px; */
   }
 
   .mapWrapper {
@@ -1062,7 +1082,7 @@ input:checked+.sliderBox:before {
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .image{
     height: 260px;
   }

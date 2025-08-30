@@ -22,7 +22,7 @@ const ResultsSortBar = ({ resultCount = 375, defaultSort = "Our recommendation" 
   };
 
   return (
-    <div className='flex resultSortBar max-lg:mt-5 z-[-1] justify-between items-center py-[10px] px-[20px] max-sm:px-[7px] flex-nowrap w-[60%] max-xl:w-[71vw] max-sm:w-[92vw] max-sm:ml-0 ml-[80px] max-xl:ml-[60px] max-md:ml-[0px] max-md:w-[80vw] bg-[#f0f3f5] gap-10'>
+    <div className={`${styles.resultsSortBar} flex resultSortBar max-lg:mt-5 z-[-1] justify-between items-center py-[10px] px-[20px] max-sm:px-[7px] flex-nowrap w-[60%] max-xl:w-[71vw] max-sm:w-[92vw] max-sm:ml-0 ml-[80px] max-xl:ml-[60px] max-md:ml-[0px] max-md:w-[80vw] bg-[#f0f3f5] gap-10`}>
       <div className='font-[400] text-[16px] max-sm:text-[14px] max-md:text-[14px] flex flex-nowrap'>{resultCount} results</div>
       <div className='relative flex items-center content-center gap-[10px] max-sm:gap-[2px]'>
       <span className="max-sm:text-[11px] max-[475px]:text-[11px]">Sort by:</span>

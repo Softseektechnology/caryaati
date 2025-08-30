@@ -66,12 +66,25 @@
 }
 
 /* ✅ Responsive Styles */
+@media (max-width: 1370px) {
+  .resultsSortBar{
+    /* margin-left: 0px; */
+    /* justify-self: center; */
+    /* width: 70%; */
+    margin-left: 90px;
+    width: 84.7vw;
+  }
+}
 @media (max-width: 1280px) {
-  /* .resultsSortBar{
-    margin-left: 0px;
-    justify-self: center;
-    width: 70%;
-  } */
+  .resultsSortBar{
+    margin-left: 60px;
+  }
+}
+@media (max-width: 1025px) {
+  .resultsSortBar {
+    width: 79.4vw;
+    margin-left: 58px;
+  }
 }
 @media (max-width: 600px) {
   .resultsCount{
@@ -84,13 +97,10 @@
     width: 90vw;
   }
 } */
-@media (max-width: 760px) {
+@media (max-width: 767px) {
   .resultsSortBar {
-    flex-direction: column;
-    /* align-items: flex-start; */
-    padding: 10px 15px;
-    margin-left: 0px;
-    width: 80vw;
+    margin-left: 0;
+    justify-self: center;
   }
 
   /* .sortContainer { */
