@@ -516,10 +516,9 @@
 .switch {
   position: relative;
   display: inline-block;
-  width: 22px;
-  height: 20px;
-  margin-right: 8px;
-  /* Space between switch and text */
+  width: 18px; /* Reduced from 22px */
+  height: 16px; /* Reduced from 20px */
+  margin-right: 6px; /* Reduced from 8px for better alignment */
 }
 
 .switch input {
@@ -535,19 +534,18 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #ccc;
-  /* Default (off) background color */
+  background-color: #ccc; /* Default (off) background color */
   transition: 0.4s;
-  border-radius: 20px;
-  height: 15px;
-  width: 25px;
+  border-radius: 16px; /* Adjusted for smaller size */
+  height: 12px; /* Reduced from 15px */
+  width: 20px; /* Reduced from 25px */
 }
 
 .sliderBox:before {
   position: absolute;
   content: "";
-  height: 11px;
-  width: 11px;
+  height: 8px; /* Reduced from 11px */
+  width: 8px; /* Reduced from 11px */
   left: 2px;
   bottom: 2px;
   background-color: white;
@@ -555,14 +553,12 @@
   border-radius: 50%;
 }
 
-input:checked+.sliderBox {
-  background-color: #ffc107;
-  /* Theme color for checked state */
+input:checked + .sliderBox {
+  background-color: #ffc107; /* Theme color for checked state */
 }
 
-input:checked+.sliderBox:before {
-  transform: translateX(11px);
-  /* Move slider knob to the right */
+input:checked + .sliderBox:before {
+  transform: translateX(8px); /* Adjusted for smaller width (20px - 8px - 4px for padding) */
 }
 
 .searchButton:hover {
@@ -919,6 +915,7 @@ input:checked+.sliderBox:before {
   height: 100%;
   z-index: 800;
 }
+
 
 /* When map should stop scrolling (becomes absolute again) */
 .mapAbsolute {
