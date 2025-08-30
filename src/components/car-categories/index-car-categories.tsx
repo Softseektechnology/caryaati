@@ -91,7 +91,7 @@ export default function CarCategories() {
                   alt={category.name}
                   width={80}
                   height={50}
-                  style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+                  style={{ objectFit: 'cover', }}
                   onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
                     e.currentTarget.src = '/images/fallback-placeholder.jpg';
                   }}
