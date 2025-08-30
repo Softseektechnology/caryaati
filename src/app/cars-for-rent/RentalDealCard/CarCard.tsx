@@ -396,7 +396,7 @@ function SamplePrevArrow(props) {
               <div className='block text-[12px] font-medium'><span>3 Days :</span><span className='float-right '><span className='theme-text-color pr-2'>3000.90</span>AED</span></div>
             </div>
             <p className={`${styles.subtext} relative left-[-4px]`}>Extra Charges</p>
-            <ul className={`${styles.features} ${styles.backFeatures} relative left-[-4px]`}>
+            <ul className={`${styles.features} ${styles.backFeatures} ${styles.switchFeatures} relative left-[-4px]`}>
               <li className='flex items-center text-[12px] mb-2 content-center'>
                 <label className={styles.switch}>
                   <input type="checkbox" checked={insurance} onChange={() => setInsurance(prev => !prev)} />

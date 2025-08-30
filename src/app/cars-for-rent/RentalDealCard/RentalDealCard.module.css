@@ -655,6 +655,14 @@ input:checked + .sliderBox:before {
   display: none;
 }
 
+@media (min-width: 1347px) and (max-width: 1465px) {
+  .switchFeatures{
+    columns: 1;
+    height: 120px;
+    overflow: auto;
+    gap: 5px;
+  }
+}
 @media (max-width: 1200px) {
   .carCard {
     width: 95vw;
