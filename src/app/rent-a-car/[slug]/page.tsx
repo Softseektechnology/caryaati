@@ -89,7 +89,7 @@ export default function RentACarListings() {
           </div>
 
         </Row>
-      </main>git pull origin <your-branch-name>
+      </main>
 
       <Footer />
     </div>

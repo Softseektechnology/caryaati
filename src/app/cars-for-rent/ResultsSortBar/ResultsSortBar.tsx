@@ -1,7 +1,7 @@
 // components/ResultsSortBar.jsx
 import React, { useState } from "react";
 import { ChevronDown } from "react-bootstrap-icons";
-import styles from "./resultsSortBar.module.css";
+import styles from "./ResultsSortBar.module.css";
 
 const ResultsSortBar = ({ resultCount = 375, defaultSort = "Our recommendation" }) => {
   const [showSortDropdown, setShowSortDropdown] = useState(false);
