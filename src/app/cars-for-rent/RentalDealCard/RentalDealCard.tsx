@@ -201,7 +201,7 @@ export default function CarAndMapLayout() {
 
       {/* Redesigned Search Section - Beautiful container with shadow, rounded, smooth animation */}
       <div 
-        className={`xl:hidden justify-center w-[93%] md:ml-[55px] md:px-5 px-2 mb-4 transition-all duration-500 ease-in-out transform ${searchOpen ? 'scale-100 opacity-100 z-[999] shadow-xl rounded-xl bg-white border border-[#ddd] py-4' : 'scale-95 opacity-0 z-[-1] h-0 py-0 overflow-hidden'}`}
+        className={`xl:hidden justify-center w-[93%] max-sm:w-[92vw] ml-[55px] ${styles.searchToggle} md:px-5 px-2 mb-4 transition-all duration-500 ease-in-out transform ${searchOpen ? 'scale-100 opacity-100 z-[999] shadow-xl rounded-xl bg-white border border-[#ddd] py-4' : 'scale-95 opacity-0 z-[-1] h-0 py-0 overflow-hidden'}`}
       >
         {searchOpen && (
           <Form onSubmit={handleSubmit} className={`flex flex-row gap-3 max-sm:flex-wrap max-sm:gap-2 max-sm:flex-col items-center`}>

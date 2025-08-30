@@ -1092,6 +1092,9 @@ input:checked+.sliderBox:before {
   .image{
     height: 260px;
   }
+  .searchToggle {
+    margin-left: 0;
+  }
   .carCard {
     width: 92vw;
     overflow: hidden;
