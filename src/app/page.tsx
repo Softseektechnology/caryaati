@@ -59,7 +59,6 @@ export default function Home() {
         </div>
         {/* Section without background color */}
         <div className="container" style={{ marginTop: '50px' }}>
-          <h1>sjadhiugkjcbnjasbfuasdgkjashdk new update</h1>
           <Subcategory /> {/* Includes the heading */}
         </div>
       </main>
