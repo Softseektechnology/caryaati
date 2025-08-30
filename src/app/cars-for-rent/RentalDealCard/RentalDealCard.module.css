@@ -1079,6 +1079,12 @@ input:checked+.sliderBox:before {
     float: right;
     top: -40px;
   }
+  .dealBtnMore{
+    right: -5.5%;
+  }
+  .dealBtnBack{
+    left: -3.5%;
+  }
 
 }
 
@@ -1153,6 +1159,10 @@ input:checked+.sliderBox:before {
   }
   .middle{
     margin-bottom: 0px;
+  }
+
+  .detailBtnBack{
+    bottom: -15.4%;
   }
 
 }
