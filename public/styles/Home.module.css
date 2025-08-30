@@ -217,7 +217,7 @@
 }
 
 .backgroundSection {
-  background: linear-gradient(135deg, #feb321 0%, #ffcc00 100%); /* Gradient background */
+  /* background: linear-gradient(135deg, #feb321 0%, #ffcc00 100%); Gradient background */
   padding: 4rem 0;
   position: relative;
   /* overflow: hidden; */
