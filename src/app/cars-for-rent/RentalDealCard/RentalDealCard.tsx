@@ -94,8 +94,8 @@ export default function CarAndMapLayout() {
     {
       id: 1,
       src: typeof window !== 'undefined'
-        ? localStorage.getItem('carImage') || '/images/cars/car-placeholder.jpg'
-        : '/images/cars/car-placeholder.jpg', // Add leading '/' for public folder
+        ? localStorage.getItem('carImage') || '/images/cars/32_sedan_white.png'
+        : '/images/cars/32_sedan_white.png', // Add leading '/' for public folder
       alt: 'Nissan Sunny',
     },
     {

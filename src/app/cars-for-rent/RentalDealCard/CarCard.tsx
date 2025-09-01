@@ -388,14 +388,14 @@ function SamplePrevArrow(props) {
 
           {/* Back Side (Details) */}
           <div className={`${styles.middleContent} bg-transparent ${styles.back}`}>
-            <p className={`${styles.subtext} relative top-[2px] left-[-4px]`}>Rental Charges</p>
+            <p className={`${styles.subtext} font-light relative top-[2px] left-[-4px]`}>Rental Charges</p>
             <div className={`flex flex-col pb-2 md:w-[45%] relative`}>
               <div className='block mb-[2px] text-[12px] font-medium'><span>30 Days :</span><span className='float-right '><span className='theme-text-color pr-2'>3000.90</span>AED</span></div>
               <div className='block mb-[2px] text-[12px] font-medium'><span>15 Days :</span><span className='float-right '><span className='theme-text-color pr-2'>3000.90</span>AED</span></div>
               <div className='block mb-[2px] text-[12px] font-medium'><span>7 Days :</span><span className='float-right '><span className='theme-text-color pr-2'>3000.90</span>AED</span></div>
               <div className='block text-[12px] font-medium'><span>3 Days :</span><span className='float-right '><span className='theme-text-color pr-2'>3000.90</span>AED</span></div>
             </div>
-            <p className={`${styles.subtext} relative left-[-4px]`}>Extra Charges</p>
+            <p className={`${styles.subtext} font-light relative left-[-4px]`}>Extra Charges</p>
             <ul className={`${styles.features} ${styles.backFeatures} ${styles.switchFeatures} relative left-[-4px]`}>
               <li className='flex items-center text-[12px] mb-2 content-center'>
                 <label className={styles.switch}>
