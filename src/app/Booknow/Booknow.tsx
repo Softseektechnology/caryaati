@@ -28,11 +28,9 @@ const CarBookingForm: React.FC = () => {
     const startDateStr = localStorage.getItem('startDate');
     const endDateStr = localStorage.getItem('endDate');
 
-    // Convert strings to Date objects or use default dates if null
     const startDate = startDateStr ? new Date(startDateStr) : new Date('2025-08-12T22:00:00+05:00');
     const endDate = endDateStr ? new Date(endDateStr) : new Date('2025-08-13T22:00:00+05:00');
 
-    // Check if the parsed dates are valid
     const isValidStartDate = startDate instanceof Date && !isNaN(startDate.getTime());
     const isValidEndDate = endDate instanceof Date && !isNaN(endDate.getTime());
 
@@ -93,12 +91,12 @@ const CarBookingForm: React.FC = () => {
   };
 
   const handleImageClick = (src: string) => {
-    if (src === selectedCar) return; // prevent unnecessary animation
-    setIsFlipping(true); // start flip
+    if (src === selectedCar) return;
+    setIsFlipping(true);
     setTimeout(() => {
-      setSelectedCar(src); // update image
-      setIsFlipping(false); // end flip
-    }, 300); // duration must match the CSS animation time
+      setSelectedCar(src);
+      setIsFlipping(false);
+    }, 300);
   };
 
   const nextStep = () => {
@@ -166,6 +164,9 @@ const CarBookingForm: React.FC = () => {
         <div className="w-full max-sm:w-[100vw] bg-white overflow-hidden">
           {/* Stepper for Progress Steps */}
           <div className={styles.stepper}>
+            <div className={styles.progressBar}>
+              <div className={styles.progressFill} style={{ width: `${((currentStep - 1) / 3) * 100}%` }}></div>
+            </div>
             {[1, 2, 3, 4].map((step) => (
               <div
                 key={step}
@@ -180,7 +181,6 @@ const CarBookingForm: React.FC = () => {
                 </p>
               </div>
             ))}
-
           </div>
 
           {/* Main Content */}
@@ -233,7 +233,7 @@ const CarBookingForm: React.FC = () => {
                       <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#000000"><path d="M450-90v-179.85l-140 138L267.85-174 450-356.15V-450h-93.85L174-267.85 131.85-310l138-140H90v-60h179.85l-138-140L174-692.15 356.15-510H450v-93.85L267.85-786 310-828.15l140 138V-870h60v179.85l140-138L692.15-786 510-603.85V-510h93.85L786-692.15 828.15-650l-138 140H870v60H690.15l138 140L786-267.85 603.85-450H510v93.85L692.15-174 650-131.85l-140-138V-90h-60Z" /></svg> A/C
                     </span>
                     <span className="flex items-center cursor-pointer bg-[#ffffff] px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm text-[#1f1f1f] font-medium shadow hover:shadow-md hover:-translate-y-1 transition-all duration-200">
-                      <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#000000"><path d="M595-180H327.31Q297-180 276-201q-21-21-21-51.31V-680h60v427.69q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85H595v60ZM445-710q-30.69 0-52.27-21.58-21.58-21.57-21.58-52.26 0-30.7 21.58-52.27 21.58-21.58 52.27-21.58 30.69 0 52.27 21.58 21.57 21.57 21.57 52.27 0 30.69-21.57 52.26Q475.69-710 445-710ZM645-90v-190H425q-29.15 0-49.58-20.42Q355-320.85 355-350v-225.38q0-38.16 25.92-64.08 25.93-25.92 64.08-25.92t64.08 25.92Q535-613.54 535-575.38V-380h100q29.15 0 49.58 20.42Q705-339.15 705-310v220h-60Z" /></svg> {`x5`}
+                      <svg xmlns="http://www.w3.org/2000/svg" height="22px" viewBox="0 -960 960 960" width="22px" fill="#000000"><path d="M595-180H327.31Q297-180 276-201q-21-21-21-51.31V-680h60v427.69q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85H595v60ZM445-710q-30.69 0-52.27-21.58-21.58-21.57-21.58-52.26 0-30.7 21.58-52.27 21.58-21.58 52.27-21.58 30.69 0 52.27 21.58 21.57 21.57 21.57 52.27 0 30.69-21.57 52.26Q475.69-710 445-710Zm200 620v-190H425q-29.15 0-49.58-20.42Q355-320.85 355-350v-225.38q0-38.16 25.92-64.08 25.93-25.92 64.08-25.92t64.08 25.92Q535-613.54 535-575.38V-380h100q29.15 0 49.58 20.42Q705-339.15 705-310v220h-60Z" /></svg> {`x5`}
                     </span>
                   </div>
                   <p className="text-red-500 text-xs sm:text-sm font-medium mb-3">
@@ -254,7 +254,7 @@ const CarBookingForm: React.FC = () => {
                         fill="currentColor"
                         aria-label="Engine Icon"
                       >
-                        <path d="m699.08-135.85-252-253.23q-21.16 9.16-43.01 14.12-21.86 4.96-46.38 4.96-95.83 0-162.91-67.08-67.09-67.09-67.09-162.92 0-31 7.89-59.27 7.88-28.27 22.42-53.81l143.69 142.93L387.54-656 245.39-798.92q25.53-14.54 53.45-22.81t58.85-8.27q95.84 0 162.92 67.08 67.08 67.09 67.08 162.92 0 25.31-4.77 47.15-4.77 21.85-14.31 42.24l253.24 252q10.46 10.59 10.46 25.6 0 15.01-10.38 25.39l-72.63 72.63q-10.38 10.37-25.07 9.99-14.69-.39-25.15-10.85Zm25.54-59.99 36.61-36.62-266.38-266.39q16.84-20.77 24.84-47.27 8-26.5 8-53.88 0-66.54-47.54-117.77Q432.61-769 359.84-768l86.7 86.69q10.84 10.85 10.84 25.31 0 14.46-10.84 25.31L327-511.15q-10.85 10.84-25.31 10.84-14.46 0-25.31-10.84l-86.69-86.7q.15 77 51.77 122.43Q293.08-430 357.69-430q26.26 0 52.52-7.81 26.25-7.8 48.02-24.42l266.39 266.39ZM472-486.46Z" />
+                        <path d="m699.08-135.85-252-253.23q-21.16 9.16-43.01 14.12-21.86 4.96-46.38 4.96-95.83 0-162.91-67.08-67.09-67.09-67.09-162.92 0-31 7.89-59.27 7.88-28.27 22.42-53.81l143.69 142.93L387.54-656 245.39-798.92q25.53-14.54 53.45-22.81t58.85-8.27q95.84 0 162.92 67.08 67.08 67.09 67.08 162.92 0 25.31-4.77 47.15-4.77 21.85-14.31 42.24l253.24 252q10.46 10.59 10.46 25.6 0 15.01-10.38 25.39l-72.63 72.63q-10.38 10.37-25.07 9.99-14.69-.39-25.15-10.85Zm25.54-59.99 36.61-36.62-266.38-266.39q16.84-20.77 24.84-47.27 8-26.5 8-53.88 0-66.54-47.54-117.77Q432.61-769 359.84-768l86.7 86.69q10.84 10.85 10.84 25.31 0 14.46-10.84 25.31L327-511.15q-10.85 10.84-25.31 10.84-14.46 0-25.31-10.84l-86.69-86.7q.15 77 51.77 122.43Q293.08-430 357.69-430q26.26 0 52.52-7.81 26.25-7.80 48.02-24.42l266.39 266.39ZM472-486.46Z" />
                       </svg>
                       <p className="text-xs sm:text-sm text-gray-600 font-medium">Engine<br />1.5L</p>
                     </div>
@@ -295,7 +295,6 @@ const CarBookingForm: React.FC = () => {
                       <p className="text-xs sm:text-sm text-gray-600 font-medium">Deposit<br />1000 AED (Net)<br />By Card</p>
                     </div>
                   </div>
-
                 </div>
               </div>
 

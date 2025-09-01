@@ -1161,7 +1161,10 @@ input:checked + .sliderBox:before {
     height: 1190px;
   }
   .right{
-    margin-top: 140px;
+    margin-top: 100px;
+  }
+  .dealBtnBack{
+    bottom: -7.4%;
   }
 }
 @media (max-width: 639px) {
@@ -1173,7 +1176,7 @@ input:checked + .sliderBox:before {
   }
 
   .detailBtnBack{
-    bottom: -15.4%;
+    bottom: -7.4%;
   }
 
 }
@@ -1182,7 +1185,7 @@ input:checked + .sliderBox:before {
     left: -3%;
   }
   .right{
-    margin-top: 160px;
+    margin-top: 0px;
   }
   .image{
     height: 160px;
@@ -1232,7 +1235,7 @@ input:checked + .sliderBox:before {
     margin-bottom: 0px;
   }
   .right{
-    margin-top: 160px;
+    margin-top: 130px;
     padding-bottom: -70px;
   }
 }
