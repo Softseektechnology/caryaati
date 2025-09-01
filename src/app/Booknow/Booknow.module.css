@@ -66,17 +66,6 @@
   transform: scale(1.05);
 }
 
-.stepperItem:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  top: 18px;
-  left: 50%;
-  width: 100%;
-  height: 4px;
-  background: linear-gradient(to right, #ffc107, #ffffff);
-  z-index: 1;
-  border-radius: 2px;
-}
 
 .stepperCircle {
   width: 36px;
@@ -757,6 +746,11 @@
 }
 
 /* Responsive Design for Tablets and Mobiles */
+@media (max-width: 335px) {
+  .stepperLabel {
+    font-size: 8px;
+  }
+}
 @media (max-width: 767px) {
   .carDetails {
     flex-direction: column;
