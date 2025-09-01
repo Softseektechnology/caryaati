@@ -245,10 +245,10 @@ const CarBookingForm: React.FC = () => {
                     <button className="mt-2 py-1 text-[#ffc107] font-medium rounded-full hover:text-[#1f1f1f] transition-all duration-300" onClick={() => setCarDetails(true)}>More Details</button>
                   </div>
 
-                  <div className="flex flex-row flex-wrap gap-2 sm:gap-5">
-                    <div className="flex-1 text-center p-3 sm:p-4 rounded-lg hover:-translate-y-1 transition-transform duration-300" data-aos="fade-up">
+                  <div className="flex flex-row flex-wrap sm:py-8 gap-2 sm:gap-3">
+                    <div className="text-center mx-3 rounded-lg hover:-translate-y-1 transition-transform duration-300" data-aos="fade-up">
                       <svg
-                        className="h-6 w-6 sm:h-7 sm:w-7 mx-auto mb-2 text-[#1f1f1f] hover:text-[#1f1f1f] transition-colors duration-300"
+                        className="h-5 w-5 sm:h-5 sm:w-5 mx-auto mb-2 text-[#1f1f1f] hover:text-[#1f1f1f] transition-colors duration-300"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 -960 960 960"
                         fill="currentColor"
@@ -258,9 +258,9 @@ const CarBookingForm: React.FC = () => {
                       </svg>
                       <p className="text-xs sm:text-sm text-gray-600 font-medium">Engine<br />1.5L</p>
                     </div>
-                    <div className="flex-1 text-center p-3 sm:p-4 rounded-lg hover:-translate-y-1 transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div className="text-center mx-3 rounded-lg hover:-translate-y-1 transition-transform duration-300" data-aos="fade-up" data-aos-delay="200">
                       <svg
-                        className="h-6 w-6 sm:h-7 sm:w-7 mx-auto mb-2 text-[#1f1f1f] hover:text-[#1f1f1f] transition-colors duration-300"
+                        className="h-5 w-5 sm:h-5 sm:w-5 mx-auto mb-2 text-[#1f1f1f] hover:text-[#1f1f1f] transition-colors duration-300"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 -960 960 960"
                         fill="currentColor"
@@ -270,9 +270,9 @@ const CarBookingForm: React.FC = () => {
                       </svg>
                       <p className="text-xs sm:text-sm text-gray-600 font-medium">Fuel Policy<br />Level to Level</p>
                     </div>
-                    <div className="flex-1 text-center p-3 sm:p-4 rounded-lg hover:-translate-y-1 transition-transform duration-300" data-aos="fade-up" data-aos-delay="400">
+                    <div className="text-center mx-3 rounded-lg hover:-translate-y-1 transition-transform duration-300" data-aos="fade-up" data-aos-delay="400">
                       <svg
-                        className="h-6 w-6 sm:h-7 sm:w-7 mx-auto mb-2 text-[#1f1f1f] hover:text-[#1f1f1f] transition-colors duration-300"
+                        className="h-5 w-5 sm:h-5 sm:w-5 mx-auto mb-2 text-[#1f1f1f] hover:text-[#1f1f1f] transition-colors duration-300"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 -960 960 960"
                         fill="currentColor"
@@ -282,9 +282,9 @@ const CarBookingForm: React.FC = () => {
                       </svg>
                       <p className="text-xs sm:text-sm text-gray-600 font-medium">Mileage<br />4500 KM</p>
                     </div>
-                    <div className="flex-1 text-center p-3 sm:p-4 rounded-lg hover:-translate-y-1 transition-transform duration-300" data-aos="fade-up" data-aos-delay="600">
+                    <div className="text-center mx-3 rounded-lg hover:-translate-y-1 transition-transform duration-300" data-aos="fade-up" data-aos-delay="600">
                       <svg
-                        className="h-6 w-6 sm:h-7 sm:w-7 mx-auto mb-2 text-[#1f1f1f] hover:text-[#1f1f1f] transition-colors duration-300"
+                        className="h-5 w-5 sm:h-5 sm:w-5 mx-auto mb-2 text-[#1f1f1f] hover:text-[#1f1f1f] transition-colors duration-300"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 -960 960 960"
                         fill="currentColor"

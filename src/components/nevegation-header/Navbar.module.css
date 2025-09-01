@@ -41,7 +41,7 @@
   /* padding: 2px 18px; */
   background: #ffffff;
   border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
 }
 
 .navbarSearchForm:hover {
@@ -57,7 +57,7 @@
   border-radius: 8px !important;
   color: #333 !important;
   background: #f9f9f9;
-  transition: all 0.3s ease;
+  /* transition: all 0.3s ease; */
   flex: 1;
   min-width: 250px;
   box-sizing: border-box;
@@ -66,9 +66,9 @@
 
 .navbarSearchInput:focus {
   outline: none;
-  border-color: #feb321 !important;
+  /* border-color: #feb321 !important; */
   background: #fff;
-  transform: scale(1.01);
+  /* transform: scale(1.01); */
   box-shadow: 0 0 8px rgba(254, 179, 33, 0.3);
 }
 
@@ -92,8 +92,7 @@
   position: relative;
 }
 
-.navbarDatePicker:focus,
-.flatpickr-input:focus {
+.navbarDatePicker:focus {
   outline: none;
   background: #fff;
   border-color: #feb321 !important;
@@ -101,61 +100,6 @@
   box-shadow: 0 0 8px rgba(254, 179, 33, 0.3);
 }
 
-.flatpickr-input {
-  border: 1px solid #ddd !important;
-  height: 48px !important;
-  padding: 0 16px;
-  font-size: 1rem;
-  border-radius: 8px !important;
-  color: #333 !important;
-  background: #f9f9f9;
-  transition: all 0.3s ease;
-  width: 100%;
-  box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
-}
-
-.flatpickr-calendar {
-  font-family: 'Montserrat', sans-serif;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  position: absolute;
-}
-
-.flatpickr-day.selected,
-.flatpickr-day.startRange,
-.flatpickr-day.endRange,
-.flatpickr-day.selected.inRange,
-.flatpickr-day.startRange.inRange,
-.flatpickr-day.endRange.inRange {
-  background: #feb321 !important;
-  color: #fff !important;
-  border-color: #feb321 !important;
-}
-
-.flatpickr-day.inRange {
-  background: rgba(254, 179, 33, 0.2) !important;
-  border-color: transparent !important;
-}
-
-.flatpickr-time {
-  display: block !important;
-}
-
-.flatpickr-time input {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.9rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  padding: 5px;
-  width: 100%;
-}
-
-.flatpickr-time .flatpickr-am-pm {
-  display: block;
-}
 
 .navbarSearchButton {
   background:#0080F6;
@@ -165,7 +109,7 @@
   text-align: center;
   color: #fff;
   font-weight: 600;
-  transition: all 0.3s ease;
+  transition: all;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -218,7 +162,7 @@
     min-width: 350px;
   }
   .navbarSearchButton {
-    min-width: 150px;
+    min-width: 60px;
   }
 }
 

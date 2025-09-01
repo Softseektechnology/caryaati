@@ -23,8 +23,8 @@
 .date-input:focus {
   outline: none;
   background: #fff;
-  border-color: #feb321 !important;
-  transform: scale(1.02);
+  /* border-color: #feb321 !important; */
+  /* transform: scale(1.02); */
   box-shadow: 0 0 8px rgba(254, 179, 33, 0.3);
 }
 
