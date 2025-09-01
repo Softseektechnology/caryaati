@@ -136,7 +136,7 @@ const CarBookingForm: React.FC = () => {
       {
         breakpoint: 768,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
@@ -146,7 +146,7 @@ const CarBookingForm: React.FC = () => {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
@@ -184,17 +184,17 @@ const CarBookingForm: React.FC = () => {
           </div>
 
           {/* Main Content */}
-          <div className="p-4 sm:p-6 lg:p-8 max-sm:p-2">
+          <div className="p-4 sm:p-6 lg:p-8 max-sm:py-2 max-sm:w-[100vw] max-sm:px-0">
             {/* Step 1: Booking Details */}
             <div className={`${styles.step} ${currentStep === 1 ? styles.stepActive : ''}`}>
-              <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 bg-white rounded-lg p-4 sm:p-6 max-sm:p-2">
+              <div className="flex flex-col lg:flex-row gap-4 lg:gap-6 bg-white rounded-lg p-4 sm:p-6 max-sm:px-0 max-sm:py-2">
                 <div className="flex flex-col gap-3 sm:gap-4">
                   <div className={`${styles.carImage} w-full max-w-md mx-auto`}>
                     <div className={`${styles.flipContainer} ${isFlipping ? styles.flipping : ''}`}>
-                      <img src={selectedCar} alt="Nissan Sunny" className="w-full drop-shadow-2xl rounded-lg" style={{height: '320px'}} />
+                      <img src={selectedCar} alt="Nissan Sunny" className={`w-full drop-shadow-2xl ${styles.carImage} h-[320px] rounded-lg`} />
                     </div>
                   </div>
-                  <div className="w-full mt-1 max-w-md mx-auto p-3 max-sm:p-1">
+                  <div className="w-full mt-1 max-w-md mx-auto p-3 max-sm:py-1 max-sm:px-0">
                     <Slider {...settings}>
                       {images.map((image) => (
                         <div

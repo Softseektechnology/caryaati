@@ -1157,6 +1157,9 @@ input:checked + .sliderBox:before {
   .features {
     columns: 1;
   }
+  .carCard{
+    height: 1190px;
+  }
   .right{
     margin-top: 140px;
   }
@@ -1183,6 +1186,9 @@ input:checked + .sliderBox:before {
   }
   .image{
     height: 160px;
+  }
+  .carCard{
+    height: 1120px;
   }
 
 }

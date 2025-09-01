@@ -181,42 +181,41 @@ export default function CarAndMapLayout() {
 
   return (
     <>
-{/* Redesigned Search Toggle Button - Beautiful, rounded, with gradient and shadow */}
-      <div className='xl:hidden flex justify-end w-full pr-4 md:pr-0'>
-        <button 
-          className={`bg-gradient-to-r from-[#0080F6] to-[#00aaff] hover:from-[#00aaff] hover:to-[#42C3F7] text-white font-semibold rounded-full px-4 py-2 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 max-md:translate-x-[-10px]`} 
+{/* Search Toggle Button - Simple, clean, responsive */}
+      <div className="flex justify-end w-full xl:hidden pr-4 md:pr-0 mb-4">
+        <button
+          className="bg-blue-600 text-white font-semibold rounded-lg px-4 py-2 hover:bg-blue-700 transition-colors duration-200 flex items-center gap-2"
           onClick={() => setSearchOpen(!searchOpen)}
         >
           {searchOpen ? (
-            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF">
+            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="#FFFFFF">
               <path d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"/>
             </svg>
           ) : (
-            <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF">
+            <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="#FFFFFF">
               <path d="M765-144 526-383q-30 22-65.79 34.5-35.79 12.5-76.18 12.5Q284-336 214-406t-70-170q0-100 70-170t170-70q100 0 170 70t70 170.03q0 40.39-12.5 76.18Q599-464 577-434l239 239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Z"/>
             </svg>
           )}
+          {/* {searchOpen ? 'Close' : 'Search'} */}
         </button>
       </div>
 
-      {/* Redesigned Search Section - Beautiful container with shadow, rounded, smooth animation */}
-      <div 
-        className={`xl:hidden justify-center w-[93%] max-sm:w-[92vw] ml-[55px] ${styles.searchToggle} md:px-5 px-2 mb-4 transition-all duration-500 ease-in-out transform ${searchOpen ? 'scale-100 opacity-100 z-[999] shadow-xl rounded-xl bg-white border border-[#ddd] py-4' : 'scale-95 opacity-0 z-[-1] h-0 py-0 overflow-hidden'}`}
-      >
-        {searchOpen && (
-          <Form onSubmit={handleSubmit} className={`flex flex-row gap-3 max-sm:flex-wrap max-sm:gap-2 max-sm:flex-col items-center`}>
-            {/* Location Input - Matched height and padding with DatePicker */}
+      {/* Search Section - Simple, clean, responsive */}
+      <div className={`w-full max-sm:w-[98vw] xl:hidden px-4 md:px-6 ${searchOpen ? 'block' : 'hidden'}`}>
+        <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-4 md:p-6">
+          <Form onSubmit={handleSubmit} className="flex flex-col md:flex-row gap-3 items-center">
+            {/* Location Input */}
             <Form.Control
               type="text"
               placeholder="Enter location (e.g., Dubai, UAE)"
               name="location"
               value={formData.location}
               onChange={handleInputChange}
-              className={`border border-[#ddd] h-[50px] px-[12px] pt-[8px] text-[#333] bg-[#f9f9f9] rounded-lg focus:border-[#feb321] focus:shadow-md transition-all duration-300 w-full font-montserrat placeholder:text-[#999]`}
+              className="border border-gray-300 rounded-lg px-4 py-2 text-gray-800 bg-gray-50 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-colors duration-200 w-full"
               aria-label="Search location"
             />
-            {/* Date Picker - Already matched */}
-            <div className={`w-full`}>
+            {/* Date Picker */}
+            <div className="w-full">
               <CustomDateRangePicker
                 value={formData.dateRange}
                 isCarCard={true}
@@ -224,19 +223,20 @@ export default function CarAndMapLayout() {
                 placeholder="Select date and time range"
               />
             </div>
-            {/* Submit Button - Gradient, rounded, with hover effects */}
-            <button 
-              type="submit" 
-              className={`bg-gradient-to-r from-[#0080F6] to-[#00aaff] hover:from-[#00aaff] hover:to-[#42C3F7] text-white font-semibold rounded-lg px-6 py-3 shadow-md hover:shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 flex items-center gap-2`}
+            {/* Submit Button */}
+            <button
+              type="submit"
+              className="bg-blue-600 text-white font-semibold rounded-lg px-6 py-2 hover:bg-blue-700 transition-colors duration-200 flex items-center gap-2 w-full md:w-auto"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#FFFFFF">
-                <path d="M765-144 526-383q-30 22-65.79 34.5-35.79 12.5-76.18 12.5Q284-336 214-406t-70-170q0-100 70-170t170-70q100 0 170 70t70 170.03q0 40.39-12.5 76.18Q599-464 577-434l239 239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Z" />
+              <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20" fill="#FFFFFF">
+                <path d="M765-144 526-383q-30 22-65.79 34.5-35.79 12.5-76.18 12.5Q284-336 214-406t-70-170q0-100 70-170t170-70q100 0 170 70t70 170.03q0 40.39-12.5 76.18Q599-464 577-434l239 239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Z"/>
               </svg>
               Search
             </button>
           </Form>
-        )}
+        </div>
       </div>
+
 
       <div className='relative mb-3 max-[725px]:ml-0 max-xl:justify-center max-xl:justify-items-center'>
         {/* Add the ResultsSortBar component below the filter bar */}

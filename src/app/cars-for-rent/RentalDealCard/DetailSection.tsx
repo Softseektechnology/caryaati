@@ -10,7 +10,7 @@ interface DetailProps {
 const DetailSection = ({ logo }: DetailProps) => {
     return (
         <>
-            <div className={`${styles.carTypeContainer} ${styles.detailSection} max-lg:justify-start lg:py-2 relative max-lg:top-[-60px] max-lg:justify-items-start 2xl:w-[270px]`} style={{marginTop: '0px'}}>
+            <div className={`${styles.carTypeContainer} ${styles.detailSection} max-lg:justify-start lg:py-2 relative max-sm:top-[-50px] max-lg:top-[-60px] max-lg:justify-items-start 2xl:w-[270px]`} style={{marginTop: '0px'}}>
                 <div className={`${styles.providerAndLocation} max-lg:w-[120%] relative max-lg:left-[-10%] max-sm:w-[100%] max-sm:left-0`}>
                     <div className={styles.providerRow}>
                         <div className={styles.providerContainer}>

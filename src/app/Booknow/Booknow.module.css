@@ -682,7 +682,9 @@
 .stepActive {
   display: block;
 }
-
+.carImage{
+  min-height: 320px;
+}
 /* Responsive Stepper */
 @media (max-width: 768px) {
   .stepper {
