@@ -37,7 +37,8 @@
 
 /* Background color section */
 .backgroundSection {
-  background-color: #0080F6;
+  /* background-color: #0080F6; */
+  background-color: transparent;
   width: 100%; /* Changed from 100vw to 100% to prevent horizontal scroll */
   margin: 0;
   padding: 20px 0;

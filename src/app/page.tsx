@@ -47,7 +47,7 @@ export default function Home() {
       <main className={`${styles.mainContent}`}>
         {/* Section with background color */}
         <div className={`${styles.backgroundSection}`}>
-          <div className={`container text-center mb-10 mt-15 ${styles.contentWrapper}`}>
+          <div className={`container text-center mb-45 mt-15 ${styles.contentWrapper}`}>
             <h1 className={`${styles.mainHeading}`}>Caryaati - Seamless Car Rental Solutions</h1>
             <div className={styles.componentWrapper}>
               <Carcategory />
@@ -56,6 +56,9 @@ export default function Home() {
               <SearchEngine />
             </div>
           </div>
+        </div>
+        <div className='absolute top-[0%] brightness-50'>
+          <video src="/videos/bg-video.mp4" autoPlay muted loop preload='auto'></video>
         </div>
         {/* Section without background color */}
         <div className="container" style={{ marginTop: '50px' }}>
