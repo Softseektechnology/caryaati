@@ -79,7 +79,6 @@ export default function RentACarListings() {
           </div>
           <div className='fixed top-[60px] py-[40px] z-[995] bg-white right-0 left-0'> </div>
           <div className={`relative top-[40px] ${styles.rentalLayout} max-[725px]:ml-0 max-xl:justify-center max-xl:justify-items-center`}>
-            <h1>22222222222</h1>
           {/* Add the ResultsSortBar component below the filter bar */}
                       {/* <ResultsSortBar resultCount={375} defaultSort="Our recommendation" /> */}
                  {/* Add the PriceAnalysisNotification component below the ResultsSortBar */}
