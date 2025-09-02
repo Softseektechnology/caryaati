@@ -1191,7 +1191,7 @@ input:checked + .sliderBox:before {
     height: 160px;
   }
   .carCard{
-    height: 1120px;
+    height: 1080px;
   }
 
 }
