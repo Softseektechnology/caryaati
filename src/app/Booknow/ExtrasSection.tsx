@@ -135,23 +135,34 @@ const ExtrasSection: React.FC<ExtrasSectionProps> = ({ onTotalsChange }) => {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
           </svg>
         </div>
-        <div className={`${styles.dropdownContent} ${expandedSections.has('protection') ? styles.dropdownOpen : ''}`}>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 p-3 sm:p-5 bg-white">
-            {packages.map((pkg) => (
-              <div
-                key={pkg.name}
-                className={`flex flex-col items-center w-full sm:w-36 h-32 sm:h-36 p-2 sm:p-3 border-2 border-orange-400 rounded-lg bg-white hover:shadow-lg hover:scale-105 transition-all duration-200 cursor-pointer ${selectedPackage === pkg.name ? 'bg-orange-50 shadow-md' : ''} ${styles.packageOption}`}
-                onClick={() => handlePackageSelect(pkg.name)}
-              >
-                {selectedPackage === pkg.name && (
-                  <span className="bg-orange-500 text-white text-xs px-2 py-1 rounded mb-2">Selected</span>
-                )}
-                <span className="text-xs sm:text-sm text-gray-700 text-center">{pkg.name}</span>
-                <span className="text-sm sm:text-base font-bold text-orange-500 mt-2">{pkg.price}</span>
-              </div>
-            ))}
+      <div className={`${styles.dropdownContent} ${expandedSections.has('protection') ? styles.dropdownOpen : ''}`}>
+  <div className="flex flex-col sm:flex-row gap-4 p-4 bg-white">
+    {packages.map((pkg) => (
+      <div
+        key={pkg.name}
+        className={`${styles.packageCard} ${selectedPackage === pkg.name ? styles.selectedCard : ''}`}
+        onClick={() => handlePackageSelect(pkg.name)}
+      >
+        <div className={styles.cardHeader}>
+          <div className={styles.icon}>
+            {pkg.name === "Super" ? (
+              <i className="fas fa-user-shield"></i>
+            ) : (
+              <i className="fas fa-truck"></i>
+            )}
           </div>
+          <div className={`${styles.radioCircle} ${selectedPackage === pkg.name ? styles.radioSelected : ''}`} />
         </div>
+        <div className={styles.cardBody}>
+          <h4 className={styles.cardTitle}>{pkg.name} Charges</h4>
+          <p className={styles.cardDuration}>For 3 Day</p>
+          <p className={styles.cardPrice}>+ {pkg.price}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
       </div>
 
       <div className="border-b border-gray-200">

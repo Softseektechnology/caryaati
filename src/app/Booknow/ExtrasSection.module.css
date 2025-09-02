@@ -5,6 +5,78 @@
     margin-bottom: 20px;
     overflow: hidden;
   }
+  .packageCard {
+  flex: 1;
+  min-width: 180px;
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  background: #f9fafb;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.packageCard:hover {
+  border-color: #6b7280;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.selectedCard {
+  border-color: #4f46e5;
+  background: #f3f4f6;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  font-size: 22px;
+  color: #4f46e5;
+}
+
+.radioCircle {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #9ca3af;
+  border-radius: 50%;
+}
+
+.radioSelected {
+  background: #4f46e5;
+  border-color: #4f46e5;
+}
+
+.cardBody {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.cardTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.cardDuration {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.cardPrice {
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  margin-top: 6px;
+}
+
   
   .section {
     border-bottom: 1px solid #e5e7eb;

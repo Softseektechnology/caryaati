@@ -7,7 +7,7 @@ import Footer from '../../components/foorter/Footer';
 import UserDropdown from '../../components/customer-dashboard/user-dashboard';
 import Sidebar from '../../components/multiplepages/Sidebar-multiplelinks';
 import styles from '.././Contact-us/Contact-us.module.css';
-import Book from './Booknow';
+import CarBookingForm from './Booknow';
 export default function ContactUs() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function ContactUs() {
       <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
       <UserDropdown isOpen={isUserDropdownOpen} />
 
-      <Book/>
+      <CarBookingForm />
 
       <Footer />
     </div>
