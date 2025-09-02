@@ -1158,7 +1158,7 @@ input:checked + .sliderBox:before {
     columns: 1;
   }
   .carCard{
-    height: 1190px;
+    height: 1150px;
   }
   .right{
     margin-top: 100px;
