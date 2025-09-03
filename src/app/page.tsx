@@ -46,8 +46,8 @@ export default function Home() {
       <UserDropdown isOpen={isDropdownOpen} />
       <main className={`${styles.mainContent}`}>
         {/* Section with background color */}
-        <div className={`${styles.backgroundSection}`}>
-          <div className={`container text-center mb-45 mt-15 ${styles.contentWrapper}`}>
+        <div className={`${styles.backgroundSection} max-lg:bg-[#0080F6]`}>
+          <div className={`container text-center mb-45 max-xl:mb-15 mt-15 ${styles.contentWrapper}`}>
             <h1 className={`${styles.mainHeading}`}>Caryaati - Seamless Car Rental Solutions</h1>
             <div className={styles.componentWrapper}>
               <Carcategory />
@@ -57,8 +57,8 @@ export default function Home() {
             </div>
           </div>
         </div>
-        <div className='absolute top-[0%] brightness-50'>
-          <video src="/videos/bg-video.mp4" autoPlay muted loop preload='auto'></video>
+        <div className='absolute overflow-hidden top-[0%] max-xl:top-[-450px] max-lg:hidden brightness-60'>
+          <video src="/videos/bg-video.mp4" autoPlay muted loop preload='auto' className='max-xl:h-[1600px] max-lg:hidden'></video>
         </div>
         {/* Section without background color */}
         <div className="container" style={{ marginTop: '50px' }}>

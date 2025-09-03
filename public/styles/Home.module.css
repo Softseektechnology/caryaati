@@ -142,6 +142,11 @@
 }
 
 /* Responsive Adjustments */
+@media (max-width: 1023px) {
+  .backgroundSection{
+    background-color: #0080F6;
+  }
+}
 @media (max-width: 768px) {
   .mainContent {
     padding: 0;
