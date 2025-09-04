@@ -34,7 +34,7 @@
     "next-auth": "^4.24.11",
     "react": "^19.1.1",
     "react-bootstrap": "^2.10.9",
-    "react-bootstrap-icons": "^1.11.5",
+    "react-bootstrap-icons": "^1.11.6",
     "react-date-range": "^2.0.1",
     "react-datepicker": "^8.4.0",
     "react-daterange-picker": "^2.0.1",

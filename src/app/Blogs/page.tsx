@@ -60,17 +60,13 @@ export default function RentACarListings() {
   };
 
   return (
-    <div className={styles.container}>
+<div className={styles.container}>
       <Navbar onMenuToggle={toggleSidebar} onUserToggle={toggleUserDropdown} />
       <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
       <UserDropdown isOpen={isUserDropdownOpen} />
 
       <main style={{ flex: 1, padding: '2rem' }}>
-        <Row>
-          <Col md={12}>
-            <BlogSection /> {/* Add the blog section component here */}
-          </Col>
-        </Row>
+        <BlogSection /> {/* Redesigned component */}
       </main>
 
       <Footer />

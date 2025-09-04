@@ -1,0 +1,266 @@
+.blogContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Montserrat', sans-serif;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.layout {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.leftSection {
+  flex: 2;
+  min-width: 300px;
+}
+
+.blogTitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5rem;
+  color: #0080F6;
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+.meta {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.carImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.carImage:hover {
+  transform: scale(1.02);
+}
+
+.blogContent {
+  padding: 20px 0;
+}
+
+.blogText {
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  font-family: 'Merriweather', serif;
+}
+
+.blogText h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4rem;
+  color: #0080F6;
+  margin-top: 30px;
+  margin-bottom: 15px;
+}
+
+.blogText p {
+  margin-bottom: 20px;
+  color: #444;
+}
+
+.blogText ul {
+  list-style-type: disc;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.blogText li {
+  margin-bottom: 10px;
+}
+
+.shareButton {
+  background: linear-gradient(90deg, #0080F6, #42C3F7);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.shareButton:hover {
+  background: linear-gradient(90deg, #42C3F7, #0080F6);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 128, 246, 0.3);
+}
+
+.rightSection {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.searchBar {
+  display: flex;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s;
+  border: 1px solid #ddd;
+}
+
+.searchBar:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.searchInput {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.searchButton {
+  background: #ffc107;
+  color: #1f1f1f;
+  border: none;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.searchButton:hover {
+  background: #ff9800;
+}
+
+.categories,
+.recentPosts {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s;
+  border: 1px solid #ddd;
+}
+
+.categories:hover,
+.recentPosts:hover {
+  transform: translateY(-3px);
+}
+
+.categories h3,
+.recentPosts h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.4rem;
+  color: #0080F6;
+  margin-bottom: 20px;
+}
+
+.categoryList {
+  list-style: none;
+  padding: 0;
+}
+
+.categoryList li {
+  margin-bottom: 15px;
+}
+
+.categoryList a {
+  color: #0080F6;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.categoryList a:hover {
+  color: #ffc107;
+}
+
+.categoryList span {
+  color: #666;
+  margin-left: 8px;
+  font-size: 0.9rem;
+}
+
+.recentPosts .post {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  transition: transform 0.3s;
+}
+
+.recentPosts .post:hover {
+  transform: translateX(5px);
+}
+
+.recentPosts .post:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.recentPosts .post a {
+  color: #0080F6;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.recentPosts .post a:hover {
+  color: #ffc107;
+}
+
+.recentPosts .post p {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 5px 0 0;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .blogTitle {
+    font-size: 2rem;
+  }
+
+  .carImage {
+    height: 250px;
+  }
+}
+
+@media (max-width: 576px) {
+  .blogContainer {
+    padding: 15px;
+  }
+
+  .blogTitle {
+    font-size: 1.8rem;
+  }
+
+  .blogContent h3 {
+    font-size: 1.5rem;
+  }
+
+  .blogText {
+    font-size: 1rem;
+  }
+}

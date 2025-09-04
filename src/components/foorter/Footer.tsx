@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
           <h4>Useful Link</h4>
            <a href="Blogs">Blogs</a>
           <a href="Contact-us">Contact us</a>
-          <a href="FAQ">FAQ</a>
+          <a href="/FAQ">FAQ</a>
           {/* <div className={styles.contactItem}>
             <img src="https://flagcdn.com/w20/ae.png" alt="UAE Flag" /> +971 (54)
             3363 900

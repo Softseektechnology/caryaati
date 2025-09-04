@@ -1,45 +1,120 @@
-import React from "react";
-import Image from "next/image";
-import { Row, Col, Form, Button } from "react-bootstrap";
-import styles from "./Blog.module.css";
+'use client';
 
-const BlogLayout = () => {
+import React, { useState } from "react";
+import Image from "next/image";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import styles from "./Blog.module.css";
+import Link from "next/link";
+
+// Simulated blog data (In production, fetch from API/CMS like WordPress/Strapi)
+const blogPosts = [
+  {
+    id: 1,
+    title: "Tips to Keep You From Getting Any Parking Tickets Practically",
+    date: "2024-10-30 21:29:43",
+    author: "Admin",
+    excerpt: "Dubai is a tremendous tourist destination, but it has strict parking policies. Tourists...",
+    image: "/images/trip.webp",
+  },
+  {
+    id: 2,
+    title: "Mastering Car Rental Caryyati",
+    date: "2024-09-07 16:37:04",
+    author: "Admin",
+    excerpt: "Essential Pickup and Drop off Tips for a smooth experience in Dubai.",
+    image: "/images/car-rental.webp",
+  },
+  {
+    id: 3,
+    title: "Ultimate Guide to SUV Car for Rent in Dubai",
+    date: "2024-08-26 16:03:11",
+    author: "Admin",
+    excerpt: "Explore the best SUVs available for rent and why they're perfect for Dubai's roads.",
+    image: "/images/suv-rental.webp",
+  },
+  {
+    id: 4,
+    title: "Discover the Best Dubai Marina Restaurants",
+    date: "2024-07-05 14:49:26",
+    author: "Admin",
+    excerpt: "Top dining spots in Dubai Marina to visit with your rental car.",
+    image: "/images/dubai-marina.webp",
+  },
+  // Add more posts as needed
+];
+
+const categoriesData = [
+  { name: "Rent a Car", count: 127, link: "#" },
+  { name: "Car Rental", count: 4, link: "#" },
+  { name: "Bus Rental", count: 1, link: "#" },
+  { name: "Travel Tips", count: 0, link: "#" },
+];
+
+const recentPostsData = blogPosts.slice(0, 4); // Reuse posts for recent
+
+const BlogSection: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 6; // Adjustable
+  const totalPages = Math.ceil(blogPosts.length / postsPerPage);
+
+  const paginatedPosts = blogPosts.slice(
+    (currentPage - 1) * postsPerPage,
+    currentPage * postsPerPage
+  );
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <div className={styles.blogContainer}>
+    <Container className={`${styles.blogContainer} bg-white rounded-lg shadow-md p-4`}>
       <Row className={styles.layout}>
-        {/* Left Side: Car Image and Content Below */}
+        {/* Left: Blog Posts Grid */}
         <Col xs={12} md={8} className={styles.leftSection}>
-          <Image
-            src="/images/trip.webp"
-            alt="Parking Garage"
-            width={100}
-            height={100}
-            className={styles.carImage}
-          />
-          <div className={styles.blogContent}>
-            <h2>Tips to Keep You From Getting Any Parking Tickets Practically</h2>
-            <p className={styles.meta}>
-              📅 2024-10-30 21:29:43 👤 Admin
-            </p>
-            <h3>
-              Are You Thinking of Visiting Dubai? Tips to Keep You From Getting
-              Any Parking Tickets Practically!
-            </h3>
-            <p>
-              Dubai is a tremendous tourist destination, but it has strict
-              parking policies. Tourists...
-            </p>
-            <Button className={styles.readMoreButton}>Get the full story</Button>
+          <div className={styles.blogPosts}>
+            {paginatedPosts.map((post) => (
+              <div key={post.id} className={styles.blogCard}>
+                <Image
+                  src={post.image}
+                  alt={post.title}
+                  width={400}
+                  height={200}
+                  className={styles.carImage}
+                />
+                <div className={styles.blogContent}>
+                  <h2>{post.title}</h2>
+                  <p className={styles.meta}>
+                    📅 {post.date} 👤 {post.author}
+                  </p>
+                  <p>{post.excerpt}</p>
+                  <Link href={`/Blog/${post.id}`} className={`${styles.readMoreButton} no-underline`}>Read More</Link>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Pagination */}
+          <div className={styles.pagination}>
+            {Array.from({ length: totalPages }, (_, i) => (
+              <button
+                key={i + 1}
+                onClick={() => handlePageChange(i + 1)}
+                className={currentPage === i + 1 ? styles.active : ""}
+              >
+                {i + 1}
+              </button>
+            ))}
           </div>
         </Col>
 
-        {/* Right Side: Search, Categories, and Recent Posts */}
+        {/* Right: Sidebar */}
         <Col xs={12} md={4} className={styles.rightSection}>
           {/* Search Bar */}
           <div className={styles.searchBar}>
             <Form.Control
               type="text"
-              placeholder="Search"
+              placeholder="Search blog..."
               className={styles.searchInput}
             />
             <Button className={styles.searchButton}>🔍</Button>
@@ -49,46 +124,28 @@ const BlogLayout = () => {
           <div className={styles.categories}>
             <h3>Categories</h3>
             <ul className={styles.categoryList}>
-              <li>
-                <a href="#">Rent a Car <span>(127)</span></a>
-              </li>
-              <li>
-                <a href="#">Car Rental <span>(4)</span></a>
-              </li>
-              <li>
-                <a href="#">Bus Rental <span>(1)</span></a>
-              </li>
-              <li>
-                <a href="#">Travel Tips <span>(0)</span></a>
-              </li>
+              {categoriesData.map((cat) => (
+                <li key={cat.name}>
+                  <a href={cat.link}>{cat.name} <span>({cat.count})</span></a>
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Recent Posts */}
           <div className={styles.recentPosts}>
             <h3>Recent Posts</h3>
-            <div className={styles.post}>
-              <a href="#">Tips to Keep You From Getting Any Parking Tickets Practically</a>
-              <p>2024-10-30 21:29:43</p>
-            </div>
-            <div className={styles.post}>
-              <a href="#">Mastering Car Rental Caryyati</a>
-              <p>Essential Pickup and Drop off Tips</p>
-              <p>2024-09-07 16:37:04</p>
-            </div>
-            <div className={styles.post}>
-              <a href="#">Ultimate Guide to SUV Car for Rent in Dubai</a>
-              <p>2024-08-26 16:03:11</p>
-            </div>
-            <div className={styles.post}>
-              <a href="#">Discover the Best Dubai Marina Restaurants</a>
-              <p>2024-07-05 14:49:26</p>
-            </div>
+            {recentPostsData.map((post) => (
+              <div key={post.id} className={styles.post}>
+                <a href="#">{post.title}</a>
+                <p>{post.date}</p>
+              </div>
+            ))}
           </div>
         </Col>
       </Row>
-    </div>
+    </Container>
   );
 };
 
-export default BlogLayout;
+export default BlogSection;
