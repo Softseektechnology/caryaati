@@ -204,10 +204,11 @@
 }
 
 .serviceIcon {
-  font-size: 96px;
-  scale: 2;
+  font-size: 126px;
+  scale: 3.5;
   color: #003087;
-  margin-bottom: 16px;
+  margin-bottom: 36px;
+  margin-top: 26px;
   display: block;
 }
 

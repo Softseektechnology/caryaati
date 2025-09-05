@@ -420,12 +420,13 @@ const BecomePartnerPage = () => {
             },
           ].map((step, index) => (
             <Col sm={12} md={4} key={index}>
-              <div className={styles.step}>
+              <div className={`${styles.step} justify-items-center text-center`}>
                 <Image
                   src={step.image}
                   alt={step.title}
-                  width={60}
-                  height={60}
+                  width={150}
+                  height={150}
+                  className={`justify-self-center`}
                   style={{ objectFit: "contain" }}
                 />
                 <h3>{step.title}</h3>
@@ -466,7 +467,7 @@ const BecomePartnerPage = () => {
               {step.content}
             </div>
           ))}
-          <div className={styles.buttonGroup}>
+          <div className={`${styles.buttonGroup} inline float-right`}>
             <Button
               className={styles.prevButton}
               onClick={() => updateFormStep(currentStep - 1)}
@@ -475,7 +476,7 @@ const BecomePartnerPage = () => {
               Previous
             </Button>
             <Button
-              className={styles.nextButton}
+              className={`${styles.nextButton} mx-2`}
               onClick={() => updateFormStep(currentStep + 1)}
               disabled={currentStep === steps.length - 1}
             >
