@@ -64,7 +64,7 @@ export default function RentACarListings() {
 
   return (
     <div className={styles.container}>
-      <Navbar onMenuToggle={toggleSidebar} isHome={false} onUserToggle={toggleUserDropdown} />
+      <Navbar onMenuToggle={toggleSidebar} isHome={true} onUserToggle={toggleUserDropdown} />
       <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
       <UserDropdown isOpen={isUserDropdownOpen} />
 
