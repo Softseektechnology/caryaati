@@ -1,70 +1,217 @@
-.privacyContainer {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+.container {
+  max-width: 1280px;
+  margin: 120px auto 40px auto;
+  padding: 0 20px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 16px;
+  background: linear-gradient(90deg, #003087, #f60);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #4b5563;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  line-height: 1.6;
+}
+
+.contentWrapper {
+  display: flex;
+  gap: 24px;
+  margin-top: 40px;
+}
+
+.sidebar {
+  flex: 0 0 250px;
+  background: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.sidebarTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: #003087;
+  margin-bottom: 16px;
+}
+
+.sidebarItem {
+  font-size: 16px;
+  color: #4b5563;
+  padding: 12px;
+  cursor: pointer;
+  transition: color 0.3s ease, background 0.3s ease;
+}
+
+.sidebarItem:hover {
+  color: #003087;
+  background: #f5f5f5;
+  border-radius: 8px;
+}
+
+.sidebarItem.active {
+  color: #f60;
+  font-weight: 500;
+  background: #f5f5f5;
+}
+
+.mainContent {
+  flex: 1;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.mainContent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #003087, #f60);
+}
+
+.section {
+  margin-bottom: 32px;
+}
+
+.section h2 {
+  font-size: 28px;
+  font-weight: 600;
+  color: #003087;
+  margin-bottom: 16px;
+}
+
+.section h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 24px 0 12px;
+}
+
+.section p {
+  font-size: 16px;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+
+.definitionList,
+.useList {
+  list-style: none;
+  padding: 0;
+}
+
+.definitionList li,
+.useList li {
+  font-size: 16px;
+  color: #4b5563;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  padding-left: 20px;
+  position: relative;
+}
+
+.definitionList li::before,
+.useList li::before {
+  content: '•';
+  color: #f60;
+  position: absolute;
+  left: 0;
+  font-size: 20px;
+}
+
+.divider {
+  margin: 40px 0;
+  border-color: #e5e7eb;
+  border-width: 1px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .container {
+    margin: 100px auto 30px auto;
+    padding: 0 16px;
   }
-  
-  .header {
-    background-color: #003087;
-    color: #fff;
-    padding: 10px 20px;
-    text-align: center;
+
+  .title {
+    font-size: 32px;
   }
-  
-  .header h1 {
-    font-size: 24px;
-    margin: 0;
+
+  .contentWrapper {
+    flex-direction: column;
   }
-  
-  .nav {
-    margin-top: 10px;
+
+  .sidebar {
+    flex: none;
+    width: 100%;
   }
-  
-  .nav a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
-    font-size: 14px;
+
+  .mainContent {
+    padding: 24px;
   }
-  
-  .nav a:hover {
-    text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+  .title {
+    font-size: 28px;
   }
-  
+
+  .subtitle {
+    font-size: 16px;
+  }
+
   .mainContent {
     padding: 20px;
-    color: #333;
   }
-  
-  .mainContent h2 {
-    font-size: 22px;
-    margin-bottom: 10px;
+
+  .section h2 {
+    font-size: 24px;
   }
-  
-  .mainContent p {
-    font-size: 16px;
-    line-height: 1.5;
-    margin-bottom: 15px;
-  }
-  
-  .mainContent h3 {
+
+  .section h3 {
     font-size: 18px;
-    margin-top: 20px;
-    margin-bottom: 10px;
   }
-  
-  .mainContent h4 {
-    font-size: 16px;
-    margin-top: 15px;
-    margin-bottom: 5px;
+
+  .section p,
+  .definitionList li,
+  .useList li {
+    font-size: 15px;
   }
-  
-  .mainContent hr {
-    border: 0;
-    border-top: 1px solid #ddd;
-    margin: 20px 0;
+
+  .sidebar {
+    padding: 20px;
   }
+
+  .sidebarTitle {
+    font-size: 18px;
+  }
+
+  .sidebarItem {
+    font-size: 15px;
+    padding: 10px;
+  }
+}

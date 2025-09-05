@@ -9,6 +9,7 @@ import styles from "./Faq.module.css";
 const faqData = [
   {
     category: "Top Questions",
+    tag:'top-questions',
     questions: [
       {
         id: "0",
@@ -59,6 +60,7 @@ const faqData = [
   },
   {
     category: "Booking Related Q/A",
+    tag: 'booking-related-q/a',
     questions: [
       {
         id: "0",
@@ -109,7 +111,7 @@ const FAQPage = () => {
         <Col md={8}>
           {filteredFaq.map((section, sectionIndex) => (
             <section key={sectionIndex} className={styles.section}>
-              <h2 className={styles.sectionTitle}>{section.category}</h2>
+              <h2 className={styles.sectionTitle} id={`${section.tag}`}>{section.category}</h2>
               <Accordion>
                 {section.questions.map((faq) => (
                   <Accordion.Item eventKey={faq.id} key={faq.id} className={styles.faqItem}>

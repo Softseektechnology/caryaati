@@ -60,6 +60,7 @@ export default function RentACarListings() {
   };
 
   return (
+    <>
     <div className={styles.container}>
       <Navbar onMenuToggle={toggleSidebar} isHome={true} onUserToggle={toggleUserDropdown} />
       <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
@@ -75,5 +76,6 @@ export default function RentACarListings() {
 
       <Footer />
     </div>
+    </>
   );
 }
