@@ -1,307 +1,293 @@
 .container {
-    max-width: 1200px;
-    margin: 100px auto 20px auto;
-    padding: 20px;
+  max-width: 1280px;
+  margin: 120px auto 40px auto;
+  padding: 0 20px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 16px;
+  background: linear-gradient(90deg, #003087, #f60);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #4b5563;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  line-height: 1.6;
+}
+
+.steps {
+  margin: 40px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.step {
+  text-align: center;
+  padding: 24px;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.step h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #003087;
+  margin: 16px 0 8px 0;
+}
+
+.step p {
+  font-size: 15px;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.divider {
+  margin: 60px 0;
+  border-color: #e5e7eb;
+  border-width: 1px;
+}
+
+.formContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.formContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #003087, #f60);
+}
+
+.progressContainer {
+  margin-bottom: 40px;
+}
+
+.progressBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 16px 0;
+}
+
+.progressBar::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.progressBar::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: calc(33.33% * var(--current-step));
+  height: 6px;
+  background: linear-gradient(90deg, #003087, #f60);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+  z-index: 1;
+}
+
+.progressStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.progressStep:hover {
+  transform: scale(1.05);
+}
+
+.progressStep .stepNumber {
+  width: 36px;
+  height: 36px;
+  background: #e5e7eb;
+  color: #6b7280;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.progressStep.completed .stepNumber {
+  background: #f60;
+  color: #ffffff;
+}
+
+.progressStep .stepLabel {
+  font-size: 15px;
+  font-weight: 500;
+  color: #6b7280;
+  margin-top: 12px;
+  transition: color 0.3s ease;
+}
+
+.progressStep.completed .stepLabel {
+  color: #003087;
+}
+
+.serviceCard {
+  text-align: center;
+  padding: 24px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 24px;
+}
+
+.serviceCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.serviceCard h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 16px 0 8px 0;
+}
+
+.serviceCard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.serviceCard li {
+  font-size: 15px;
+  color: #4b5563;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.serviceIcon {
+  font-size: 96px;
+  scale: 2;
+  color: #003087;
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.steps, .serviceCard, .formContainer {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Ensure only active step is visible */
+.formStep {
+  display: none;
+}
+
+.formStep.active {
+  display: block;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .container {
+    margin: 100px auto 30px auto;
+    padding: 0 16px;
   }
-  
-  .breadcrumb {
-    color: #000;
-    margin-bottom: 20px;
+
+  .title {
+    font-size: 32px;
   }
-  
-  .breadcrumb a {
-    color: #000;
-    text-decoration: none;
+
+  .steps {
+    grid-template-columns: 1fr;
   }
-  
-  .breadcrumb a:hover {
-    text-decoration: underline;
+
+  .formContainer {
+    padding: 24px;
   }
-  
+}
+
+@media (max-width: 767px) {
   .title {
     font-size: 28px;
-    color: #333;
-    text-align: center;
-    margin-bottom: 10px;
   }
-  
+
   .subtitle {
     font-size: 16px;
-    color: #666;
-    text-align: center;
-    margin-bottom: 20px;
   }
-  
-  .steps {
-    margin: 20px 0;
-  }
-  
-  .step {
-    text-align: center;
+
+  .step, .serviceCard {
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #f9f9f9;
-    margin-bottom: 20px;
   }
-  
-  .step h3 {
-    font-size: 18px;
-    color: #003087;
-    margin: 10px 0;
-  }
-  
-  .step p {
-    font-size: 14px;
-    color: #333;
-  }
-  
-  .divider {
-    margin: 30px 0;
-    border-color: #ddd;
-  }
-  
-  .formContainer {
-    max-width: 900px;
-    margin: 0 auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .progressContainer {
-    margin-bottom: 30px;
-  }
-  
+
   .progressBar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-  }
-  
-  .progressBar::before {
-    content: '';
-    position: absolute;
-    top: 15px;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: #ddd;
-    z-index: 1;
-  }
-  
-  .progressBar::after {
-    content: '';
-    position: absolute;
-    top: 15px;
-    left: 0;
-    width: calc(33.33% * var(--current-step));
-    height: 4px;
-    background: #f60;
-    transition: width 0.3s ease;
-    z-index: 1;
-  }
-  
-  .progressStep {
-    display: flex;
     flex-direction: column;
-    align-items: center;
-    position: relative;
-    z-index: 2;
+    gap: 24px;
   }
-  
+
+  .progressBar::before,
+  .progressBar::after {
+    display: none;
+  }
+
   .progressStep .stepNumber {
-    width: 30px;
-    height: 30px;
-    background: #ddd;
-    color: #666;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: bold;
-    transition: background 0.3s ease, color 0.3s ease;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
   }
-  
-  .progressStep.completed .stepNumber {
-    background: #f60;
-    color: #fff;
-  }
-  
+
   .progressStep .stepLabel {
     font-size: 14px;
-    color: #666;
-    margin-top: 8px;
-    transition: color 0.3s ease;
   }
-  
-  .progressStep.completed .stepLabel {
-    color: #f60;
-  }
-  
-  .formStep {
-    display: none;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-  }
-  
-  .formStep.active {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-  }
-  
-  .formStep h4 {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: left;
-  }
-  
-  .formStep label {
-    text-align: left;
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 500;
-    color: #333;
-  }
-  
-  .formStep input,
-  .formStep select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
-    background: #f9f9f9;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .formStep input:focus,
-  .formStep select:focus {
-    border-color: #f60;
-    box-shadow: 0 0 5px rgba(255, 102, 0, 0.2);
-    outline: none;
-  }
-  
-  .required {
-    color: red;
-  }
-  
-  .buttonGroup {
-    margin-top: 30px;
-    text-align: right;
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-  }
-  
-  .nextButton,
-  .prevButton {
-    padding: 12px 30px;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: 500;
-    transition: background-color 0.3s ease, transform 0.1s ease;
-  }
-  
-  .nextButton {
-    background-color: #f60;
-    border: none;
-    color: #fff;
-  }
-  
-  .nextButton:hover {
-    background-color: #e55;
-    transform: translateY(-2px);
-  }
-  
-  .prevButton {
-    background-color: #6c757d;
-    border: none;
-    color: #fff;
-  }
-  
-  .prevButton:hover {
-    background-color: #5a6268;
-    transform: translateY(-2px);
-  }
-  
-  .serviceCard {
-    text-align: center;
+
+  .formContainer {
     padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #f9f9f9;
-    margin-bottom: 20px;
   }
-  
-  .serviceCard h3 {
-    font-size: 18px;
-    color: #000;
-    margin: 10px 0;
+
+  .serviceIcon {
+    font-size: 72px;
   }
-  
-  .serviceCard ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .serviceCard li {
-    font-size: 14px;
-    color: #333;
-    margin-bottom: 5px;
-  }
-  
-  /* Responsive Adjustments */
-  @media (max-width: 767px) {
-    .formContainer {
-      padding: 20px;
-    }
-  
-    .progressBar {
-      flex-direction: column;
-      gap: 20px;
-    }
-  
-    .progressBar::before,
-    .progressBar::after {
-      display: none;
-    }
-  
-    .progressStep .stepNumber {
-      width: 40px;
-      height: 40px;
-      font-size: 16px;
-    }
-  
-    .progressStep .stepLabel {
-      font-size: 12px;
-    }
-  
-    .formStep h4 {
-      font-size: 18px;
-    }
-  
-    .formStep input,
-    .formStep select {
-      padding: 10px;
-      font-size: 12px;
-    }
-  
-    .nextButton,
-    .prevButton {
-      padding: 10px 20px;
-      font-size: 14px;
-      width: 100%;
-    }
-  
-    .buttonGroup {
-      flex-direction: column;
-      gap: 10px;
-    }
-  }
+}

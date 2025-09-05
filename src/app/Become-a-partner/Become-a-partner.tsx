@@ -23,10 +23,14 @@ const BecomePartnerPage = () => {
     ownerMobileNumber: "",
     emiratesIdNumber: "",
     tradeLicenseNumber: "",
+    emiratesIdCopy: null,
+    tradeLicenseCopy: null,
   });
 
   const updateFormStep = (step) => {
-    setCurrentStep(step);
+    if (step >= 0 && step < steps.length) {
+      setCurrentStep(step);
+    }
   };
 
   const handleInputChange = (e) => {
@@ -70,6 +74,8 @@ const BecomePartnerPage = () => {
           ownerMobileNumber: "",
           emiratesIdNumber: "",
           tradeLicenseNumber: "",
+          emiratesIdCopy: null,
+          tradeLicenseCopy: null,
         });
         setCurrentStep(0);
       } else {
@@ -179,17 +185,17 @@ const BecomePartnerPage = () => {
               <Form.Group className="mb-3">
                 <Form.Label>Website (Optional)</Form.Label>
                 <Form.Control
-                  type="text"
+                  type="url"
                   name="website"
                   value={formData.website}
                   onChange={handleInputChange}
-                  placeholder="Enter Website Address"
+                  placeholder="Enter Website URL"
                 />
               </Form.Group>
             </Col>
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Total Number of Cars <span className={styles.required}>*</span></Form.Label>
+                <Form.Label>Total Cars <span className={styles.required}>*</span></Form.Label>
                 <Form.Control
                   type="number"
                   name="totalCars"
@@ -201,11 +207,6 @@ const BecomePartnerPage = () => {
               </Form.Group>
             </Col>
           </Row>
-          <div className={styles.buttonGroup}>
-            <Button onClick={() => updateFormStep(1)} className={styles.nextButton}>
-              Next
-            </Button>
-          </div>
         </>
       ),
     },
@@ -216,26 +217,26 @@ const BecomePartnerPage = () => {
           <Row>
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Company Owner Name <span className={styles.required}>*</span></Form.Label>
+                <Form.Label>Owner Name <span className={styles.required}>*</span></Form.Label>
                 <Form.Control
                   type="text"
                   name="ownerName"
                   value={formData.ownerName}
                   onChange={handleInputChange}
-                  placeholder="Enter Company Owner Name"
+                  placeholder="Enter Owner Name"
                   required
                 />
               </Form.Group>
             </Col>
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Email Address <span className={styles.required}>*</span></Form.Label>
+                <Form.Label>Owner Email <span className={styles.required}>*</span></Form.Label>
                 <Form.Control
                   type="email"
                   name="ownerEmail"
                   value={formData.ownerEmail}
                   onChange={handleInputChange}
-                  placeholder="Enter Email Address"
+                  placeholder="Enter Owner Email"
                   required
                 />
               </Form.Group>
@@ -261,63 +262,49 @@ const BecomePartnerPage = () => {
             </Col>
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Mobile Number <span className={styles.required}>*</span></Form.Label>
+                <Form.Label>Owner Mobile Number <span className={styles.required}>*</span></Form.Label>
                 <Form.Control
                   type="tel"
                   name="ownerMobileNumber"
                   value={formData.ownerMobileNumber}
                   onChange={handleInputChange}
-                  placeholder="Enter Mobile Number"
+                  placeholder="Enter Owner Mobile Number"
                   required
                 />
               </Form.Group>
             </Col>
           </Row>
-          <div className={styles.buttonGroup}>
-            <Button onClick={() => updateFormStep(0)} className={styles.prevButton}>
-              Previous
-            </Button>
-            <Button onClick={() => updateFormStep(2)} className={styles.nextButton}>
-              Next
-            </Button>
-          </div>
         </>
       ),
     },
     {
-      title: "Document Upload",
+      title: "Documents",
       content: (
         <>
           <Row>
-            <Col md={4}>
+            <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Emirates ID Number (optional)</Form.Label>
+                <Form.Label>Emirates ID Number <span className={styles.required}>*</span></Form.Label>
                 <Form.Control
                   type="text"
                   name="emiratesIdNumber"
                   value={formData.emiratesIdNumber}
                   onChange={handleInputChange}
-                  placeholder="Enter ID Number"
+                  placeholder="Enter Emirates ID Number"
+                  required
                 />
               </Form.Group>
             </Col>
-            <Col md={4}>
+            <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Emirates ID Front Image (optional)</Form.Label>
+                <Form.Label>Trade License Number <span className={styles.required}>*</span></Form.Label>
                 <Form.Control
-                  type="file"
-                  name="emiratesIdFrontImage"
-                  onChange={handleFileChange}
-                />
-              </Form.Group>
-            </Col>
-            <Col md={4}>
-              <Form.Group className="mb-3">
-                <Form.Label>Emirates ID Back Image (optional)</Form.Label>
-                <Form.Control
-                  type="file"
-                  name="emiratesIdBackImage"
-                  onChange={handleFileChange}
+                  type="text"
+                  name="tradeLicenseNumber"
+                  value={formData.tradeLicenseNumber}
+                  onChange={handleInputChange}
+                  placeholder="Enter Trade License Number"
+                  required
                 />
               </Form.Group>
             </Col>
@@ -325,35 +312,25 @@ const BecomePartnerPage = () => {
           <Row>
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Company Trade License Number (Optional)</Form.Label>
+                <Form.Label>Emirates ID Copy (Optional)</Form.Label>
                 <Form.Control
-                  type="text"
-                  name="tradeLicenseNumber"
-                  value={formData.tradeLicenseNumber}
-                  onChange={handleInputChange}
-                  placeholder="Enter ID Number"
+                  type="file"
+                  name="emiratesIdCopy"
+                  onChange={handleFileChange}
                 />
               </Form.Group>
             </Col>
             <Col md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Company Trade License Image (Optional)</Form.Label>
+                <Form.Label>Trade License Copy (Optional)</Form.Label>
                 <Form.Control
                   type="file"
-                  name="tradeLicenseImage"
+                  name="tradeLicenseCopy"
                   onChange={handleFileChange}
                 />
               </Form.Group>
             </Col>
           </Row>
-          <div className={styles.buttonGroup}>
-            <Button onClick={() => updateFormStep(1)} className={styles.prevButton}>
-              Previous
-            </Button>
-            <Button type="submit" className={styles.nextButton}>
-              Submit
-            </Button>
-          </div>
         </>
       ),
     },
@@ -361,127 +338,101 @@ const BecomePartnerPage = () => {
 
   const services = [
     {
-      title: "Car Booking Portal",
-      image: "/images/car-booking-portal.jpg",
-      items: ["Attractive Booking Page", "Show Complete Fleet", "Customer Booking", "Online Payment"],
-    },
-    {
-      title: "Invoice Designer",
-      image: "/images/invoice-designer.jpg",
-      items: ["Customize Your Invoice", "Innovative Design", "Place Your Logo"],
-    },
-    {
-      title: "Asset Management",
-      image: "/images/assets-management.jpg",
-      items: ["Manage Your Vehicle", "Finance Module", "Monthly and Yearly Asset Report", "Important Alerts and Reminder", "ROI Reports"],
-    },
-    {
-      title: "Staff Performance",
-      image: "/images/staff-performance.jpg",
-      items: ["Create Separate User Profile", "Manage Data Base", "Assign Controls", "Monitor Tasks"],
-    },
-    {
-      title: "Unpaid Invoices",
-      image: "/images/unpaid-invoices.jpg",
-      items: ["Get Accurate Report", "Messages Integration", "Invoice Aging", "Notes and Remarks"],
-    },
-    {
-      title: "Fleet Status",
-      image: "/images/fleet-status.jpg",
+      title: "Fleet Management",
+      icon: "directions_car",
       items: ["Single Screen Operation", "Vehicle Status Reports", "Smart Searching", "Smart Contract Creation"],
     },
     {
       title: "Fines and Salik Integration",
-      image: "/images/fines-salik-integration.jpg",
+      icon: "toll",
       items: ["Salik Report", "Fines Report", "Smart Invoicing", "Real Time Updates"],
     },
     {
       title: "Booking Verification",
-      image: "/images/booking-verification.jpg",
+      icon: "verified",
       items: ["Check Documents", "Important Validations", "Save Time Easy Working", "Manage Reservations"],
     },
     {
       title: "Bookings and Reservations",
-      image: "/images/booking-reservation.jpg",
+      icon: "event_available",
       items: ["Track Online Booking", "Convert Reservations to Bookings", "Useful Booking Reports"],
     },
     {
       title: "Excel Import and Export",
-      image: "/images/excel-import.jpg",
+      icon: "import_export",
       items: ["Import Your Fleet Data", "Export Report to PDF and Excel", "One Click Report Download Option"],
     },
     {
       title: "Payments Gateway",
-      image: "/images/payment-gateways.jpg",
+      icon: "payment",
       items: ["Easy Online Ordering", "Secure Gateways", "Record Your Transactions"],
     },
     {
       title: "Smart Printing",
-      image: "/images/smart-printing.jpg",
+      icon: "print",
       items: ["Reports Are Ready to Print", "Print or Email Invoices", "Stored Documents Printing"],
     },
     {
       title: "Reports & Analytics",
-      image: "/images/reports-analytics.jpg",
+      icon: "analytics",
       items: ["Financial Reports", "Fleet Utilization Report", "Managerial Report", "Overdue Payment Report"],
     },
     {
       title: "Easy Configuration",
-      image: "/images/easy-configuration.jpg",
+      icon: "settings",
       items: ["System Configuration", "Fuel Settings", "Accounts Settings", "Maintenance Protocols"],
     },
     {
       title: "Customer Portal",
-      image: "/images/customer-portal.jpg",
+      icon: "web",
       items: ["Booking Information", "Rental History", "Salik and Fines Reports", "Profile Settings", "Promotions and Referral"],
     },
   ];
 
   return (
     <div className={styles.container}>
-      {/* Car Rental Software Section */}
-      <div className={styles.title}>Car Rental Software for Fast-Growing Companies</div>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+
+      {/* Hero Section */}
+      <div className={styles.title}>Join CarYaati as a Partner</div>
       <div className={styles.subtitle}>
-        CarYaati is the easiest way to encourage your customers, work more productively, and grow faster.
+        Partner with CarYaati to streamline your car rental business with our cutting-edge software, designed to boost productivity and growth.
       </div>
+
+      {/* Steps Section */}
       <div className={styles.steps}>
         <Row>
-          <Col sm={6} md={4}>
-            <div className={styles.step}>
-              <Image
-                src="/images/register_online.png"
-                alt="Register Online"
-                width={50}
-                height={50}
-              />
-              <h3>Register Online</h3>
-              <p>Easy and FREE registrations. CarYaati Representative will contact you for further assistance.</p>
-            </div>
-          </Col>
-          <Col sm={6} md={4}>
-            <div className={styles.step}>
-              <Image
-                src="/images/import_vehicle_caryaati.png"
-                alt="Import Your Vehicles"
-                width={50}
-                height={50}
-              />
-              <h3>Import Your Vehicles</h3>
-              <p>Easy Company Setup, just import your important/required data, and connect with innovative solutions.</p>
-            </div>
-          </Col>
-          <Col sm={6} md={4}>
-            <div className={styles.step}>
-              <Image
-                src="/images/integration_caryaati.png"
-                alt="Integrate Tolls and Fines"
-                width={50}
-                height={50}
-              />
-              <h3>Integrate Tolls and Fines</h3>
-              <p>Simple, Smart Easy configurations to streamline your operations and integrate calculations.</p>
-            </div>
-          </Col>
+          {[
+            {
+              image: "/images/register_online.png",
+              title: "Register Online",
+              description: "Easy and FREE registrations. A CarYaati representative will contact you for further assistance.",
+            },
+            {
+              image: "/images/import_vehicle_caryaati.png",
+              title: "Import Your Vehicles",
+              description: "Effortless company setup: import your fleet data and connect with innovative solutions.",
+            },
+            {
+              image: "/images/integration_caryaati.png",
+              title: "Integrate Tolls and Fines",
+              description: "Simplify operations with smart, seamless configurations for tolls and fines integration.",
+            },
+          ].map((step, index) => (
+            <Col sm={12} md={4} key={index}>
+              <div className={styles.step}>
+                <Image
+                  src={step.image}
+                  alt={step.title}
+                  width={60}
+                  height={60}
+                  style={{ objectFit: "contain" }}
+                />
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </div>
+            </Col>
+          ))}
         </Row>
       </div>
 
@@ -489,15 +440,15 @@ const BecomePartnerPage = () => {
       <hr className={styles.divider} />
 
       {/* Form Section */}
-    
       <div className={styles.formContainer}>
-      <div className={styles.title}>Become A Partner</div>
+        <div className={styles.title}>Become a Partner</div>
         <div className={styles.progressContainer}>
-          <div className={styles.progressBar}>
+          <div className={styles.progressBar} style={{ "--current-step": currentStep + 1 } as React.CSSProperties}>
             {steps.map((step, index) => (
               <div
                 key={index}
                 className={`${styles.progressStep} ${currentStep >= index ? styles.completed : ""}`}
+                onClick={() => updateFormStep(index)}
               >
                 <span className={styles.stepNumber}>{index + 1}</span>
                 <span className={styles.stepLabel}>{step.title}</span>
@@ -512,29 +463,45 @@ const BecomePartnerPage = () => {
               className={`${styles.formStep} ${currentStep === index ? styles.active : ""}`}
               id={`step-${index + 1}`}
             >
-              <h4>{step.title}</h4>
               {step.content}
             </div>
           ))}
+          <div className={styles.buttonGroup}>
+            <Button
+              className={styles.prevButton}
+              onClick={() => updateFormStep(currentStep - 1)}
+              disabled={currentStep === 0}
+            >
+              Previous
+            </Button>
+            <Button
+              className={styles.nextButton}
+              onClick={() => updateFormStep(currentStep + 1)}
+              disabled={currentStep === steps.length - 1}
+            >
+              Next
+            </Button>
+            {currentStep === steps.length - 1 && (
+              <Button className={styles.nextButton} type="submit">
+                Submit
+              </Button>
+            )}
+          </div>
         </Form>
       </div>
 
-      {/* What You Will Get Section */}
-      <div className={styles.title} style={{marginTop:"50px"}}>What You Will Get? Rental Management Software</div>
+      {/* Services Section */}
+      <div className={styles.title}>What You’ll Get with CarYaati</div>
+      <div className={styles.subtitle}>Explore the powerful features of our Rental Management Software.</div>
       <Row>
         {services.map((service, index) => (
-          <Col md={4} key={index}>
+          <Col sm={12} md={6} lg={4} key={index}>
             <div className={styles.serviceCard}>
-              <Image
-                src={service.image}
-                alt={`${service.title} Icon`}
-                width={100}
-                height={100}
-              />
-              <h3 style={{ color: "#000" }}>{service.title}</h3>
+              <span className={`material-icons ${styles.serviceIcon}`}>{service.icon}</span>
+              <h3>{service.title}</h3>
               <ul>
                 {service.items.map((item, idx) => (
-                  <li key={idx} style={{ fontSize: "14px" }}>{item}</li>
+                  <li key={idx}>{item}</li>
                 ))}
               </ul>
             </div>

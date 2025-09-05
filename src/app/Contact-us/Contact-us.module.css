@@ -1,204 +1,170 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-  }
-
-  .info{
-    font-size: 18px;
-    color: #f39c12;
-  }
-  
-  .main {
-    flex: 1;
-    padding: 2rem;
-    padding-left: 80px;
-    padding-right: 60px;
-    background-color: #f8f9fa;
-  }
-  
-  .title {
-    font-size: 45px;
-    color: #333;
-    text-align: left;
-    margin-bottom: 1rem;
-  }
-  
-  .subtitle {
-    font-size: 16px;
-    color: #666;
-    text-align: left;
-    margin-bottom: 2rem;
-  }
-  
-  .contactInfoSection {
-    margin-bottom: 2rem;
-  }
-  
-  .mapContainer {
-    height: 300px;
-    width: 100%;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .contactDetails {
-    padding: 1rem;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    height: 100%;
-  }
-  
-  .contactDetails h3 {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 1rem;
-  }
-  
-  .contactDetails p {
-    font-size: 14px;
-    color: #666;
-    margin-bottom: 0.5rem;
-  }
-  
-  .contactDetails strong {
-    color: #333;
-  }
-  
-  .contactForm {
-    max-width: 800px;
-    margin: 0 auto;
-    /* background: #fff; */
-    padding: 2rem;
-    border-radius: 10px;
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
-  }
-  
-  .contactForm label {
-    font-weight: 500;
-    color: #333;
-  }
-
-  .contactInfoSection {
-  margin: 3rem 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.contactDetails {
+.main {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f8f9fa;
+}
+
+.title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2.5rem;
+  color: #0080F6;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.contactCard {
   background: #fff;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 1.5rem;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.3s;
 }
 
-.contactDetails i {
-  display: block;
+.contactCard:hover {
+  transform: translateY(-5px);
+}
+
+.contactIcon {
+  font-size: 2rem;
+  color: #0080F6;
+  margin-bottom: 1rem;
+}
+
+.contactCard h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
+  color: #0080F6;
   margin-bottom: 0.5rem;
 }
 
-.contactDetails h3 {
-  font-size: 18px;
-  color: #f39c12;
-  margin-bottom: 0.5rem;
-}
-
-.contactDetails p {
-  margin: 0;
-  font-size: 14px;
+.contactCard p {
+  font-size: 1rem;
   color: #333;
 }
-  
-  .contactForm input,
-  .contactForm textarea {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 14px;
-    background: #f9f9f9;
-    /* background: #fff; */
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+.contactForm {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.contactForm label {
+  font-weight: 500;
+  color: #333;
+}
+
+.contactForm input,
+.contactForm textarea {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  background: #f9f9f9;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.contactForm input:focus,
+.contactForm textarea:focus {
+  border-color: #0080F6;
+  box-shadow: 0 0 5px rgba(0, 128, 246, 0.2);
+}
+
+.required {
+  color: red;
+}
+
+.submitButton {
+  background: linear-gradient(90deg, #0080F6, #42C3F7);
+  border: none;
+  color: #fff;
+  padding: 12px 30px;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.3s;
+  width: 100%;
+}
+
+.submitButton:hover {
+  background: linear-gradient(90deg, #42C3F7, #0080F6);
+  transform: scale(1.05);
+}
+
+.mapContainer {
+  height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+.aboutTitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 2rem;
+  color: #0080F6;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.aboutText {
+  font-size: 1.1rem;
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.tipsTitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.8rem;
+  color: #0080F6;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.tipsList {
+  list-style-type: disc;
+  padding-left: 20px;
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 767px) {
+  .main {
+    padding: 1rem;
   }
-  
-  .contactForm input:focus,
-  .contactForm textarea:focus {
-    border-color: #f60;
-    box-shadow: 0 0 5px rgba(255, 102, 0, 0.2);
-    outline: none;
+
+  .title {
+    font-size: 2rem;
   }
-  
-  .required {
-    color: red;
+
+  .subtitle {
+    font-size: 1rem;
   }
-  
-  .submitButton {
-    background-color: #f60;
-    border: none;
-    color: #fff;
-    padding: 12px 30px;
-    border-radius: 6px;
-    font-size: 16px;
-    font-weight: 500;
-    display: block;
-    margin: 0 auto;
-    transition: background-color 0.3s ease, transform 0.1s ease;
+
+  .mapContainer {
+    height: 300px;
   }
-  
-  .submitButton:hover {
-    background-color: #e55;
-    transform: translateY(-2px);
+
+  .aboutTitle {
+    font-size: 1.8rem;
   }
-  
-  .alert {
-    max-width: 800px;
-    margin: 0 auto 1rem;
+
+  .tipsTitle {
+    font-size: 1.5rem;
   }
-  
-  /* Responsive Adjustments */
-  @media (max-width: 767px) {
-    .main {
-      padding: 1rem;
-    }
-  
-    .title {
-      font-size: 24px;
-    }
-  
-    .subtitle {
-      font-size: 14px;
-    }
-  
-    .mapContainer {
-      height: 200px;
-    }
-  
-    .contactDetails {
-      margin-top: 1rem;
-      padding: 0.5rem;
-    }
-  
-    .contactDetails h3 {
-      font-size: 18px;
-    }
-  
-    .contactDetails p {
-      font-size: 12px;
-    }
-  
-    .contactForm {
-      padding: 1rem;
-    }
-  
-    .contactForm input,
-    .contactForm textarea {
-      padding: 10px;
-      font-size: 12px;
-    }
-  
-    .submitButton {
-      padding: 10px 20px;
-      font-size: 14px;
-      width: 100%;
-    }
-  }
+}
