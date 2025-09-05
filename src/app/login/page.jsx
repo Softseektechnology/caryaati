@@ -193,6 +193,7 @@ const data = await res.json();
           setIsSidebarOpen(!isSidebarOpen);
           setIsDropdownOpen(false);
         }}
+        isHome={true}
         onUserToggle={() => {
           setIsDropdownOpen(!isDropdownOpen);
           setIsSidebarOpen(false);
