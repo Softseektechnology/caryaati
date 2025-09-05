@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./Footer.module.css";
+import Link from "next/link";
 
 const Footer: React.FC = () => {
   return (
@@ -19,16 +20,16 @@ const Footer: React.FC = () => {
 
         <div className={styles.footerCol}>
           <h4>Important Reading</h4>
-          <a href="Privacy-policy">Privacy Policy</a>
-          <a href="Terms-conditions">Terms &amp; Conditions</a>
-          <a href="Become-a-partner">Become a Partner</a>
+          <Link href="/Privacy-policy">Privacy Policy</Link>
+          <Link href="/Terms-conditions">Terms &amp; Conditions</Link>
+          <Link href="/Become-a-partner">Become a Partner</Link>
         </div>
 
         <div className={styles.footerCol}>
           <h4>Useful Link</h4>
-           <a href="Blogs">Blogs</a>
-          <a href="Contact-us">Contact us</a>
-          <a href="/FAQ">FAQ</a>
+          <Link href="/Blogs">Blogs</Link>
+          <Link href="/Contact-us">Contact us</Link>
+          <Link href="/FAQ">FAQ</Link>
           {/* <div className={styles.contactItem}>
             <img src="https://flagcdn.com/w20/ae.png" alt="UAE Flag" /> +971 (54)
             3363 900

@@ -22,7 +22,7 @@ const blogPosts = [
     date: "2024-09-07 16:37:04",
     author: "Admin",
     excerpt: "Essential Pickup and Drop off Tips for a smooth experience in Dubai.",
-    image: "/images/car-rental.webp",
+    image: "/images/trip.webp",
   },
   {
     id: 3,
@@ -30,7 +30,7 @@ const blogPosts = [
     date: "2024-08-26 16:03:11",
     author: "Admin",
     excerpt: "Explore the best SUVs available for rent and why they're perfect for Dubai's roads.",
-    image: "/images/suv-rental.webp",
+    image: "/images/trip.webp",
   },
   {
     id: 4,
@@ -38,7 +38,7 @@ const blogPosts = [
     date: "2024-07-05 14:49:26",
     author: "Admin",
     excerpt: "Top dining spots in Dubai Marina to visit with your rental car.",
-    image: "/images/dubai-marina.webp",
+    image: "/images/trip.webp",
   },
   // Add more posts as needed
 ];
