@@ -492,7 +492,7 @@ const BecomePartnerPage = () => {
       </div>
 
       {/* Services Section */}
-      <div className={styles.title}>What You’ll Get with CarYaati</div>
+      <div className={`${styles.title} mt-[77px]`}>What You’ll Get with CarYaati</div>
       <div className={styles.subtitle}>Explore the powerful features of our Rental Management Software.</div>
       <Row>
         {services.map((service, index) => (
@@ -509,6 +509,24 @@ const BecomePartnerPage = () => {
           </Col>
         ))}
       </Row>
+      {/* Feature Section */}
+<div className={`${styles.featureSection} hidden`}>
+  <h2>Why Partner with CarYaati?</h2>
+  <div className={styles.featureGrid}>
+    {[
+      {id: 1, src: 'https://www.caryaati.com/assets/become_partner/booking_and_reservation.png', content: 'Booking & Reservation'},
+      {id: 2, src: 'https://www.caryaati.com/assets/become_partner/fleet_management_icon.jpg', content: 'Fleet Management'},
+      {id: 3, src: 'https://www.caryaati.com/assets/become_partner/accounting_and_finance.jpg', content: 'Accounting and Finance'},
+      {id: 4, src: 'https://www.caryaati.com/assets/become_partner/integration.png', content: 'Integration'}
+    ].map((item) => (
+      <div key={item.id} className={styles.featureItem}>
+        <img src={item.src} className={styles.featureImage} />
+        <p>{item.content}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
     </div>
   );
 };
