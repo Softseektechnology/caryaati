@@ -89,7 +89,7 @@ const BecomePartnerPage = () => {
 
   const steps = [
     {
-      title: "Company Information",
+      title: "Company Info",
       content: (
         <>
           <Row>
@@ -211,7 +211,7 @@ const BecomePartnerPage = () => {
       ),
     },
     {
-      title: "Owner Information",
+      title: "Owner Info",
       content: (
         <>
           <Row>
@@ -278,7 +278,7 @@ const BecomePartnerPage = () => {
       ),
     },
     {
-      title: "Documents",
+      title: "Docs",
       content: (
         <>
           <Row>
@@ -452,7 +452,7 @@ const BecomePartnerPage = () => {
                 onClick={() => updateFormStep(index)}
               >
                 <span className={styles.stepNumber}>{index + 1}</span>
-                <span className={styles.stepLabel}>{step.title}</span>
+                <span className={`${styles.stepLabel} max-sm:text-[8px]`}>{step.title}</span>
               </div>
             ))}
           </div>
@@ -502,7 +502,7 @@ const BecomePartnerPage = () => {
               <h3>{service.title}</h3>
               <ul>
                 {service.items.map((item, idx) => (
-                  <li key={idx}>{item}</li>
+                  <li key={idx} className={styles.serviceItem}>{item}</li>
                 ))}
               </ul>
             </div>

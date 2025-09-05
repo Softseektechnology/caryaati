@@ -175,17 +175,226 @@
 
 /* Responsive Design */
 @media (max-width: 992px) {
+  .faqContainer {
+    padding: 15px;
+  }
+
   .sidebar {
     margin-top: 30px;
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 768px) {
+  .faqContainer {
+    padding: 10px;
+  }
+
   .header {
     font-size: 2rem;
   }
 
   .sectionTitle {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+  }
+
+  .faqItem {
+    margin-bottom: 10px;
+  }
+
+  .faqHeader {
+    padding: 12px;
+    font-size: 0.95rem;
+  }
+
+  .faqBody {
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+
+  .helpfulSection {
+    font-size: 0.85rem;
+    gap: 8px;
+  }
+
+  .searchInput {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .searchButton {
+    padding: 10px;
+  }
+
+  .sidebar {
+    padding: 15px;
+  }
+
+  .sidebarTitle {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+
+  .categoryList li {
+    margin-bottom: 12px;
+  }
+
+  .categoryList a {
+    font-size: 0.9rem;
+  }
+
+  .contactSupport h4 {
+    font-size: 1.1rem;
+  }
+
+  .supportButton {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .faqContainer {
+    padding: 8px;
+  }
+
+  .header {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
+
+  .sectionTitle {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  .faqHeader {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .faqBody {
+    padding: 12px;
+    font-size: 0.85rem;
+  }
+
+  .helpfulSection {
+    font-size: 0.8rem;
+    gap: 6px;
+  }
+
+  .searchInput {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+
+  .searchButton {
+    padding: 8px;
+  }
+
+  .sidebar {
+    padding: 12px;
+    margin-top: 20px;
+  }
+
+  .sidebarTitle {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+
+  .categoryList li {
+    margin-bottom: 10px;
+  }
+
+  .categoryList a {
+    font-size: 0.85rem;
+  }
+
+  .contactSupport {
+    margin-top: 20px;
+  }
+
+  .contactSupport h4 {
+    font-size: 1rem;
+  }
+
+  .supportButton {
+    padding: 7px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .faqContainer {
+    padding: 5px;
+  }
+
+  .header {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+  }
+
+  .sectionTitle {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+  }
+
+  .faqItem {
+    margin-bottom: 8px;
+  }
+
+  .faqHeader {
+    padding: 8px;
+    font-size: 0.85rem;
+  }
+
+  .faqBody {
+    padding: 10px;
+    font-size: 0.8rem;
+  }
+
+  .helpfulSection {
+    font-size: 0.75rem;
+    gap: 5px;
+  }
+
+  .searchInput {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+
+  .searchButton {
+    padding: 6px;
+  }
+
+  .sidebar {
+    padding: 10px;
+    margin-top: 15px;
+  }
+
+  .sidebarTitle {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .categoryList li {
+    margin-bottom: 8px;
+  }
+
+  .categoryList a {
+    font-size: 0.8rem;
+  }
+
+  .contactSupport {
+    margin-top: 15px;
+  }
+
+  .contactSupport h4 {
+    font-size: 0.9rem;
+  }
+
+  .supportButton {
+    padding: 6px 12px;
+    font-size: 0.8rem;
   }
 }

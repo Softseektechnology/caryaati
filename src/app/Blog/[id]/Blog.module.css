@@ -1,6 +1,6 @@
 .blogContainer {
   max-width: 1200px;
-  margin: 0 auto;
+  margin-left: 40px;
   padding: 20px;
   font-family: 'Montserrat', sans-serif;
   animation: fadeIn 0.8s ease-in-out;
@@ -19,7 +19,7 @@
 
 .leftSection {
   flex: 2;
-  min-width: 300px;
+  min-width: 280px;
 }
 
 .blogTitle {
@@ -103,43 +103,49 @@
   box-shadow: 0 4px 12px rgba(0, 128, 246, 0.3);
 }
 
+.socialIcons {
+  display: flex;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.socialIcon {
+  color: #0080F6;
+  font-size: 1.5rem;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.socialIcon:hover {
+  color: #ffc107;
+  transform: scale(1.1);
+}
+
 .rightSection {
   flex: 1;
   min-width: 250px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
 }
 
 .searchBar {
   display: flex;
-  background: #fff;
-  border-radius: 8px;
-  overflow: hidden;
+  margin-bottom: 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  transition: box-shadow 0.3s;
-  border: 1px solid #ddd;
-}
-
-.searchBar:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  overflow: hidden;
 }
 
 .searchInput {
   flex: 1;
-  padding: 12px;
   border: none;
-  outline: none;
+  padding: 12px;
   font-size: 1rem;
-  font-family: 'Montserrat', sans-serif;
+  background: #f9f9f9;
 }
 
 .searchButton {
   background: #ffc107;
-  color: #1f1f1f;
   border: none;
+  color: #1f1f1f;
   padding: 12px 20px;
-  cursor: pointer;
   transition: background 0.3s;
 }
 
@@ -247,20 +253,363 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (max-width: 767px) {
   .blogContainer {
     padding: 15px;
+    margin: 0 auto;
   }
 
   .blogTitle {
     font-size: 1.8rem;
   }
 
-  .blogContent h3 {
-    font-size: 1.5rem;
+  .meta {
+    font-size: 0.9rem;
   }
 
   .blogText {
     font-size: 1rem;
+  }
+
+  .blogText h3 {
+    font-size: 1.3rem;
+  }
+
+  .shareButton {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+  }
+
+  .socialIcons {
+    gap: 12px;
+  }
+
+  .socialIcon {
+    font-size: 1.3rem;
+  }
+
+  .searchBar {
+    margin-bottom: 20px;
+  }
+
+  .searchInput {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .searchButton {
+    padding: 10px 15px;
+  }
+
+  .categories h3,
+  .recentPosts h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+  }
+
+  .categoryList li {
+    margin-bottom: 12px;
+  }
+
+  .categoryList a {
+    font-size: 0.95rem;
+  }
+
+  .categoryList span {
+    font-size: 0.85rem;
+  }
+
+  .recentPosts .post a {
+    font-size: 0.95rem;
+  }
+
+  .recentPosts .post p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .blogContainer {
+    padding: 10px;
+  }
+
+  .blogTitle {
+    font-size: 1.6rem;
+  }
+
+  .meta {
+    font-size: 0.85rem;
+    gap: 8px;
+  }
+
+  .carImage {
+    height: 200px;
+  }
+
+  .blogText {
+    font-size: 0.95rem;
+  }
+
+  .blogText h3 {
+    font-size: 1.2rem;
+  }
+
+  .blogText p {
+    margin-bottom: 15px;
+  }
+
+  .blogText ul {
+    margin-left: 15px;
+  }
+
+  .shareButton {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+
+  .socialIcons {
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .socialIcon {
+    font-size: 1.2rem;
+  }
+
+  .searchBar {
+    margin-bottom: 15px;
+  }
+
+  .searchInput {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .searchButton {
+    padding: 8px 12px;
+  }
+
+  .categories,
+  .recentPosts {
+    padding: 15px;
+  }
+
+  .categories h3,
+  .recentPosts h3 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+
+  .categoryList li {
+    margin-bottom: 10px;
+  }
+
+  .categoryList a {
+    font-size: 0.9rem;
+  }
+
+  .recentPosts .post {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+  }
+
+  .recentPosts .post a {
+    font-size: 0.9rem;
+  }
+
+  .recentPosts .post p {
+    font-size: 0.75rem;
+    margin: 3px 0 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .blogContainer {
+    padding: 8px;
+  }
+
+  .leftSection {
+    min-width: 100%;
+  }
+
+  .blogTitle {
+    font-size: ;
+  }
+
+  .meta {
+    font-size: 0.8rem;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .carImage {
+    height: 180px;
+  }
+
+  .blogText {
+    font-size: 0.9rem;
+  }
+
+  .blogText h3 {
+    font-size: 1.1rem;
+  }
+
+  .blogText p {
+    margin-bottom: 12px;
+  }
+
+  .blogText ul {
+    margin-left: 12px;
+  }
+
+  .blogText li {
+    margin-bottom: 8px;
+  }
+
+  .shareButton {
+    padding: 7px 14px;
+    font-size: 0.85rem;
+  }
+
+  .socialIcons {
+    gap: 8px;
+    margin-top: 8px;
+  }
+
+  .socialIcon {
+    font-size: 1.1rem;
+  }
+
+  .searchInput {
+    padding: 6px;
+    font-size: 0.85rem;
+  }
+
+  .searchButton {
+    padding: 6px 10px;
+  }
+
+  .categories,
+  .recentPosts {
+    padding: 12px;
+  }
+
+  .categories h3,
+  .recentPosts h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .categoryList li {
+    margin-bottom: 8px;
+  }
+
+  .categoryList a {
+    font-size: 0.85rem;
+  }
+
+  .categoryList span {
+    font-size: 0.8rem;
+  }
+
+  .recentPosts .post a {
+    font-size: 0.85rem;
+  }
+
+  .recentPosts .post p {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .blogContainer {
+    padding: 5px;
+  }
+
+  .blogTitle {
+    font-size: 18px;
+  }
+
+  .meta {
+    font-size: 0.75rem;
+    gap: 5px;
+  }
+
+  .carImage {
+    height: 160px;
+  }
+
+  .blogText {
+    font-size: 0.85rem;
+  }
+
+  .blogText h3 {
+    font-size: 1rem;
+  }
+
+  .blogText p {
+    margin-bottom: 10px;
+  }
+
+  .blogText ul {
+    margin-left: 10px;
+  }
+
+  .blogText li {
+    margin-bottom: 6px;
+  }
+
+  .shareButton {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+
+  .socialIcons {
+    gap: 6px;
+    margin-top: 6px;
+  }
+
+  .socialIcon {
+    font-size: 1rem;
+  }
+
+  .searchInput {
+    padding: 5px;
+    font-size: 0.8rem;
+  }
+
+  .searchButton {
+    padding: 5px 8px;
+  }
+
+  .categories,
+  .recentPosts {
+    padding: 10px;
+  }
+
+  .categories h3,
+  .recentPosts h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .categoryList li {
+    margin-bottom: 6px;
+  }
+
+  .categoryList a {
+    font-size: 0.8rem;
+  }
+
+  .categoryList span {
+    font-size: 0.75rem;
+  }
+
+  .recentPosts .post a {
+    font-size: 0.8rem;
+  }
+
+  .recentPosts .post p {
+    font-size: 0.65rem;
   }
 }

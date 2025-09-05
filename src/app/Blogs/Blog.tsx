@@ -70,7 +70,7 @@ const BlogSection: React.FC = () => {
   return (
     <Container className={`${styles.blogContainer} bg-white rounded-lg shadow-md p-4`}>
       <Row className={styles.layout}>
-        {/* Left: Blog Posts Grid */}
+        {/* Left: Blog Posts */}
         <Col xs={12} md={8} className={styles.leftSection}>
           <div className={styles.blogPosts}>
             {paginatedPosts.map((post) => (

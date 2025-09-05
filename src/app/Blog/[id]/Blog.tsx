@@ -3,6 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import { FaFacebookF, FaTwitter, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
 import styles from './Blog.module.css';
 
 interface BlogPost {
@@ -51,11 +52,11 @@ const BlogLayout = () => {
   return (
     <Container className={`${styles.blogContainer} bg-white rounded-lg shadow-md p-4`}>
       <Row className={styles.layout}>
-        {/* Main Content */}
+        {/* Left: Blog Content */}
         <Col xs={12} md={8} className={styles.leftSection}>
           <h1 className={styles.blogTitle}>{blogPost.title}</h1>
           <p className={styles.meta}>
-            📅 {blogPost.date} | 👤 {blogPost.author}
+            📅 {blogPost.date} 👤 {blogPost.author}
           </p>
           <Image
             src={blogPost.image}
@@ -71,6 +72,12 @@ const BlogLayout = () => {
               className={styles.blogText}
             />
             <Button className={styles.shareButton}>Share this Post</Button>
+            <div className={styles.socialIcons}>
+              <a href="#" className={styles.socialIcon}><FaFacebookF /></a>
+              <a href="#" className={styles.socialIcon}><FaTwitter /></a>
+              <a href="#" className={styles.socialIcon}><FaLinkedinIn /></a>
+              <a href="#" className={styles.socialIcon}><FaWhatsapp /></a>
+            </div>
           </div>
         </Col>
 
