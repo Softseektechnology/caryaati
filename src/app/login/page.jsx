@@ -1,22 +1,24 @@
 'use client'
+
 import Sidebar from '@/components/multiplepages/Sidebar-multiplelinks';
 import Navbar from '@/components/nevegation-header/Navbar';
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import './style.css'
 import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import Footer from '@/components/foorter/Footer';
 import { signIn, useSession } from 'next-auth/react';
 import axios from 'axios'
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
+// const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), { ssr: false });
 
+const Page = () => {
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true });
+  }, []);
 
-
-const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), { ssr: false });
-
-
-
-const page = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
@@ -25,380 +27,495 @@ const page = () => {
   const [countryCode, setCountryCode] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [errors, setErrors] = useState({});
+  const [loginMethod, setLoginMethod] = useState('email'); // New state for login method
 
-  const { data: session, status } = useSession();
-  console.log(status)
+  const countryCodes = [
+    { value: "+93", label: "+93 (Afghanistan)" },
+    { value: "+355", label: "+355 (Albania)" },
+    { value: "+213", label: "+213 (Algeria)" },
+    { value: "+1-684", label: "+1-684 (American Samoa)" },
+    { value: "+376", label: "+376 (Andorra)" },
+    { value: "+244", label: "+244 (Angola)" },
+    { value: "+1-264", label: "+1-264 (Anguilla)" },
+    { value: "+672", label: "+672 (Antarctica)" },
+    { value: "+1-268", label: "+1-268 (Antigua and Barbuda)" },
+    { value: "+54", label: "+54 (Argentina)" },
+    { value: "+374", label: "+374 (Armenia)" },
+    { value: "+297", label: "+297 (Aruba)" },
+    { value: "+61", label: "+61 (Australia)" },
+    { value: "+43", label: "+43 (Austria)" },
+    { value: "+994", label: "+994 (Azerbaijan)" },
+    { value: "+1-242", label: "+1-242 (Bahamas)" },
+    { value: "+973", label: "+973 (Bahrain)" },
+    { value: "+880", label: "+880 (Bangladesh)" },
+    { value: "+1-246", label: "+1-246 (Barbados)" },
+    { value: "+375", label: "+375 (Belarus)" },
+    { value: "+32", label: "+32 (Belgium)" },
+    { value: "+501", label: "+501 (Belize)" },
+    { value: "+229", label: "+229 (Benin)" },
+    { value: "+1-441", label: "+1-441 (Bermuda)" },
+    { value: "+975", label: "+975 (Bhutan)" },
+    { value: "+591", label: "+591 (Bolivia)" },
+    { value: "+387", label: "+387 (Bosnia and Herzegovina)" },
+    { value: "+267", label: "+267 (Botswana)" },
+    { value: "+55", label: "+55 (Brazil)" },
+    { value: "+246", label: "+246 (British Indian Ocean Territory)" },
+    { value: "+1-284", label: "+1-284 (British Virgin Islands)" },
+    { value: "+673", label: "+673 (Brunei)" },
+    { value: "+359", label: "+359 (Bulgaria)" },
+    { value: "+226", label: "+226 (Burkina Faso)" },
+    { value: "+257", label: "+257 (Burundi)" },
+    { value: "+855", label: "+855 (Cambodia)" },
+    { value: "+237", label: "+237 (Cameroon)" },
+    { value: "+1", label: "+1 (Canada)" },
+    { value: "+238", label: "+238 (Cape Verde)" },
+    { value: "+1-345", label: "+1-345 (Cayman Islands)" },
+    { value: "+236", label: "+236 (Central African Republic)" },
+    { value: "+235", label: "+235 (Chad)" },
+    { value: "+56", label: "+56 (Chile)" },
+    { value: "+86", label: "+86 (China)" },
+    { value: "+61", label: "+61 (Christmas Island)" },
+    { value: "+61", label: "+61 (Cocos Islands)" },
+    { value: "+57", label: "+57 (Colombia)" },
+    { value: "+269", label: "+269 (Comoros)" },
+    { value: "+682", label: "+682 (Cook Islands)" },
+    { value: "+506", label: "+506 (Costa Rica)" },
+    { value: "+385", label: "+385 (Croatia)" },
+    { value: "+53", label: "+53 (Cuba)" },
+    { value: "+599", label: "+599 (Curacao)" },
+    { value: "+357", label: "+357 (Cyprus)" },
+    { value: "+420", label: "+420 (Czech Republic)" },
+    { value: "+243", label: "+243 (Democratic Republic of the Congo)" },
+    { value: "+45", label: "+45 (Denmark)" },
+    { value: "+253", label: "+253 (Djibouti)" },
+    { value: "+1-767", label: "+1-767 (Dominica)" },
+    { value: "+1-809", label: "+1-809 (Dominican Republic)" },
+    { value: "+670", label: "+670 (East Timor)" },
+    { value: "+593", label: "+593 (Ecuador)" },
+    { value: "+20", label: "+20 (Egypt)" },
+    { value: "+503", label: "+503 (El Salvador)" },
+    { value: "+240", label: "+240 (Equatorial Guinea)" },
+    { value: "+291", label: "+291 (Eritrea)" },
+    { value: "+372", label: "+372 (Estonia)" },
+    { value: "+251", label: "+251 (Ethiopia)" },
+    { value: "+500", label: "+500 (Falkland Islands)" },
+    { value: "+298", label: "+298 (Faroe Islands)" },
+    { value: "+679", label: "+679 (Fiji)" },
+    { value: "+358", label: "+358 (Finland)" },
+    { value: "+33", label: "+33 (France)" },
+    { value: "+689", label: "+689 (French Polynesia)" },
+    { value: "+241", label: "+241 (Gabon)" },
+    { value: "+220", label: "+220 (Gambia)" },
+    { value: "+995", label: "+995 (Georgia)" },
+    { value: "+49", label: "+49 (Germany)" },
+    { value: "+233", label: "+233 (Ghana)" },
+    { value: "+350", label: "+350 (Gibraltar)" },
+    { value: "+30", label: "+30 (Greece)" },
+    { value: "+299", label: "+299 (Greenland)" },
+    { value: "+1-473", label: "+1-473 (Grenada)" },
+    { value: "+1-671", label: "+1-671 (Guam)" },
+    { value: "+502", label: "+502 (Guatemala)" },
+    { value: "+44-1481", label: "+44-1481 (Guernsey)" },
+    { value: "+224", label: "+224 (Guinea)" },
+    { value: "+245", label: "+245 (Guinea-Bissau)" },
+    { value: "+592", label: "+592 (Guyana)" },
+    { value: "+509", label: "+509 (Haiti)" },
+    { value: "+504", label: "+504 (Honduras)" },
+    { value: "+852", label: "+852 (Hong Kong)" },
+    { value: "+36", label: "+36 (Hungary)" },
+    { value: "+354", label: "+354 (Iceland)" },
+    { value: "+91", label: "+91 (India)" },
+    { value: "+62", label: "+62 (Indonesia)" },
+    { value: "+98", label: "+98 (Iran)" },
+    { value: "+964", label: "+964 (Iraq)" },
+    { value: "+353", label: "+353 (Ireland)" },
+    { value: "+44-1624", label: "+44-1624 (Isle of Man)" },
+    { value: "+972", label: "+972 (Israel)" },
+    { value: "+39", label: "+39 (Italy)" },
+    { value: "+225", label: "+225 (Ivory Coast)" },
+    { value: "+1-876", label: "+1-876 (Jamaica)" },
+    { value: "+81", label: "+81 (Japan)" },
+    { value: "+44-1534", label: "+44-1534 (Jersey)" },
+    { value: "+962", label: "+962 (Jordan)" },
+    { value: "+7", label: "+7 (Kazakhstan)" },
+    { value: "+254", label: "+254 (Kenya)" },
+    { value: "+686", label: "+686 (Kiribati)" },
+    { value: "+383", label: "+383 (Kosovo)" },
+    { value: "+965", label: "+965 (Kuwait)" },
+    { value: "+996", label: "+996 (Kyrgyzstan)" },
+    { value: "+856", label: "+856 (Laos)" },
+    { value: "+371", label: "+371 (Latvia)" },
+    { value: "+961", label: "+961 (Lebanon)" },
+    { value: "+266", label: "+266 (Lesotho)" },
+    { value: "+231", label: "+231 (Liberia)" },
+    { value: "+218", label: "+218 (Libya)" },
+    { value: "+423", label: "+423 (Liechtenstein)" },
+    { value: "+370", label: "+370 (Lithuania)" },
+    { value: "+352", label: "+352 (Luxembourg)" },
+    { value: "+853", label: "+853 (Macau)" },
+    { value: "+389", label: "+389 (Macedonia)" },
+    { value: "+261", label: "+261 (Madagascar)" },
+    { value: "+265", label: "+265 (Malawi)" },
+    { value: "+60", label: "+60 (Malaysia)" },
+    { value: "+960", label: "+960 (Maldives)" },
+    { value: "+223", label: "+223 (Mali)" },
+    { value: "+356", label: "+356 (Malta)" },
+    { value: "+692", label: "+692 (Marshall Islands)" },
+    { value: "+222", label: "+222 (Mauritania)" },
+    { value: "+230", label: "+230 (Mauritius)" },
+    { value: "+262", label: "+262 (Mayotte)" },
+    { value: "+52", label: "+52 (Mexico)" },
+    { value: "+691", label: "+691 (Micronesia)" },
+    { value: "+373", label: "+373 (Moldova)" },
+    { value: "+377", label: "+377 (Monaco)" },
+    { value: "+976", label: "+976 (Mongolia)" },
+    { value: "+382", label: "+382 (Montenegro)" },
+    { value: "+1-664", label: "+1-664 (Montserrat)" },
+    { value: "+212", label: "+212 (Morocco)" },
+    { value: "+258", label: "+258 (Mozambique)" },
+    { value: "+95", label: "+95 (Myanmar)" },
+    { value: "+264", label: "+264 (Namibia)" },
+    { value: "+674", label: "+674 (Nauru)" },
+    { value: "+977", label: "+977 (Nepal)" },
+    { value: "+31", label: "+31 (Netherlands)" },
+    { value: "+599", label: "+599 (Netherlands Antilles)" },
+    { value: "+687", label: "+687 (New Caledonia)" },
+    { value: "+64", label: "+64 (New Zealand)" },
+    { value: "+505", label: "+505 (Nicaragua)" },
+    { value: "+227", label: "+227 (Niger)" },
+    { value: "+234", label: "+234 (Nigeria)" },
+    { value: "+683", label: "+683 (Niue)" },
+    { value: "+850", label: "+850 (North Korea)" },
+    { value: "+1-670", label: "+1-670 (Northern Mariana Islands)" },
+    { value: "+47", label: "+47 (Norway)" },
+    { value: "+968", label: "+968 (Oman)" },
+    { value: "+92", label: "+92 (Pakistan)" },
+    { value: "+680", label: "+680 (Palau)" },
+    { value: "+970", label: "+970 (Palestine)" },
+    { value: "+507", label: "+507 (Panama)" },
+    { value: "+675", label: "+675 (Papua New Guinea)" },
+    { value: "+595", label: "+595 (Paraguay)" },
+    { value: "+51", label: "+51 (Peru)" },
+    { value: "+63", label: "+63 (Philippines)" },
+    { value: "+64", label: "+64 (Pitcairn)" },
+    { value: "+48", label: "+48 (Poland)" },
+    { value: "+351", label: "+351 (Portugal)" },
+    { value: "+1-787", label: "+1-787 (Puerto Rico)" },
+    { value: "+974", label: "+974 (Qatar)" },
+    { value: "+242", label: "+242 (Republic of the Congo)" },
+    { value: "+262", label: "+262 (Reunion)" },
+    { value: "+40", label: "+40 (Romania)" },
+    { value: "+7", label: "+7 (Russia)" },
+    { value: "+250", label: "+250 (Rwanda)" },
+    { value: "+590", label: "+590 (Saint Barthelemy)" },
+    { value: "+290", label: "+290 (Saint Helena)" },
+    { value: "+1-869", label: "+1-869 (Saint Kitts and Nevis)" },
+    { value: "+1-758", label: "+1-758 (Saint Lucia)" },
+    { value: "+590", label: "+590 (Saint Martin)" },
+    { value: "+508", label: "+508 (Saint Pierre and Miquelon)" },
+    { value: "+1-784", label: "+1-784 (Saint Vincent and the Grenadines)" },
+    { value: "+685", label: "+685 (Samoa)" },
+    { value: "+378", label: "+378 (San Marino)" },
+    { value: "+239", label: "+239 (Sao Tome and Principe)" },
+    { value: "+966", label: "+966 (Saudi Arabia)" },
+    { value: "+221", label: "+221 (Senegal)" },
+    { value: "+381", label: "+381 (Serbia)" },
+    { value: "+248", label: "+248 (Seychelles)" },
+    { value: "+232", label: "+232 (Sierra Leone)" },
+    { value: "+65", label: "+65 (Singapore)" },
+    { value: "+1-721", label: "+1-721 (Sint Maarten)" },
+    { value: "+421", label: "+421 (Slovakia)" },
+    { value: "+386", label: "+386 (Slovenia)" },
+    { value: "+677", label: "+677 (Solomon Islands)" },
+    { value: "+252", label: "+252 (Somalia)" },
+    { value: "+27", label: "+27 (South Africa)" },
+    { value: "+82", label: "+82 (South Korea)" },
+    { value: "+211", label: "+211 (South Sudan)" },
+    { value: "+34", label: "+34 (Spain)" },
+    { value: "+94", label: "+94 (Sri Lanka)" },
+    { value: "+249", label: "+249 (Sudan)" },
+    { value: "+597", label: "+597 (Suriname)" },
+    { value: "+47", label: "+47 (Svalbard and Jan Mayen)" },
+    { value: "+268", label: "+268 (Swaziland)" },
+    { value: "+46", label: "+46 (Sweden)" },
+    { value: "+41", label: "+41 (Switzerland)" },
+    { value: "+963", label: "+963 (Syria)" },
+    { value: "+886", label: "+886 (Taiwan)" },
+    { value: "+992", label: "+992 (Tajikistan)" },
+    { value: "+255", label: "+255 (Tanzania)" },
+    { value: "+66", label: "+66 (Thailand)" },
+    { value: "+228", label: "+228 (Togo)" },
+    { value: "+690", label: "+690 (Tokelau)" },
+    { value: "+676", label: "+676 (Tonga)" },
+    { value: "+1-868", label: "+1-868 (Trinidad and Tobago)" },
+    { value: "+216", label: "+216 (Tunisia)" },
+    { value: "+90", label: "+90 (Turkey)" },
+    { value: "+993", label: "+993 (Turkmenistan)" },
+    { value: "+1-649", label: "+1-649 (Turks and Caicos Islands)" },
+    { value: "+688", label: "+688 (Tuvalu)" },
+    { value: "+1-340", label: "+1-340 (U.S. Virgin Islands)" },
+    { value: "+256", label: "+256 (Uganda)" },
+    { value: "+380", label: "+380 (Ukraine)" },
+    { value: "+971", label: "+971 (United Arab Emirates)" },
+    { value: "+44", label: "+44 (United Kingdom)" },
+    { value: "+1", label: "+1 (United States)" },
+    { value: "+598", label: "+598 (Uruguay)" },
+    { value: "+998", label: "+998 (Uzbekistan)" },
+    { value: "+678", label: "+678 (Vanuatu)" },
+    { value: "+379", label: "+379 (Vatican)" },
+    { value: "+58", label: "+58 (Venezuela)" },
+    { value: "+84", label: "+84 (Vietnam)" },
+    { value: "+681", label: "+681 (Wallis and Futuna)" },
+    { value: "+212", label: "+212 (Western Sahara)" },
+    { value: "+967", label: "+967 (Yemen)" },
+    { value: "+260", label: "+260 (Zambia)" },
+    { value: "+263", label: "+263 (Zimbabwe)" }
+  ];
 
   const handleGoogleAuth = async () => {
     try {
-      // await signIn('google', { callbackUrl: '/' });
-
-      // console.log(session.user)
-      // Wait for session to become available (not reliable with setTimeout)
-      //  setTimeout(async () => {
-      // if (!session?.user?.email) return;
-
-      //  const response = await axios.post(
-      //    'http://localhost:4000/api/google-auth',
-      //    { email: session.user.email },
-      //    { withCredentials: true }
-      //  );
-
-      //  const { message } = response.data;
-
-      //  if (message) {
-      //    alert(message);
-      //  }
-
-      //  }, 1500); // wait for redirect to complete
+      await signIn('google', { callbackUrl: '/' });
     } catch (e) {
       console.error(e);
     }
   };
 
-
-
   const handleSidebarClose = () => {
     setIsSidebarOpen(false);
   };
 
-  let greaterThan = '>'
+  const validateForm = (isSignupMode) => {
+    const newErrors = {};
+    if (loginMethod === 'email' || isSignupMode) {
+      if (!email || !/\S+@\S+\.\S+/.test(email)) newErrors.email = "Valid email is required";
+    }
+    if (loginMethod === 'mobile') {
+      if (!countryCode) newErrors.countryCode = "Country code is required";
+      // Add mobile validation if needed
+    }
+    if (!password) newErrors.password = "Password is required";
+    if (isSignupMode && !countryCode) newErrors.countryCode = "Country code is required";
 
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSubmit = (e, isSignupMode) => {
+    e.preventDefault();
+    if (validateForm(isSignupMode)) {
+      // Proceed with submission
+      console.log('Form submitted:', { email, password, countryCode, loginMethod });
+      // Add API call here
+    }
+  };
+
+  let greaterThan = '>'
   let buttonRef = useRef();
   let loginFormRef = useRef();
   let signupFormRef = useRef();
   let loginRef = useRef();
   let signupRef = useRef();
 
-
-  if (loginFormRef.current) {
-    if (isSignupForm === true) {
-      loginFormRef.current.style.display = 'none'
-    } else {
-      loginFormRef.current.style.display = 'block'
-    }
+  const handleHover = () => {
+    buttonRef.current.style.backgroundColor = 'blue';
+    buttonRef.current.style.color = 'white';
   }
 
-  if (signupFormRef.current) {
-    if (isSignupForm === true) {
-      signupFormRef.current.style.display = 'block'
-    } else {
-      signupFormRef.current.style.display = 'none'
-    }
+  const handleLeave = () => {
+    buttonRef.current.style.backgroundColor = 'black';
+    buttonRef.current.style.color = 'white';
   }
-
-
-  if (buttonRef.current) {
-    buttonRef.current.style.backgroundColor = 'black'
-  }
-  if (loginRef.current) {
-    loginRef.current.style.borderColor = '#feb321'
-    if (isSignup === false) {
-      loginRef.current.style.borderColor = '#feb321'
-    } else {
-      loginRef.current.style.borderColor = '#ffffff'
-    }
-  }
-  if (signupRef.current) {
-    signupRef.current.style.borderColor = '#ffffff'
-    if (isSignup === true) {
-      signupRef.current.style.borderColor = '#feb321'
-    } else {
-      signupRef.current.style.borderColor = '#ffffff'
-    }
-  }
-
-  let handleHover = () => {
-    if (buttonRef.current) {
-      buttonRef.current.style.backgroundColor = '#feb321'
-    }
-  }
-  let handleLeave = () => {
-    if (buttonRef.current) {
-      buttonRef.current.style.backgroundColor = 'black'
-    }
-  }
-
-  let handleLoginSubmit = async (e) => {
-    e.preventDefault();
-    if (!captchaValue) {
-      alert('Please complete the CAPTCHA.');
-      return;
-    }
-    // You can send the reCAPTCHA value to your backend for validation
-    const res = await fetch('/api/verify-recaptcha', {
-      method: 'POST',
-      body: JSON.stringify({ recaptchaValue: captchaValue }),
-      headers: { 'Content-Type': 'application/json' },
-    });
-    const data = await res.json();
-    if (data.success) {
-      
-
-    const loginResAxios = await axios.post('https://www.caryaati.ca/api/Login', {email, password}, {withCredentials:true}).then((e)=>{
-      alert(e.data.ResponseMessage)
-      console.log(e.data, 'login')
-    })
-    const loginRes = await fetch('https://www.caryaati.ca/api/Login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
-      credentials: 'include',
-    });
-
-    const loginData = await loginRes.json();
-
-    if (loginData?.ResponseMessage) {
-      alert(loginData.ResponseMessage);
-      console.log(e.data, 'login')
-    } else {
-      alert('Login failed. Please try again.');
-    }
-    } else {
-      alert('reCAPTCHA verification failed.');
-    }
-
-
-
-    
-  };
-
-
-  let handleSignupSubmit = async (e) => {
-    e.preventDefault();
-    if (!captchaValue) {
-      alert('Please complete the CAPTCHA.');
-      return;
-    }
-
-   const res = await fetch('http://localhost:4000/api/verify-recaptcha', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ recaptchaValue: captchaValue }),
-});
-const data = await res.json();
-
-    if (data.success) {
-      // Proceed with login or signup
-    } else {
-      alert('reCAPTCHA verification failed.');
-    }
-  };
-
 
   return (
     <>
-      <Navbar
-        onMenuToggle={() => {
-          setIsSidebarOpen(!isSidebarOpen);
-          setIsDropdownOpen(false);
-        }}
-        isHome={true}
-        onUserToggle={() => {
-          setIsDropdownOpen(!isDropdownOpen);
-          setIsSidebarOpen(false);
-        }}
-      />
+      <Navbar onMenuToggle={() => setIsSidebarOpen(true)} isHome={true} onUserToggle={() => setIsDropdownOpen(true)} />
       <Sidebar isOpen={isSidebarOpen} onClose={handleSidebarClose} />
-      <main>
-        <section className='bg-black justify-around items-center content-center  text-white py-[12px] max-md:px-[60px] max-sm:px-[20px] px-[140px]'>
-          <div className='inline-block max-xl:text-[30px] max-sm:text-[16px] text-[37px] max-sm:font-medium'>Sign in or Sign Up</div>
-          <ul className='inline float-right translate-y-[22.5px] max-sm:translate-y-[7px] max-sm:text-[8px] max-xl:translate-y-[16px] text-[12px] max-xl:text-[10px] font-light text-gray-300'>Home <span className='px-1'>{greaterThan}</span> Sign in or sign</ul>
+
+      <main className="main-container" data-aos="fade-in">
+        <section className="hero-section">
+          <h1 className="hero-title">Welcome Back!</h1>
+          <p className="hero-subtitle">Login to access your personalized car rental dashboard.</p>
         </section>
-        <section className='justify-center justify-items-center bg-[#f0f3f5] pt-3 pb-8 text-black'>
-          <div className='justify-self-center text-center w-[450px] max-sm:w-[95%] px-[12px] py-[24px] bg-white'>
-            <div className="top">
-              <button className='w-[45%] font-medium pb-[7px] border-b-2 outline-none' style={{ borderColor: '#feb321' }} ref={loginRef} onClick={() => {
-                setIsSignup(false)
-                setIsSignupForm(false)
-              }}>Login</button>
-              <button className='w-[45%] font-medium pb-[7px] border-b-2 outline-none' style={{ borderColor: 'white' }} onClick={() => {
-                setIsSignup(true)
-                setIsSignupForm(true)
-              }} ref={signupRef}>Sign Up</button>
+
+        <section className="form-section" data-aos="fade-up" data-aos-delay="200">
+          <div className="form-container">
+            <div className="tab-container">
+              <button 
+                className={`tab-button ${!isSignup ? 'active' : ''}`} 
+                onClick={() => setIsSignup(false)}
+              >
+                Login
+              </button>
+              <button 
+                className={`tab-button ${isSignup ? 'active' : ''}`} 
+                onClick={() => setIsSignup(true)}
+              >
+                Signup
+              </button>
             </div>
 
-            <form method='post' onSubmit={handleLoginSubmit} ref={loginFormRef}>
-              <div className="middle my-4 px-[20px]">
-                <div className='block text-left'>
-                  <label className='text-[16px]'>Email ID</label><br />
-                  <input type="text" name="id" id="" value={email} onChange={(e)=> setEmail(e.target.value)} placeholder='Mobile or Email ID' className='border shadowLight border-b-gray-500 outline-none focus:border-blue-300 rounded-sm px-[12px] my-2 py-[12px] w-full' />
+            {!isSignup ? (
+              <form ref={loginFormRef} onSubmit={(e) => handleSubmit(e, false)} className="form-content">
+                <div className="login-method-container">
+                  <label>
+                    <input 
+                      type="radio" 
+                      value="email" 
+                      checked={loginMethod === 'email'} 
+                      onChange={() => setLoginMethod('email')} 
+                    />
+                    Login via Email
+                  </label>
+                  <label>
+                    <input 
+                      type="radio" 
+                      value="mobile" 
+                      checked={loginMethod === 'mobile'} 
+                      onChange={() => setLoginMethod('mobile')} 
+                    />
+                    Login via Mobile
+                  </label>
                 </div>
-                <div className='block text-left'>
-                  <label className='text-[16px]'>Password</label><br />
-                  <input type="password" name="password" id="" placeholder='Password' value={password} onChange={(e)=> setPassword(e.target.value)} className='border shadowLight border-b-gray-500 outline-none focus:border-blue-300 rounded-sm px-[12px] my-2 py-[12px] w-full' />
-                </div>
-                <div className='max-sm:scale-[0.80] text-left relative max-sm:left-[-10%]'>
-                  <ReCAPTCHA
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} // Use your site key
-                    onChange={(e) => setCaptchaValue(e)} // Store the captcha response
-                  />
-                </div>
-                <div className='flex justify-between text-left my-3 ml-0.5'>
-                  <div>
-                    <input type="checkbox" name="remember" id="remember" className='border shadowLight border-b-gray-500 outline-none focus:border-blue-300 rounded-sm' />
-                    <label className='text-[16px] px-2 max-sm:text-[12px]' htmlFor='remember' id='remember' >Remember Me</label>
+
+                {loginMethod === 'email' ? (
+                  <div className="form-group">
+                    <input 
+                      type="email" 
+                      name="email" 
+                      placeholder='Email' 
+                      className='form-input' 
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                    />
+                    {errors.email && <span className="error-message">{errors.email}</span>}
                   </div>
-                  <Link href={'#'} style={{ color: '#feb321' }} className='max-sm:text-[12px]'>Forgot Password?</Link>
-                </div>
-                <button type='submit' onMouseEnter={handleHover} onMouseLeave={handleLeave} className='w-full text-white duration-300 font-medium text-2xl py-[12px]' ref={buttonRef} onClick={handleLoginSubmit} style={{ backgroundColor: 'black' }}>Login</button>
-                <hr className='mt-4' />
-                <div className='bg-white translate-y-[-26px] px-2 text-sm w-fit justify-self-center'>Or Login with Social Profile</div>
-                <div className='rounded-[50px] bg-red-500 justify-self-center text-white font-bold text-xl text-center content-center w-[40px] h-[40px] cursor-pointer'
-                //  onClick={()=> signIn("google")}
-                 >G</div>
-              </div>
-            </form>
-
-
-            <form method='post' onSubmit={handleSignupSubmit} ref={signupFormRef} style={{ display: 'none' }}>
-              <div className="middle my-4 px-[20px]">
-                <div className='block text-left'>
-                  <label className='text-[16px]'>Full Name</label><br />
-                  <input type="text" name="name" id="" placeholder='Full Name' className='border shadowLight border-b-gray-500 outline-none focus:border-blue-300 rounded-sm px-[12px] my-2 py-[12px] w-full' />
-                </div>
-                <div className='block text-left'>
-                  <label className='text-[16px]'>Email ID</label><br />
-                  <input type="text" name="id" id="" placeholder='Mobile or Email ID' className='border shadowLight border-b-gray-500 outline-none focus:border-blue-300 rounded-sm px-[12px] my-2 py-[12px] w-full' />
-                </div>
-                <div className='block text-left'>
-                  <label className='text-[16px]'>Password</label><br />
-                  <input type="password" name="password" id="" placeholder='Password' className='border shadowLight border-b-gray-500 outline-none focus:border-blue-300 rounded-sm px-[12px] my-2 py-[12px] w-full' />
-                </div>
-                <div className='block text-left'>
-                  <label className='text-[16px]'>Mobile Number</label><br />
-                  <div className='flex justify-between'>
-                    <select type="password" name="countryCode" id="" value={countryCode} onChange={(e) => setCountryCode(e.target.value)} placeholder='Password' className='border shadowLight border-b-gray-500 outline-none focus:border-blue-300 rounded-sm px-[12px] my-2 py-[12px] w-[45%]' >
-                      <option value="">Select Country Code</option>
-                      <option value="+1">+1</option>
-                      <option value="+7">+7</option>
-                      <option value="+20">+20</option>
-                      <option value="+27">+27</option>
-                      <option value="+30">+30</option>
-                      <option value="+31">+31</option>
-                      <option value="+32">+32</option>
-                      <option value="+33">+33</option>
-                      <option value="+34">+34</option>
-                      <option value="+36">+36</option>
-                      <option value="+39">+39</option>
-                      <option value="+40">+40</option>
-                      <option value="+44">+44</option>
-                      <option value="+49">+49</option>
-                      <option value="+51">+51</option>
-                      <option value="+52">+52</option>
-                      <option value="+55">+55</option>
-                      <option value="+60">+60</option>
-                      <option value="+61">+61</option>
-                      <option value="+62">+62</option>
-                      <option value="+63">+63</option>
-                      <option value="+64">+64</option>
-                      <option value="+65">+65</option>
-                      <option value="+66">+66</option>
-                      <option value="+81">+81</option>
-                      <option value="+82">+82</option>
-                      <option value="+84">+84</option>
-                      <option value="+86">+86</option>
-                      <option value="+90">+90</option>
-                      <option value="+91">+91</option>
-                      <option value="+92">+92</option>
-                      <option value="+93">+93</option>
-                      <option value="+94">+94</option>
-                      <option value="+95">+95</option>
-                      <option value="+98">+98</option>
-                      <option value="+211">+211</option>
-                      <option value="+212">+212</option>
-                      <option value="+213">+213</option>
-                      <option value="+216">+216</option>
-                      <option value="+218">+218</option>
-                      <option value="+220">+220</option>
-                      <option value="+221">+221</option>
-                      <option value="+222">+222</option>
-                      <option value="+223">+223</option>
-                      <option value="+224">+224</option>
-                      <option value="+225">+225</option>
-                      <option value="+226">+226</option>
-                      <option value="+227">+227</option>
-                      <option value="+228">+228</option>
-                      <option value="+229">+229</option>
-                      <option value="+230">+230</option>
-                      <option value="+231">+231</option>
-                      <option value="+232">+232</option>
-                      <option value="+233">+233</option>
-                      <option value="+234">+234</option>
-                      <option value="+235">+235</option>
-                      <option value="+236">+236</option>
-                      <option value="+237">+237</option>
-                      <option value="+238">+238</option>
-                      <option value="+239">+239</option>
-                      <option value="+240">+240</option>
-                      <option value="+241">+241</option>
-                      <option value="+242">+242</option>
-                      <option value="+243">+243</option>
-                      <option value="+244">+244</option>
-                      <option value="+245">+245</option>
-                      <option value="+246">+246</option>
-                      <option value="+248">+248</option>
-                      <option value="+249">+249</option>
-                      <option value="+250">+250</option>
-                      <option value="+251">+251</option>
-                      <option value="+252">+252</option>
-                      <option value="+253">+253</option>
-                      <option value="+254">+254</option>
-                      <option value="+255">+255</option>
-                      <option value="+256">+256</option>
-                      <option value="+257">+257</option>
-                      <option value="+258">+258</option>
-                      <option value="+260">+260</option>
-                      <option value="+261">+261</option>
-                      <option value="+263">+263</option>
-                      <option value="+264">+264</option>
-                      <option value="+265">+265</option>
-                      <option value="+266">+266</option>
-                      <option value="+267">+267</option>
-                      <option value="+268">+268</option>
-                      <option value="+269">+269</option>
-                      <option value="+850">+850</option>
-                      <option value="+852">+852</option>
-                      <option value="+853">+853</option>
-                      <option value="+855">+855</option>
-                      <option value="+856">+856</option>
-                      <option value="+880">+880</option>
-                      <option value="+886">+886</option>
-                      <option value="+960">+960</option>
-                      <option value="+961">+961</option>
-                      <option value="+962">+962</option>
-                      <option value="+963">+963</option>
-                      <option value="+964">+964</option>
-                      <option value="+965">+965</option>
-                      <option value="+966">+966</option>
-                      <option value="+967">+967</option>
-                      <option value="+968">+968</option>
-                      <option value="+970">+970</option>
-                      <option value="+971">+971</option>
-                      <option value="+972">+972</option>
-                      <option value="+973">+973</option>
-                      <option value="+974">+974</option>
-                      <option value="+975">+975</option>
-                      <option value="+976">+976</option>
-                      <option value="+977">+977</option>
+                ) : (
+                  <div className="form-group phone-group">
+                    <select 
+                      name="countryCode" 
+                      className='country-select' 
+                      value={countryCode}
+                      onChange={(e) => setCountryCode(e.target.value)}
+                    >
+                      <option value="">Country Code</option>
+                      {countryCodes.map((country) => (
+                        <option key={country.label} value={country.value}>
+                          {country.label}
+                        </option>
+                      ))}
                     </select>
-                    <input type="number" name="number" id="" placeholder='Mobile Number' className='border shadowLight border-b-gray-500 outline-none focus:border-blue-300 rounded-sm px-[12px] my-2 py-[12px] w-[50%]' />
+                    <input 
+                      type="number" 
+                      name="number" 
+                      placeholder='Mobile Number' 
+                      className='form-input'
+                    />
+                    {errors.countryCode && <span className="error-message">{errors.countryCode}</span>}
                   </div>
-                </div>
-                <div className='my-2'>
-                  <ReCAPTCHA
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY} // Use your site key
-                    onChange={(value) => setCaptchaValue(value)} // Store the captcha response
+                )}
+
+                <div className="form-group">
+                  <input 
+                    type="password" 
+                    name="password" 
+                    placeholder='Password' 
+                    className='form-input' 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
+                  {errors.password && <span className="error-message">{errors.password}</span>}
                 </div>
-
-                <button type='submit' onMouseEnter={handleHover} onMouseLeave={handleLeave} className='w-full text-white duration-300 mt-1 font-medium text-2xl py-[12px]' ref={buttonRef} style={{ backgroundColor: 'black' }}>Signup</button>
-                <hr className='mt-4' />
-                <div className='bg-white translate-y-[-26px] px-2 text-sm w-fit justify-self-center'>Or Login with Social Profile</div>
-                <div className='rounded-[50px] bg-red-500 justify-self-center text-white font-bold text-xl text-center content-center w-[40px] h-[40px] cursor-pointer'>G</div>
-              </div>
-            </form>
-
+                <div className="remember-forgot">
+                  <div className="remember-me">
+                    <input type="checkbox" id="remember" />
+                    <label htmlFor="remember">Remember me</label>
+                  </div>
+                  <Link href="/forgot-password" className="forgot-password">Forgot Password?</Link>
+                </div>
+                <button 
+                  type='submit' 
+                  className='submit-button' 
+                  ref={buttonRef} 
+                  onMouseEnter={handleHover} 
+                  onMouseLeave={handleLeave}
+                >
+                  Login
+                </button>
+                <hr className='divider' />
+                <p className='social-text'>Or Login with Social Profile</p>
+                <button type="button" onClick={handleGoogleAuth} className="google-button">
+                  <span className="google-icon">G</span> Continue with Google
+                </button>
+              </form>
+            ) : (
+              <form ref={signupFormRef} onSubmit={(e) => handleSubmit(e, true)} className="form-content">
+                <div className="form-group">
+                  <input 
+                    type="email" 
+                    name="email" 
+                    placeholder='Email' 
+                    className='form-input' 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                  {errors.email && <span className="error-message">{errors.email}</span>}
+                </div>
+                <div className="form-group">
+                  <input 
+                    type="password" 
+                    name="password" 
+                    placeholder='Password' 
+                    className='form-input' 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                  {errors.password && <span className="error-message">{errors.password}</span>}
+                </div>
+                <div className="form-group phone-group">
+                  <select 
+                    name="countryCode" 
+                    className='country-select' 
+                    value={countryCode}
+                    onChange={(e) => setCountryCode(e.target.value)}
+                  >
+                    <option value="">Country Code</option>
+                    {countryCodes.map((country) => (
+                      <option key={country.label} value={country.value}>
+                        {country.label}
+                      </option>
+                    ))}
+                  </select>
+                  <input 
+                    type="number" 
+                    name="number" 
+                    placeholder='Mobile Number' 
+                    className='form-input phone-input'
+                  />
+                  {errors.countryCode && <span className="error-message">{errors.countryCode}</span>}
+                </div>
+                {/* <div className='captcha-container'>
+                  <ReCAPTCHA
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                    onChange={(value) => setCaptchaValue(value)}
+                  />
+                </div> */}
+                <button 
+                  type='submit' 
+                  className='submit-button' 
+                  ref={buttonRef} 
+                  onMouseEnter={handleHover} 
+                  onMouseLeave={handleLeave}
+                >
+                  Signup
+                </button>
+                <hr className='divider' />
+                <p className='social-text'>Or Signup with Social Profile</p>
+                <button type="button" onClick={handleGoogleAuth} className="google-button">
+                  <span className="google-icon">G</span> Continue with Google
+                </button>
+              </form>
+            )}
           </div>
         </section>
       </main>
@@ -407,4 +524,4 @@ const data = await res.json();
   )
 }
 
-export default page
+export default Page;
