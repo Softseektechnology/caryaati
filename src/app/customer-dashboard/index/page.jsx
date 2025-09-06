@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react";
-import { Menu, LogOut, User, Heart, Calendar, DollarSign, Car, LayoutGrid } from "lucide-react";
+import { Menu, LogOut, User, Heart, Calendar, DollarSign, Car, LayoutGrid, Search } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import Footer from "./components/Footer";
 
@@ -36,165 +36,242 @@ export default function CustomerDashboard() {
     return (
         <div className="flex flex-col min-h-screen">
             <div className="flex flex-1 bg-gradient-to-br from-gray-50 to-gray-100">
-                {/* Sidebar (Desktop only) */}
+                {/* New Desktop Sidebar */}
                 <motion.aside
-                    initial={{ width: sidebarOpen ? 280 : 80 }}
-                    animate={{ width: sidebarOpen ? 280 : 80 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                    className="hidden md:flex flex-col bg-white text-gray-800 shadow-xl border-r border-gray-200/50 overflow-y-auto"
+                    initial={{ width: sidebarOpen ? 280 : 72 }}
+                    animate={{ width: sidebarOpen ? 280 : 72 }}
+                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    className="hidden md:flex flex-col bg-white text-gray-800 shadow-2xl border-r border-gray-200/30 relative overflow-y-hidden"
+                    role="navigation"
+                    aria-label="Dashboard sidebar"
                 >
-                    {/* Logo + Burger */}
-                    <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                        <AnimatePresence>
-                            {sidebarOpen && (
-                                <motion.span
-                                    initial={{ opacity: 0, x: -20 }}
-                                    animate={{ opacity: 1, x: 0 }}
-                                    exit={{ opacity: 0, x: -20 }}
-                                    transition={{ duration: 0.2 }}
-                                    className="text-xl font-bold tracking-tight text-gray-900 flex items-center gap-2"
-                                >
-                                    <span className="text-indigo-600">🚗</span> Engine
-                                </motion.span>
-                            )}
-                        </AnimatePresence>
+                    {/* Animated Wave Background */}
+                    <div className="absolute inset-0 pointer-events-none wave-bg" />
+
+                    {/* Header: Logo and Toggle */}
+                    <div className="relative z-10 p-4 flex items-center justify-between border-b border-gray-200/30">
+                        <motion.div
+                            className="flex items-center gap-2"
+                            animate={{ scale: sidebarOpen ? 1 : 0.9 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <motion.span
+                                animate={{ rotate: [0, 360] }}
+                                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                                className="text-2xl"
+                            >
+                                🚗
+                            </motion.span>
+                            <AnimatePresence>
+                                {sidebarOpen && (
+                                    <motion.span
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -10 }}
+                                        className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600"
+                                    >
+                                        Engine
+                                    </motion.span>
+                                )}
+                            </AnimatePresence>
+                        </motion.div>
                         <button
                             onClick={() => setSidebarOpen(!sidebarOpen)}
-                            className="p-2 rounded-full hover:bg-gray-100 transition-all duration-200 hover:rotate-180 hover:scale-105 text-gray-600"
+                            className="p-2 rounded-full hover:bg-gray-100 transition-all duration-300 text-gray-600 hover:text-indigo-600 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+                            aria-label={sidebarOpen ? "Collapse sidebar" : "Expand sidebar"}
                         >
-                            <Menu size={24} />
+                            <motion.div animate={{ rotate: sidebarOpen ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                                <Menu size={24} />
+                            </motion.div>
                         </button>
                     </div>
 
-                    {/* Navigation */}
-                    <nav className="flex-1 px-3 py-8 space-y-8">
-                        {/* Main Section */}
-                        <div>
-                            <AnimatePresence>
-                                {sidebarOpen && (
-                                    <motion.p
-                                        initial={{ opacity: 0, y: -10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -10 }}
-                                        className="text-xs uppercase font-semibold tracking-wider text-gray-500 px-4 mb-4 relative after:content-[''] after:absolute after:bottom-[-8px] after:left-4 after:w-8 after:h-0.5 after:bg-gradient-to-r after:from-indigo-400 after:to-purple-400 after:rounded-full"
-                                    >
-                                        Main
-                                    </motion.p>
-                                )}
-                            </AnimatePresence>
-                            <NavItem icon={<LayoutGrid size={20} className="text-gray-500 group-hover:text-indigo-600 transition-colors" />} text="Dashboard" sidebarOpen={sidebarOpen} active={true} />
-                            <NavItem icon={<Calendar size={20} className="text-gray-500 group-hover:text-indigo-600 transition-colors" />} text="Booking" sidebarOpen={sidebarOpen} />
-                            <NavItem icon={<DollarSign size={20} className="text-gray-500 group-hover:text-indigo-600 transition-colors" />} text="Fines" sidebarOpen={sidebarOpen} />
-                            <NavItem icon={<Car size={20} className="text-gray-500 group-hover:text-indigo-600 transition-colors" />} text="Salik" sidebarOpen={sidebarOpen} />
-                        </div>
-
-                        {/* Profile Section */}
-                        <div>
-                            <AnimatePresence>
-                                {sidebarOpen && (
-                                    <motion.p
-                                        initial={{ opacity: 0, y: -10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -10 }}
-                                        className="text-xs uppercase font-semibold tracking-wider text-gray-500 px-4 mb-4 relative after:content-[''] after:absolute after:bottom-[-8px] after:left-4 after:w-8 after:h-0.5 after:bg-gradient-to-r after:from-indigo-400 after:to-purple-400 after:rounded-full"
-                                    >
-                                        Profile
-                                    </motion.p>
-                                )}
-                            </AnimatePresence>
-                            <NavItem icon={<User size={20} className="text-gray-500 group-hover:text-indigo-600 transition-colors" />} text="Profile" sidebarOpen={sidebarOpen} />
-                            <NavItem icon={<Heart size={20} className="text-gray-500 group-hover:text-indigo-600 transition-colors" />} text="Wishlist" sidebarOpen={sidebarOpen} />
-                        </div>
-
-                        {/* Widgets Section */}
-                        <div>
-                            <AnimatePresence>
-                                {sidebarOpen && (
-                                    <motion.p
-                                        initial={{ opacity: 0, y: -10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -10 }}
-                                        className="text-xs uppercase font-semibold tracking-wider text-gray-500 px-4 mb-4 relative after:content-[''] after:absolute after:bottom-[-8px] after:left-4 after:w-8 after:h-0.5 after:bg-gradient-to-r after:from-indigo-400 after:to-purple-400 after:rounded-full"
-                                    >
-                                        Widgets
-                                    </motion.p>
-                                )}
-                            </AnimatePresence>
+                    {/* User Profile Section */}
+                    <div className="relative z-10 p-4 border-b border-gray-200/30">
+                        <div className="flex items-center gap-3">
                             <div className="relative">
-                                <NavItem
-                                    icon={<LayoutGrid size={20} className="text-gray-500 group-hover:text-indigo-600 transition-colors" />}
-                                    text="Widgets"
-                                    sidebarOpen={sidebarOpen}
+                                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
+                                    MA
+                                </div>
+                                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-white" />
+                            </div>
+                            <AnimatePresence>
+                                {sidebarOpen && (
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -10 }}
+                                        className="flex-1"
+                                    >
+                                        <p className="font-semibold text-gray-800">Maaz Aziz</p>
+                                        <p className="text-xs text-gray-500">Premium User</p>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                            {sidebarOpen && (
+                                <button
                                     onClick={() => {
-                                        setWidgetsDropdownOpen(!widgetsDropdownOpen);
-                                        setProfileDropdownOpen(false);
+                                        setProfileDropdownOpen(!profileDropdownOpen);
+                                        setWidgetsDropdownOpen(false);
                                         setWishlistDropdownOpen(false);
                                     }}
-                                />
-                                <AnimatePresence>
-                                    {widgetsDropdownOpen && sidebarOpen && (
-                                        <motion.div
-                                            initial={{ opacity: 0, scale: 0.95, x: -10 }}
-                                            animate={{ opacity: 1, scale: 1, x: 0 }}
-                                            exit={{ opacity: 0, scale: 0.95, x: -10 }}
-                                            transition={{ duration: 0.2 }}
-                                            className="absolute left-full ml-4 mt-[-40px] w-56 bg-white shadow-xl rounded-xl overflow-hidden z-50 ring-1 ring-gray-200/50"
-                                        >
-                                            {widgetItems.map(item => (
-                                                <button
-                                                    key={item.id}
-                                                    className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors border-b last:border-none"
-                                                >
-                                                    {item.icon}
-                                                    {item.name}
-                                                </button>
-                                            ))}
-                                        </motion.div>
-                                    )}
-                                </AnimatePresence>
-                            </div>
+                                    className="ml-auto p-1.5 rounded-full hover:bg-gray-100 transition-colors"
+                                    aria-label="User menu"
+                                >
+                                    <User size={20} className="text-gray-600" />
+                                </button>
+                            )}
                         </div>
+                        <AnimatePresence>
+                            {profileDropdownOpen && sidebarOpen && (
+                                <motion.div
+                                    initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                                    exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                                    className="absolute left-4 right-4 mt-2 bg-white shadow-lg rounded-xl overflow-hidden z-20 border border-gray-200/50"
+                                >
+                                    <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 border-b text-gray-700 transition-colors">
+                                        <User size={16} className="text-gray-600" /> My Profile
+                                    </button>
+                                    <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 text-red-600 transition-colors">
+                                        <LogOut size={16} /> Log Out
+                                    </button>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
 
-                        {/* Booking Engine Section */}
-                        <div>
-                            <AnimatePresence>
-                                {sidebarOpen && (
-                                    <motion.p
-                                        initial={{ opacity: 0, y: -10 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        exit={{ opacity: 0, y: -10 }}
-                                        className="text-xs uppercase font-semibold tracking-wider text-gray-500 px-4 mb-4 relative after:content-[''] after:absolute after:bottom-[-8px] after:left-4 after:w-8 after:h-0.5 after:bg-gradient-to-r after:from-indigo-400 after:to-purple-400 after:rounded-full"
-                                    >
-                                        Booking Engine
-                                    </motion.p>
-                                )}
-                            </AnimatePresence>
-                            <NavItem icon={<User size={20} className="text-gray-500 group-hover:text-indigo-600 transition-colors" />} text="Booking Engine" sidebarOpen={sidebarOpen} />
+                    {/* Search Bar */}
+                    <div className="relative z-10 p-4 border-b border-gray-200/30">
+                        <div className="relative">
+                            <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
+                            <input
+                                type="text"
+                                placeholder={sidebarOpen ? "Search dashboard..." : ""}
+                                className={`w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-full focus:outline-none focus:border-indigo-400 transition-all text-sm ${!sidebarOpen ? 'cursor-default' : ''}`}
+                                disabled={!sidebarOpen}
+                            />
                         </div>
+                    </div>
+
+                    {/* Navigation */}
+                    <nav className="relative z-10 flex-1 p-4 space-y-2">
+                        <NavItem
+                            icon={<LayoutGrid size={24} className="text-indigo-500" />}
+                            text="Dashboard"
+                            sidebarOpen={sidebarOpen}
+                            isActive={true}
+                        />
+                        <NavItem
+                            icon={<Calendar size={24} className="text-blue-500" />}
+                            text="Booking"
+                            sidebarOpen={sidebarOpen}
+                        />
+                        <NavItem
+                            icon={<DollarSign size={24} className="text-red-500" />}
+                            text="Fines"
+                            sidebarOpen={sidebarOpen}
+                        />
+                        <NavItem
+                            icon={<Car size={24} className="text-orange-500" />}
+                            text="Salik"
+                            sidebarOpen={sidebarOpen}
+                        />
+                        <NavItem
+                            icon={<User size={24} className="text-purple-500" />}
+                            text="Profile"
+                            sidebarOpen={sidebarOpen}
+                        />
+                        <NavItem
+                            icon={<Heart size={24} className="text-pink-500" />}
+                            text="Wishlist"
+                            sidebarOpen={sidebarOpen}
+                            badge={wishlistItems.length}
+                            onClick={() => {
+                                setWishlistDropdownOpen(!wishlistDropdownOpen);
+                                setWidgetsDropdownOpen(false);
+                                setProfileDropdownOpen(false);
+                            }}
+                        />
+                        {wishlistDropdownOpen && sidebarOpen && (
+                            <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="ml-10 space-y-1 border-l-2 border-indigo-200/50 pl-3"
+                            >
+                                {wishlistItems.map(item => (
+                                    <button
+                                        key={item.id}
+                                        className="w-full flex items-center gap-2 px-2 py-1.5 text-sm text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-md transition-colors"
+                                    >
+                                        <Heart size={14} className="text-pink-400" />
+                                        <span>{item.name}</span>
+                                        <span className="ml-auto text-gray-500">{item.price}</span>
+                                    </button>
+                                ))}
+                            </motion.div>
+                        )}
+                        <NavItem
+                            icon={<LayoutGrid size={24} className="text-green-500" />}
+                            text="Widgets"
+                            sidebarOpen={sidebarOpen}
+                            onClick={() => {
+                                setWidgetsDropdownOpen(!widgetsDropdownOpen);
+                                setWishlistDropdownOpen(false);
+                                setProfileDropdownOpen(false);
+                            }}
+                        />
+                        {widgetsDropdownOpen && sidebarOpen && (
+                            <motion.div
+                                initial={{ height: 0, opacity: 0 }}
+                                animate={{ height: "auto", opacity: 1 }}
+                                exit={{ height: 0, opacity: 0 }}
+                                className="ml-10 space-y-1 border-l-2 border-indigo-200/50 pl-3"
+                            >
+                                {widgetItems.map(item => (
+                                    <button
+                                        key={item.id}
+                                        className="w-full flex items-center gap-2 px-2 py-1.5 text-sm text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-md transition-colors"
+                                    >
+                                        {item.icon}
+                                        {item.name}
+                                    </button>
+                                ))}
+                            </motion.div>
+                        )}
+                        <NavItem
+                            icon={<Car size={24} className="text-teal-500" />}
+                            text="Booking Engine"
+                            sidebarOpen={sidebarOpen}
+                        />
                     </nav>
 
-                    {/* Footer */}
-                    <div className="p-6 border-t border-gray-200 mt-auto">
-                        <NavItem icon={<LogOut size={20} className="text-red-500 group-hover:text-red-600 transition-colors" />} text="Logout" sidebarOpen={sidebarOpen} />
+                    {/* Logout */}
+                    <div className="relative z-10 p-4 border-t border-gray-200/30 mt-auto">
+                        <NavItem
+                            icon={<LogOut size={24} className="text-red-500" />}
+                            text="Logout"
+                            sidebarOpen={sidebarOpen}
+                        />
                     </div>
                 </motion.aside>
 
-                {/* Main Content */}
+                {/* Main Content (unchanged) */}
                 <main className="flex-1 px-1 py-2 sm:p-6 md:p-8 overflow-auto min-w-[280px]">
-                    {/* Header */}
-                    <header className="flex items-center justify-between mb-6 bg-white p-4 rounded-xl shadow-sm relative">
-                        <div className="flex items-center relative max-sm:left-[-10px] w-full justify-between">
+                    <header className="flex items-center justify-between mb-6 bg-white content-center p-4 rounded-xl shadow-sm relative">
+                        <div classNameమ
+                            className="flex items-center relative max-sm:left-[-10px] w-full justify-between">
                             <div className="flex items-center">
                                 <button
                                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
                                     className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-colors mr-3"
                                 >
-                                    <Menu size={24} className="text-gray-800 min-h-[30px] min-w-[30px]" />
+                                    <Menu size={24} className="text-gray-800" />
                                 </button>
-                                <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Dashboard</h1>
+                                <h1 className="text-xl dashboard-text sm:text-2xl font-bold text-gray-800">Dashboard</h1>
                             </div>
                             <div className="flex items-center gap-3 sm:gap-4">
-                                {/* Wishlist Dropdown */}
                                 <div className="relative">
                                     <button
                                         onClick={() => {
@@ -202,23 +279,22 @@ export default function CustomerDashboard() {
                                             setProfileDropdownOpen(false);
                                             setWidgetsDropdownOpen(false);
                                         }}
-                                        className="p-2 hover:bg-gray-100 rounded-full relative transition-colors"
+                                        className="p-2 hover:bg-gray-100 rounded-full relative"
                                     >
                                         <Heart size={22} className="text-gray-600" />
                                         {wishlistItems.length > 0 && (
-                                            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 min-w-[18px] text-center">
+                                            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5">
                                                 {wishlistItems.length}
                                             </span>
                                         )}
                                     </button>
-
                                     <AnimatePresence>
                                         {wishlistDropdownOpen && (
                                             <motion.div
                                                 initial={{ opacity: 0, scale: 0.95 }}
                                                 animate={{ opacity: 1, scale: 1 }}
                                                 exit={{ opacity: 0, scale: 0.95 }}
-                                                className="absolute right-0 mt-2 w-56 sm:w-64 bg-white shadow-lg rounded-xl overflow-hidden z-10 ring-1 ring-gray-200/50"
+                                                className="absolute right-0 mt-2 w-56 sm:w-64 bg-white shadow-lg rounded-xl overflow-hidden z-10"
                                             >
                                                 <div className="p-4 border-b bg-gray-50">
                                                     <h3 className="font-semibold text-gray-800">Wishlist</h3>
@@ -227,14 +303,14 @@ export default function CustomerDashboard() {
                                                     <p className="p-4 text-center text-gray-500 text-sm">Your wishlist is empty</p>
                                                 ) : (
                                                     wishlistItems.map(item => (
-                                                        <div key={item.id} className="p-3 hover:bg-gray-50 flex justify-between items-center border-b last:border-0 transition-colors">
+                                                        <div key={item.id} className="p-3 hover:bg-gray-50 flex justify-between items-center border-b last:border-0">
                                                             <span className="text-sm font-medium text-gray-700">{item.name}</span>
                                                             <span className="text-sm text-gray-500">{item.price}</span>
                                                         </div>
                                                     ))
                                                 )}
                                                 {wishlistItems.length > 0 && (
-                                                    <button className="w-full p-3 text-sm font-medium text-indigo-600 hover:bg-indigo-50 transition-colors">
+                                                    <button className="w-full p-3 text-sm font-medium text-indigo-600 hover:bg-indigo-50">
                                                         View All
                                                     </button>
                                                 )}
@@ -242,8 +318,6 @@ export default function CustomerDashboard() {
                                         )}
                                     </AnimatePresence>
                                 </div>
-
-                                {/* Profile Dropdown */}
                                 <div className="relative">
                                     <button
                                         onClick={() => {
@@ -251,26 +325,23 @@ export default function CustomerDashboard() {
                                             setWishlistDropdownOpen(false);
                                             setWidgetsDropdownOpen(false);
                                         }}
-                                        className="flex items-center gap-2 sm:gap-3 p-2 hover:bg-gray-100 rounded-full transition-colors"
+                                        className="flex items-center gap-2 sm:gap-3 p-2 hover:bg-gray-100 rounded-full"
                                     >
-                                        <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center">
-                                            <User size={20} className="text-indigo-600" />
-                                        </div>
+                                        <User size={28} className="text-indigo-500" />
                                         <span className="font-medium hidden sm:inline text-gray-800">Maaz Aziz</span>
                                     </button>
-
                                     <AnimatePresence>
                                         {profileDropdownOpen && (
                                             <motion.div
                                                 initial={{ opacity: 0, scale: 0.95 }}
                                                 animate={{ opacity: 1, scale: 1 }}
                                                 exit={{ opacity: 0, scale: 0.95 }}
-                                                className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-xl overflow-hidden z-10 ring-1 ring-gray-200/50"
+                                                className="absolute right-0 mt-2 w-44 sm:w-48 bg-white shadow-lg rounded-xl overflow-hidden z-10"
                                             >
-                                                <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 border-b transition-colors text-gray-700">
+                                                <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 border-b">
                                                     <User size={16} className="text-gray-600" /> My Profile
                                                 </button>
-                                                <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 text-red-600 transition-colors">
+                                                <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 text-red-600">
                                                     <LogOut size={16} /> Log Out
                                                 </button>
                                             </motion.div>
@@ -279,20 +350,17 @@ export default function CustomerDashboard() {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Mobile Menu Dropdown */}
                         <AnimatePresence>
                             {mobileMenuOpen && (
                                 <motion.div
                                     initial={{ opacity: 0, y: -20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
-                                    className="absolute top-full left-0 w-full bg-white shadow-lg z-50 md:hidden overflow-auto max-h-[80vh] rounded-b-xl ring-1 ring-gray-200/50"
+                                    className="absolute top-full left-0 w-full bg-white shadow-lg z-50 md:hidden overflow-auto max-h-[80vh]"
                                 >
                                     <nav className="flex flex-col px-4 py-6 space-y-6">
-                                        {/* Main Section */}
                                         <div>
-                                            <p className="text-xs text-gray-500 uppercase mb-3 font-semibold tracking-wider">
+                                            <p className="text-xs text-gray-600 uppercase mb-3 font-semibold tracking-wider">
                                                 Main
                                             </p>
                                             <MobileNavItem icon={<LayoutGrid size={18} />} text="Dashboard" />
@@ -300,19 +368,15 @@ export default function CustomerDashboard() {
                                             <MobileNavItem icon={<DollarSign size={18} />} text="Fines" />
                                             <MobileNavItem icon={<Car size={18} />} text="Salik" />
                                         </div>
-
-                                        {/* Profile Section */}
                                         <div>
-                                            <p className="text-xs text-gray-500 uppercase mb-3 font-semibold tracking-wider">
+                                            <p className="text-xs text-gray-600 uppercase mb-3 font-semibold tracking-wider">
                                                 Profile
                                             </p>
                                             <MobileNavItem icon={<User size={18} />} text="Profile" />
                                             <MobileNavItem icon={<Heart size={18} />} text="Wishlist" />
                                         </div>
-
-                                        {/* Widgets Section */}
                                         <div>
-                                            <p className="text-xs text-gray-500 uppercase mb-3 font-semibold tracking-wider">
+                                            <p className="text-xs text-gray-600 uppercase mb-3 font-semibold tracking-wider">
                                                 Widgets
                                             </p>
                                             <MobileNavItem
@@ -325,7 +389,7 @@ export default function CustomerDashboard() {
                                                     {widgetItems.map(item => (
                                                         <button
                                                             key={item.id}
-                                                            className="w-full flex items-center gap-2 py-2 text-sm text-gray-700 hover:bg-gray-50 px-2 rounded transition-colors"
+                                                            className="w-full flex items-center gap-2 py-2 text-sm text-gray-700 hover:bg-gray-50 px-2 rounded"
                                                         >
                                                             {item.icon}
                                                             {item.name}
@@ -334,26 +398,20 @@ export default function CustomerDashboard() {
                                                 </div>
                                             )}
                                         </div>
-
-                                        {/* Booking Engine Section */}
                                         <div>
-                                            <p className="text-xs text-gray-500 uppercase mb-3 font-semibold tracking-wider">
+                                            <p className="text-xs text-gray-600 uppercase mb-3 font-semibold tracking-wider">
                                                 Booking Engine
                                             </p>
                                             <MobileNavItem icon={<User size={18} />} text="Booking Engine" />
                                         </div>
-
-                                        {/* Logout */}
                                         <div className="pt-4 border-t border-gray-200">
-                                            <MobileNavItem icon={<LogOut size={18} className="text-red-500" />} text="Logout" />
+                                            <MobileNavItem icon={<LogOut size={18} />} text="Logout" />
                                         </div>
                                     </nav>
                                 </motion.div>
                             )}
                         </AnimatePresence>
                     </header>
-
-                    {/* Dashboard Cards */}
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
                         {cards.map((card, index) => (
                             <motion.div
@@ -379,33 +437,42 @@ export default function CustomerDashboard() {
 }
 
 /* Sidebar Nav Item Component */
-function NavItem({ icon, text, sidebarOpen, onClick, active = false }) {
+function NavItem({ icon, text, sidebarOpen, onClick, isActive = false, badge }) {
     return (
         <button
             onClick={onClick}
-            className={`group relative flex items-center gap-3 px-4 py-3 rounded-xl w-full text-left transition-all duration-300 hover:bg-indigo-50 hover:text-indigo-600 hover:shadow-sm ${
-                active ? 'bg-indigo-50 text-indigo-600 shadow-sm before:absolute before:left-0 before:inset-y-0 before:w-1 before:bg-indigo-600 before:rounded-r' : 'text-gray-700'
-            }`}
+            className={`relative group flex items-center gap-3 px-3 py-2.5 rounded-xl w-full text-left transition-all duration-300 hover:bg-gray-100 hover:shadow-md ${isActive ? 'bg-indigo-50 text-indigo-700 shadow-md' : 'text-gray-700'}`}
+            aria-label={`Navigate to ${text}`}
         >
-            {icon}
+            <motion.div
+                className={`p-2 rounded-lg bg-white shadow-sm ring-1 ring-gray-200/50 ${isActive ? 'ring-indigo-300' : 'group-hover:ring-indigo-300'}`}
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                transition={{ duration: 0.2 }}
+            >
+                {icon}
+            </motion.div>
             <AnimatePresence>
                 {sidebarOpen && (
                     <motion.span
                         initial={{ opacity: 0, width: 0 }}
                         animate={{ opacity: 1, width: "auto" }}
                         exit={{ opacity: 0, width: 0 }}
-                        className="text-sm font-medium overflow-hidden whitespace-nowrap"
+                        className="text-sm font-semibold overflow-hidden whitespace-nowrap"
                     >
                         {text}
                     </motion.span>
                 )}
             </AnimatePresence>
+            {badge > 0 && (
+                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-2 py-0.5">
+                    {badge}
+                </span>
+            )}
             {!sidebarOpen && (
                 <motion.span
                     initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    className="absolute left-full ml-2 bg-gray-800 text-white px-3 py-1 rounded-md text-sm shadow-lg z-50 hidden group-hover:block"
-                    style={{ whiteSpace: 'nowrap' }}
+                    whileHover={{ opacity: 1, x: 10 }}
+                    className="absolute left-full ml-2 px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-sm shadow-lg whitespace-nowrap z-50 hidden group-hover:block"
                 >
                     {text}
                 </motion.span>
