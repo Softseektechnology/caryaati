@@ -17,7 +17,6 @@ interface NavbarProps {
 }
 
 export default function Navbar({ onMenuToggle, onUserToggle, isHome }: NavbarProps) {
-  const [searchOpen, setSearchOpen] = useState(false);
   const [formData, setFormData] = useState({
     location: '',
     dateRange: [null, null] as [Date | null, Date | null],
@@ -149,36 +148,6 @@ export default function Navbar({ onMenuToggle, onUserToggle, isHome }: NavbarPro
       </nav>
       <div style={{ height: '70px' }}></div> 
 
-      {/* <div className={`flex justify-center flex-grow fixed top-[64px] md:px-5 px-2 border h-auto md:py-5 py-3 bg-white w-[100vw] ${searchOpen ? 'z-[999]' : 'z-[-1]'} `}>
-        {!isHome && searchOpen && (
-          <Form onSubmit={handleSubmit} className={`${styles.navbarSearchForm} ${styles.openSearchForm}`}>
-              <Form.Control
-                type="text"
-                placeholder="Enter location (e.g., Dubai, UAE)"
-                name="location"
-                value={formData.location}
-                onChange={handleInputChange}
-                className={`${styles.navbarSearchInput} ${styles.openSearchInput}`}
-                aria-label="Search location"
-                />
-                <div className={`w-full ${styles.openSearchDate}`}>
-              <CustomDateRangePicker
-                value={formData.dateRange}
-                onChange={handleDateRangeChange}
-                placeholder="Select date and time range"
-                />
-                </div>
-              <button type="submit" className={styles.navbarSearchButton}>
-                <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="#FFFFFF"><path d="M765-144 526-383q-30 22-65.79 34.5-35.79 12.5-76.18 12.5Q284-336 214-406t-70-170q0-100 70-170t170-70q100 0 170 70t70 170.03q0 40.39-12.5 76.18Q599-464 577-434l239 239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Z"/></svg>
-              </button>
-            </Form>
-          )}
-          </div>
-          {!isHome && (
-          <div className='fixed top-[62px] left-1/2 transform -translate-x-1/2 xl:hidden z-[1000]'>
-            <button className={`border bg-[#0080F6] hover:bg-[#42C3F7] text-white transition-all duration-150 px-5 py-1 ${styles.openSearch} relative`} onClick={() => setSearchOpen(!searchOpen)}>{searchOpen ? <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="#FFFFFF"><path d="m291-240-51-51 189-189-189-189 51-51 189 189 189-189 51 51-189 189 189 189-51 51-189-189-189 189Z"/></svg> : <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 -960 960 960" width="16px" fill="#FFFFFF"><path d="M765-144 526-383q-30 22-65.79 34.5-35.79 12.5-76.18 12.5Q284-336 214-406t-70-170q0-100 70-170t170-70q100 0 170 70t70 170.03q0 40.39-12.5 76.18Q599-464 577-434l239 239-51 51ZM384-408q70 0 119-49t49-119q0-70-49-119t-119-49q-70 0-119 49t-49 119q0 70 49 119t119 49Z"/></svg>}</button>
-          </div>
-          )} */}
     </>
   );
 }

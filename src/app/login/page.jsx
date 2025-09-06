@@ -29,6 +29,7 @@ const Page = () => {
   const [password, setPassword] = useState('')
   const [errors, setErrors] = useState({});
   const [loginMethod, setLoginMethod] = useState('email'); // New state for login method
+  
 
   const countryCodes = [
     { value: "+93", label: "+93 (Afghanistan)" },
@@ -329,7 +330,13 @@ const Page = () => {
 
   return (
     <>
-      <Navbar onMenuToggle={() => setIsSidebarOpen(true)} isHome={true} onUserToggle={() => setIsDropdownOpen(true)} />
+      <Navbar onMenuToggle={() => {
+        setIsSidebarOpen(!isSidebarOpen)
+        setIsDropdownOpen(false);
+      }} isHome={true} onUserToggle={() =>{
+        setIsDropdownOpen(!isDropdownOpen);
+        setIsSidebarOpen(false);
+      }} />
       <Sidebar isOpen={isSidebarOpen} onClose={handleSidebarClose} />
 
       <main className="main-container" data-aos="fade-in">
