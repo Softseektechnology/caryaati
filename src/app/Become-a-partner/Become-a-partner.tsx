@@ -518,7 +518,7 @@ const BecomePartnerPage = () => {
             },
           ].map((step, index) => (
             <Col sm={12} md={4} key={index}>
-              <div className={`${styles.step} justify-items-center text-center`}>
+              <div className={`${styles.step} h-[360px] justify-items-center text-center`}>
                 <Image
                   src={step.image}
                   alt={step.title}
