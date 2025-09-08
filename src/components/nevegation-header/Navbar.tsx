@@ -8,6 +8,8 @@ import { FaSearch } from 'react-icons/fa';
 import { useRouter, useParams } from 'next/navigation';
 import CustomDateRangePicker from '../search-engine/CustomDateRangePicker';
 import { isSea } from 'node:sea';
+import Link from 'next/link';
+import { DoorOpen } from 'lucide-react';
 
 
 interface NavbarProps {
@@ -140,9 +142,15 @@ export default function Navbar({ onMenuToggle, onUserToggle, isHome }: NavbarPro
           </div>
 
           <div className="ms-auto">
+              {localStorage.getItem('isLoggedIn') === 'true' ? (
             <button className="btn" onClick={onUserToggle}>
-              <Image src="/images/user-image.png" alt="User" width={30} height={30} />
-            </button>
+                <Image src="/images/user-image.png" alt="User" width={30} height={30} />
+                </button>
+              ) : (
+                <Link href="/login" className="no-underline text-red-600 font-medium" style={{ textDecoration: 'none' }}>
+                  <div className="flex content-center no-underline text-red-600 font-medium items-center"><DoorOpen /> Login</div>
+                </Link>
+              )}
           </div>
         </div>
       </nav>

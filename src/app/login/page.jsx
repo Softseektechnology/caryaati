@@ -11,6 +11,7 @@ import { signIn, useSession } from 'next-auth/react';
 import axios from 'axios'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useRouter } from 'next/navigation';
 
 // const ReCAPTCHA = dynamic(() => import('react-google-recaptcha'), { ssr: false });
 
@@ -273,6 +274,7 @@ const Page = () => {
     { value: "+260", label: "+260 (Zambia)" },
     { value: "+263", label: "+263 (Zimbabwe)" }
   ];
+  let router = useRouter();
 
   const handleGoogleAuth = async () => {
     try {
@@ -446,6 +448,10 @@ const Page = () => {
                   ref={buttonRef} 
                   onMouseEnter={handleHover} 
                   onMouseLeave={handleLeave}
+                  onClick={() => {
+                    localStorage.setItem('isLoggedIn', 'true')
+                    router.push('/');
+                  }}
                 >
                   Login
                 </button>
