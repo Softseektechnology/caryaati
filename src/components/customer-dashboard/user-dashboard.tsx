@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import styles from './user-dashboard.module.css';
 
 interface UserDropdownProps {
@@ -10,8 +11,8 @@ export default function UserDropdown({ isOpen }: UserDropdownProps) {
   return (
     <div className={`${styles.userDropdown} ${isOpen ? styles.active : ''}`}>
       <ul>
-        <li><a href="#">My Account</a></li>
-        <li><a href="#">Logout</a></li>
+        <li><Link href="/customer-dashboard/index">My Account</Link></li>
+        <li><Link href="#">Logout</Link></li>
       </ul>
     </div>
   );

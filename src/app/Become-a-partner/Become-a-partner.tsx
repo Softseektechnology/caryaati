@@ -89,7 +89,7 @@ const BecomePartnerPage = () => {
 
   const steps = [
     {
-      title: "Company Info",
+      title: "Company",
       content: (
         <>
           <Row>
@@ -211,7 +211,7 @@ const BecomePartnerPage = () => {
       ),
     },
     {
-      title: "Owner Info",
+      title: "Owner",
       content: (
         <>
           <Row>
@@ -278,7 +278,7 @@ const BecomePartnerPage = () => {
       ),
     },
     {
-      title: "Docs",
+      title: "Document",
       content: (
         <>
           <Row>
@@ -337,57 +337,155 @@ const BecomePartnerPage = () => {
   ];
 
   const services = [
-    {
-      title: "Fleet Management",
-      icon: "directions_car",
-      items: ["Single Screen Operation", "Vehicle Status Reports", "Smart Searching", "Smart Contract Creation"],
-    },
-    {
-      title: "Fines and Salik Integration",
-      icon: "toll",
-      items: ["Salik Report", "Fines Report", "Smart Invoicing", "Real Time Updates"],
-    },
-    {
-      title: "Booking Verification",
-      icon: "verified",
-      items: ["Check Documents", "Important Validations", "Save Time Easy Working", "Manage Reservations"],
-    },
-    {
-      title: "Bookings and Reservations",
-      icon: "event_available",
-      items: ["Track Online Booking", "Convert Reservations to Bookings", "Useful Booking Reports"],
-    },
-    {
-      title: "Excel Import and Export",
-      icon: "import_export",
-      items: ["Import Your Fleet Data", "Export Report to PDF and Excel", "One Click Report Download Option"],
-    },
-    {
-      title: "Payments Gateway",
-      icon: "payment",
-      items: ["Easy Online Ordering", "Secure Gateways", "Record Your Transactions"],
-    },
-    {
-      title: "Smart Printing",
-      icon: "print",
-      items: ["Reports Are Ready to Print", "Print or Email Invoices", "Stored Documents Printing"],
-    },
-    {
-      title: "Reports & Analytics",
-      icon: "analytics",
-      items: ["Financial Reports", "Fleet Utilization Report", "Managerial Report", "Overdue Payment Report"],
-    },
-    {
-      title: "Easy Configuration",
-      icon: "settings",
-      items: ["System Configuration", "Fuel Settings", "Accounts Settings", "Maintenance Protocols"],
-    },
-    {
-      title: "Customer Portal",
-      icon: "web",
-      items: ["Booking Information", "Rental History", "Salik and Fines Reports", "Profile Settings", "Promotions and Referral"],
-    },
-  ];
+  {
+    title: "Car Booking Portal",
+    icon: "directions_car",
+    items: [
+      "Attractive Booking Page",
+      "Show Complete Fleet",
+      "Customer Booking",
+      "Online Payment"
+    ],
+  },
+  {
+    title: "Invoice Designer",
+    icon: "receipt_long",
+    items: [
+      "Customize Your Invoice",
+      "Innovative Design",
+      "Place your Logo"
+    ],
+  },
+  {
+    title: "Asset Management",
+    icon: "inventory_2",
+    items: [
+      "Manage your Vehicle",
+      "Finance Module",
+      "Monthly and Yearly Asset Report",
+      "Important Alerts and Reminder",
+      "ROI Reports"
+    ],
+  },
+  {
+    title: "Staff Performance",
+    icon: "groups",
+    items: [
+      "Create separate User Profile",
+      "Manage Data Base",
+      "Assign Controls",
+      "Monitor Tasks"
+    ],
+  },
+  {
+    title: "Unpaid Invoices",
+    icon: "request_quote",
+    items: [
+      "Get accurate Report",
+      "Messages Integration",
+      "Invoice aging",
+      "Notes and Remarks"
+    ],
+  },
+  {
+    title: "Fleet Status",
+    icon: "local_shipping",
+    items: [
+      "Single Screen Operation",
+      "Vehicle Status Reports",
+      "Smart Searching",
+      "Smart Contract Creation"
+    ],
+  },
+  {
+    title: "Fines and Salik Integration",
+    icon: "toll",
+    items: [
+      "Salik Report",
+      "Fines Report",
+      "Smart Invoicing",
+      "Real Time Updates"
+    ],
+  },
+  {
+    title: "Booking Verification",
+    icon: "verified",
+    items: [
+      "Check Documents",
+      "Important Validations",
+      "Save time easy working",
+      "Manage Reservations"
+    ],
+  },
+  {
+    title: "Bookings and Reservations",
+    icon: "event_available",
+    items: [
+      "Track online booking",
+      "Convert reservations to bookings",
+      "Useful booking reports"
+    ],
+  },
+  {
+    title: "Excel Import and Export",
+    icon: "import_export",
+    items: [
+      "Import Your Fleet Data",
+      "Export Report to PDF and Excel",
+      "One click report Download option"
+    ],
+  },
+  {
+    title: "Payments Gateway",
+    icon: "payment",
+    items: [
+      "Easy Online ordering",
+      "Secure gateways",
+      "Record you transactions"
+    ],
+  },
+  {
+    title: "Smart Printing",
+    icon: "print",
+    items: [
+      "Report are ready to print",
+      "Print or email Invoices",
+      "Stored Documents Printing"
+    ],
+  },
+  {
+    title: "Reports & Analytics",
+    icon: "analytics",
+    items: [
+      "Financial Reports",
+      "Fleet Utilization Report",
+      "Managerial Report",
+      "Overdue Payment Report"
+    ],
+  },
+  {
+    title: "Easy Configuration",
+    icon: "settings",
+    items: [
+      "System Configuration",
+      "Fuel settings",
+      "Accounts settings",
+      "Maintenance Protocols"
+    ],
+  },
+  {
+    title: "Customer Portal",
+    icon: "person",
+    items: [
+      "Booking information",
+      "Rental History",
+      "Salik and fines reports",
+      "Profile settings",
+      "Promotions and Referral"
+    ],
+  },
+];
+
 
   return (
     <div className={styles.container}>

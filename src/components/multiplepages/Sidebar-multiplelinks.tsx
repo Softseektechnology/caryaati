@@ -27,15 +27,15 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
     const handleResize = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      if (mobile && !isOpen && !isExpanded) {
-        setIsOpen(false);
-        setIsExpanded(false);
+      if (mobile) {
+        setIsExpanded(isOpen);
       }
+      // For desktop, do not set isExpanded here; let it be controlled by hover (initially false)
     };
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, [isOpen, isExpanded]);
+  }, [isOpen]);
 
   useEffect(() => {
     setIsOpen(initialIsOpen);
@@ -109,9 +109,11 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                   transition={{ duration: 0.3 }}
                 >
                   <motion.span
+                    animate={{ rotate: [0, 360] }}
+                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                     className="text-2xl"
                   >
-                    <img src="https://caryaati.com//assets/1555247740_caryaati_logo.png" className='w-12 min-w-7' alt="" />
+                    🚗
                   </motion.span>
                   <AnimatePresence>
                     {isExpanded && (
@@ -121,6 +123,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                         exit={{ opacity: 0, x: -10 }}
                         className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600"
                       >
+                        Engine
                       </motion.span>
                     )}
                   </AnimatePresence>
@@ -439,12 +442,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
       )}
 
       {!Dashboard && (
-        <div className={styles.sidebar} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-          <div className={styles.hamburgerIcon} onClick={handleToggle}>
-            <i className="bi bi-list"></i>
-            <span className={styles.menuText}>Menu</span>
-            {isExpanded && <button className={styles.closeBtn} onClick={handleClose}>×</button>}
-          </div>
+        <div className={`${styles.sidebar} ${isExpanded ? styles.expanded : ''}`} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={{ top: '63px', display: isMobile && !isOpen ? 'none' : 'block' }}>
           <ul>
             {/* 🔽 Car Rental Airport with Dropdown */}
             <li className='transition-all duration-200'>
@@ -547,10 +545,11 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
         </div>
       )}
 
-      {isExpanded && <div className={styles.overlay} onClick={handleClose}></div>}
+      {(isExpanded || isOpen) && <div className={styles.overlay} onClick={handleClose}></div>}
     </>
   );
 }
+
 /* Sidebar Nav Item Component */
 function NavItem({ icon, text, sidebarOpen, onClick, isActive = false, badge }) {
   return (
