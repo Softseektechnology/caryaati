@@ -6,7 +6,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import Footer from "@/components/foorter/Footer";
 import Navbar from "@/components/nevegation-header/Navbar";
 import Sidebar from "@/components/multiplepages/Sidebar-multiplelinks";
-
+import UserDropdown from "@/components/customer-dashboard/user-dashboard"; // Adjust path as needed
+import Link from "next/link";
 
 export default function CustomerDashboard() {
     const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -41,7 +42,6 @@ export default function CustomerDashboard() {
     setIsSidebarOpen(false);
   };
 
-
     return (
         <>
         <Navbar
@@ -55,6 +55,8 @@ export default function CustomerDashboard() {
           setIsSidebarOpen(false);
         }} />
               <Sidebar isOpen={isSidebarOpen} isDashboard={true} onClose={handleSidebarClose} />
+              {/* User Dropdown */}
+              <UserDropdown isOpen={isDropdownOpen} />
         
         <div className="flex flex-col min-h-screen md:pl-[72px]">
             <div className="flex flex-1 bg-gradient-to-br from-gray-50 to-gray-100">
@@ -135,9 +137,9 @@ export default function CustomerDashboard() {
                                                 <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 border-b">
                                                     <User size={16} className="text-gray-600" /> My Profile
                                                 </button>
-                                                <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 text-red-600">
-                                                    <LogOut size={16} /> Log Out
-                                                </button>
+                                                <Link href={`/login`} className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 no-underline text-red-600" style={{ textDecoration: 'none' }}>
+                                                    <button className="w-full text-sm hover:bg-gray-50 flex items-center gap-2 no-underline text-red-600"><LogOut size={16} /> Log Out</button>
+                                                </Link>
                                             </motion.div>
                                         )}
                                     </AnimatePresence>

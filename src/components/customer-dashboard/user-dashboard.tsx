@@ -12,7 +12,7 @@ export default function UserDropdown({ isOpen }: UserDropdownProps) {
     <div className={`${styles.userDropdown} ${isOpen ? styles.active : ''}`}>
       <ul>
         <li><Link href="/customer-dashboard/index">My Account</Link></li>
-        <li><Link href="#">Logout</Link></li>
+        <li><Link href="/login">Logout</Link></li>
       </ul>
     </div>
   );

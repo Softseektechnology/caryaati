@@ -102,18 +102,16 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
               <div className="absolute inset-0 pointer-events-none wave-bg" />
 
               {/* Header: Logo and Toggle */}
-              <div className="relative z-10 p-4 flex items-center justify-between border-b border-gray-200/30">
+              {/* <div className="relative z-10 p-4 flex items-center justify-between border-b border-gray-200/30">
                 <motion.div
                   className="flex items-center gap-2"
                   animate={{ scale: isExpanded ? 1 : 0.9 }}
                   transition={{ duration: 0.3 }}
                 >
                   <motion.span
-                    animate={{ rotate: [0, 360] }}
-                    transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
                     className="text-2xl"
                   >
-                    🚗
+                    <img src="" alt="" />
                   </motion.span>
                   <AnimatePresence>
                     {isExpanded && (
@@ -128,10 +126,10 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                     )}
                   </AnimatePresence>
                 </motion.div>
-              </div>
+              </div> */}
 
               {/* User Profile Section */}
-              <div className="relative z-10 p-4 border-b border-gray-200/30">
+              <div className="relative z-10 py-1 px-4 border-b border-gray-200/30">
                 <div className="flex items-center gap-3">
                   <div className="relative">
                     <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
@@ -147,7 +145,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                         exit={{ opacity: 0, x: -10 }}
                         className="flex-1"
                       >
-                        <p className="font-semibold text-gray-800">Maaz Aziz</p>
+                        <p className="font-semibold translate-y-3 text-gray-800">Maaz Aziz</p>
                         <p className="text-xs text-gray-500">Premium User</p>
                       </motion.div>
                     )}
@@ -166,7 +164,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                     </button>
                   )}
                 </div>
-                <AnimatePresence>
+                {/* <AnimatePresence>
                   {profileDropdownOpen && isExpanded && (
                     <motion.div
                       initial={{ opacity: 0, scale: 0.95, y: 10 }}
@@ -182,11 +180,11 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                       </button>
                     </motion.div>
                   )}
-                </AnimatePresence>
+                </AnimatePresence> */}
               </div>
 
               {/* Navigation */}
-              <nav className="relative z-10 flex-1 p-4 space-y-2 overflow-y-hidden">
+              <nav className="relative z-10 flex-1 py-2 px-4 overflow-y-hidden">
                 <NavItem
                   icon={<LayoutGrid size={24} className="text-indigo-500" />}
                   text="Dashboard"
