@@ -119,9 +119,13 @@ export default function DriversPage() {
 
     // Account Info States
     const [personalInfo, setPersonalInfo] = useState({
-        fullName: "Maaz Aziz",
+        fullName: "MAAZ AZIZ ABDUL AZIZ QADRI",
         email: "maximusmaaz@gmail.com",
-        phone: "+971 50 123 4567"
+        phone: "+971 50 188 9924",
+        gender: "Male",
+        dateOfBirth: "04-02-1988",
+        nationality: "Pakistan",
+        countryOfResidence: "United Arab Emirates"
     });
     const [isEditingPersonal, setIsEditingPersonal] = useState(false);
     const [tempPersonalInfo, setTempPersonalInfo] = useState(personalInfo);
@@ -146,9 +150,13 @@ export default function DriversPage() {
     };
 
     const [licenseInfo, setLicenseInfo] = useState({
-        licenseNumber: "DL1234567890",
-        expiryDate: "15/08/2026",
-        copyName: "license.pdf"
+        documentType: "UAE Driving License",
+        documentNo: "4109329",
+        expiryDate: "26-04-2028",
+        issueDate: "04-04-2021",
+        dateOfBirth: "04-02-1988",
+        frontCopy: "No file chosen",
+        backCopy: "No file chosen"
     });
     const [isEditingLicense, setIsEditingLicense] = useState(false);
     const [tempLicenseInfo, setTempLicenseInfo] = useState(licenseInfo);
@@ -156,6 +164,14 @@ export default function DriversPage() {
     const handleLicenseChange = (e) => {
         const { name, value } = e.target;
         setTempLicenseInfo(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleLicenseFileChange = (e, side) => {
+        const file = e.target.files[0];
+        setTempLicenseInfo(prev => ({
+            ...prev,
+            [`${side}Copy`]: file ? file.name : "No file chosen"
+        }));
     };
 
     const startEditingLicense = () => {
@@ -214,11 +230,22 @@ export default function DriversPage() {
     };
 
     const [documents, setDocuments] = useState([
-        { id: 1, name: "Passport.pdf", uploaded: "2 days ago" },
-        { id: 2, name: "ID_Card.pdf", uploaded: "1 week ago" }
+        { 
+            id: 1, 
+            type: "Emirates Id", 
+            documentNo: "784198831963255", 
+            expiryDate: "06-02-2026", 
+            issueBy: "RTA", 
+            frontCopy: "No file chosen", 
+            backCopy: "No file chosen",
+            name: "Emirates ID.pdf", 
+            uploaded: "Just now" 
+        },
+        { id: 2, name: "Passport.pdf", uploaded: "2 days ago" },
+        { id: 3, name: "ID_Card.pdf", uploaded: "1 week ago" }
     ]);
     const [showAddDocument, setShowAddDocument] = useState(false);
-    const [newDocument, setNewDocument] = useState({ name: "", uploaded: "Just now" });
+    const [newDocument, setNewDocument] = useState({ name: "", uploaded: "Just now", frontCopy: "No file chosen", backCopy: "No file chosen" });
     const [editingDocument, setEditingDocument] = useState(null);
 
     const handleNewDocumentChange = (e) => {
@@ -226,10 +253,31 @@ export default function DriversPage() {
         setNewDocument(prev => ({ ...prev, [name]: value }));
     };
 
+    const handleNewDocumentFileChange = (e, side) => {
+        const file = e.target.files[0];
+        setNewDocument(prev => ({
+            ...prev,
+            [`${side}Copy`]: file ? file.name : "No file chosen"
+        }));
+    };
+
+    const handleNewDocumentNameFromFile = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setNewDocument(prev => ({ 
+                ...prev, 
+                name: file.name, 
+                uploaded: "Just now",
+                frontCopy: file.name, // Assuming single file for simple docs
+                backCopy: "No file chosen"
+            }));
+        }
+    };
+
     const addDocument = () => {
         if (!newDocument.name) return;
         setDocuments(prev => [...prev, { id: prev.length + 1, ...newDocument }]);
-        setNewDocument({ name: "", uploaded: "Just now" });
+        setNewDocument({ name: "", uploaded: "Just now", frontCopy: "No file chosen", backCopy: "No file chosen" });
         setShowAddDocument(false);
     };
 
@@ -240,6 +288,14 @@ export default function DriversPage() {
     const handleEditDocumentChange = (e) => {
         const { name, value } = e.target;
         setEditingDocument(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleEditDocumentFileChange = (e, side) => {
+        const file = e.target.files[0];
+        setEditingDocument(prev => ({
+            ...prev,
+            [`${side}Copy`]: file ? file.name : prev[`${side}Copy`]
+        }));
     };
 
     const updateDocument = () => {
@@ -282,7 +338,7 @@ export default function DriversPage() {
                             </div>
 
                             <div className="mt-4 md:mt-0">
-                                <div className="flex flex-wrap gap-2">
+                                <div className="flex max-sm:flex-col flex-wrap gap-2">
                                     <button
                                         onClick={() => setActiveTab("accountInfo")}
                                         className={`px-4 py-2 rounded-lg transition ${activeTab === "accountInfo" ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'}`}
@@ -448,7 +504,7 @@ export default function DriversPage() {
                                             </div>
                                             <div className="space-y-3">
                                                 <div>
-                                                    <p className="text-sm text-gray-500">Full Name</p>
+                                                    <p className="text-sm text-gray-500">Display Name</p>
                                                     {isEditingPersonal ? (
                                                         <input
                                                             type="text"
@@ -462,7 +518,7 @@ export default function DriversPage() {
                                                     )}
                                                 </div>
                                                 <div>
-                                                    <p className="text-sm text-gray-500">Email</p>
+                                                    <p className="text-sm text-gray-500">Email Address</p>
                                                     {isEditingPersonal ? (
                                                         <input
                                                             type="email"
@@ -489,6 +545,62 @@ export default function DriversPage() {
                                                         <p className="font-medium">{personalInfo.phone}</p>
                                                     )}
                                                 </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Gender</p>
+                                                    {isEditingPersonal ? (
+                                                        <input
+                                                            type="text"
+                                                            name="gender"
+                                                            value={tempPersonalInfo.gender}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                    ) : (
+                                                        <p className="font-medium">{personalInfo.gender}</p>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Date of Birth</p>
+                                                    {isEditingPersonal ? (
+                                                        <input
+                                                            type="text"
+                                                            name="dateOfBirth"
+                                                            value={tempPersonalInfo.dateOfBirth}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                    ) : (
+                                                        <p className="font-medium">{personalInfo.dateOfBirth}</p>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Nationality</p>
+                                                    {isEditingPersonal ? (
+                                                        <input
+                                                            type="text"
+                                                            name="nationality"
+                                                            value={tempPersonalInfo.nationality}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                    ) : (
+                                                        <p className="font-medium">{personalInfo.nationality}</p>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Country of Residence</p>
+                                                    {isEditingPersonal ? (
+                                                        <input
+                                                            type="text"
+                                                            name="countryOfResidence"
+                                                            value={tempPersonalInfo.countryOfResidence}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                    ) : (
+                                                        <p className="font-medium">{personalInfo.countryOfResidence}</p>
+                                                    )}
+                                                </div>
                                             </div>
                                         </div>
 
@@ -506,6 +618,8 @@ export default function DriversPage() {
                                                         <div>
                                                             <p className="font-medium">{doc.name}</p>
                                                             <p className="text-sm text-gray-500">Uploaded {doc.uploaded}</p>
+                                                            {doc.type && <p className="text-sm text-gray-500">Type: {doc.type} | No: {doc.documentNo} | Expiry: {doc.expiryDate} | Issued by: {doc.issueBy}</p>}
+                                                            {doc.frontCopy && <p className="text-sm text-gray-500">Front: {doc.frontCopy} | Back: {doc.backCopy}</p>}
                                                         </div>
                                                         <div className="flex gap-2">
                                                             <button className="text-indigo-600" onClick={() => startEditingDocument(doc)}>
@@ -530,13 +644,24 @@ export default function DriversPage() {
                                                     <h4 className="text-md font-medium mb-2">Add New Document</h4>
                                                     <div className="space-y-2">
                                                         <input
-                                                            type="text"
-                                                            name="name"
-                                                            value={newDocument.name}
-                                                            onChange={handleNewDocumentChange}
-                                                            placeholder="Document Name"
+                                                            type="file"
+                                                            onChange={handleNewDocumentNameFromFile}
                                                             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                                         />
+                                                        {newDocument.frontCopy !== "No file chosen" && newDocument.backCopy !== "No file chosen" && (
+                                                            <>
+                                                                <input
+                                                                    type="file"
+                                                                    onChange={(e) => handleNewDocumentFileChange(e, 'front')}
+                                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                                />
+                                                                <input
+                                                                    type="file"
+                                                                    onChange={(e) => handleNewDocumentFileChange(e, 'back')}
+                                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                                />
+                                                            </>
+                                                        )}
                                                     </div>
                                                     <div className="flex gap-2 mt-4">
                                                         <button onClick={addDocument} className="px-4 py-2 bg-indigo-600 text-white rounded-lg">Save</button>
@@ -552,22 +677,85 @@ export default function DriversPage() {
                                                 >
                                                     <h4 className="text-md font-medium mb-2">Edit Document</h4>
                                                     <div className="space-y-2">
-                                                        <input
-                                                            type="text"
-                                                            name="name"
-                                                            value={editingDocument.name}
-                                                            onChange={handleEditDocumentChange}
-                                                            placeholder="Document Name"
-                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                                        />
-                                                        <input
-                                                            type="text"
-                                                            name="uploaded"
-                                                            value={editingDocument.uploaded}
-                                                            onChange={handleEditDocumentChange}
-                                                            placeholder="Uploaded Date"
-                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                                        />
+                                                        {!editingDocument.type ? (
+                                                            <input
+                                                                type="file"
+                                                                onChange={(e) => {
+                                                                    const file = e.target.files[0];
+                                                                    if (file) {
+                                                                        setEditingDocument(prev => ({...prev, name: file.name}));
+                                                                    }
+                                                                }}
+                                                                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                            />
+                                                        ) : (
+                                                            <>
+                                                                <input
+                                                                    type="text"
+                                                                    name="name"
+                                                                    value={editingDocument.name}
+                                                                    onChange={handleEditDocumentChange}
+                                                                    placeholder="Document Name"
+                                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                                />
+                                                                <input
+                                                                    type="text"
+                                                                    name="uploaded"
+                                                                    value={editingDocument.uploaded}
+                                                                    onChange={handleEditDocumentChange}
+                                                                    placeholder="Uploaded Date"
+                                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                                />
+                                                                <input
+                                                                    type="text"
+                                                                    name="type"
+                                                                    value={editingDocument.type}
+                                                                    onChange={handleEditDocumentChange}
+                                                                    placeholder="Document Type"
+                                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                                />
+                                                                <input
+                                                                    type="text"
+                                                                    name="documentNo"
+                                                                    value={editingDocument.documentNo}
+                                                                    onChange={handleEditDocumentChange}
+                                                                    placeholder="Document No"
+                                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                                />
+                                                                <input
+                                                                    type="text"
+                                                                    name="expiryDate"
+                                                                    value={editingDocument.expiryDate}
+                                                                    onChange={handleEditDocumentChange}
+                                                                    placeholder="Expiry Date"
+                                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                                />
+                                                                <input
+                                                                    type="text"
+                                                                    name="issueBy"
+                                                                    value={editingDocument.issueBy}
+                                                                    onChange={handleEditDocumentChange}
+                                                                    placeholder="Issued By"
+                                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                                />
+                                                                <div>
+                                                                    <p className="text-sm text-gray-500 mb-1">Attach Copy (Front) - Current: {editingDocument.frontCopy}</p>
+                                                                    <input
+                                                                        type="file"
+                                                                        onChange={(e) => handleEditDocumentFileChange(e, 'front')}
+                                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                                    />
+                                                                </div>
+                                                                <div>
+                                                                    <p className="text-sm text-gray-500 mb-1">Attach Copy (Back) - Current: {editingDocument.backCopy}</p>
+                                                                    <input
+                                                                        type="file"
+                                                                        onChange={(e) => handleEditDocumentFileChange(e, 'back')}
+                                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                                    />
+                                                                </div>
+                                                            </>
+                                                        )}
                                                     </div>
                                                     <div className="flex gap-2 mt-4">
                                                         <button onClick={updateDocument} className="px-4 py-2 bg-indigo-600 text-white rounded-lg">Update</button>
@@ -594,17 +782,31 @@ export default function DriversPage() {
                                             </div>
                                             <div className="space-y-4">
                                                 <div>
-                                                    <p className="text-sm text-gray-500">License Number</p>
+                                                    <p className="text-sm text-gray-500">Document Type</p>
                                                     {isEditingLicense ? (
                                                         <input
                                                             type="text"
-                                                            name="licenseNumber"
-                                                            value={tempLicenseInfo.licenseNumber}
+                                                            name="documentType"
+                                                            value={tempLicenseInfo.documentType}
                                                             onChange={handleLicenseChange}
                                                             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
                                                         />
                                                     ) : (
-                                                        <p className="font-medium">{licenseInfo.licenseNumber}</p>
+                                                        <p className="font-medium">{licenseInfo.documentType}</p>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Document No</p>
+                                                    {isEditingLicense ? (
+                                                        <input
+                                                            type="text"
+                                                            name="documentNo"
+                                                            value={tempLicenseInfo.documentNo}
+                                                            onChange={handleLicenseChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                    ) : (
+                                                        <p className="font-medium">{licenseInfo.documentNo}</p>
                                                     )}
                                                 </div>
                                                 <div>
@@ -621,22 +823,56 @@ export default function DriversPage() {
                                                         <p className="font-medium">{licenseInfo.expiryDate}</p>
                                                     )}
                                                 </div>
-                                                <div className="p-3 bg-gray-50 rounded">
-                                                    <p className="text-sm text-gray-500 mb-2">License Copy</p>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Issue Date</p>
                                                     {isEditingLicense ? (
                                                         <input
                                                             type="text"
-                                                            name="copyName"
-                                                            value={tempLicenseInfo.copyName}
+                                                            name="issueDate"
+                                                            value={tempLicenseInfo.issueDate}
                                                             onChange={handleLicenseChange}
-                                                            placeholder="License File Name"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                    ) : (
+                                                        <p className="font-medium">{licenseInfo.issueDate}</p>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Date of Birth</p>
+                                                    {isEditingLicense ? (
+                                                        <input
+                                                            type="text"
+                                                            name="dateOfBirth"
+                                                            value={tempLicenseInfo.dateOfBirth}
+                                                            onChange={handleLicenseChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                    ) : (
+                                                        <p className="font-medium">{licenseInfo.dateOfBirth}</p>
+                                                    )}
+                                                </div>
+                                                <div className="p-3 bg-gray-50 rounded">
+                                                    <p className="text-sm text-gray-500 mb-2">Attach Copy Docs (Front) - Current: {isEditingLicense ? tempLicenseInfo.frontCopy : licenseInfo.frontCopy}</p>
+                                                    {isEditingLicense ? (
+                                                        <input
+                                                            type="file"
+                                                            onChange={(e) => handleLicenseFileChange(e, 'front')}
                                                             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                                         />
                                                     ) : (
-                                                        <button className="text-indigo-600 flex items-center gap-1">
-                                                            <Download size={16} />
-                                                            <span>Download {licenseInfo.copyName}</span>
-                                                        </button>
+                                                        <p className="font-medium">{licenseInfo.frontCopy}</p>
+                                                    )}
+                                                </div>
+                                                <div className="p-3 bg-gray-50 rounded">
+                                                    <p className="text-sm text-gray-500 mb-2">Attach Copy Docs (Back) - Current: {isEditingLicense ? tempLicenseInfo.backCopy : licenseInfo.backCopy}</p>
+                                                    {isEditingLicense ? (
+                                                        <input
+                                                            type="file"
+                                                            onChange={(e) => handleLicenseFileChange(e, 'back')}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                    ) : (
+                                                        <p className="font-medium">{licenseInfo.backCopy}</p>
                                                     )}
                                                 </div>
                                             </div>

@@ -263,7 +263,7 @@ export default function FinesPage() {
                                     />
                                 </div>
                                 
-                                <div className="flex gap-2">
+                                <div className="flex max-sm:flex-col gap-2">
                                     <select
                                         className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                                         value={filterStatus}
