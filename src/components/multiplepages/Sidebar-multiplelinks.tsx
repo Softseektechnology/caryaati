@@ -287,7 +287,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                   icon={<Car size={24} className="text-teal-500" />}
                   text="Booking Engine"
                   isActive={active === 'bookingEngine' ? true : false}
-                  onClick={()=> router.push('/')}
+                  onClick={() => router.push('/')}
                   sidebarOpen={isExpanded}
                 />
               </nav>
@@ -371,34 +371,44 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                     icon={<LayoutGrid size={24} className="text-indigo-500" />}
                     text="Dashboard"
                     sidebarOpen={true}
-                    isActive={true}
+                    onClick={() => router.push('/customer-dashboard/index')}  // Add this
+                    isActive={active === 'dashboard' ? true : false}  // Optional: Add if you want active state
                   />
                   <NavItem
                     icon={<Calendar size={24} className="text-blue-500" />}
                     text="Booking"
                     sidebarOpen={true}
+                    onClick={() => router.push('/customer-dashboard/booking')}  // Add this
+                    isActive={active === 'booking' ? true : false}  // Optional
                   />
                   <NavItem
                     icon={<DollarSign size={24} className="text-red-500" />}
                     text="Fines"
                     sidebarOpen={true}
+                    onClick={() => router.push('/customer-dashboard/fines')}  // Add this
+                    isActive={active === 'fines' ? true : false}  // Optional
                   />
                   <NavItem
                     icon={<Car size={24} className="text-orange-500" />}
                     text="Salik"
                     sidebarOpen={true}
+                    onClick={() => router.push('/customer-dashboard/salik')}  // Add this
+                    isActive={active === 'salik' ? true : false}  // Optional
                   />
                   <NavItem
                     icon={<User size={24} className="text-purple-500" />}
                     text="Profile"
                     sidebarOpen={true}
+                    onClick={() => router.push('/customer-dashboard/profile')}  // Add this
+                    isActive={active === 'profile' ? true : false}  // Optional
                   />
                   <NavItem
                     icon={<Heart size={24} className="text-pink-500" />}
                     text="Wishlist"
                     sidebarOpen={true}
                     badge={wishlistItems.length}
-                    onClick={() => setWishlistDropdownOpen(!wishlistDropdownOpen)}
+                    onClick={() => setWishlistDropdownOpen(!wishlistDropdownOpen)}  // Already present
+                    isActive={active === 'wishlist' ? true : false}  // Optional
                   />
                   {wishlistDropdownOpen && (
                     <motion.div
@@ -423,7 +433,8 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                     icon={<LayoutGrid size={24} className="text-green-500" />}
                     text="Widgets"
                     sidebarOpen={true}
-                    onClick={() => setWidgetsDropdownOpen(!widgetsDropdownOpen)}
+                    onClick={() => setWidgetsDropdownOpen(!widgetsDropdownOpen)}  // Already present, but if you want direct nav, change to router.push
+                    isActive={active === 'widgets' ? true : false}  // Optional
                   />
                   {widgetsDropdownOpen && (
                     <motion.div
@@ -436,6 +447,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                         <button
                           key={item.id}
                           className="w-full flex items-center gap-2 px-2 py-1.5 text-sm text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-md transition-colors"
+                          onClick={() => { router.push(`/customer-dashboard/${item.name}`) }}
                         >
                           {item.icon}
                           {item.name}
@@ -447,6 +459,8 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                     icon={<Car size={24} className="text-teal-500" />}
                     text="Booking Engine"
                     sidebarOpen={true}
+                    onClick={() => router.push('/')}  // Add this (matches desktop)
+                    isActive={active === 'bookingEngine' ? true : false}  // Optional
                   />
                 </div>
               </nav>
