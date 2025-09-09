@@ -54,7 +54,7 @@ export default function CustomerDashboard() {
           setIsDropdownOpen(!isDropdownOpen);
           setIsSidebarOpen(false);
         }} />
-              <Sidebar isOpen={isSidebarOpen} isDashboard={true} onClose={handleSidebarClose} />
+              <Sidebar isOpen={isSidebarOpen} isDashboard={true} active={'dashboard'} onClose={handleSidebarClose} />
               {/* User Dropdown */}
               <UserDropdown isOpen={isDropdownOpen} />
         

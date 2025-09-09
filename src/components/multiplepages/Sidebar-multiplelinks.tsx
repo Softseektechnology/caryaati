@@ -5,8 +5,9 @@ import styles from './Sidebar-multiplelinks.module.css';
 import Link from 'next/link';
 import { Menu, LogOut, User, Heart, Calendar, DollarSign, Car, LayoutGrid, Search } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useRouter } from 'next/navigation';
 
-export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDashboard }: { isOpen?: boolean; onClose?: () => void, isDashboard?: boolean }) {
+export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDashboard, active }: { isOpen?: boolean; onClose?: () => void, isDashboard?: boolean, active?: string }) {
   const [isOpen, setIsOpen] = useState(initialIsOpen);
   const [isExpanded, setIsExpanded] = useState(initialIsOpen);
 
@@ -41,6 +42,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
     setIsOpen(initialIsOpen);
     setIsExpanded(initialIsOpen);
   }, [initialIsOpen]);
+  let router = useRouter();
 
   const handleMouseEnter = () => {
     if (!isMobile) setIsExpanded(true);
@@ -132,7 +134,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
               <div className="relative z-10 py-1 px-4 border-b border-gray-200/30">
                 <div className="flex items-center gap-3">
                   <div className="relative">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
+                    <div className="w-10 h-10 max-sm:w-6 max-sm:h-6 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
                       MA
                     </div>
                     <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-white" />
@@ -145,7 +147,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                         exit={{ opacity: 0, x: -10 }}
                         className="flex-1"
                       >
-                        <p className="font-semibold translate-y-3 text-gray-800">Maaz Aziz</p>
+                        <p className="font-semibold translate-y-3 max-sm:translate-y-5 text-gray-800">Maaz Aziz</p>
                         <p className="text-xs text-gray-500">Premium User</p>
                       </motion.div>
                     )}
@@ -184,38 +186,48 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
               </div>
 
               {/* Navigation */}
-              <nav className="relative z-10 flex-1 py-2 px-4 overflow-y-hidden">
+              <nav className="relative z-10 flex-1 py-2 px-4 overflow-auto">
                 <NavItem
                   icon={<LayoutGrid size={24} className="text-indigo-500" />}
                   text="Dashboard"
                   sidebarOpen={isExpanded}
-                  isActive={true}
+                  onClick={() => router.push('/customer-dashboard/index')}
+                  isActive={active === 'dashboard' ? true : false}
                 />
                 <NavItem
                   icon={<Calendar size={24} className="text-blue-500" />}
                   text="Booking"
                   sidebarOpen={isExpanded}
+                  onClick={() => router.push('/customer-dashboard/booking')}
+                  isActive={active === 'booking' ? true : false}
                 />
                 <NavItem
                   icon={<DollarSign size={24} className="text-red-500" />}
                   text="Fines"
                   sidebarOpen={isExpanded}
+                  onClick={() => router.push('/customer-dashboard/fines')}
+                  isActive={active === 'fines' ? true : false}
                 />
                 <NavItem
                   icon={<Car size={24} className="text-orange-500" />}
                   text="Salik"
                   sidebarOpen={isExpanded}
+                  onClick={() => router.push('/customer-dashboard/salik')}
+                  isActive={active === 'salik' ? true : false}
                 />
                 <NavItem
                   icon={<User size={24} className="text-purple-500" />}
                   text="Profile"
                   sidebarOpen={isExpanded}
+                  onClick={() => router.push('/customer-dashboard/profile')}
+                  isActive={active === 'profile' ? true : false}
                 />
                 <NavItem
                   icon={<Heart size={24} className="text-pink-500" />}
                   text="Wishlist"
                   sidebarOpen={isExpanded}
                   badge={wishlistItems.length}
+                  isActive={active === 'wishlist' ? true : false}
                   onClick={() => {
                     setWishlistDropdownOpen(!wishlistDropdownOpen);
                     setWidgetsDropdownOpen(false);
@@ -245,6 +257,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                   icon={<LayoutGrid size={24} className="text-green-500" />}
                   text="Widgets"
                   sidebarOpen={isExpanded}
+                  isActive={active === 'widgets' ? true : false}
                   onClick={() => {
                     setWidgetsDropdownOpen(!widgetsDropdownOpen);
                     setWishlistDropdownOpen(false);
@@ -262,6 +275,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                       <button
                         key={item.id}
                         className="w-full flex items-center gap-2 px-2 py-1.5 text-sm text-gray-600 hover:text-indigo-600 hover:bg-gray-50 rounded-md transition-colors"
+                        onClick={() => { router.push(`/customer-dashboard/${item.name}`) }}
                       >
                         {item.icon}
                         {item.name}
@@ -272,6 +286,8 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                 <NavItem
                   icon={<Car size={24} className="text-teal-500" />}
                   text="Booking Engine"
+                  isActive={active === 'bookingEngine' ? true : false}
+                  onClick={()=> router.push('/')}
                   sidebarOpen={isExpanded}
                 />
               </nav>
@@ -553,7 +569,7 @@ function NavItem({ icon, text, sidebarOpen, onClick, isActive = false, badge }) 
   return (
     <button
       onClick={onClick}
-      className={`relative group flex items-center gap-1 px-1 py-2.5 rounded-xl w-full text-left transition-all duration-300 hover:bg-gray-100 hover:shadow-md ${isActive ? 'bg-indigo-50 text-indigo-700 shadow-md' : 'text-gray-700'}`}
+      className={`relative group flex items-center gap-1 px-1 py-2.5 max-sm:py-2 rounded-xl w-full text-left transition-all duration-300 hover:bg-gray-100 hover:shadow-md ${isActive ? 'bg-indigo-50 text-indigo-700 shadow-md' : 'text-gray-700'}`}
       aria-label={`Navigate to ${text}`}
     >
       <motion.div
@@ -584,7 +600,7 @@ function NavItem({ icon, text, sidebarOpen, onClick, isActive = false, badge }) 
         <motion.span
           initial={{ opacity: 0 }}
           whileHover={{ opacity: 1, x: 10 }}
-          className="absolute left-full ml-2 px-3 py-1.5 bg-indigo-600 text-white rounded-lg text-sm shadow-lg whitespace-nowrap z-50 hidden group-hover:block"
+          className="absolute left-full ml-2 px-3 py-1.5 max-sm:py-1 bg-indigo-600 text-white rounded-lg text-sm shadow-lg whitespace-nowrap z-50 hidden group-hover:block"
         >
           {text}
         </motion.span>

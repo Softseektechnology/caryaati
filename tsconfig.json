@@ -22,6 +22,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/login/page.jsx", "src/app/reCaptcha.ts", "src/app/reCaptcha.ts", "src/app/reCaptcha.ts", "src/app/Api/verify-recaptcha/route.js", "src/app/Api/auth/[...nextauth]/route.js", "src/app/cars-for-rent/luxury", "src/app/rent-a-car/abu-dhabi"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/app/login/page.jsx", "src/app/reCaptcha.ts", "src/app/reCaptcha.ts", "src/app/reCaptcha.ts", "src/app/Api/verify-recaptcha/route.js", "src/app/Api/auth/[...nextauth]/route.js", "src/app/cars-for-rent/luxury", "src/app/rent-a-car/abu-dhabi", "src/app/customer-dashboard/booking/page.jsx"],
   "exclude": ["node_modules"]
 }
