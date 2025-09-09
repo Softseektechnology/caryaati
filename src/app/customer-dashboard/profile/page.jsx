@@ -117,6 +117,143 @@ export default function DriversPage() {
         driver.nationality.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+    // Account Info States
+    const [personalInfo, setPersonalInfo] = useState({
+        fullName: "Maaz Aziz",
+        email: "maximusmaaz@gmail.com",
+        phone: "+971 50 123 4567"
+    });
+    const [isEditingPersonal, setIsEditingPersonal] = useState(false);
+    const [tempPersonalInfo, setTempPersonalInfo] = useState(personalInfo);
+
+    const handlePersonalChange = (e) => {
+        const { name, value } = e.target;
+        setTempPersonalInfo(prev => ({ ...prev, [name]: value }));
+    };
+
+    const startEditingPersonal = () => {
+        setTempPersonalInfo({ ...personalInfo });
+        setIsEditingPersonal(true);
+    };
+
+    const savePersonal = () => {
+        setPersonalInfo({ ...tempPersonalInfo });
+        setIsEditingPersonal(false);
+    };
+
+    const cancelPersonal = () => {
+        setIsEditingPersonal(false);
+    };
+
+    const [licenseInfo, setLicenseInfo] = useState({
+        licenseNumber: "DL1234567890",
+        expiryDate: "15/08/2026",
+        copyName: "license.pdf"
+    });
+    const [isEditingLicense, setIsEditingLicense] = useState(false);
+    const [tempLicenseInfo, setTempLicenseInfo] = useState(licenseInfo);
+
+    const handleLicenseChange = (e) => {
+        const { name, value } = e.target;
+        setTempLicenseInfo(prev => ({ ...prev, [name]: value }));
+    };
+
+    const startEditingLicense = () => {
+        setTempLicenseInfo({ ...licenseInfo });
+        setIsEditingLicense(true);
+    };
+
+    const saveLicense = () => {
+        setLicenseInfo({ ...tempLicenseInfo });
+        setIsEditingLicense(false);
+    };
+
+    const cancelLicense = () => {
+        setIsEditingLicense(false);
+    };
+
+    const [cards, setCards] = useState([
+        { id: 1, type: "Visa", last4: "1234", expiry: "12/2025" },
+        { id: 2, type: "Mastercard", last4: "5678", expiry: "09/2024" }
+    ]);
+    const [showAddCard, setShowAddCard] = useState(false);
+    const [newCard, setNewCard] = useState({ type: "", last4: "", expiry: "" });
+    const [editingCard, setEditingCard] = useState(null);
+
+    const handleNewCardChange = (e) => {
+        const { name, value } = e.target;
+        setNewCard(prev => ({ ...prev, [name]: value }));
+    };
+
+    const addCard = () => {
+        if (!newCard.type || !newCard.last4 || !newCard.expiry) return;
+        setCards(prev => [...prev, { id: prev.length + 1, ...newCard }]);
+        setNewCard({ type: "", last4: "", expiry: "" });
+        setShowAddCard(false);
+    };
+
+    const startEditingCard = (card) => {
+        setEditingCard({ ...card });
+    };
+
+    const handleEditCardChange = (e) => {
+        const { name, value } = e.target;
+        setEditingCard(prev => ({ ...prev, [name]: value }));
+    };
+
+    const updateCard = () => {
+        if (!editingCard.type || !editingCard.last4 || !editingCard.expiry) return;
+        setCards(prev =>
+            prev.map(c => c.id === editingCard.id ? editingCard : c)
+        );
+        setEditingCard(null);
+    };
+
+    const deleteCard = (id) => {
+        setCards(prev => prev.filter(c => c.id !== id));
+    };
+
+    const [documents, setDocuments] = useState([
+        { id: 1, name: "Passport.pdf", uploaded: "2 days ago" },
+        { id: 2, name: "ID_Card.pdf", uploaded: "1 week ago" }
+    ]);
+    const [showAddDocument, setShowAddDocument] = useState(false);
+    const [newDocument, setNewDocument] = useState({ name: "", uploaded: "Just now" });
+    const [editingDocument, setEditingDocument] = useState(null);
+
+    const handleNewDocumentChange = (e) => {
+        const { name, value } = e.target;
+        setNewDocument(prev => ({ ...prev, [name]: value }));
+    };
+
+    const addDocument = () => {
+        if (!newDocument.name) return;
+        setDocuments(prev => [...prev, { id: prev.length + 1, ...newDocument }]);
+        setNewDocument({ name: "", uploaded: "Just now" });
+        setShowAddDocument(false);
+    };
+
+    const startEditingDocument = (doc) => {
+        setEditingDocument({ ...doc });
+    };
+
+    const handleEditDocumentChange = (e) => {
+        const { name, value } = e.target;
+        setEditingDocument(prev => ({ ...prev, [name]: value }));
+    };
+
+    const updateDocument = () => {
+        if (!editingDocument.name) return;
+        setDocuments(prev =>
+            prev.map(d => d.id === editingDocument.id ? editingDocument : d)
+        );
+        setEditingDocument(null);
+    };
+
+    const deleteDocument = (id) => {
+        setDocuments(prev => prev.filter(d => d.id !== id));
+    };
+
     return (
         <>
             <Navbar
@@ -176,131 +313,337 @@ export default function DriversPage() {
 
                         <AnimatePresence mode="wait">
                             {/* Account Information Tab */}
-{activeTab === "accountInfo" && (
-  <motion.div
-    key="accountInfo"
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -10 }}
-    transition={{ duration: 0.2 }}
-    className="bg-white rounded-2xl shadow-md p-6"
-  >
-    <h2 className="text-lg font-semibold text-gray-800 mb-6">Account Information</h2>
-    
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-      {/* My Cards Section */}
-      <div className="border rounded-lg p-4">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-medium flex items-center gap-2">
-            <CreditCard size={18} /> My Cards
-          </h3>
-          <button className="text-indigo-600 text-sm">Add New</button>
-        </div>
-        <div className="space-y-3">
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
-            <div>
-              <p className="font-medium">Visa •••• 1234</p>
-              <p className="text-sm text-gray-500">Expires 12/2025</p>
-            </div>
-            <button className="text-red-600">
-              <Trash2 size={16} />
-            </button>
-          </div>
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
-            <div>
-              <p className="font-medium">Mastercard •••• 5678</p>
-              <p className="text-sm text-gray-500">Expires 09/2024</p>
-            </div>
-            <button className="text-red-600">
-              <Trash2 size={16} />
-            </button>
-          </div>
-        </div>
-      </div>
+                            {activeTab === "accountInfo" && (
+                                <motion.div
+                                    key="accountInfo"
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    transition={{ duration: 0.2 }}
+                                    className="bg-white rounded-2xl shadow-md p-6"
+                                >
+                                    <h2 className="text-lg font-semibold text-gray-800 mb-6">Account Information</h2>
+                                    
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                                        {/* My Cards Section */}
+                                        <div className="border rounded-lg p-4">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <h3 className="font-medium flex items-center gap-2">
+                                                    <CreditCard size={18} /> My Cards
+                                                </h3>
+                                                <button className="text-indigo-600 text-sm" onClick={() => setShowAddCard(true)}>Add New</button>
+                                            </div>
+                                            <div className="space-y-3">
+                                                {cards.map(card => (
+                                                    <div key={card.id} className="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                                        <div>
+                                                            <p className="font-medium">{card.type} •••• {card.last4}</p>
+                                                            <p className="text-sm text-gray-500">Expires {card.expiry}</p>
+                                                        </div>
+                                                        <div className="flex gap-2">
+                                                            <button className="text-indigo-600" onClick={() => startEditingCard(card)}>
+                                                                <Edit size={16} />
+                                                            </button>
+                                                            <button className="text-red-600" onClick={() => deleteCard(card.id)}>
+                                                                <Trash2 size={16} />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            {showAddCard && (
+                                                <motion.div 
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: "auto" }}
+                                                    className="mt-4 p-4 border border-gray-200 rounded-lg"
+                                                >
+                                                    <h4 className="text-md font-medium mb-2">Add New Card</h4>
+                                                    <div className="space-y-2">
+                                                        <input
+                                                            type="text"
+                                                            name="type"
+                                                            value={newCard.type}
+                                                            onChange={handleNewCardChange}
+                                                            placeholder="Card Type (e.g., Visa)"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                        <input
+                                                            type="text"
+                                                            name="last4"
+                                                            value={newCard.last4}
+                                                            onChange={handleNewCardChange}
+                                                            placeholder="Last 4 digits"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                        <input
+                                                            type="text"
+                                                            name="expiry"
+                                                            value={newCard.expiry}
+                                                            onChange={handleNewCardChange}
+                                                            placeholder="Expiry (MM/YYYY)"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                    </div>
+                                                    <div className="flex gap-2 mt-4">
+                                                        <button onClick={addCard} className="px-4 py-2 bg-indigo-600 text-white rounded-lg">Save</button>
+                                                        <button onClick={() => setShowAddCard(false)} className="px-4 py-2 border border-gray-300 rounded-lg">Cancel</button>
+                                                    </div>
+                                                </motion.div>
+                                            )}
+                                            {editingCard && (
+                                                <motion.div 
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: "auto" }}
+                                                    className="mt-4 p-4 border border-indigo-200 rounded-lg bg-indigo-50"
+                                                >
+                                                    <h4 className="text-md font-medium mb-2">Edit Card</h4>
+                                                    <div className="space-y-2">
+                                                        <input
+                                                            type="text"
+                                                            name="type"
+                                                            value={editingCard.type}
+                                                            onChange={handleEditCardChange}
+                                                            placeholder="Card Type (e.g., Visa)"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                        <input
+                                                            type="text"
+                                                            name="last4"
+                                                            value={editingCard.last4}
+                                                            onChange={handleEditCardChange}
+                                                            placeholder="Last 4 digits"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                        <input
+                                                            type="text"
+                                                            name="expiry"
+                                                            value={editingCard.expiry}
+                                                            onChange={handleEditCardChange}
+                                                            placeholder="Expiry (MM/YYYY)"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                    </div>
+                                                    <div className="flex gap-2 mt-4">
+                                                        <button onClick={updateCard} className="px-4 py-2 bg-indigo-600 text-white rounded-lg">Update</button>
+                                                        <button onClick={() => setEditingCard(null)} className="px-4 py-2 border border-gray-300 rounded-lg">Cancel</button>
+                                                    </div>
+                                                </motion.div>
+                                            )}
+                                        </div>
 
-      {/* Account Information Section */}
-      <div className="border rounded-lg p-4">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-medium flex items-center gap-2">
-            <User size={18} /> Personal Information
-          </h3>
-          <button className="text-indigo-600 text-sm">Edit</button>
-        </div>
-        <div className="space-y-3">
-          <div>
-            <p className="text-sm text-gray-500">Full Name</p>
-            <p className="font-medium">John Doe</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Email</p>
-            <p className="font-medium">john.doe@example.com</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Phone Number</p>
-            <p className="font-medium">+971 50 123 4567</p>
-          </div>
-        </div>
-      </div>
+                                        {/* Personal Information Section */}
+                                        <div className="border rounded-lg p-4">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <h3 className="font-medium flex items-center gap-2">
+                                                    <User size={18} /> Personal Information
+                                                </h3>
+                                                {!isEditingPersonal ? (
+                                                    <button className="text-indigo-600 text-sm" onClick={startEditingPersonal}>Edit</button>
+                                                ) : (
+                                                    <div className="flex gap-2">
+                                                        <button className="text-indigo-600 text-sm" onClick={savePersonal}>Save</button>
+                                                        <button className="text-gray-600 text-sm" onClick={cancelPersonal}>Cancel</button>
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="space-y-3">
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Full Name</p>
+                                                    {isEditingPersonal ? (
+                                                        <input
+                                                            type="text"
+                                                            name="fullName"
+                                                            value={tempPersonalInfo.fullName}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                    ) : (
+                                                        <p className="font-medium">{personalInfo.fullName}</p>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Email</p>
+                                                    {isEditingPersonal ? (
+                                                        <input
+                                                            type="email"
+                                                            name="email"
+                                                            value={tempPersonalInfo.email}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                    ) : (
+                                                        <p className="font-medium">{personalInfo.email}</p>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Phone Number</p>
+                                                    {isEditingPersonal ? (
+                                                        <input
+                                                            type="text"
+                                                            name="phone"
+                                                            value={tempPersonalInfo.phone}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                    ) : (
+                                                        <p className="font-medium">{personalInfo.phone}</p>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
 
-      {/* My Documents Section */}
-      <div className="border rounded-lg p-4">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-medium flex items-center gap-2">
-            <FileText size={18} /> My Documents
-          </h3>
-          <button className="text-indigo-600 text-sm">Upload</button>
-        </div>
-        <div className="space-y-3">
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
-            <div>
-              <p className="font-medium">Passport.pdf</p>
-              <p className="text-sm text-gray-500">Uploaded 2 days ago</p>
-            </div>
-            <button className="text-indigo-600">
-              <Download size={16} />
-            </button>
-          </div>
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
-            <div>
-              <p className="font-medium">ID_Card.pdf</p>
-              <p className="text-sm text-gray-500">Uploaded 1 week ago</p>
-            </div>
-            <button className="text-indigo-600">
-              <Download size={16} />
-            </button>
-          </div>
-        </div>
-      </div>
+                                        {/* My Documents Section */}
+                                        <div className="border rounded-lg p-4">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <h3 className="font-medium flex items-center gap-2">
+                                                    <FileText size={18} /> My Documents
+                                                </h3>
+                                                <button className="text-indigo-600 text-sm" onClick={() => setShowAddDocument(true)}>Upload</button>
+                                            </div>
+                                            <div className="space-y-3">
+                                                {documents.map(doc => (
+                                                    <div key={doc.id} className="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                                        <div>
+                                                            <p className="font-medium">{doc.name}</p>
+                                                            <p className="text-sm text-gray-500">Uploaded {doc.uploaded}</p>
+                                                        </div>
+                                                        <div className="flex gap-2">
+                                                            <button className="text-indigo-600" onClick={() => startEditingDocument(doc)}>
+                                                                <Edit size={16} />
+                                                            </button>
+                                                            <button className="text-indigo-600">
+                                                                <Download size={16} />
+                                                            </button>
+                                                            <button className="text-red-600" onClick={() => deleteDocument(doc.id)}>
+                                                                <Trash2 size={16} />
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            {showAddDocument && (
+                                                <motion.div 
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: "auto" }}
+                                                    className="mt-4 p-4 border border-gray-200 rounded-lg"
+                                                >
+                                                    <h4 className="text-md font-medium mb-2">Add New Document</h4>
+                                                    <div className="space-y-2">
+                                                        <input
+                                                            type="text"
+                                                            name="name"
+                                                            value={newDocument.name}
+                                                            onChange={handleNewDocumentChange}
+                                                            placeholder="Document Name"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                    </div>
+                                                    <div className="flex gap-2 mt-4">
+                                                        <button onClick={addDocument} className="px-4 py-2 bg-indigo-600 text-white rounded-lg">Save</button>
+                                                        <button onClick={() => setShowAddDocument(false)} className="px-4 py-2 border border-gray-300 rounded-lg">Cancel</button>
+                                                    </div>
+                                                </motion.div>
+                                            )}
+                                            {editingDocument && (
+                                                <motion.div 
+                                                    initial={{ opacity: 0, height: 0 }}
+                                                    animate={{ opacity: 1, height: "auto" }}
+                                                    className="mt-4 p-4 border border-indigo-200 rounded-lg bg-indigo-50"
+                                                >
+                                                    <h4 className="text-md font-medium mb-2">Edit Document</h4>
+                                                    <div className="space-y-2">
+                                                        <input
+                                                            type="text"
+                                                            name="name"
+                                                            value={editingDocument.name}
+                                                            onChange={handleEditDocumentChange}
+                                                            placeholder="Document Name"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                        <input
+                                                            type="text"
+                                                            name="uploaded"
+                                                            value={editingDocument.uploaded}
+                                                            onChange={handleEditDocumentChange}
+                                                            placeholder="Uploaded Date"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                    </div>
+                                                    <div className="flex gap-2 mt-4">
+                                                        <button onClick={updateDocument} className="px-4 py-2 bg-indigo-600 text-white rounded-lg">Update</button>
+                                                        <button onClick={() => setEditingDocument(null)} className="px-4 py-2 border border-gray-300 rounded-lg">Cancel</button>
+                                                    </div>
+                                                </motion.div>
+                                            )}
+                                        </div>
 
-      {/* My Driving License Section */}
-      <div className="border rounded-lg p-4">
-        <div className="flex items-center justify-between mb-4">
-          <h3 className="font-medium flex items-center gap-2">
-            <Key size={18} /> My Driving License
-          </h3>
-          <button className="text-indigo-600 text-sm">Update</button>
-        </div>
-        <div className="space-y-4">
-          <div>
-            <p className="text-sm text-gray-500">License Number</p>
-            <p className="font-medium">DL1234567890</p>
-          </div>
-          <div>
-            <p className="text-sm text-gray-500">Expiry Date</p>
-            <p className="font-medium">15/08/2026</p>
-          </div>
-          <div className="p-3 bg-gray-50 rounded">
-            <p className="text-sm text-gray-500 mb-2">License Copy</p>
-            <button className="text-indigo-600 flex items-center gap-1">
-              <Download size={16} />
-              <span>Download</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </motion.div>
-)}
+                                        {/* My Driving License Section */}
+                                        <div className="border rounded-lg p-4">
+                                            <div className="flex items-center justify-between mb-4">
+                                                <h3 className="font-medium flex items-center gap-2">
+                                                    <Key size={18} /> My Driving License
+                                                </h3>
+                                                {!isEditingLicense ? (
+                                                    <button className="text-indigo-600 text-sm" onClick={startEditingLicense}>Update</button>
+                                                ) : (
+                                                    <div className="flex gap-2">
+                                                        <button className="text-indigo-600 text-sm" onClick={saveLicense}>Save</button>
+                                                        <button className="text-gray-600 text-sm" onClick={cancelLicense}>Cancel</button>
+                                                    </div>
+                                                )}
+                                            </div>
+                                            <div className="space-y-4">
+                                                <div>
+                                                    <p className="text-sm text-gray-500">License Number</p>
+                                                    {isEditingLicense ? (
+                                                        <input
+                                                            type="text"
+                                                            name="licenseNumber"
+                                                            value={tempLicenseInfo.licenseNumber}
+                                                            onChange={handleLicenseChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                    ) : (
+                                                        <p className="font-medium">{licenseInfo.licenseNumber}</p>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Expiry Date</p>
+                                                    {isEditingLicense ? (
+                                                        <input
+                                                            type="text"
+                                                            name="expiryDate"
+                                                            value={tempLicenseInfo.expiryDate}
+                                                            onChange={handleLicenseChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                    ) : (
+                                                        <p className="font-medium">{licenseInfo.expiryDate}</p>
+                                                    )}
+                                                </div>
+                                                <div className="p-3 bg-gray-50 rounded">
+                                                    <p className="text-sm text-gray-500 mb-2">License Copy</p>
+                                                    {isEditingLicense ? (
+                                                        <input
+                                                            type="text"
+                                                            name="copyName"
+                                                            value={tempLicenseInfo.copyName}
+                                                            onChange={handleLicenseChange}
+                                                            placeholder="License File Name"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                    ) : (
+                                                        <button className="text-indigo-600 flex items-center gap-1">
+                                                            <Download size={16} />
+                                                            <span>Download {licenseInfo.copyName}</span>
+                                                        </button>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            )}
                             {/* Drivers Tab */}
                             {activeTab === "drivers" && (
                                 <motion.div
@@ -561,8 +904,8 @@ export default function DriversPage() {
                                                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{driver.email}</td>
                                                         <td className="px-6 py-4 whitespace-nowrap">
                                                             <span className={`px-2 py-1 text-xs font-semibold rounded-full ${driver.status === "Active" ? "bg-green-100 text-green-800" :
-                                                                    driver.status === "Inactive" ? "bg-red-100 text-red-800" :
-                                                                        "bg-yellow-100 text-yellow-800"
+                                                                driver.status === "Inactive" ? "bg-red-100 text-red-800" :
+                                                                    "bg-yellow-100 text-yellow-800"
                                                                 }`}>
                                                                 {driver.status}
                                                             </span>
@@ -639,20 +982,6 @@ export default function DriversPage() {
                                         </table>
                                     </div>
 
-                                    {/* <div className="mt-8 p-6 bg-gray-50 rounded-lg">
-                                        <h3 className="text-lg font-semibold mb-4">Terms & Conditions Overview</h3>
-                                        <div className="prose prose-sm max-w-none">
-                                            <p>By using our services, you agree to the following terms and conditions:</p>
-                                            <ul className="list-disc pl-5 mt-2">
-                                                <li>All drivers must possess a valid driving license</li>
-                                                <li>Vehicles must be returned in the same condition as rented</li>
-                                                <li>Any traffic violations during rental period are responsibility of the renter</li>
-                                                <li>Fuel should be returned at the same level as provided</li>
-                                                <li>A security deposit may be required for certain vehicle categories</li>
-                                            </ul>
-                                            <p className="mt-4">For complete terms and conditions, please click the link above.</p>
-                                        </div>
-                                    </div> */}
                                 </motion.div>
                             )}
 
@@ -697,20 +1026,6 @@ export default function DriversPage() {
                                         </table>
                                     </div>
 
-                                    {/* <div className="mt-8 p-6 bg-gray-50 rounded-lg">
-                                        <h3 className="text-lg font-semibold mb-4">Suppliers Terms & Conditions Overview</h3>
-                                        <div className="prose prose-sm max-w-none">
-                                            <p>By partnering with our suppliers, they agree to the following terms:</p>
-                                            <ul className="list-disc pl-5 mt-2">
-                                                <li>Provide vehicles in good condition</li>
-                                                <li>Accurate pricing and availability</li>
-                                                <li>Timely response to bookings</li>
-                                                <li>Compliance with local regulations</li>
-                                                <li>Insurance coverage for vehicles</li>
-                                            </ul>
-                                            <p className="mt-4">For complete terms for each supplier, please click the links above.</p>
-                                        </div>
-                                    </div> */}
                                 </motion.div>
                             )}
                         </AnimatePresence>
