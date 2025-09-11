@@ -151,7 +151,7 @@ const SalikMain = () => {
     <div className="flex flex-col min-h-screen md:pl-[72px]">
                     <div className="flex flex-1 bg-gradient-to-br from-gray-50 to-gray-100">
                         <main className="flex-1 px-1 py-2 sm:p-6 md:p-8 overflow-auto min-w-[280px]">
-                            <header className="flex items-center justify-between mb-6 bg-white content-center p-4 rounded-xl shadow-sm relative">
+                            <header className="flex items-center justify-between mb-6 bg-white content-center p-4 rounded-xl relative">
                                 <div className="flex items-center relative max-sm:left-[-10px] w-full justify-between">
                                     <div className="flex items-center">
                                         <h1 className="text-xl dashboard-text sm:text-2xl font-bold text-gray-800">Salik Transactions</h1>
@@ -187,7 +187,7 @@ const SalikMain = () => {
                                                         initial={{ opacity: 0, scale: 0.95 }}
                                                         animate={{ opacity: 1, scale: 1 }}
                                                         exit={{ opacity: 0, scale: 0.95 }}
-                                                        className="absolute right-0 mt-2 w-44 sm:w-48 bg-white shadow-lg rounded-xl overflow-hidden z-10"
+                                                        className="absolute right-0 mt-2 w-44 sm:w-48 bg-white rounded-xl overflow-hidden z-10"
                                                     >
                                                         <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 border-b">
                                                             <User size={16} className="text-gray-600" /> My Profile
@@ -209,7 +209,7 @@ const SalikMain = () => {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.1 }}
-                                    className="bg-white rounded-2xl p-6 shadow-lg border-l-4 border-indigo-500"
+                                    className="bg-white rounded-2xl p-6 border-l-4 border-indigo-500"
                                 >
                                     <div className="flex items-center justify-between">
                                         <div>
@@ -226,7 +226,7 @@ const SalikMain = () => {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.2 }}
-                                    className="bg-white rounded-2xl p-6 shadow-lg border-l-4 border-green-500"
+                                    className="bg-white rounded-2xl p-6 border-l-4 border-green-500"
                                 >
                                     <div className="flex items-center justify-between">
                                         <div>
@@ -243,7 +243,7 @@ const SalikMain = () => {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.3 }}
-                                    className="bg-white rounded-2xl p-6 shadow-lg border-l-4 border-blue-500"
+                                    className="bg-white rounded-2xl p-6 border-l-4 border-blue-500"
                                 >
                                     <div className="flex items-center justify-between">
                                         <div>
@@ -260,7 +260,7 @@ const SalikMain = () => {
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.4 }}
-                                    className="bg-white rounded-2xl p-6 shadow-lg border-l-4 border-purple-500"
+                                    className="bg-white rounded-2xl p-6 border-l-4 border-purple-500"
                                 >
                                     <div className="flex items-center justify-between">
                                         <div>
@@ -275,7 +275,7 @@ const SalikMain = () => {
                             </div>
     
                             {/* Vehicle Summary */}
-                            <div className="bg-white rounded-2xl p-6 shadow-lg mb-6">
+                            <div className="bg-white rounded-2xl p-6 mb-6">
                                 <h2 className="text-lg font-semibold text-gray-800 mb-4">Transactions by Vehicle</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                                     {Object.entries(transactionsByPlate).slice(0, 4).map(([plate, data], index) => (
@@ -308,7 +308,7 @@ const SalikMain = () => {
                             </div>
     
                             {/* Filters and Search */}
-                            <div className="bg-white rounded-2xl p-4 shadow-lg mb-6">
+                            <div className="bg-white rounded-2xl p-4 mb-6">
                                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                                     <div className="relative flex-1">
                                         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
@@ -356,7 +356,7 @@ const SalikMain = () => {
                             </div>
     
                             {/* Transactions Table */}
-                            <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+                            <div className="bg-white rounded-2xl overflow-hidden">
                                 <div className="overflow-x-auto">
                                     <table className="w-full">
                                         <thead className="bg-gray-50">

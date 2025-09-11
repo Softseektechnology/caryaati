@@ -8,6 +8,7 @@ import Navbar from "@/components/nevegation-header/Navbar";
 import Sidebar from "@/components/multiplepages/Sidebar-multiplelinks";
 import UserDropdown from "@/components/customer-dashboard/user-dashboard"; // Adjust path as needed
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 const IndexMain = () => {
@@ -20,11 +21,14 @@ const IndexMain = () => {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [mobileWidgetsOpen, setMobileWidgetsOpen] = useState(false);
 
+
+    let router = useRouter();
+
     const cards = [
-        { title: "Booking", subtitle: "Go to Booking", icon: <Calendar size={28} />, color: "from-blue-500 to-indigo-500" },
-        { title: "Fines", subtitle: "Go to Fines", icon: <DollarSign size={28} />, color: "from-rose-500 to-red-500" },
-        { title: "Salik", subtitle: "Go to Salik", icon: <Car size={28} />, color: "from-yellow-400 to-orange-500" },
-        { title: "Profile", subtitle: "Go to Profile", icon: <User size={28} />, color: "from-purple-500 to-pink-500" },
+        { title: "Booking", subtitle: "Go to Booking", icon: <Calendar size={28} />, color: "from-blue-500 to-indigo-500", link: '/customer-dashboard/booking' },
+        { title: "Fines", subtitle: "Go to Fines", icon: <DollarSign size={28} />, color: "from-rose-500 to-red-500", link: '/customer-dashboard/fines' },
+        { title: "Salik", subtitle: "Go to Salik", icon: <Car size={28} />, color: "from-yellow-400 to-orange-500", link: '/customer-dashboard/salik' },
+        { title: "Profile", subtitle: "Go to Profile", icon: <User size={28} />, color: "from-purple-500 to-pink-500", link: '/customer-dashboard/profile' },
     ];
 
     const wishlistItems = [
@@ -47,7 +51,7 @@ const IndexMain = () => {
             <div className="flex flex-1 bg-gradient-to-br from-gray-50 to-gray-100">
                 {/* Main Content (unchanged) */}
                 <main className="flex-1 px-1 py-2 sm:p-6 md:p-8 overflow-auto min-w-[280px]">
-                    <header className="flex items-center justify-between mb-6 bg-white content-center p-4 rounded-xl shadow-sm relative">
+                    <header className="flex items-center justify-between mb-6 bg-white content-center p-4 rounded-xl relative">
                         <div className="flex items-center relative max-sm:left-[-10px] w-full justify-between">
                             <div className="flex items-center">
                                 <h1 className="text-xl dashboard-text sm:text-2xl font-bold text-gray-800">Dashboard</h1>
@@ -75,7 +79,7 @@ const IndexMain = () => {
                                                 initial={{ opacity: 0, scale: 0.95 }}
                                                 animate={{ opacity: 1, scale: 1 }}
                                                 exit={{ opacity: 0, scale: 0.95 }}
-                                                className="absolute right-0 mt-2 w-56 sm:w-64 bg-white shadow-lg rounded-xl overflow-hidden z-10"
+                                                className="absolute right-0 mt-2 w-56 sm:w-64 bg-white rounded-xl overflow-hidden z-10"
                                             >
                                                 <div className="p-4 border-b bg-gray-50">
                                                     <h3 className="font-semibold text-gray-800">Wishlist</h3>
@@ -100,7 +104,7 @@ const IndexMain = () => {
                                     </AnimatePresence>
                                 </div>
                                 <div className="relative">
-                                    <button
+                                    {/* <button
                                         onClick={() => {
                                             setProfileDropdownOpen(!profileDropdownOpen);
                                             setWishlistDropdownOpen(false);
@@ -110,14 +114,14 @@ const IndexMain = () => {
                                     >
                                         <User size={28} className="text-indigo-500" />
                                         <span className="font-medium hidden sm:inline text-gray-800">Maaz Aziz</span>
-                                    </button>
+                                    </button> */}
                                     <AnimatePresence>
                                         {profileDropdownOpen && (
                                             <motion.div
                                                 initial={{ opacity: 0, scale: 0.95 }}
                                                 animate={{ opacity: 1, scale: 1 }}
                                                 exit={{ opacity: 0, scale: 0.95 }}
-                                                className="absolute right-0 mt-2 w-44 sm:w-48 bg-white shadow-lg rounded-xl overflow-hidden z-10"
+                                                className="absolute right-0 mt-2 w-44 sm:w-48 bg-white rounded-xl overflow-hidden z-10"
                                             >
                                                 <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 border-b">
                                                     <User size={16} className="text-gray-600" /> My Profile
@@ -139,7 +143,8 @@ const IndexMain = () => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: index * 0.1 }}
-                                className={`rounded-2xl p-4 sm:p-6 shadow-lg bg-gradient-to-r ${card.color} text-white hover:scale-105 transition-transform duration-300 cursor-pointer`}
+                                className={`rounded-2xl p-4 sm:p-6 bg-gradient-to-r ${card.color} text-white hover:scale-105 transition-transform duration-300 cursor-pointer`}
+                                onClick={() => router.push(card.link)}
                             >
                                 <div className="flex items-center justify-between mb-3 sm:mb-4">
                                     <span className="text-3xl sm:text-4xl opacity-90">{card.icon}</span>

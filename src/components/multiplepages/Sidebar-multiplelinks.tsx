@@ -14,6 +14,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
   const [Dashboard, setDashboard] = useState(isDashboard);
   const [isMobile, setIsMobile] = useState(false);
   const [carRentalDropdownOpen, setCarRentalDropdownOpen] = useState(false);
+  const [carsForRentDropdownOpen, setCarsForRentDropdownOpen] = useState(false);
   const [carRentalFlightDropdownOpen, setCarRentalFlightDropdownOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -50,8 +51,9 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
 
   const handleMouseLeave = () => {
     if (!isMobile && !isOpen) setIsExpanded(false);
-    setCarRentalDropdownOpen(false)
-    setCarRentalFlightDropdownOpen(false)
+    setCarRentalDropdownOpen(false);
+    setCarsForRentDropdownOpen(false);
+    setCarRentalFlightDropdownOpen(false);
   };
 
   const handleToggle = () => {
@@ -69,6 +71,9 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
 
   const toggleCarRentalDropdown = () => {
     setCarRentalDropdownOpen(!carRentalDropdownOpen);
+  };
+  const toggleCarsForRentDropdown = () => {
+    setCarsForRentDropdownOpen(!carsForRentDropdownOpen);
   };
   const toggleCarRentalFlightDropdown = () => {
     setCarRentalFlightDropdownOpen(!carRentalFlightDropdownOpen);
@@ -94,7 +99,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
               initial={{ width: isExpanded ? 280 : 72 }}
               animate={{ width: isExpanded ? 280 : 72 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="flex z-[999] fixed flex-col bg-white text-gray-800 shadow-2xl border-r border-gray-200/30 overflow-y-hidden top-[60px] sm:top-[64px] h-[calc(100vh-60px)] sm:h-[calc(100vh-70px)]"
+              className="flex z-[999] fixed flex-col bg-white text-gray-800 border-r border-gray-200/30 overflow-y-hidden top-[60px] sm:top-[64px] h-[calc(100vh-60px)] sm:h-[calc(100vh-70px)]"
               role="navigation"
               aria-label="Dashboard sidebar"
               onMouseEnter={handleMouseEnter}
@@ -130,60 +135,6 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                 </motion.div>
               </div> */}
 
-              {/* User Profile Section */}
-              <div className="relative z-10 py-1 px-4 border-b border-gray-200/30">
-                <div className="flex items-center gap-3">
-                  <div className="relative">
-                    <div className="w-10 h-10 max-sm:w-6 max-sm:h-6 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
-                      MA
-                    </div>
-                    <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-white" />
-                  </div>
-                  <AnimatePresence>
-                    {isExpanded && (
-                      <motion.div
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -10 }}
-                        className="flex-1"
-                      >
-                        <p className="font-semibold translate-y-3 max-sm:translate-y-5 text-gray-800">Maaz Aziz</p>
-                        <p className="text-xs text-gray-500">Premium User</p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                  {isExpanded && (
-                    <button
-                      onClick={() => {
-                        setProfileDropdownOpen(!profileDropdownOpen);
-                        setWidgetsDropdownOpen(false);
-                        setWishlistDropdownOpen(false);
-                      }}
-                      className="ml-auto p-1.5 rounded-full hover:bg-gray-100 transition-colors"
-                      aria-label="User menu"
-                    >
-                      <User size={20} className="text-gray-600" />
-                    </button>
-                  )}
-                </div>
-                {/* <AnimatePresence>
-                  {profileDropdownOpen && isExpanded && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                      animate={{ opacity: 1, scale: 1, y: 0 }}
-                      exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                      className="absolute left-4 right-4 mt-2 bg-white shadow-lg rounded-xl overflow-hidden z-20 border border-gray-200/50"
-                    >
-                      <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 border-b text-gray-700 transition-colors">
-                        <User size={16} className="text-gray-600" /> My Profile
-                      </button>
-                      <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 text-red-600 transition-colors">
-                        <LogOut size={16} /> Log Out
-                      </button>
-                    </motion.div>
-                  )}
-                </AnimatePresence> */}
-              </div>
 
               {/* Navigation */}
               <nav className="relative z-10 flex-1 py-2 px-4 overflow-auto">
@@ -300,7 +251,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
               animate={{ x: 0, opacity: 1 }}
               exit={{ x: "-100%", opacity: 0 }}
               transition={{ duration: 0.3, ease: "easeOut" }}
-              className="fixed top-0 left-0 w-64 bg-white shadow-2xl z-50 h-screen overflow-y-hidden"
+              className="fixed top-0 left-0 w-64 bg-white z-50 h-screen overflow-y-hidden"
             >
               <div className="absolute inset-0 pointer-events-none wave-bg" />
               <nav className="relative z-10 flex flex-col h-full">
@@ -488,6 +439,9 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
               {carRentalFlightDropdownOpen && (
                 <ul className={styles.submenu}>
                   <li>
+                    <Link href="/car-rental-airport/" onClick={handleClose}>Airport car Rental</Link>
+                  </li>
+                  <li>
                     <Link href="/car-rental-airport/dubai-international-airport" onClick={handleClose}>Dubai-International-Airport</Link>
                   </li>
                   <li>
@@ -525,6 +479,9 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
               {carRentalDropdownOpen && (
                 <ul className={styles.submenu}>
                   <li>
+                    <Link href="/rent-a-car" onClick={handleClose}>Rent a Car</Link>
+                  </li>
+                  <li>
                     <Link href="/rent-a-car/dubai" onClick={handleClose}>Dubai</Link>
                   </li>
                   <li>
@@ -544,6 +501,49 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                   </li>
                   <li>
                     <Link href="/rent-a-car/al-ain" onClick={handleClose}>Al Ain</Link>
+                  </li>
+                </ul>
+              )}
+              </li>
+              <li className='transition-all duration-200'>
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent page jump
+                  setCarsForRentDropdownOpen(!carsForRentDropdownOpen);
+                }}
+              >
+                <i className="bi bi-car-front-fill"></i>
+                <span className={styles.menuText}>Special Car Offers</span>
+              </a>
+              {carsForRentDropdownOpen && (
+                <ul className={styles.submenu}>
+                  <li>
+                    <Link href="/rent-a-car/special-car-offers" onClick={handleClose}>Special Car Offers</Link>
+                  </li>
+                  <li>
+                    <Link href="/special-car/sports" onClick={handleClose}>Sports Cars on Rent</Link>
+                  </li>
+                  <li>
+                    <Link href="/special-car/standard" onClick={handleClose}>Standard Cars on Rent</Link>
+                  </li>
+                  <li>
+                    <Link href="/special-car/mini" onClick={handleClose}>Mini Cars on Rent</Link>
+                  </li>
+                  <li>
+                    <Link href="/special-car/mid-size" onClick={handleClose}>Mid-Size Cars on Rent</Link>
+                  </li>
+                  <li>
+                    <Link href="/special-car/luxury" onClick={handleClose}>Luxury Cars on Rent</Link>
+                  </li>
+                  <li>
+                    <Link href="/special-car/premium" onClick={handleClose}>Premium Cars on Rent</Link>
+                  </li>
+                  <li>
+                    <Link href="/special-car/economy" onClick={handleClose}>Economy Cars on Rent</Link>
+                  </li>
+                  <li>
+                    <Link href="/special-car/monthly" onClick={handleClose}>Monthly Car on Rent</Link>
                   </li>
                 </ul>
               )}

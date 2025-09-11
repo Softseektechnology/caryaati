@@ -52,7 +52,7 @@ export default function Home() {
             <div className={styles.componentWrapper}>
               <Carcategory />
             </div>
-            <div className={styles.componentWrapper}>
+            <div className={`${styles.componentWrapper} xl:h-[300px] xl:max-h-[300px]`}>
               <SearchEngine />
             </div>
           </div>
@@ -61,7 +61,7 @@ export default function Home() {
           <video src="/videos/bg-video.mp4" autoPlay muted loop preload='auto' className='max-xl:h-[1600px] max-lg:hidden'></video>
         </div>
         {/* Section without background color */}
-        <div className="container" style={{ marginTop: '50px' }}>
+        <div className="container relative" style={{ top: '50px' }}>
           <Subcategory /> {/* Includes the heading */}
         </div>
       </main>

@@ -143,9 +143,16 @@ export default function Navbar({ onMenuToggle, onUserToggle, isHome }: NavbarPro
 
           <div className="ms-auto">
               {localStorage.getItem('isLoggedIn') === 'true' ? (
+                <div className='flex items-center'>
+                  <div className='block leading-[20px] mr-3 text-right'>
+                  <div className='h-2 w-2 rounded-full absolute right-[10px] bg-green-500'></div>
+                    <div className='text-[14px]'>Maaz Aziz</div>
+                    <div className='text-[12px] font-light'>Premium user</div>
+                  </div>
             <button className="btn" onClick={onUserToggle}>
                 <Image src="/images/user-image.png" alt="User" width={30} height={30} />
                 </button>
+                </div>
               ) : (
                 <Link href="/login" className="no-underline text-red-600 font-medium" style={{ textDecoration: 'none' }}>
                   <div className="flex content-center no-underline text-red-600 font-medium items-center"><DoorOpen /> Login</div>
