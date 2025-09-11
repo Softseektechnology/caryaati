@@ -30,13 +30,13 @@ export default function RentACarListings() {
   const pickUpDate = searchParams.get('pickUpDate') || 'Not specified';
   const returnDate = searchParams.get('returnDate') || 'Not specified';
   const carType = searchParams.get('carType') || 'Not specified';
-
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [filters, setFilters] = useState({
     priceRange: 5000,
     carType: 'Any',
   });
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);

@@ -99,7 +99,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
               initial={{ width: isExpanded ? 280 : 72 }}
               animate={{ width: isExpanded ? 280 : 72 }}
               transition={{ duration: 0.4, ease: "easeOut" }}
-              className="flex z-[999] fixed flex-col bg-white text-gray-800 border-r border-gray-200/30 overflow-y-hidden top-[60px] sm:top-[64px] h-[calc(100vh-60px)] sm:h-[calc(100vh-70px)]"
+              className="flex z-[999] fixed flex-col bg-white text-gray-800 border-r border-gray-200/30 overflow-y-hidden top-[60px] sm:top-[63px] h-[calc(100vh-60px)] sm:h-[calc(100vh-70px)]"
               role="navigation"
               aria-label="Dashboard sidebar"
               onMouseEnter={handleMouseEnter}
@@ -190,7 +190,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    className="ml-8 space-y-1 border-l-2 border-indigo-200/50 pl-3"
+                    className="ml-3 space-y-1 border-l-2 border-indigo-200/50 pl-1"
                   >
                     {wishlistItems.map(item => (
                       <button
@@ -220,7 +220,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    className="ml-8 space-y-1 border-l-2 border-indigo-200/50 pl-3"
+                    className="ml-3 space-y-1 border-l-2 border-indigo-200/50 pl-1"
                   >
                     {widgetItems.map(item => (
                       <button
@@ -255,67 +255,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
             >
               <div className="absolute inset-0 pointer-events-none wave-bg" />
               <nav className="relative z-10 flex flex-col h-full">
-                {/* Header: Logo and Close Button */}
-                <div className="p-4 flex items-center justify-between border-b border-gray-200/30">
-                  <div className="flex items-center gap-2">
-                    <motion.span
-                      animate={{ rotate: [0, 360] }}
-                      transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                      className="text-2xl"
-                    >
-                      🚗
-                    </motion.span>
-                    <span className="text-xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
-                      Engine
-                    </span>
-                  </div>
-                  <button
-                    onClick={handleClose}
-                    className="p-2 rounded-full hover:bg-gray-100 transition-all duration-300 text-gray-600 hover:text-indigo-600"
-                    aria-label="Close menu"
-                  >
-                    <Menu size={24} />
-                  </button>
-                </div>
-                {/* User Profile */}
-                <div className="p-4 border-b border-gray-200/30">
-                  <div className="flex items-center gap-3">
-                    <div className="relative">
-                      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center text-white font-bold text-lg shadow-md">
-                        MA
-                      </div>
-                      <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-white" />
-                    </div>
-                    <div className="flex-1">
-                      <p className="font-semibold text-gray-800">Maaz Aziz</p>
-                      <p className="text-xs text-gray-500">Premium User</p>
-                    </div>
-                    <button
-                      onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                      className="p-1.5 rounded-full hover:bg-gray-100 transition-colors"
-                      aria-label="User menu"
-                    >
-                      <User size={20} className="text-gray-600" />
-                    </button>
-                  </div>
-                  <AnimatePresence>
-                    {profileDropdownOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                        className="mt-2 bg-white shadow-lg rounded-xl overflow-hidden border border-gray-200/50"
-                      >
-                        <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 border-b text-gray-700 transition-colors">
-                          <User size={16} className="text-gray-600" /> My Profile
-                        </button>
-                        <button className="w-full px-4 py-3 text-sm hover:bg-gray-50 flex items-center gap-2 text-red-600 transition-colors">
-                          <LogOut size={16} /> Log Out
-                        </button>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+
                 {/* Navigation */}
                 <div className="flex-1 p-4 space-y-2 overflow-y-hidden">
                   <NavItem

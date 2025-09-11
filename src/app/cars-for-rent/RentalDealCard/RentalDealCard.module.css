@@ -1180,6 +1180,11 @@ input:checked + .sliderBox:before {
   }
 
 }
+@media (max-width: 379px) {
+  .middle{
+    margin-bottom: 130px;
+  }
+}
 @media (max-width: 386px) {
   .slider{
     left: -3%;
@@ -1198,6 +1203,9 @@ input:checked + .sliderBox:before {
 @media (max-width: 339px) {
   .middle {
     /* margin-bottom: 170px; */
+  }
+  .carCard{
+    height: 1095px;
   }
   .slider{
     left: -5%;

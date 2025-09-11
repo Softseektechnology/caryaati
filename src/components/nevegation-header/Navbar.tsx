@@ -143,7 +143,7 @@ export default function Navbar({ onMenuToggle, onUserToggle, isHome }: NavbarPro
 
           <div className="ms-auto">
               {localStorage.getItem('isLoggedIn') === 'true' ? (
-                <div className='flex items-center'>
+                <div className='flex items-center max-sm:hidden'>
                   <div className='block leading-[20px] mr-3 text-right'>
                   <div className='h-2 w-2 rounded-full absolute right-[10px] bg-green-500'></div>
                     <div className='text-[14px]'>Maaz Aziz</div>

@@ -1,44 +1,65 @@
-'use client';
+'use client'
 
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
-import { Row, Col, Button, Form, Alert } from 'react-bootstrap';
-import Navbar from '../../components/nevegation-header/Navbar';
-import Footer from '../../components/foorter/Footer';
-import UserDropdown from '../../components/customer-dashboard/user-dashboard';
-import Sidebar from '../../components/multiplepages/Sidebar-multiplelinks';
-import CustomCheckboxDropdown from '../cars-for-rent/listing_filter/listing_filters';
-import styles from '../../../public/styles/Home.module.css';
-import RentalLayout from '../cars-for-rent/RentalDealCard/RentalDealCard';
-import ResultsSortBar from '../cars-for-rent/ResultsSortBar/ResultsSortBar';
-import PriceAnalysisNotification from '../cars-for-rent/PriceAnalysisNotification/Price';
-import Trackprice from '../cars-for-rent/PriceAnalysisNotification/Trackprices';
+import Navbar from '@/components/nevegation-header/Navbar';
+import Sidebar from '@/components/multiplepages/Sidebar-multiplelinks';
+import Footer from '@/components/foorter/Footer';
+import Link from 'next/link';
+import React, { useState, useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import './airport.css';
+import UserDropdown from '@/components/customer-dashboard/user-dashboard';
 
+const airports = [
+  {
+    name: "Dubai International Airport",
+    slug: "dubai-international-airport",
+    code: "DXB",
+    description: "The world's busiest airport by international passenger traffic.",
+    image: "/images/dubai.jpg" // Replace with actual image path
+  },
+  {
+    name: "Al Maktoum International Airport",
+    slug: "al-maktoum-international-airport",
+    code: "DWC",
+    description: "Dubai's second international airport, set to become one of the largest.",
+    image: "/images/al-makhtoum.jpg"
+  },
+  {
+    name: "Abu Dhabi International Airport",
+    slug: "abu-dhabi-international-airport",
+    code: "AUH",
+    description: "The main international airport serving Abu Dhabi.",
+    image: "/images/abu-dhabi.jpg"
+  },
+  {
+    name: "Sharjah International Airport",
+    slug: "sharjah-international-airport",
+    code: "SHJ",
+    description: "A major cargo and passenger hub in the UAE.",
+    image: "/images/sharjah.jpg"
+  },
+  {
+    name: "Ras Al Khaimah International Airport",
+    slug: "ras-al-khaimah-international-airport",
+    code: "RKT",
+    description: "Serving the northern emirate of Ras Al Khaimah.",
+    image: "/images/ras-al-khaimah.jpg"
+  },
+  {
+    name: "Fujairah International Airport",
+    slug: "fujairah-international-airport",
+    code: "FJR",
+    description: "Located on the east coast of the UAE.",
+    image: "/images/fujairah.jpg"
+  }
+];
 
-// Define the Car interface (kept for potential future use)
-interface Car {
-  name: string;
-  type: string;
-  image: string;
-  charges: { [key: string]: number };
-  features: { icon: string; label: string }[];
-  providerImage: string;
-  location: { lat: number; lng: number };
-}
-
-export default function RentACarListings() {
-  const searchParams = useSearchParams();
-  const location = searchParams.get('location') || 'Dubai';
-  const pickUpDate = searchParams.get('pickUpDate') || 'Not specified';
-  const returnDate = searchParams.get('returnDate') || 'Not specified';
-  const carType = searchParams.get('carType') || 'Not specified';
-
+const AirportCarRentalPage = () => {
+  
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
-  const [filters, setFilters] = useState({
-    priceRange: 5000,
-    carType: 'Any',
-  });
+  
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -49,51 +70,59 @@ export default function RentACarListings() {
     setIsUserDropdownOpen(!isUserDropdownOpen);
     if (isSidebarOpen) setIsSidebarOpen(false);
   };
+  useEffect(() => {
+    AOS.init({ duration: 800, once: true });
+  }, []);
 
-  // Handle filter changes
-  const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFilters((prev) => ({
-      ...prev,
-      [name]: name === 'priceRange' ? parseInt(value) : value,
-    }));
-  };
 
-  // Apply filters (now a no-op since cards are removed)
-  const applyFilters = (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSidebarClose = () => {
+    setIsSidebarOpen(false);
   };
+  
 
   return (
-    <div className={styles.container}>
-      <Navbar onMenuToggle={toggleSidebar} isHome={false} onUserToggle={toggleUserDropdown} />
-      <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
-      <UserDropdown isOpen={isUserDropdownOpen} />
+    <div className='min-h-screen'>
+     <Navbar onMenuToggle={toggleSidebar} isHome={false} onUserToggle={toggleUserDropdown} />
+           <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
+           <UserDropdown isOpen={isUserDropdownOpen} />
+     
+      <main className="airport-main-container min-h-screen">
+        {/* Hero Section */}
+        <section className="hero-section" data-aos="fade-in">
+          <div className="hero-overlay">
+            <h1 className="hero-title">Airport Car Rental</h1>
+            <p className="hero-subtitle">Convenient car rentals at major UAE airports. Start your journey seamlessly!</p>
+            <Link href="/rent-a-car" className="hero-cta">Browse All Cars</Link>
+          </div>
+        </section>
 
-      <main style={{ flex: 1, padding: '2rem' }}>
-              <Row>
-                <div className='relative z-[998] bg-white'>
-                <div className='fixed top-[70px] py-2 z-[998] bg-white'>
-                  <div className='absolute z-[998]'>
-                <CustomCheckboxDropdown />
-                  </div>
+        {/* Airports List Section */}
+        <section className="airports-section" data-aos="fade-up" data-aos-delay="200">
+          <div className="container">
+            <h2 className="section-title">Available Airports</h2>
+            <p className="section-description">Choose from our partnered airports across the UAE for hassle-free car rentals.</p>
+            <div className="airports-grid">
+              {airports.map((airport, index) => (
+                <div key={index} className="airport-card" data-aos="zoom-in" data-aos-delay={index * 100}>
+                  <img src={airport.image} alt={airport.name} className="airport-image" />
+                  <div className="airport-content">
+                    <h3 className="airport-name">{airport.name}</h3>
+                    <span className="airport-code">{airport.code}</span>
+                    <p className="airport-description">{airport.description}</p>
+                    <Link href={`/car-rental-airport/${airport.slug}`} className="airport-button">
+                      Rent a Car Here
+                    </Link>
                   </div>
                 </div>
-                <div className='fixed top-[60px] py-[40px] z-[995] bg-white right-0 left-0'> </div>
-                <div className='relative top-[40px] max-[725px]:ml-0 max-xl:justify-center max-xl:justify-items-center'>
-                {/* Add the ResultsSortBar component below the filter bar */}
-                            {/* <ResultsSortBar resultCount={375} defaultSort="Our recommendation" /> */}
-                       {/* Add the PriceAnalysisNotification component below the ResultsSortBar */}
-                {/* <PriceAnalysisNotification /> */}
-                 {/* Add the trackprice component below the ResultsSortBar */}
-                 {/* <Trackprice /> */}
-                <RentalLayout />
-                </div>
-               
-              </Row>
-            </main>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
 
       <Footer />
     </div>
   );
-}
+};
+
+export default AirportCarRentalPage;

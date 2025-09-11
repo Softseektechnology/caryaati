@@ -326,25 +326,29 @@ const ProfileMain = () => {
                                     <div className="flex max-sm:flex-col flex-wrap gap-2">
                                         <button
                                             onClick={() => setActiveTab("accountInfo")}
-                                            className={`px-4 py-2 rounded-lg transition ${activeTab === "accountInfo" ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'}`}
+                                            className={`px-4 py-2 transition ${activeTab === "accountInfo" ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'}`}
+                                            style={{ borderRadius: '0.5rem' }}
                                         >
                                             Account Information
                                         </button>
                                         <button
                                             onClick={() => setActiveTab("drivers")}
                                             className={`px-4 py-2 rounded-lg transition ${activeTab === "drivers" ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'}`}
+                                            style={{ borderRadius: '0.5rem' }}
                                         >
                                             My Drivers
                                         </button>
                                         <button
                                             onClick={() => setActiveTab("companyTerms")}
                                             className={`px-4 py-2 rounded-lg transition ${activeTab === "companyTerms" ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'}`}
+                                            style={{ borderRadius: '0.5rem' }}
                                         >
                                             Company Terms
                                         </button>
                                         <button
                                             onClick={() => setActiveTab("supplierTerms")}
                                             className={`px-4 py-2 rounded-lg transition ${activeTab === "supplierTerms" ? 'bg-indigo-600 text-white' : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'}`}
+                                            style={{ borderRadius: '0.5rem' }}
                                         >
                                             Supplier Terms
                                         </button>
