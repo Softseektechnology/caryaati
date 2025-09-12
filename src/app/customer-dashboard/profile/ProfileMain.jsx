@@ -1,5 +1,3 @@
-'use client'
-
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -18,25 +16,27 @@ const ProfileMain = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [activeTab, setActiveTab] = useState("accountInfo");
+    const [activeAccountSubTab, setActiveAccountSubTab] = useState("personalInfo");
     const [editingDriver, setEditingDriver] = useState(null);
     const [showAddDriver, setShowAddDriver] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
     const [showAddDriverModal, setShowAddDriverModal] = useState(false);
     const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
     const [showDeactivateModal, setShowDeactivateModal] = useState(false);
+    const [editingCard, setEditingCard] = useState(null);
 
     const handleSidebarClose = () => setIsSidebarOpen(false);
 
     // Drivers data with enhanced document information
     const [drivers, setDrivers] = useState([
-        { 
-            id: 1, 
-            driverName: "MAAZ AZIZ", 
-            arabicName: "", 
-            nationality: "Pakistan", 
-            documentNo: "4109329", 
-            email: "maximusmaaz@gmail.com", 
-            status: "Active", 
+        {
+            id: 1,
+            driverName: "MAAZ AZIZ",
+            arabicName: "",
+            nationality: "Pakistan",
+            documentNo: "4109329",
+            email: "maximusmaaz@gmail.com",
+            status: "Active",
             phone: "+971 50 123 4567",
             documentType: "Emirates ID",
             documentNumber: "784198831963255",
@@ -45,14 +45,14 @@ const ProfileMain = () => {
             frontCopy: "No file chosen",
             backCopy: "No file chosen"
         },
-        { 
-            id: 2, 
-            driverName: "MAAZ AZIZ", 
-            arabicName: "", 
-            nationality: "Pakistan", 
-            documentNo: "4109329", 
-            email: "info@samr.com", 
-            status: "Inactive", 
+        {
+            id: 2,
+            driverName: "MAAZ AZIZ",
+            arabicName: "",
+            nationality: "Pakistan",
+            documentNo: "4109329",
+            email: "info@samr.com",
+            status: "Inactive",
             phone: "+971 55 987 6543",
             documentType: "Emirates ID",
             documentNumber: "784198831963255",
@@ -165,7 +165,8 @@ const ProfileMain = () => {
     const [personalInfo, setPersonalInfo] = useState({
         fullName: "MAAZ AZIZ ABDUL AZIZ QADRI",
         email: "maximusmaaz@gmail.com",
-        phone: "+971 50 188 9924",
+        phoneCountryCode: "+971",
+        phoneNumber: "50 188 9924",
         gender: "Male",
         dateOfBirth: "04-02-1988",
         nationality: "Pakistan",
@@ -233,22 +234,36 @@ const ProfileMain = () => {
     };
 
     const [cards, setCards] = useState([
-        { id: 1, type: "Visa", last4: "1234", expiry: "12/2025" },
-        { id: 2, type: "Mastercard", last4: "5678", expiry: "09/2024" }
+        { id: 2, type: "Mastercard", fullNumber: "5500 0000 0000 5678", last4: "5678", expiry: "09/2024" }
     ]);
     const [showAddCard, setShowAddCard] = useState(false);
-    const [newCard, setNewCard] = useState({ type: "", last4: "", expiry: "" });
-    const [editingCard, setEditingCard] = useState(null);
+    const [newCard, setNewCard] = useState({ type: "", fullNumber: "", expiry: "" });
 
     const handleNewCardChange = (e) => {
         const { name, value } = e.target;
-        setNewCard(prev => ({ ...prev, [name]: value }));
+        setNewCard(prev => {
+            const updatedCard = { ...prev, [name]: value };
+
+            // Automatically extract last 4 digits when full number is entered
+            if (name === "fullNumber" && value.length === 20) {
+                updatedCard.last4 = value.slice(-4);
+            }
+
+            return updatedCard;
+        });
     };
 
     const addCard = () => {
-        if (!newCard.type || !newCard.last4 || !newCard.expiry) return;
-        setCards(prev => [...prev, { id: prev.length + 1, ...newCard }]);
-        setNewCard({ type: "", last4: "", expiry: "" });
+        if (!newCard.type || !newCard.fullNumber || !newCard.expiry || newCard.fullNumber.length !== 20) return;
+
+        const cardToAdd = {
+            ...newCard,
+            id: cards.length + 1,
+            last4: newCard.fullNumber.slice(-4)
+        };
+
+        setCards(prev => [...prev, cardToAdd]);
+        setNewCard({ type: "", fullNumber: "", expiry: "" });
         setShowAddCard(false);
     };
 
@@ -258,13 +273,19 @@ const ProfileMain = () => {
 
     const handleEditCardChange = (e) => {
         const { name, value } = e.target;
-        setEditingCard(prev => ({ ...prev, [name]: value }));
+        setEditingCard(prev => {
+            const updatedCard = { ...prev, [name]: value };
+            if (name === "fullNumber" && value.length === 20) {
+                updatedCard.last4 = value.slice(-4);
+            }
+            return updatedCard;
+        });
     };
 
     const updateCard = () => {
-        if (!editingCard.type || !editingCard.last4 || !editingCard.expiry) return;
+        if (!editingCard.type || !editingCard.fullNumber || !editingCard.expiry || editingCard.fullNumber.length !== 20) return;
         setCards(prev =>
-            prev.map(c => c.id === editingCard.id ? editingCard : c)
+            prev.map(c => c.id === editingCard.id ? { ...editingCard, last4: editingCard.fullNumber.slice(-4) } : c)
         );
         setEditingCard(null);
     };
@@ -276,7 +297,7 @@ const ProfileMain = () => {
     const [documents, setDocuments] = useState([
         {
             id: 1,
-            type: "Emirates Id",
+            type: "Emirates ID",
             documentNo: "784198831963255",
             expiryDate: "06-02-2026",
             issueBy: "RTA",
@@ -285,19 +306,17 @@ const ProfileMain = () => {
             name: "Emirates ID.pdf",
             uploaded: "Just now"
         },
-        { id: 2, name: "Passport.pdf", uploaded: "2 days ago" },
-        { id: 3, name: "ID_Card.pdf", uploaded: "1 week ago" }
     ]);
     const [showAddDocument, setShowAddDocument] = useState(false);
-    const [newDocument, setNewDocument] = useState({ 
-        name: "", 
-        uploaded: "Just now", 
+    const [newDocument, setNewDocument] = useState({
+        name: "",
+        uploaded: "Just now",
         type: "Emirates ID",
         documentNo: "",
         expiryDate: "",
         issueBy: "RTA",
-        frontCopy: "No file chosen", 
-        backCopy: "No file chosen" 
+        frontCopy: "No file chosen",
+        backCopy: "No file chosen"
     });
     const [editingDocument, setEditingDocument] = useState(null);
 
@@ -330,15 +349,15 @@ const ProfileMain = () => {
     const addDocument = () => {
         if (!newDocument.name) return;
         setDocuments(prev => [...prev, { id: prev.length + 1, ...newDocument }]);
-        setNewDocument({ 
-            name: "", 
-            uploaded: "Just now", 
+        setNewDocument({
+            name: "",
+            uploaded: "Just now",
             type: "Emirates ID",
             documentNo: "",
             expiryDate: "",
             issueBy: "RTA",
-            frontCopy: "No file chosen", 
-            backCopy: "No file chosen" 
+            frontCopy: "No file chosen",
+            backCopy: "No file chosen"
         });
         setShowAddDocument(false);
     };
@@ -385,7 +404,6 @@ const ProfileMain = () => {
     };
 
     const handlePasswordSubmit = () => {
-        // Add password change logic here
         console.log("Password change submitted:", passwordData);
         setShowChangePasswordModal(false);
         setPasswordData({
@@ -397,26 +415,24 @@ const ProfileMain = () => {
 
     // Deactivate account state
     const [deactivateReason, setDeactivateReason] = useState("");
+    const [deactivatePassword, setDeactivatePassword] = useState("");
 
     const handleDeactivateAccount = () => {
-        // Add account deactivation logic here
-        console.log("Account deactivation reason:", deactivateReason);
+        console.log("Account deactivation reason:", deactivateReason, "Password:", deactivatePassword);
         setShowDeactivateModal(false);
         setDeactivateReason("");
+        setDeactivatePassword("");
     };
 
     return (
         <div className="flex flex-col min-h-screen md:pl-[72px]">
-
-
-
             <div className="flex flex-1 bg-gradient-to-br from-gray-50 to-gray-100">
                 <main className="flex-1 px-2 py-4 sm:p-6 md:p-8 overflow-auto min-w-[280px]">
                     {/* Header */}
                     <header className="flex flex-col md:flex-row md:items-center justify-between mb-6 bg-white p-4 rounded-xl shadow-sm">
                         <div>
-                            <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Drivers Management</h1>
-                            <p className="text-sm text-gray-500 mt-1">Manage your drivers and review terms & conditions</p>
+                            <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Profile</h1>
+                            <p className="text-sm text-gray-500 mt-1">Manage your profile settings and preferences</p>
                         </div>
 
                         <div className="mt-4 md:mt-0">
@@ -474,14 +490,14 @@ const ProfileMain = () => {
                                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
                                     <h2 className="text-lg font-semibold text-gray-800">Account Information</h2>
                                     <div className="flex max-sm:flex-col gap-2 mt-4 md:mt-0">
-                                        <button 
+                                        <button
                                             onClick={() => setShowChangePasswordModal(true)}
                                             className="px-4 py-2 bg-indigo-600 text-white max-sm:text-center max-sm:justify-center max-sm:justify-items-center text-sm flex items-center gap-2"
                                             style={{ borderRadius: '10px' }}
                                         >
                                             <Lock size={16} /> Change my password
                                         </button>
-                                        <button 
+                                        <button
                                             onClick={() => setShowDeactivateModal(true)}
                                             className="px-4 py-2 bg-red-600 text-white text-sm"
                                             style={{ borderRadius: '10px' }}
@@ -491,8 +507,30 @@ const ProfileMain = () => {
                                     </div>
                                 </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                                    {/* Personal Information Section */}
+                                {/* Account Information Sub-Tabs */}
+                                <div className="flex border-b border-gray-200 mb-6">
+                                    <button
+                                        onClick={() => setActiveAccountSubTab("personalInfo")}
+                                        className={`px-4 py-2 font-medium text-sm ${activeAccountSubTab === "personalInfo" ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-gray-500 hover:text-gray-700'}`}
+                                    >
+                                        Personal Information
+                                    </button>
+                                    <button
+                                        onClick={() => setActiveAccountSubTab("documents")}
+                                        className={`px-4 py-2 font-medium text-sm ${activeAccountSubTab === "documents" ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-gray-500 hover:text-gray-700'}`}
+                                    >
+                                        My Documents
+                                    </button>
+                                    <button
+                                        onClick={() => setActiveAccountSubTab("drivingLicense")}
+                                        className={`px-4 py-2 font-medium text-sm ${activeAccountSubTab === "drivingLicense" ? 'text-indigo-600 border-b-2 border-indigo-600' : 'text-gray-500 hover:text-gray-700'}`}
+                                    >
+                                        My Driving License
+                                    </button>
+                                </div>
+
+                                {/* Personal Information Sub-Tab */}
+                                {activeAccountSubTab === "personalInfo" && (
                                     <div className="border rounded-lg p-4">
                                         <div className="flex items-center justify-between mb-4">
                                             <h3 className="font-medium flex items-center gap-2">
@@ -539,15 +577,26 @@ const ProfileMain = () => {
                                             <div>
                                                 <p className="text-sm text-gray-500">Phone Number</p>
                                                 {isEditingPersonal ? (
-                                                    <input
-                                                        type="text"
-                                                        name="phone"
-                                                        value={tempPersonalInfo.phone}
-                                                        onChange={handlePersonalChange}
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
-                                                    />
+                                                    <div className="flex gap-2">
+                                                        <input
+                                                            type="text"
+                                                            name="phoneCountryCode"
+                                                            value={tempPersonalInfo.phoneCountryCode}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-1/4 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                            placeholder="+971"
+                                                        />
+                                                        <input
+                                                            type="text"
+                                                            name="phoneNumber"
+                                                            value={tempPersonalInfo.phoneNumber}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-3/4 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                            placeholder="50 188 9924"
+                                                        />
+                                                    </div>
                                                 ) : (
-                                                    <p className="font-medium">{personalInfo.phone}</p>
+                                                    <p className="font-medium">{personalInfo.phoneCountryCode} {personalInfo.phoneNumber}</p>
                                                 )}
                                             </div>
                                             <div>
@@ -608,8 +657,10 @@ const ProfileMain = () => {
                                             </div>
                                         </div>
                                     </div>
+                                )}
 
-                                    {/* My Documents Section */}
+                                {/* My Documents Sub-Tab */}
+                                {activeAccountSubTab === "documents" && (
                                     <div className="border rounded-lg p-4">
                                         <div className="flex items-center justify-between mb-4">
                                             <h3 className="font-medium flex items-center gap-2">
@@ -666,8 +717,7 @@ const ProfileMain = () => {
                                                         >
                                                             <option value="Emirates ID">Emirates ID</option>
                                                             <option value="Passport">Passport</option>
-                                                            <option value="Driving License">Driving License</option>
-                                                            <option value="Other">Other</option>
+                                                            <option value="Visit Visa">Visit Visa</option>
                                                         </select>
                                                     </div>
                                                     <div>
@@ -721,8 +771,8 @@ const ProfileMain = () => {
                                                     </div>
                                                 </div>
                                                 <div className="flex gap-2 mt-4">
-                                                    <button onClick={addDocument} className="px-4 py-2 bg-indigo-600 text-white rounded-lg">Save</button>
-                                                    <button onClick={() => setShowAddDocument(false)} className="px-4 py-2 border border-gray-300 rounded-lg">Cancel</button>
+                                                    <button onClick={addDocument} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Save</button>
+                                                    <button onClick={() => setShowAddDocument(false)} className="px-4 py-2 border border-gray-300" style={{ borderRadius: "10px" }}>Cancel</button>
                                                 </div>
                                             </motion.div>
                                         )}
@@ -730,7 +780,7 @@ const ProfileMain = () => {
                                             <motion.div
                                                 initial={{ opacity: 0, height: 0 }}
                                                 animate={{ opacity: 1, height: "auto" }}
-                                                className="mt-4 p-4 border border-indigo-200 rounded-lg bg-indigo-50"
+                                                className="mt-4 p-4 border border-indigo-200 rounded-lg "
                                             >
                                                 <h4 className="text-md font-medium mb-2">Edit Document</h4>
                                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -744,8 +794,7 @@ const ProfileMain = () => {
                                                         >
                                                             <option value="Emirates ID">Emirates ID</option>
                                                             <option value="Passport">Passport</option>
-                                                            <option value="Driving License">Driving License</option>
-                                                            <option value="Other">Other</option>
+                                                            <option value="Visit Visa">Visit Visa</option>
                                                         </select>
                                                     </div>
                                                     <div>
@@ -765,6 +814,7 @@ const ProfileMain = () => {
                                                             name="expiryDate"
                                                             value={editingDocument.expiryDate}
                                                             onChange={handleEditDocumentChange}
+                                                            placeholder="DD-MM-YYYY"
                                                             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                                         />
                                                     </div>
@@ -779,38 +829,42 @@ const ProfileMain = () => {
                                                         />
                                                     </div>
                                                     <div>
-                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Attach Front Copy - Current: {editingDocument.frontCopy}</label>
+                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Attach Front Copy</label>
                                                         <input
                                                             type="file"
                                                             onChange={(e) => handleEditDocumentFileChange(e, 'front')}
                                                             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                                         />
+                                                        <p className="text-xs text-gray-500 mt-1">{editingDocument.frontCopy}</p>
                                                     </div>
                                                     <div>
-                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Attach Back Copy - Current: {editingDocument.backCopy}</label>
+                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Attach Back Copy</label>
                                                         <input
                                                             type="file"
                                                             onChange={(e) => handleEditDocumentFileChange(e, 'back')}
                                                             className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                                         />
+                                                        <p className="text-xs text-gray-500 mt-1">{editingDocument.backCopy}</p>
                                                     </div>
                                                 </div>
                                                 <div className="flex gap-2 mt-4">
-                                                    <button onClick={updateDocument} className="px-4 py-2 bg-indigo-600 text-white rounded-lg">Update</button>
-                                                    <button onClick={() => setEditingDocument(null)} className="px-4 py-2 border border-gray-300 rounded-lg">Cancel</button>
+                                                    <button onClick={updateDocument} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Update</button>
+                                                    <button onClick={() => setEditingDocument(null)} className="px-4 py-2 border border-gray-300" style={{ borderRadius: "10px" }}>Cancel</button>
                                                 </div>
                                             </motion.div>
                                         )}
                                     </div>
+                                )}
 
-                                    {/* My Driving License Section */}
+                                {/* My Driving License Sub-Tab */}
+                                {activeAccountSubTab === "drivingLicense" && (
                                     <div className="border rounded-lg p-4">
                                         <div className="flex items-center justify-between mb-4">
                                             <h3 className="font-medium flex items-center gap-2">
-                                                <Key size={18} /> My Driving License
+                                                <FileText size={18} /> My Driving License
                                             </h3>
                                             {!isEditingLicense ? (
-                                                <button className="text-indigo-600 text-sm" onClick={startEditingLicense}>Update</button>
+                                                <button className="text-indigo-600 text-sm" onClick={startEditingLicense}>Edit</button>
                                             ) : (
                                                 <div className="flex gap-2">
                                                     <button className="text-indigo-600 text-sm" onClick={saveLicense}>Save</button>
@@ -818,17 +872,18 @@ const ProfileMain = () => {
                                                 </div>
                                             )}
                                         </div>
-                                        <div className="space-y-4">
+                                        <div className="space-y-3">
                                             <div>
                                                 <p className="text-sm text-gray-500">Document Type</p>
                                                 {isEditingLicense ? (
-                                                    <input
-                                                        type="text"
+                                                    <select
                                                         name="documentType"
                                                         value={tempLicenseInfo.documentType}
                                                         onChange={handleLicenseChange}
                                                         className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
-                                                    />
+                                                    >
+                                                        <option value="UAE Driving License">UAE Driving License</option>
+                                                    </select>
                                                 ) : (
                                                     <p className="font-medium">{licenseInfo.documentType}</p>
                                                 )}
@@ -848,13 +903,14 @@ const ProfileMain = () => {
                                                 )}
                                             </div>
                                             <div>
-                                                <p className="text-sm text-gray-500">Expiry Date</p>
+                                                <p className="text-sm text-gray-500">Document Expiry</p>
                                                 {isEditingLicense ? (
                                                     <input
                                                         type="text"
                                                         name="expiryDate"
                                                         value={tempLicenseInfo.expiryDate}
                                                         onChange={handleLicenseChange}
+                                                        placeholder="DD-MM-YYYY"
                                                         className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
                                                     />
                                                 ) : (
@@ -862,13 +918,14 @@ const ProfileMain = () => {
                                                 )}
                                             </div>
                                             <div>
-                                                <p className="text-sm text-gray-500">Issue Date</p>
+                                                <p className="text-sm text-gray-500">Document Issue Date</p>
                                                 {isEditingLicense ? (
                                                     <input
                                                         type="text"
                                                         name="issueDate"
                                                         value={tempLicenseInfo.issueDate}
                                                         onChange={handleLicenseChange}
+                                                        placeholder="DD-MM-YYYY"
                                                         className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
                                                     />
                                                 ) : (
@@ -883,43 +940,50 @@ const ProfileMain = () => {
                                                         name="dateOfBirth"
                                                         value={tempLicenseInfo.dateOfBirth}
                                                         onChange={handleLicenseChange}
+                                                        placeholder="DD-MM-YYYY"
                                                         className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
                                                     />
                                                 ) : (
                                                     <p className="font-medium">{licenseInfo.dateOfBirth}</p>
                                                 )}
                                             </div>
-                                            <div className="p-3 bg-gray-50 rounded">
-                                                <p className="text-sm text-gray-500 mb-2">Attach Copy Docs (Front) - Current: {isEditingLicense ? tempLicenseInfo.frontCopy : licenseInfo.frontCopy}</p>
+                                            <div>
+                                                <p className="text-sm text-gray-500">Attach Copy Docs (Front)</p>
                                                 {isEditingLicense ? (
-                                                    <input
-                                                        type="file"
-                                                        onChange={(e) => handleLicenseFileChange(e, 'front')}
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                                    />
+                                                    <>
+                                                        <input
+                                                            type="file"
+                                                            onChange={(e) => handleLicenseFileChange(e, 'front')}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                        <p className="text-xs text-gray-500 mt-1">{tempLicenseInfo.frontCopy}</p>
+                                                    </>
                                                 ) : (
                                                     <p className="font-medium">{licenseInfo.frontCopy}</p>
                                                 )}
                                             </div>
-                                            <div className="p-3 bg-gray-50 rounded">
-                                                <p className="text-sm text-gray-500 mb-2">Attach Copy Docs (Back) - Current: {isEditingLicense ? tempLicenseInfo.backCopy : licenseInfo.backCopy}</p>
+                                            <div>
+                                                <p className="text-sm text-gray-500">Attach Copy Docs (Back)</p>
                                                 {isEditingLicense ? (
-                                                    <input
-                                                        type="file"
-                                                        onChange={(e) => handleLicenseFileChange(e, 'back')}
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                                    />
+                                                    <>
+                                                        <input
+                                                            type="file"
+                                                            onChange={(e) => handleLicenseFileChange(e, 'back')}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                        <p className="text-xs text-gray-500 mt-1">{tempLicenseInfo.backCopy}</p>
+                                                    </>
                                                 ) : (
                                                     <p className="font-medium">{licenseInfo.backCopy}</p>
                                                 )}
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                )}
                             </motion.div>
                         )}
 
-                        {/* Drivers Tab */}
+                        {/* My Drivers Tab */}
                         {activeTab === "drivers" && (
                             <motion.div
                                 key="drivers"
@@ -930,38 +994,35 @@ const ProfileMain = () => {
                                 className="bg-white rounded-2xl shadow-md p-6"
                             >
                                 <div className="flex flex-col md:flex-row md:items-center justify-between mb-6">
-                                    <h2 className="text-lg font-semibold text-gray-800 mb-4 md:mb-0">Drivers List</h2>
-
-                                    <div className="flex flex-col md:flex-row gap-3">
+                                    <h2 className="text-lg font-semibold text-gray-800">My Drivers</h2>
+                                    <div className="flex max-sm:flex-col gap-2 mt-4 md:mt-0">
                                         <div className="relative">
-                                            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                                             <input
                                                 type="text"
                                                 placeholder="Search drivers..."
-                                                className="pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                                                 value={searchQuery}
                                                 onChange={(e) => setSearchQuery(e.target.value)}
+                                                className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                             />
+                                            <Search className="absolute left-3 top-2.5 text-gray-400" size={20} />
                                         </div>
-
                                         <button
                                             onClick={() => setShowAddDriverModal(true)}
                                             className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white hover:bg-indigo-700 transition"
-                                            style={{ borderRadius: '10px' }}
+                                            style={{ borderRadius: "10px" }}
                                         >
-                                            <Plus size={18} /> Add Driver
+                                            <Plus size={18} /> Add New Driver
                                         </button>
                                     </div>
                                 </div>
 
-                                {/* Edit Driver Form */}
                                 {editingDriver && (
                                     <motion.div
                                         initial={{ opacity: 0, height: 0 }}
                                         animate={{ opacity: 1, height: "auto" }}
-                                        className="mb-6 p-4 border border-indigo-200 rounded-lg bg-indigo-50"
+                                        className="mb-6 p-4 border border-indigo-200 rounded-lg"
                                     >
-                                        <h3 className="text-lg font-medium mb-4">Edit Driver</h3>
+                                        <h3 className="text-md font-medium mb-2">Edit Driver</h3>
                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700 mb-1">Driver Name</label>
@@ -1015,13 +1076,29 @@ const ProfileMain = () => {
                                             </div>
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                                                <input
-                                                    type="text"
-                                                    name="phone"
-                                                    value={editingDriver.phone}
-                                                    onChange={handleEditInputChange}
-                                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                                />
+                                                <div className="flex gap-2">
+                                                    <select
+                                                        name="phoneCountryCode"
+                                                        value={editingDriver.phoneCountryCode || "+971"}
+                                                        onChange={handleEditInputChange}
+                                                        className="w-1/4 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                    >
+                                                        <option value="+971">+971</option>
+                                                        <option value="+966">+966</option>
+                                                        <option value="+92">+92</option>
+                                                        <option value="+91">+91</option>
+                                                        <option value="+44">+44</option>
+                                                        <option value="+1">+1</option>
+                                                    </select>
+                                                    <input
+                                                        type="text"
+                                                        name="phone"
+                                                        value={editingDriver.phone}
+                                                        onChange={handleEditInputChange}
+                                                        className="w-3/4 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        placeholder="50 123 4567"
+                                                    />
+                                                </div>
                                             </div>
                                             <div>
                                                 <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
@@ -1046,7 +1123,7 @@ const ProfileMain = () => {
                                                 >
                                                     <option value="Emirates ID">Emirates ID</option>
                                                     <option value="Passport">Passport</option>
-                                                    <option value="Driving License">Driving License</option>
+                                                    <option value="Visit Visa">Visit Visa</option>
                                                 </select>
                                             </div>
                                             <div>
@@ -1081,7 +1158,7 @@ const ProfileMain = () => {
                                                 />
                                             </div>
                                             <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-1">Attach Front Copy - Current: {editingDriver.frontCopy}</label>
+                                                <label className="block text-sm font-medium text-gray-700 mb-1">Attach Front Copy</label>
                                                 <input
                                                     type="file"
                                                     onChange={(e) => {
@@ -1095,9 +1172,10 @@ const ProfileMain = () => {
                                                     }}
                                                     className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                                 />
+                                                <p className="text-xs text-gray-500 mt-1">{editingDriver.frontCopy}</p>
                                             </div>
                                             <div>
-                                                <label className="block text-sm font-medium text-gray-700 mb-1">Attach Back Copy - Current: {editingDriver.backCopy}</label>
+                                                <label className="block text-sm font-medium text-gray-700 mb-1">Attach Back Copy</label>
                                                 <input
                                                     type="file"
                                                     onChange={(e) => {
@@ -1111,18 +1189,21 @@ const ProfileMain = () => {
                                                     }}
                                                     className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                                 />
+                                                <p className="text-xs text-gray-500 mt-1">{editingDriver.backCopy}</p>
                                             </div>
                                         </div>
                                         <div className="flex gap-2 mt-4">
                                             <button
                                                 onClick={updateDriver}
-                                                className="px-4 py-2 bg-indigo-600 text-white rounded-lg"
+                                                className="px-4 py-2 bg-indigo-600 text-white"
+                                                style={{ borderRadius: "10px" }}
                                             >
                                                 Update Driver
                                             </button>
                                             <button
                                                 onClick={() => setEditingDriver(null)}
-                                                className="px-4 py-2 border border-gray-300 rounded-lg"
+                                                className="px-4 py-2 border border-gray-300"
+                                                style={{ borderRadius: "10px" }}
                                             >
                                                 Cancel
                                             </button>
@@ -1176,7 +1257,6 @@ const ProfileMain = () => {
                                                             >
                                                                 <Trash2 size={16} />
                                                             </button>
-                                                        
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -1234,7 +1314,6 @@ const ProfileMain = () => {
                                         </tbody>
                                     </table>
                                 </div>
-
                             </motion.div>
                         )}
 
@@ -1278,7 +1357,6 @@ const ProfileMain = () => {
                                         </tbody>
                                     </table>
                                 </div>
-
                             </motion.div>
                         )}
 
@@ -1294,9 +1372,10 @@ const ProfileMain = () => {
                             >
                                 <div className="flex items-center justify-between mb-6">
                                     <h2 className="text-lg font-semibold text-gray-800">My Cards</h2>
-                                    <button 
+                                    <button
                                         onClick={() => setShowAddCard(true)}
                                         className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
+                                        style={{ borderRadius: "10px" }}
                                     >
                                         <Plus size={18} /> Add New Card
                                     </button>
@@ -1342,15 +1421,16 @@ const ProfileMain = () => {
                                                 value={newCard.type}
                                                 onChange={handleNewCardChange}
                                                 placeholder="Card Type (e.g., Visa)"
-                                                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                className="w-full border my-1 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                             />
                                             <input
                                                 type="text"
-                                                name="last4"
-                                                value={newCard.last4}
+                                                name="fullNumber"
+                                                value={newCard.fullNumber}
                                                 onChange={handleNewCardChange}
-                                                placeholder="Last 4 digits"
-                                                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                placeholder="Card Number"
+                                                maxLength={20}
+                                                className="w-full border my-1 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                             />
                                             <input
                                                 type="text"
@@ -1358,12 +1438,12 @@ const ProfileMain = () => {
                                                 value={newCard.expiry}
                                                 onChange={handleNewCardChange}
                                                 placeholder="Expiry (MM/YYYY)"
-                                                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                className="w-full border my-1 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                             />
                                         </div>
                                         <div className="flex gap-2 mt-4">
-                                            <button onClick={addCard} className="px-4 py-2 bg-indigo-600 text-white rounded-lg">Save</button>
-                                            <button onClick={() => setShowAddCard(false)} className="px-4 py-2 border border-gray-300 rounded-lg">Cancel</button>
+                                            <button onClick={addCard} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Save</button>
+                                            <button onClick={() => setShowAddCard(false)} className="px-4 py-2 border border-gray-300" style={{ borderRadius: "10px" }}>Cancel</button>
                                         </div>
                                     </motion.div>
                                 )}
@@ -1372,7 +1452,7 @@ const ProfileMain = () => {
                                     <motion.div
                                         initial={{ opacity: 0, height: 0 }}
                                         animate={{ opacity: 1, height: "auto" }}
-                                        className="mt-4 p-4 border border-indigo-200 rounded-lg bg-indigo-50"
+                                        className="mt-4 p-4 border border-indigo-200 rounded-lg"
                                     >
                                         <h4 className="text-md font-medium mb-2">Edit Card</h4>
                                         <div className="space-y-2">
@@ -1382,15 +1462,16 @@ const ProfileMain = () => {
                                                 value={editingCard.type}
                                                 onChange={handleEditCardChange}
                                                 placeholder="Card Type (e.g., Visa)"
-                                                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                className="w-full border rounded my-1 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                             />
                                             <input
                                                 type="text"
-                                                name="last4"
-                                                value={editingCard.last4}
+                                                name="fullNumber"
+                                                value={editingCard.fullNumber}
                                                 onChange={handleEditCardChange}
-                                                placeholder="Last 4 digits"
-                                                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                placeholder="Card Number"
+                                                maxLength={20}
+                                                className="w-full border rounded my-1 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                             />
                                             <input
                                                 type="text"
@@ -1398,12 +1479,12 @@ const ProfileMain = () => {
                                                 value={editingCard.expiry}
                                                 onChange={handleEditCardChange}
                                                 placeholder="Expiry (MM/YYYY)"
-                                                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                className="w-full border rounded my-1 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                             />
                                         </div>
                                         <div className="flex gap-2 mt-4">
-                                            <button onClick={updateCard} className="px-4 py-2 bg-indigo-600 text-white rounded-lg">Update</button>
-                                            <button onClick={() => setEditingCard(null)} className="px-4 py-2 border border-gray-300 rounded-lg">Cancel</button>
+                                            <button onClick={updateCard} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Update</button>
+                                            <button onClick={() => setEditingCard(null)} className="px-4 py-2 border border-gray-300" style={{ borderRadius: "10px" }}>Cancel</button>
                                         </div>
                                     </motion.div>
                                 )}
@@ -1416,7 +1497,7 @@ const ProfileMain = () => {
             {/* Add Driver Modal */}
             {showAddDriverModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         className="bg-white rounded-2xl p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto"
@@ -1480,13 +1561,29 @@ const ProfileMain = () => {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-                                <input
-                                    type="text"
-                                    name="phone"
-                                    value={newDriver.phone}
-                                    onChange={handleInputChange}
-                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                />
+                                <div className="flex gap-2">
+                                    <select
+                                        name="phoneCountryCode"
+                                        value={newDriver.phoneCountryCode || "+971"}
+                                        onChange={handleInputChange}
+                                        className="w-1/4 border rounded px-1 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                    >
+                                        <option value="+971">+971</option>
+                                        <option value="+966">+966</option>
+                                        <option value="+92">+92</option>
+                                        <option value="+91">+91</option>
+                                        <option value="+44">+44</option>
+                                        <option value="+1">+1</option>
+                                    </select>
+                                    <input
+                                        type="text"
+                                        name="phone"
+                                        value={newDriver.phone}
+                                        onChange={handleInputChange}
+                                        className="w-3/4 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                        placeholder="50 123 4567"
+                                    />
+                                </div>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
@@ -1511,7 +1608,7 @@ const ProfileMain = () => {
                                 >
                                     <option value="Emirates ID">Emirates ID</option>
                                     <option value="Passport">Passport</option>
-                                    <option value="Driving License">Driving License</option>
+                                    <option value="Visit Visa">Visit Visa</option>
                                 </select>
                             </div>
                             <div>
@@ -1583,13 +1680,15 @@ const ProfileMain = () => {
                         <div className="flex gap-2 mt-6">
                             <button
                                 onClick={addDriver}
-                                className="px-4 py-2 bg-indigo-600 text-white rounded-lg"
+                                className="px-4 py-2 bg-indigo-600 text-white"
+                                style={{ borderRadius: "10px" }}
                             >
                                 Save Driver
                             </button>
                             <button
                                 onClick={() => setShowAddDriverModal(false)}
-                                className="px-4 py-2 border border-gray-300 rounded-lg"
+                                className="px-4 py-2 border border-gray-300"
+                                style={{ borderRadius: "10px" }}
                             >
                                 Cancel
                             </button>
@@ -1598,10 +1697,11 @@ const ProfileMain = () => {
                 </div>
             )}
 
+
             {/* Change Password Modal */}
             {showChangePasswordModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         className="bg-white rounded-2xl p-6 w-full max-w-md"
@@ -1647,13 +1747,15 @@ const ProfileMain = () => {
                         <div className="flex gap-2 mt-6">
                             <button
                                 onClick={handlePasswordSubmit}
-                                className="px-4 py-2 bg-indigo-600 text-white rounded-lg"
+                                className="px-4 py-2 bg-indigo-600 text-white"
+                                style={{ borderRadius: '10px' }}
                             >
                                 Change Password
                             </button>
                             <button
                                 onClick={() => setShowChangePasswordModal(false)}
-                                className="px-4 py-2 border border-gray-300 rounded-lg"
+                                className="px-4 py-2 border border-gray-300"
+                                style={{ borderRadius: '10px' }}
                             >
                                 Cancel
                             </button>
@@ -1665,39 +1767,78 @@ const ProfileMain = () => {
             {/* Deactivate Account Modal */}
             {showDeactivateModal && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-                    <motion.div 
+                    <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
                         className="bg-white rounded-2xl p-6 w-full max-w-md"
                     >
                         <div className="flex justify-between items-center mb-6">
                             <h3 className="text-lg font-medium">Deactivate Account</h3>
-                            <button onClick={() => setShowDeactivateModal(false)} className="text-gray-500 hover:text-gray-700">
+                            <button
+                                onClick={() => setShowDeactivateModal(false)}
+                                className="text-gray-500 hover:text-gray-700"
+                            >
                                 <X size={24} />
                             </button>
                         </div>
                         <div className="space-y-4">
-                            <p className="text-gray-600">We're sorry to see you go. Please let us know why you're deactivating your account.</p>
-                            <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Reason for deactivation</label>
+                            <p className="text-gray-600 font-medium">Please help us to serve you better</p>
+                            <p className="text-gray-500 text-sm">Select from the following or give us feedback</p>
+                            <div className="flex flex-col gap-2">
+                                {[
+                                    "I did not find ideal deals.",
+                                    "I did not find it easy to book a car.",
+                                    "I did not find good car rental companies at caryaati.com",
+                                    "Car rental company are not friendly.",
+                                    "Renting Policies are very strict.",
+                                    "Other",
+                                ].map((reason, index) => (
+                                    <label key={index} className="flex items-center gap-2">
+                                        <input
+                                            type="radio"
+                                            name="deactivateReason"
+                                            value={reason}
+                                            checked={deactivateReason === reason}
+                                            onChange={(e) => setDeactivateReason(e.target.value)}
+                                            className="h-4 w-4 text-indigo-600 focus:ring-indigo-200"
+                                        />
+                                        <span className="text-sm text-gray-700">{reason}</span>
+                                    </label>
+                                ))}
+                            </div>
+                            {deactivateReason === "Other" && (
                                 <textarea
-                                    value={deactivateReason}
+                                    value={deactivateReason === "Other" ? "" : deactivateReason}
                                     onChange={(e) => setDeactivateReason(e.target.value)}
                                     className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 h-24"
                                     placeholder="Please share your feedback..."
+                                />
+                            )}
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                    Current Password
+                                </label>
+                                <input
+                                    type="password"
+                                    value={deactivatePassword}
+                                    onChange={(e) => setDeactivatePassword(e.target.value)}
+                                    className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                    placeholder="Enter your current password"
                                 />
                             </div>
                         </div>
                         <div className="flex gap-2 mt-6">
                             <button
                                 onClick={handleDeactivateAccount}
-                                className="px-4 py-2 bg-red-600 text-white rounded-lg"
+                                className="px-4 py-2 bg-red-600 text-white"
+                                style={{ borderRadius: '10px' }}
                             >
                                 Deactivate Account
                             </button>
                             <button
                                 onClick={() => setShowDeactivateModal(false)}
-                                className="px-4 py-2 border border-gray-300 rounded-lg"
+                                className="px-4 py-2 border border-gray-300"
+                                style={{ borderRadius: '10px' }}
                             >
                                 Cancel
                             </button>
@@ -1705,7 +1846,6 @@ const ProfileMain = () => {
                     </motion.div>
                 </div>
             )}
-
             <Footer />
         </div>
     )

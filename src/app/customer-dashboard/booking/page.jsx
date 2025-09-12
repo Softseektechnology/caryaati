@@ -418,64 +418,140 @@ export default function BookingPage() {
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.9 }}
-                            className="bg-white rounded-2xl p-6 w-full max-w-2xl"
+                            className="bg-white rounded-2xl w-full max-w-4xl overflow-hidden shadow-2xl flex flex-col"
+                            style={{ maxHeight: '80vh' }}
                         >
-                            <div className="flex justify-between items-center mb-6">
-                                <h2 className="text-xl font-bold text-gray-800">Booking Details</h2>
-                                <button onClick={closeBookingDetails} className="text-gray-500 hover:text-gray-700">
-                                    &times;
-                                </button>
-                            </div>
-
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <h3 className="text-sm font-medium text-gray-500 mb-2">Reference Number</h3>
-                                    <p className="text-lg font-semibold">{selectedBooking.refNo}</p>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-sm font-medium text-gray-500 mb-2">Status</h3>
-                                    <span className={`px-3 py-1 text-sm font-semibold rounded-full ${getStatusColor(selectedBooking.status)}`}>
-                                        {selectedBooking.status}
-                                    </span>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-sm font-medium text-gray-500 mb-2">Date</h3>
-                                    <p className="text-lg">{formatDate(selectedBooking.date)}</p>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-sm font-medium text-gray-500 mb-2">Time Slot</h3>
-                                    <p className="text-lg">{selectedBooking.timeSlot}</p>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-sm font-medium text-gray-500 mb-2">Company</h3>
-                                    <p className="text-lg">{selectedBooking.company}</p>
-                                </div>
-
-                                <div>
-                                    <h3 className="text-sm font-medium text-gray-500 mb-2">Car</h3>
-                                    <p className="text-lg">{selectedBooking.car}</p>
-                                </div>
-
-                                <div className="md:col-span-2">
-                                    <h3 className="text-sm font-medium text-gray-500 mb-2">Quantity</h3>
-                                    <p className="text-lg">{selectedBooking.quantity}</p>
+                            {/* Header with gradient background */}
+                            <div className="bg-gradient-to-r from-indigo-600 to-purple-600 px-5 py-3 text-white flex-shrink-0">
+                                <div className="flex justify-between items-center">
+                                    <div>
+                                        <h2 className="text-2xl font-bold">Booking Details</h2>
+                                        <p className="text-indigo-100 mt-1 text-sm">Complete information about your reservation</p>
+                                    </div>
+                                    <button
+                                        onClick={closeBookingDetails}
+                                        className="text-white hover:bg-white/20 p-2 rounded-full transition-colors"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
                                 </div>
                             </div>
 
-                            <div className="mt-8 flex justify-end gap-3">
-                                <button
-                                    onClick={closeBookingDetails}
-                                    className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
-                                >
-                                    Close
-                                </button>
-                                <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors">
-                                    Edit Booking
-                                </button>
+                            {/* Content - Scrollable area */}
+                            <div className="p-6 overflow-y-auto flex-grow">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                                    {/* Left Column */}
+                                    <div className="space-y-5">
+                                        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                            <h3 className="text-sm font-medium text-gray-500 mb-3 flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+                                                </svg>
+                                                REFERENCE NUMBER
+                                            </h3>
+                                            <p className="text-xl font-semibold text-gray-800">{selectedBooking.refNo}</p>
+                                        </div>
+
+                                        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                            <h3 className="text-sm font-medium text-gray-500 mb-3 flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                </svg>
+                                                DATE & TIME
+                                            </h3>
+                                            <div className="grid grid-cols-2 gap-3">
+                                                <div>
+                                                    <p className="text-xs text-gray-500">Date</p>
+                                                    <p className="text-md font-medium">{formatDate(selectedBooking.date)}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-xs text-gray-500">Time Slot</p>
+                                                    <p className="text-md font-medium flex items-center">
+                                                        <Clock size={14} className="mr-1" />
+                                                        {selectedBooking.timeSlot}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                            <h3 className="text-sm font-medium text-gray-500 mb-3 flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-4 0H9m4 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v12m4 0V9" />
+                                                </svg>
+                                                COMPANY INFORMATION
+                                            </h3>
+                                            <p className="text-md font-medium">{selectedBooking.company}</p>
+                                        </div>
+                                    </div>
+
+                                    {/* Right Column */}
+                                    <div className="space-y-5">
+                                        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                            <h3 className="text-sm font-medium text-gray-500 mb-3 flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                                </svg>
+                                                STATUS
+                                            </h3>
+                                            <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-semibold ${getStatusColor(selectedBooking.status)}`}>
+                                                {selectedBooking.status}
+                                            </span>
+                                        </div>
+
+                                        <div className="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                                            <h3 className="text-sm font-medium text-gray-500 mb-3 flex items-center">
+                                                <Car className="h-4 w-4 mr-2" />
+                                                VEHICLE DETAILS
+                                            </h3>
+                                            <div className="grid grid-cols-2 gap-3">
+                                                <div>
+                                                    <p className="text-xs text-gray-500">Car ID</p>
+                                                    <p className="text-md font-medium">{selectedBooking.car}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-xs text-gray-500">Quantity</p>
+                                                    <p className="text-md font-medium">{selectedBooking.quantity}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-indigo-50 border border-indigo-100 p-4 rounded-xl">
+                                            <h3 className="text-sm font-medium text-indigo-700 mb-2 flex items-center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                                </svg>
+                                                NEED ASSISTANCE?
+                                            </h3>
+                                            <p className="text-xs text-indigo-600">Contact our support team at support@rentacar.com or call +1 (555) 123-4567</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Fixed Footer with Action Buttons */}
+                            <div className="border-t border-gray-200 p-5 bg-gray-50 flex-shrink-0">
+                                <div className="flex flex-col sm:flex-row justify-end gap-3">
+                                    <button
+                                        onClick={closeBookingDetails}
+                                        className="px-5 py-2.5 bg-white border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors flex items-center justify-center order-2 sm:order-1"
+                                        style={{ borderRadius: '10px' }}
+                                    >
+                                        Close
+                                    </button>
+                                    <button className="px-5 py-2.5 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition-colors flex items-center justify-center order-1 sm:order-2" style={{ borderRadius: '10px' }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                                        </svg>
+                                        Edit Booking
+                                    </button>
+                                    <button className="px-5 py-2.5 bg-emerald-500 text-white rounded-xl hover:bg-emerald-600 transition-colors flex items-center justify-center order-3" style={{ borderRadius: '10px' }}>
+                                        <Download size={18} className="mr-2" />
+                                        Download Receipt
+                                    </button>
+                                </div>
                             </div>
                         </motion.div>
                     </div>

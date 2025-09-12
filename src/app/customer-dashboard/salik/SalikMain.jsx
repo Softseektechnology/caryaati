@@ -344,11 +344,11 @@ const SalikMain = () => {
                                             ))}
                                         </select>
                                         
-                                        <button className="px-4 py-2 bg-indigo-600 text-white rounded-[10px] flex items-center gap-2 hover:bg-indigo-700 transition-colors">
+                                        <button className="px-4 py-2 bg-indigo-600 text-white flex items-center gap-2 hover:bg-indigo-700 transition-colors" style={{ borderRadius: '10px' }}>
                                             <Filter size={18} /> Filter
                                         </button>
-                                        
-                                        <button className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-[10px] flex items-center gap-2 hover:bg-gray-50 transition-colors">
+
+                                        <button className="px-4 py-2 bg-white border border-gray-200 text-gray-700 flex items-center gap-2 hover:bg-gray-50 transition-colors" style={{ borderRadius: '10px' }}>
                                             <Download size={18} /> Export
                                         </button>
                                     </div>
