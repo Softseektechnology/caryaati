@@ -39,9 +39,9 @@ export default function DocumentsInfo() {
                   <Image
                     src="/images/info-documents/tourist.webp"
                     alt="Tourist"
-                    width={205}
-                    height={205}
-                    className={`${styles.image}`}
+                    width={225}
+                    height={225}
+                    className={`${styles.image} translate-y-2`}
                   />
                 </div>
                 <h3 className={styles.subHeading}>For Tourist Visiting the UAE</h3>
