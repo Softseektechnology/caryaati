@@ -24,7 +24,7 @@ const PrivacyPolicy = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.title}>Caryyati Privacy Policy</div>
+      <div className={styles.title}>Caryaati Privacy Policy</div>
       <div className={styles.subtitle}>
         Learn how we collect, use, and protect your personal information to provide a seamless and secure car rental experience.
       </div>

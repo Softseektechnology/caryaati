@@ -1,0 +1,409 @@
+/* Airport Car Rental Page Styles */
+
+.airport-main-container {
+  background: linear-gradient(135deg, #f6f9fc 0%, #ffffff 100%);
+  min-height: 100vh;
+}
+
+.hero-section {
+  position: relative;
+  height: 100vh;
+  background-image: url('/images/special-car-offers/special-car-offers.jpg');
+  background-position: center;
+  background-size: cover;
+  background-attachment: fixed; /* parallax effect */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+  /* important for pseudo element */
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.hero-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.hero-cta {
+  background: linear-gradient(90deg, #0080F6, #42C3F7);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.hero-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 128, 246, 0.2);
+}
+
+.airports-section {
+  padding: 4rem 1rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: 2.5rem;
+  color: #0080F6;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.section-description {
+  font-size: 1.2rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.airports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.airport-card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.airport-card:hover {
+  transform: translateY(-5px);
+}
+
+.airport-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.airport-content {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.airport-name {
+  font-size: 1.5rem;
+  color: #0080F6;
+  margin-bottom: 0.5rem;
+}
+
+.airport-code {
+  display: block;
+  font-size: 1.2rem;
+  color: #333;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.airport-description {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.airport-button {
+  background: linear-gradient(90deg, #0080F6, #42C3F7);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.airport-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 128, 246, 0.2);
+}
+/* Benefits Section Styles */
+.benefits-section {
+  padding: 5rem 1rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fcff 100%);
+  position: relative;
+}
+
+.benefits-section .section-title {
+  color: #0080F6;
+  margin-bottom: 1rem;
+}
+
+.benefits-section .section-description {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.benefit-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(0, 128, 246, 0.1);
+}
+
+.benefit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 128, 246, 0.15);
+}
+
+.benefit-icon {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #0080F6, #42C3F7);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+}
+
+.benefit-icon svg {
+  width: 30px;
+  height: 30px;
+  color: white;
+}
+
+.benefit-card h3 {
+  font-size: 1.4rem;
+  color: #0080F6;
+  margin-bottom: 1rem;
+}
+
+.benefit-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Stats Section */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+  padding: 2rem 0;
+  border-top: 1px solid #eaeaea;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  display: block;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #0080F6;
+  margin-bottom: 0.5rem;
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* CTA Section */
+.cta-container {
+  background: linear-gradient(135deg, #0080F6 0%, #42C3F7 100%);
+  padding: 3rem 2rem;
+  border-radius: 15px;
+  text-align: center;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0, 128, 246, 0.3);
+}
+
+.cta-container h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.cta-container p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.cta-button {
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.cta-button.primary {
+  background: white;
+  color: #0080F6;
+}
+
+.cta-button.primary:hover {
+  background: #f5f5f5;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
+.cta-button.secondary {
+  background: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.cta-button.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+  
+  .cta-container {
+    padding: 2rem 1rem;
+  }
+  
+  .cta-container h3 {
+    font-size: 1.5rem;
+  }
+  
+  .cta-container p {
+    font-size: 1rem;
+  }
+  
+  .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .cta-button {
+    width: 100%;
+    max-width: 250px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .benefit-card {
+    padding: 1.5rem;
+  }
+  
+  .benefit-icon {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .benefit-icon svg {
+    width: 25px;
+    height: 25px;
+  }
+}
+
+/* Disable parallax on mobile for better performance */
+@media (max-width: 768px) {
+  .hero-overlay{
+    padding: 2rem 0.75rem;
+  }
+  .hero-section {
+    background-attachment: scroll;
+    /* Fallback to normal scrolling */
+    height: 50vh;
+    /* Slightly shorter for mobile */
+  }
+
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .airports-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    height: auto;
+  }
+  .airport-button{
+    padding: 0.45rem 1.1rem;
+    font-size: 0.7rem;
+  }
+  
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1rem;
+  }
+  
+  .hero-cta {
+    padding: 0.45rem 1.1rem;
+    font-size: 0.7rem;
+  }
+}

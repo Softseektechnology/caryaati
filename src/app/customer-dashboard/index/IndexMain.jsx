@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 
 
 const IndexMain = () => {
-      const [sidebarOpen, setSidebarOpen] = useState(true);
+    const [sidebarOpen, setSidebarOpen] = useState(true);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const [widgetsDropdownOpen, setWidgetsDropdownOpen] = useState(false);

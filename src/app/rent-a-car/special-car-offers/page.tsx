@@ -7,58 +7,65 @@ import Link from 'next/link';
 import React, { useState, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import './rent-a-car.css';
+import './special-car-offers.css';
 import UserDropdown from '@/components/customer-dashboard/user-dashboard';
 
 const airports = [
   {
-    name: "Dubai",
-    slug: "dubai",
-    code: "Rent a Car in Dubai",
+    name: "Sports Cars on Rent",
+    slug: "sports",
+    code: "Sports Car Rentals",
     description: "The world's busiest airport by international passenger traffic.",
-    image: "/images/cities/dubai.jpg" // Replace with actual image path
+    image: "/images/special-car-offers/sports.jpg" // Replace with actual image path
   },
   {
-    name: "Abu Dhabi",
-    slug: "abu-dhabi",
-    code: "Rent a Car in Abu Dhabi",
+    name: "Standard Cars on Rent",
+    slug: "standard",
+    code: "Standard Car Rentals",
     description: "Dubai's second international airport, set to become one of the largest.",
-    image: "/images/cities/abu-dhabi.jpg"
+    image: "/images/special-car-offers/standard.jpg"
   },
   {
-    name: "Umm Al Quwain",
-    slug: "umm-al-quwain",
-    code: "Rent a Car in Umm Al Quwain",
+    name: "Mini Cars on Rent",
+    slug: "mini",
+    code: "Mini Car Rentals",
     description: "A small emirate located in the northern part of the UAE.",
-    image: "/images/cities/umm-al-quwain.jpg"
+    image: "/images/special-car-offers/mini.jpg"
   },
   {
-    name: "Fujairah",
-    slug: "fujairah",
-    code: "Rent a Car in Fujairah",
+    name: "Mid Size Cars on Rent",
+    slug: "mid-size",
+    code: "Mid Size Car Rentals",
     description: "A major cargo and passenger hub in the UAE.",
-    image: "/images/cities/fujairah.jpg"
+    image: "/images/special-car-offers/mid-size.jpg"
   },
   {
-    name: "Ras Al Khaimah",
-    slug: "ras-al-khaimah",
-    code: "Rent a Car in Ras Al Khaimah",
+    name: "Luxury Cars on Rent",
+    slug: "luxury",
+    code: "Luxury Car Rentals",
     description: "Serving the northern emirate of Ras Al Khaimah.",
-    image: "/images/cities/ras-al-khaimah.jpg"
+    image: "/images/special-car-offers/luxury.jpg"
   },
   {
-    name: "Ajman",
-    slug: "ajman",
-    code: "Rent a Car in Ajman",
+    name: "Premium Cars on Rent",
+    slug: "premium",
+    code: "Premium Car Rentals",
     description: "Located on the east coast of the UAE.",
-    image: "/images/cities/ajman.jpg"
+    image: "/images/special-car-offers/premium.jpg"
   },
   {
-    name: "Al Ain",
-    slug: "al-ain",
-    code: "Rent a Car in Al Ain",
+    name: "Economy Cars on Rent",
+    slug: "economy",
+    code: "Economy Car Rentals",
     description: "A city in the Emirate of Abu Dhabi, known for its greenery.",
-    image: "/images/cities/al-ain.jpg"
+    image: "/images/special-car-offers/economy.jpg"
+  },
+  {
+    name: "Monthly Cars on Rent",
+    slug: "monthly",
+    code: "Monthly Car Rentals",
+    description: "A city in the Emirate of Abu Dhabi, known for its greenery.",
+    image: "/images/special-car-offers/monthly.jpg"
   }
 ];
 
@@ -97,7 +104,7 @@ const AirportCarRentalPage = () => {
         {/* Hero Section */}
         <section className="hero-section" data-aos="fade-in">
           <div className="hero-overlay">
-            <h1 className="hero-title">Rent a Car</h1>
+            <h1 className="hero-title">Special Car Offers</h1>
             <p className="hero-subtitle">Convenient car rentals at major UAE Cities. Start your journey seamlessly!</p>
             <Link href="/rent-a-car" className="hero-cta">Browse All Cars</Link>
           </div>
@@ -125,10 +132,10 @@ const AirportCarRentalPage = () => {
             </div>
           </div>
         </section>
-        
+
         <section className="benefits-section" data-aos="fade-up">
           <div className="container">
-            <h2 className="section-title">Why Choose Our Car Rental Offers?</h2>
+            <h2 className="section-title">Why Choose Our Special Car Offers?</h2>
             <p className="section-description">Experience the ultimate in convenience, luxury, and value with our exclusive car rental services</p>
 
             <div className="benefits-grid">
@@ -204,7 +211,7 @@ const AirportCarRentalPage = () => {
             </div>
           </div>
         </section>
-
+        
       </main>
 
       <Footer />

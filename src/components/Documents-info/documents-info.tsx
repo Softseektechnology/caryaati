@@ -8,20 +8,20 @@ export default function DocumentsInfo() {
       <div className='w-full h-full backdrop-brightness-40'>
 
         <div className="container py-5">
-          <h2 className={styles.sectionHeading}>
+          <h2 className={`${styles.sectionHeading} mb-4`}>
             Documents Required for Car Rental in <span>UAE</span>
           </h2>
           <div className="row">
             {/* UAE Resident Column */}
             <div className="col-md-6">
               <div className={styles.card}>
-                <div className={styles.imageWrapper}>
+                <div className={`${styles.imageWrapper} min-h-40`}>
                   <Image
                     src="/images/info-documents/uae-resident.png"
                     alt="UAE Resident"
                     width={150}
                     height={150}
-                    className={styles.image}
+                    className={`${styles.image}`}
                   />
                 </div>
                 <h3 className={styles.subHeading}>For UAE Resident</h3>
@@ -35,13 +35,13 @@ export default function DocumentsInfo() {
             {/* Tourist Column */}
             <div className="col-md-6">
               <div className={styles.card}>
-                <div className={styles.imageWrapper}>
+                <div className={`${styles.imageWrapper} min-h-40`}>
                   <Image
                     src="/images/info-documents/tourist.webp"
                     alt="Tourist"
                     width={150}
                     height={150}
-                    className={styles.image}
+                    className={`${styles.image}`}
                   />
                 </div>
                 <h3 className={styles.subHeading}>For Tourist Visiting the UAE</h3>
@@ -54,7 +54,7 @@ export default function DocumentsInfo() {
             </div>
           </div>
           {/* Note at the bottom */}
-          <div className={styles.note}>
+          <div className={`${styles.note} mt-4`}>
             Visitors from the GCC, US, UK, Canada and Certain other countries can drive with their home country driving license alone in the UAE.
           </div>
         </div>

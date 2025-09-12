@@ -62,8 +62,8 @@ export default function BookingPage() {
     const sortedAndFilteredData = bookingData
         .filter(booking => {
             const matchesStatus = filterStatus === "all" || booking.status === filterStatus;
-            const matchesSearch = searchQuery === "" || 
-                Object.values(booking).some(value => 
+            const matchesSearch = searchQuery === "" ||
+                Object.values(booking).some(value =>
                     String(value).toLowerCase().includes(searchQuery.toLowerCase())
                 );
             return matchesStatus && matchesSearch;
@@ -71,12 +71,12 @@ export default function BookingPage() {
         .sort((a, b) => {
             let aValue = a[sortField];
             let bValue = b[sortField];
-            
+
             if (sortField === "date") {
                 aValue = new Date(a.date);
                 bValue = new Date(b.date);
             }
-            
+
             if (aValue < bValue) return sortDirection === "asc" ? -1 : 1;
             if (aValue > bValue) return sortDirection === "asc" ? 1 : -1;
             return 0;
@@ -155,7 +155,7 @@ export default function BookingPage() {
                                             <Heart size={22} className="text-gray-600" />
                                         </button>
                                     </div>
-                                    <div className="relative">
+                                    {/* <div className="relative">
                                         <button
                                             onClick={() => {
                                                 setProfileDropdownOpen(!profileDropdownOpen);
@@ -184,14 +184,14 @@ export default function BookingPage() {
                                                 </motion.div>
                                             )}
                                         </AnimatePresence>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </header>
 
                         {/* Summary Cards */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                            <motion.div 
+                            <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.1 }}
@@ -208,7 +208,7 @@ export default function BookingPage() {
                                 </div>
                             </motion.div>
 
-                            <motion.div 
+                            <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.2 }}
@@ -225,7 +225,7 @@ export default function BookingPage() {
                                 </div>
                             </motion.div>
 
-                            <motion.div 
+                            <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3 }}
@@ -242,7 +242,7 @@ export default function BookingPage() {
                                 </div>
                             </motion.div>
 
-                            <motion.div 
+                            <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.4 }}
@@ -273,10 +273,10 @@ export default function BookingPage() {
                                         onChange={(e) => setSearchQuery(e.target.value)}
                                     />
                                 </div>
-                                
+
                                 <div className="flex max-sm:flex-col gap-2">
                                     <select
-                                        className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                        className="px-4 py-2 border border-gray-200 rounded-[10px] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                                         value={filterStatus}
                                         onChange={(e) => setFilterStatus(e.target.value)}
                                     >
@@ -286,12 +286,12 @@ export default function BookingPage() {
                                         <option value="Pending">Pending</option>
                                         <option value="Cancelled">Cancelled</option>
                                     </select>
-                                    
-                                    <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg flex items-center gap-2 hover:bg-indigo-700 transition-colors">
+
+                                    <button className="px-4 py-2 bg-indigo-600 text-white rounded-[10px] flex items-center gap-2 hover:bg-indigo-700 transition-colors" style={{ borderRadius: '10px' }}>
                                         <Filter size={18} /> Filter
                                     </button>
-                                    
-                                    <button className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg flex items-center gap-2 hover:bg-gray-50 transition-colors">
+
+                                    <button className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-[10px] flex items-center gap-2 hover:bg-gray-50 transition-colors" style={{ borderRadius: '10px' }}>
                                         <Download size={18} /> Export
                                     </button>
                                 </div>
@@ -302,13 +302,15 @@ export default function BookingPage() {
                         <div className="bg-white rounded-2xl overflow-hidden">
                             <div className="overflow-x-auto">
                                 <table className="w-full">
-                                    <thead className="bg-gray-50">
-                                        <tr>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                Ref No.
+                                    <thead>
+                                        <tr className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider border-l-2 border-white/30 first:border-l-0">
+                                                <div className="flex items-center">
+                                                    <span>Ref No.</span>
+                                                </div>
                                             </th>
-                                            <th 
-                                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                                            <th
+                                                className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider border-l-2 border-white/30 cursor-pointer"
                                                 onClick={() => handleSort("date")}
                                             >
                                                 <div className="flex items-center gap-1">
@@ -318,26 +320,26 @@ export default function BookingPage() {
                                                     )}
                                                 </div>
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider border-l-2 border-white/30">
                                                 Time Slot
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider border-l-2 border-white/30">
                                                 Company
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider border-l-2 border-white/30">
                                                 Car
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider border-l-2 border-white/30">
                                                 Status
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider border-l-2 border-white/30">
                                                 Action
                                             </th>
                                         </tr>
                                     </thead>
                                     <tbody className="bg-white divide-y divide-gray-200">
                                         {sortedAndFilteredData.map((booking) => (
-                                            <motion.tr 
+                                            <motion.tr
                                                 key={booking.id}
                                                 initial={{ opacity: 0 }}
                                                 animate={{ opacity: 1 }}
@@ -363,12 +365,12 @@ export default function BookingPage() {
                                                     {booking.car}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap">
-                                                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(booking.status)}`}>
+                                                    <span className={`px-2 py-1 text-xs font-semibold ${getStatusColor(booking.status)}`}>
                                                         {booking.status}
                                                     </span>
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                    <button 
+                                                    <button
                                                         onClick={() => openBookingDetails(booking)}
                                                         className="text-indigo-600 hover:text-indigo-900 flex items-center gap-1"
                                                     >
@@ -380,7 +382,7 @@ export default function BookingPage() {
                                     </tbody>
                                 </table>
                             </div>
-                            
+
                             {sortedAndFilteredData.length === 0 && (
                                 <div className="text-center py-12">
                                     <Calendar className="mx-auto text-gray-400" size={48} />
@@ -412,7 +414,7 @@ export default function BookingPage() {
             <AnimatePresence>
                 {selectedBooking && (
                     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-                        <motion.div 
+                        <motion.div
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.9 }}
@@ -424,48 +426,48 @@ export default function BookingPage() {
                                     &times;
                                 </button>
                             </div>
-                            
+
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
                                     <h3 className="text-sm font-medium text-gray-500 mb-2">Reference Number</h3>
                                     <p className="text-lg font-semibold">{selectedBooking.refNo}</p>
                                 </div>
-                                
+
                                 <div>
                                     <h3 className="text-sm font-medium text-gray-500 mb-2">Status</h3>
                                     <span className={`px-3 py-1 text-sm font-semibold rounded-full ${getStatusColor(selectedBooking.status)}`}>
                                         {selectedBooking.status}
                                     </span>
                                 </div>
-                                
+
                                 <div>
                                     <h3 className="text-sm font-medium text-gray-500 mb-2">Date</h3>
                                     <p className="text-lg">{formatDate(selectedBooking.date)}</p>
                                 </div>
-                                
+
                                 <div>
                                     <h3 className="text-sm font-medium text-gray-500 mb-2">Time Slot</h3>
                                     <p className="text-lg">{selectedBooking.timeSlot}</p>
                                 </div>
-                                
+
                                 <div>
                                     <h3 className="text-sm font-medium text-gray-500 mb-2">Company</h3>
                                     <p className="text-lg">{selectedBooking.company}</p>
                                 </div>
-                                
+
                                 <div>
                                     <h3 className="text-sm font-medium text-gray-500 mb-2">Car</h3>
                                     <p className="text-lg">{selectedBooking.car}</p>
                                 </div>
-                                
+
                                 <div className="md:col-span-2">
                                     <h3 className="text-sm font-medium text-gray-500 mb-2">Quantity</h3>
                                     <p className="text-lg">{selectedBooking.quantity}</p>
                                 </div>
                             </div>
-                            
+
                             <div className="mt-8 flex justify-end gap-3">
-                                <button 
+                                <button
                                     onClick={closeBookingDetails}
                                     className="px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
                                 >

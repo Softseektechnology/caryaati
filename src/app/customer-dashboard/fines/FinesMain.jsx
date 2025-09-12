@@ -249,7 +249,7 @@ const FinesMain = () => {
                                 
                                 <div className="flex max-sm:flex-col gap-2">
                                     <select
-                                        className="px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                                        className="px-4 py-2 border border-gray-200 rounded-[10px] focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
                                         value={filterStatus}
                                         onChange={(e) => setFilterStatus(e.target.value)}
                                     >
@@ -258,11 +258,11 @@ const FinesMain = () => {
                                         <option value="UnPaid">Unpaid</option>
                                     </select>
                                     
-                                    <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg flex items-center gap-2 hover:bg-indigo-700 transition-colors">
+                                    <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg flex items-center gap-2 hover:bg-indigo-700 transition-colors" style={{ borderRadius: '10px' }}>
                                         <Filter size={18} /> Filter
                                     </button>
                                     
-                                    <button className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg flex items-center gap-2 hover:bg-gray-50 transition-colors">
+                                    <button className="px-4 py-2 bg-white border border-gray-200 text-gray-700 rounded-lg flex items-center gap-2 hover:bg-gray-50 transition-colors" style={{ borderRadius: '10px' }}>
                                         <Download size={18} /> Export
                                     </button>
                                 </div>
@@ -274,9 +274,9 @@ const FinesMain = () => {
                             <div className="overflow-x-auto">
                                 <table className="w-full">
                                     <thead className="bg-gray-50">
-                                        <tr>
+                                        <tr className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
                                             <th 
-                                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                                                className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider border-l-2 border-white/30 first:border-l-0"
                                                 onClick={() => handleSort("date")}
                                             >
                                                 <div className="flex items-center gap-1">
@@ -286,23 +286,23 @@ const FinesMain = () => {
                                                     )}
                                                 </div>
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider border-l-2 border-white/30 first:border-l-0">
                                                 Fine Number
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider border-l-2 border-white/30 first:border-l-0">
                                                 Plate
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider border-l-2 border-white/30 first:border-l-0">
                                                 Reason
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider border-l-2 border-white/30 first:border-l-0">
                                                 Location
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider border-l-2 border-white/30 first:border-l-0">
                                                 Source
                                             </th>
                                             <th 
-                                                className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer"
+                                                className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider cursor-pointer"
                                                 onClick={() => handleSort("amount")}
                                             >
                                                 <div className="flex items-center gap-1">
@@ -312,10 +312,10 @@ const FinesMain = () => {
                                                     )}
                                                 </div>
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider">
                                                 Status
                                             </th>
-                                            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            <th className="px-6 py-4 text-left text-sm font-semibold text-white uppercase tracking-wider">
                                                 Action
                                             </th>
                                         </tr>
@@ -342,7 +342,7 @@ const FinesMain = () => {
                                                     {fine.amount.toFixed(2)}
                                                 </td>
                                                 <td className="px-6 py-4 whitespace-nowrap">
-                                                    <span className={`px-2 py-1 text-xs font-semibold rounded-full ${
+                                                    <span className={`px-2 py-1 text-xs font-semibold ${
                                                         fine.status === "Paid" 
                                                             ? "bg-green-100 text-green-800" 
                                                             : "bg-red-100 text-red-800"

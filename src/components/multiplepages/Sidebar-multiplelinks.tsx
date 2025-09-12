@@ -15,6 +15,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
   const [isMobile, setIsMobile] = useState(false);
   const [carRentalDropdownOpen, setCarRentalDropdownOpen] = useState(false);
   const [carsForRentDropdownOpen, setCarsForRentDropdownOpen] = useState(false);
+  const [languagesDropdownOpen, setLanguagesDropdownOpen] = useState(false);
   const [carRentalFlightDropdownOpen, setCarRentalFlightDropdownOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -53,6 +54,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
     if (!isMobile && !isOpen) setIsExpanded(false);
     setCarRentalDropdownOpen(false);
     setCarsForRentDropdownOpen(false);
+    setLanguagesDropdownOpen(false);
     setCarRentalFlightDropdownOpen(false);
   };
 
@@ -74,6 +76,9 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
   };
   const toggleCarsForRentDropdown = () => {
     setCarsForRentDropdownOpen(!carsForRentDropdownOpen);
+  };
+  const toggleLanguagesDropdown = () => {
+    setLanguagesDropdownOpen(!languagesDropdownOpen);
   };
   const toggleCarRentalFlightDropdown = () => {
     setCarRentalFlightDropdownOpen(!carRentalFlightDropdownOpen);
@@ -444,8 +449,8 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                   </li>
                 </ul>
               )}
-              </li>
-              <li className='transition-all duration-200'>
+            </li>
+            <li className='transition-all duration-200'>
               <a
                 href="#"
                 onClick={(e) => {
@@ -497,10 +502,38 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
             </li>
 
             <li>
-              <a href="#" onClick={handleClose}>
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault(); // Prevent page jump
+                  setLanguagesDropdownOpen(!languagesDropdownOpen);
+                }}
+              >
                 <i className="bi bi-globe"></i>
                 <span className={styles.menuText}>Language</span>
               </a>
+              {languagesDropdownOpen && (
+                <ul className={styles.submenu}>
+                  <li>
+                    <Link href="#English" onClick={handleClose}>English</Link>
+                  </li>
+                  <li>
+                    <Link href="#Arabic" onClick={handleClose}>Arabic</Link>
+                  </li>
+                  <li>
+                    <Link href="#Turkish" onClick={handleClose}>Turkish</Link>
+                  </li>
+                  <li>
+                    <Link href="#Spanish" onClick={handleClose}>Spanish</Link>
+                  </li>
+                  <li>
+                    <Link href="#French" onClick={handleClose}>French</Link>
+                  </li>
+                  <li>
+                    <Link href="#German" onClick={handleClose}>German</Link>
+                  </li>
+                </ul>
+              )}
             </li>
 
             <li>
