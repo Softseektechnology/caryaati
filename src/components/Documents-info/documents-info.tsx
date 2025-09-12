@@ -39,8 +39,8 @@ export default function DocumentsInfo() {
                   <Image
                     src="/images/info-documents/tourist.webp"
                     alt="Tourist"
-                    width={150}
-                    height={150}
+                    width={205}
+                    height={205}
                     className={`${styles.image}`}
                   />
                 </div>
