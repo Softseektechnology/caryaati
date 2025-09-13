@@ -1,0 +1,137 @@
+ /* .resultsSortBar { */
+  /* display: flex; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  /* padding: 10px 20px; */
+  /* width: 60%; */
+  /* background-color: #f0f3f5; */
+  /* flex-wrap: wrap; */
+  /* gap: 10px; */
+
+/* }  */
+
+.resultsCount {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+.sortContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  gap: 10px;
+}
+
+.sortDropdown {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 4px;
+  background-color: #f0f3f5;
+}
+
+.sortDropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #f0f3f5;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  min-width: 200px;
+  margin-top: 5px;
+}
+
+.sortOption {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+}
+
+.sortOption:hover {
+  background-color: #e0e3e5;
+}
+
+.infoIcon {
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+}
+
+/* ✅ Responsive Styles */
+@media (max-width: 1347px) {
+  .resultsSortBar{
+    /* margin-left: 0px; */
+    /* justify-self: center; */
+    /* width: 70%; */
+    margin-left: 90px;
+    width: 84.7vw;
+  }
+}
+@media (max-width: 1280px) {
+  .resultsSortBar{
+    margin-left: 60px;
+  }
+}
+@media (max-width: 1025px) {
+  .resultsSortBar {
+    width: 79.4vw;
+    margin-left: 58px;
+  }
+}
+@media (max-width: 600px) {
+  .resultsCount{
+    font-size: 12px;
+  }
+}
+/* @media (min-width: 640px) {
+  .resultsSortBar{
+    margin-left: 0px;
+    width: 90vw;
+  }
+} */
+@media (max-width: 767px) {
+  .resultsSortBar {
+    margin-left: 0;
+    justify-self: center;
+  }
+
+  /* .sortContainer { */
+    /* width: 100%; */
+    /* position: relative; */
+    /* left: 30px; */
+    /* justify-content: space-between; */
+  /* } */
+/* 
+  .resultsCount {
+    font-size: 14px;
+  }
+
+  .sortDropdown {
+    font-size: 13px;
+  }
+
+  .sortOption {
+    font-size: 13px;
+  }
+
+  .infoIcon {
+    margin-left: auto;
+  } */
+}
+
+/* @media (max-width: 616px) {} */
+@media (max-width: 480px) {
+  .sortDropdownMenu {
+    min-width: 100%;
+    right: auto;
+    left: 0;
+  }
+}

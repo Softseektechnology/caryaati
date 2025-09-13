@@ -7,7 +7,7 @@ import Navbar from '../../../components/nevegation-header/Navbar';
 import Footer from '../../../components/foorter/Footer';
 import UserDropdown from '../../../components/customer-dashboard/user-dashboard';
 import Sidebar from '../../../components/multiplepages/Sidebar-multiplelinks';
-import BlogSection from './Blog'; // Import the new component
+import BlogSection from '../../../components/Blog/Blog'; // Import the new component
 import styles from '../../../../public/styles/Home.module.css';
 
 // Define the Car interface (kept for potential future use)

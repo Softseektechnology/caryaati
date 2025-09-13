@@ -8,8 +8,8 @@ import { Telephone, Whatsapp, Star, Tag } from 'react-bootstrap-icons';
 import styles from './carcategories.module.css';
 import { Car, cars } from '../../data/carsData';
 import QuickBooking from './Modalbox';
-import InquiryButtton from '@/app/cars-for-rent/RentalDealCard/InquiryButtton';
-import DetailSection from '@/app/cars-for-rent/RentalDealCard/DetailSection';
+import InquiryButtton from '@/components/RentalDealCard/InquiryButtton';
+import DetailSection from '@/components/RentalDealCard/DetailSection';
 
 interface SubcategoryProps {
   category?: string;

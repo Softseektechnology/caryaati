@@ -1,0 +1,351 @@
+.extrasContainer {
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    overflow: hidden;
+  }
+  .packageCard {
+  flex: 1;
+  min-width: 180px;
+  border: 2px solid #d1d5db;
+  border-radius: 10px;
+  background: #f9fafb;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.packageCard:hover {
+  border-color: #6b7280;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.selectedCard {
+  border-color: #4f46e5;
+  background: #f3f4f6;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.icon {
+  font-size: 22px;
+  color: #4f46e5;
+}
+
+.radioCircle {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #9ca3af;
+  border-radius: 50%;
+}
+
+.radioSelected {
+  background: #4f46e5;
+  border-color: #4f46e5;
+}
+
+.cardBody {
+  margin-top: 10px;
+  text-align: left;
+}
+
+.cardTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.cardDuration {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+.cardPrice {
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  margin-top: 6px;
+}
+
+  
+  .section {
+    border-bottom: 1px solid #e5e7eb;
+  }
+  
+  .sectionHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #f9fafb;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    color: #1f2937;
+    transition: background 0.3s;
+  }
+  
+  .sectionHeader:hover {
+    background: #e2e8f0;
+  }
+  
+  .sectionHeader span:first-child {
+    flex-grow: 1;
+  }
+  
+  .totalPrice {
+    font-weight: bold;
+    color: #f4a261;
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .arrow {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+  }
+  
+  .rotated {
+    transform: rotate(180deg);
+  }
+  
+  .packageOptions {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    background: #fff;
+  }
+  
+  .packageOption {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    padding: 10px;
+    border: 2px solid #f4a261;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  
+  .packageOption.selected {
+    background: #f4e4bc;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(244, 162, 97, 0.3);
+  }
+  
+  .selectedLabel {
+    background: #f4a261;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+  }
+  
+  .packageOption span {
+    font-size: 14px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .price {
+    font-size: 16px;
+    font-weight: bold;
+    color: #f4a261;
+    margin-top: 5px;
+  }
+  
+  .extraItems {
+    padding: 20px;
+    background: #fff;
+  }
+  
+  .extraItem {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 15px;
+  }
+  
+  .extraImage {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+  }
+  
+  .extraDetails {
+    flex: 1;
+  }
+  
+  .extraDetails span {
+    display: block;
+    font-size: 14px;
+    color: #4b5563;
+    white-space: pre-wrap;
+  }
+  
+  .extraPrice {
+    font-size: 14px;
+    color: #f4a261;
+    font-weight: bold;
+  }
+  
+  .quantityControl {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  
+  .quantityButton {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #e5e7eb;
+    background: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.2s;
+  }
+  
+  .quantityButton:hover {
+    background: #f1f5f9;
+  }
+  
+  .quantityInput {
+    width: 50px;
+    height: 30px;
+    border: 1px solid #e5e7eb;
+    text-align: center;
+    font-size: 14px;
+    background: #fff;
+  }
+  
+  .note {
+    padding: 15px;
+    background: #e0f2fe;
+    border-radius: 5px;
+    margin-top: 15px;
+    font-size: 12px;
+    color: #1e40af;
+    text-align: center;
+  }
+  
+  .note p {
+    margin: 0;
+  }
+  
+  .summarySection {
+    padding: 20px;
+    background: #fff;
+  }
+  
+  .summaryTitle {
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 15px;
+  }
+  
+  .chargeItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+  }
+  
+  .chargeItem .label {
+    font-weight: bold;
+    color: #fff;
+    background-color: #1f2937;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  
+  .chargeItem .value {
+    color: #1f2937;
+  }
+  
+  .chargeItem.subtotal,
+  .chargeItem.vat,
+  .chargeItem.total {
+    font-weight: bold;
+  }
+  
+  .chargeItem.total .value {
+    color: #f4a261;
+    font-size: 18px;
+  }
+  
+  .reserveButton {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #f4a261;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: background-color 0.3s;
+  }
+  
+  .reserveButton:hover {
+    background-color: #e07a3f;
+  }
+  
+  .advice {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #f4a261;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 12px;
+    text-align: center;
+  }
+  
+  .note {
+    margin-top: 10px;
+    font-size: 12px;
+    color: #4b5563;
+    text-align: center;
+  }
+  .sectionHeader {
+  /* Minimal styles to avoid overriding Tailwind */
+}
+
+.dropdownContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
+}
+
+.dropdownOpen {
+  max-height: 1000px; /* Large enough to accommodate content; adjust if needed */
+}
+
+.arrow {
+  /* Minimal styles to avoid overriding Tailwind */
+}
+
+.rotated {
+  transform: rotate(180deg);
+}
+
+.packageOption {
+  /* Minimal styles to avoid overriding Tailwind */
+}

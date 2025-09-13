@@ -7,7 +7,7 @@ import Footer from '../../components/foorter/Footer';
 import UserDropdown from '../../components/customer-dashboard/user-dashboard';
 import Sidebar from '../../components/multiplepages/Sidebar-multiplelinks';
 import styles from '.././Contact-us/Contact-us.module.css';
-import Book from './Bookform';
+import Book from '../../components/Form/Bookform';
 export default function ContactUs() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);

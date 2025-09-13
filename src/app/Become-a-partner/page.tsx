@@ -7,7 +7,7 @@ import Navbar from '../../components/nevegation-header/Navbar';
 import Footer from '../../components/foorter/Footer';
 import UserDropdown from '../../components/customer-dashboard/user-dashboard';
 import Sidebar from '../../components/multiplepages/Sidebar-multiplelinks';
-import BecomePartnerPage from './Become-a-partner';
+import BecomePartnerPage from '../../components/Become-a-partner/Become-a-partner';
 import styles from '../../../public/styles/Home.module.css';
 
 interface Car {

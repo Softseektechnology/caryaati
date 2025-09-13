@@ -1,0 +1,368 @@
+.container {
+  max-width: 1280px;
+  margin: 120px auto 40px auto;
+  padding: 0 20px;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 16px;
+  background: linear-gradient(90deg, #003087, #f60);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: fadeIn 1s ease-in-out;
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #4b5563;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+  line-height: 1.6;
+}
+
+.steps {
+  margin: 40px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.step {
+  text-align: center;
+  padding: 24px;
+  border: none;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.step:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.step h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #003087;
+  margin: 16px 0 8px 0;
+}
+
+.step p {
+  font-size: 15px;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.divider {
+  margin: 60px 0;
+  border-color: #e5e7eb;
+  border-width: 1px;
+}
+
+.formContainer {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.formContainer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #003087, #f60);
+}
+
+.progressContainer {
+  margin-bottom: 40px;
+}
+
+.progressBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 16px 0;
+}
+
+.progressBar::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: #e5e7eb;
+  border-radius: 3px;
+  z-index: 1;
+}
+
+.progressBar::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: calc(33.33% * var(--current-step));
+  height: 6px;
+  background: linear-gradient(90deg, #003087, #f60);
+  border-radius: 3px;
+  transition: width 0.4s ease;
+  z-index: 1;
+}
+
+.progressStep {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  transition: transform 0.3s ease;
+}
+
+.progressStep:hover {
+  transform: scale(1.05);
+}
+
+.progressStep .stepNumber {
+  width: 36px;
+  height: 36px;
+  background: #e5e7eb;
+  color: #6b7280;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.progressStep.completed .stepNumber {
+  background: #f60;
+  color: #ffffff;
+}
+
+.progressStep .stepLabel {
+  font-size: 15px;
+  font-weight: 500;
+  color: #6b7280;
+  margin-top: 12px;
+  transition: color 0.3s ease;
+}
+
+.progressStep.completed .stepLabel {
+  color: #003087;
+}
+
+.serviceCard {
+  text-align: center;
+  padding: 24px;
+  height: 350px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 24px;
+}
+
+.serviceCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.serviceCard h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 16px 0 8px 0;
+}
+
+.serviceCard ul {
+  list-style: none;
+  padding: 0;
+}
+
+.serviceCard li {
+  font-size: 15px;
+  color: #4b5563;
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.serviceIcon {
+  font-size: 126px;
+  scale: 3.5;
+  color: #003087;
+  margin-bottom: 36px;
+  margin-top: 26px;
+  display: block;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.steps, .serviceCard, .formContainer {
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Ensure only active step is visible */
+.formStep {
+  display: none;
+}
+
+.formStep.active {
+  display: block;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .container {
+    margin: 100px auto 30px auto;
+    padding: 0 16px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .steps {
+    grid-template-columns: 1fr;
+  }
+
+  .formContainer {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .formContainer {
+    margin: 0;
+  }
+  .container {
+    padding: 0;
+  }
+  .title {
+    font-size: 28px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .step, .serviceCard {
+    padding: 20px;
+  }
+
+  .progressBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 16px 0;
+  }
+
+  .progressBar::before {
+    display: block;
+    top: 18px;
+    width: 100%;
+    height: 6px;
+  }
+
+  .progressBar::after {
+    display: block;
+    top: 18px;
+    width: calc(33.33% * var(--current-step));
+    height: 6px;
+  }
+
+  .progressStep {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .progressStep .stepNumber {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .progressStep .stepLabel {
+    font-size: 10px;
+    margin-top: 8px;
+  }
+
+  .formContainer {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .serviceIcon {
+    font-size: 72px;
+  }
+}
+
+.featureSection {
+  background: #000;
+  padding: 60px 20px;
+  margin-top: 60px;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border-radius: 12px;
+}
+
+.featureSection h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.featureGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.featureItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.featureImage {
+  width: 120px;
+  height: 120px;
+  background: #333;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  font-size: 14px;
+}

@@ -2,13 +2,13 @@
 
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Form from '../Form/Bookform';
-import ExtrasSection from './ExtrasSection';
+import Form from '../../components/Form/Bookform';
+import ExtrasSection from '../../components/Booknow/ExtrasSection';
 import CustomDateRangePicker from '@/components/search-engine/CustomDateRangePicker';
 import Subcategory from '@/components/homepage-subcategory/allCarscategory';
 import 'aos/dist/aos.css';
 import AOS from 'aos';
-import CarDetailsModal from './CarDetailsModal';
+import CarDetailsModal from '../../components/Booknow/CarDetailsModal';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';

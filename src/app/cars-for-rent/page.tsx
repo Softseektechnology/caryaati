@@ -7,12 +7,12 @@ import Navbar from '../../components/nevegation-header/Navbar';
 import Footer from '../../components/foorter/Footer';
 import UserDropdown from '../../components/customer-dashboard/user-dashboard';
 import Sidebar from '../../components/multiplepages/Sidebar-multiplelinks';
-import CustomCheckboxDropdown from './listing_filter/listing_filters';
+import CustomCheckboxDropdown from '../../components/listing_filter/listing_filters';
 import styles from '../../../public/styles/Home.module.css';
-import RentalLayout from './RentalDealCard/RentalDealCard';
-import ResultsSortBar from './ResultsSortBar/ResultsSortBar';
-import PriceAnalysisNotification from './PriceAnalysisNotification/Price';
-import Trackprice from './PriceAnalysisNotification/Trackprices';
+import RentalLayout from '../../components/RentalDealCard/RentalDealCard';
+import ResultsSortBar from '../../components/ResultsSortBar/ResultsSortBar';
+import PriceAnalysisNotification from '../../components/PriceAnalysisNotification/Price';
+import Trackprice from '../../components/PriceAnalysisNotification/Trackprices';
 // Define the Car interface (kept for potential future use)
 interface Car {
   name: string;

@@ -1,0 +1,608 @@
+.blogContainer {
+  max-width: 1180px;
+  margin-left: 32px;
+  padding: 10px;
+  font-family: 'Montserrat', sans-serif;
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.layout {
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.leftSection {
+  flex: 2;
+  min-width: 280px;
+}
+
+.blogPosts {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.blogCard {
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  border: 1px solid #ddd;
+}
+
+.blogCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.carImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.carImage:hover {
+  transform: scale(1.02);
+}
+
+.blogContent {
+  padding: 20px;
+}
+
+.blogContent h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  color: #0080F6;
+  margin-bottom: 10px;
+}
+
+.blogContent .meta {
+  font-size: 0.85rem;
+  color: #666;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.blogContent p {
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.readMoreButton {
+  background: linear-gradient(90deg, #0080F6, #42C3F7);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.readMoreButton:hover {
+  background: linear-gradient(90deg, #42C3F7, #0080F6);
+  transform: scale(1.05);
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.pagination button {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: background 0.3s, color 0.3s;
+}
+
+.pagination button:hover {
+  background: #0080F6;
+  color: #fff;
+}
+
+.pagination .active {
+  background: #0080F6;
+  color: #fff;
+  font-weight: bold;
+}
+
+.rightSection {
+  flex: 1;
+  min-width: 250px;
+}
+
+.searchBar {
+  display: flex;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  padding: 12px;
+  font-size: 1rem;
+  background: #f9f9f9;
+}
+
+.searchButton {
+  background: #ffc107;
+  border: none;
+  color: #1f1f1f;
+  padding: 12px 20px;
+  transition: background 0.3s;
+}
+
+.searchButton:hover {
+  background: #ff9800;
+}
+
+.categories,
+.recentPosts {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s;
+  border: 1px solid #ddd;
+}
+
+.categories:hover,
+.recentPosts:hover {
+  transform: translateY(-3px);
+}
+
+.categories h3,
+.recentPosts h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
+  color: #0080F6;
+  margin-bottom: 15px;
+}
+
+.categoryList {
+  list-style: none;
+  padding: 0;
+}
+
+.categoryList li {
+  margin-bottom: 12px;
+}
+
+.categoryList a {
+  color: #0080F6;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.categoryList a:hover {
+  color: #ffc107;
+}
+
+.categoryList span {
+  color: #666;
+  margin-left: 8px;
+  font-size: 0.9rem;
+}
+
+.recentPosts .post {
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+  transition: transform 0.3s;
+}
+
+.recentPosts .post:hover {
+  transform: translateX(5px);
+}
+
+.recentPosts .post:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.recentPosts .post a {
+  color: #0080F6;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.recentPosts .post a:hover {
+  color: #ffc107;
+}
+
+.recentPosts .post p {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 5px 0 0;
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+  .blogContainer{
+    margin: 0 auto;
+  }
+}
+@media (max-width: 992px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .blogPosts {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .blogContainer {
+    padding: 15px;
+  }
+
+  .blogContent h2 {
+    font-size: 1.4rem;
+  }
+
+  .blogContent .meta {
+    font-size: 0.8rem;
+  }
+
+  .blogContent p {
+    font-size: 0.95rem;
+  }
+
+  .readMoreButton {
+    padding: 8px 16px;
+    font-size: 0.95rem;
+  }
+
+  .carImage {
+    height: 180px;
+  }
+
+  .pagination {
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .pagination button {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+  }
+
+  .searchBar {
+    margin-bottom: 20px;
+  }
+
+  .searchInput {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .searchButton {
+    padding: 10px 15px;
+  }
+
+  .categories h3,
+  .recentPosts h3 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+
+  .categoryList li {
+    margin-bottom: 10px;
+  }
+
+  .categoryList a {
+    font-size: 0.95rem;
+  }
+
+  .categoryList span {
+    font-size: 0.85rem;
+  }
+
+  .recentPosts .post a {
+    font-size: 0.95rem;
+  }
+
+  .recentPosts .post p {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .blogContainer {
+    padding: 10px;
+  }
+
+  .blogPosts {
+    gap: 20px;
+  }
+
+  .blogCard {
+    justify-items: center;
+  }
+
+  .blogContent {
+    padding: 15px;
+  }
+
+  .blogContent h2 {
+    font-size: 1.3rem;
+  }
+
+  .blogContent .meta {
+    font-size: 0.75rem;
+    gap: 8px;
+  }
+
+  .blogContent p {
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+
+  .readMoreButton {
+    padding: 7px 14px;
+    font-size: 0.9rem;
+  }
+
+  .carImage {
+    height: 160px;
+  }
+
+  .pagination {
+    gap: 5px;
+    margin-top: 15px;
+  }
+
+  .pagination button {
+    padding: 6px 10px;
+    font-size: 0.9rem;
+  }
+
+  .searchInput {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .searchButton {
+    padding: 8px 12px;
+  }
+
+  .categories,
+  .recentPosts {
+    padding: 15px;
+  }
+
+  .categories h3,
+  .recentPosts h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+  }
+
+  .categoryList li {
+    margin-bottom: 8px;
+  }
+
+  .categoryList a {
+    font-size: 0.9rem;
+  }
+
+  .recentPosts .post {
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+  }
+
+  .recentPosts .post a {
+    font-size: 0.9rem;
+  }
+
+  .recentPosts .post p {
+    font-size: 0.75rem;
+    margin: 3px 0 0;
+  }
+}
+
+@media (max-width: 400px) {
+  .blogContainer {
+    padding: 8px;
+  }
+
+  .leftSection {
+    min-width: 100%;
+  }
+
+  .blogPosts {
+    gap: 15px;
+  }
+
+  .blogCard {
+    min-width: 100%;
+  }
+
+  .blogContent {
+    padding: 12px;
+  }
+
+  .blogContent h2 {
+    font-size: 1.25rem;
+  }
+
+  .blogContent .meta {
+    font-size: 0.7rem;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .blogContent p {
+    font-size: 0.85rem;
+  }
+
+  .readMoreButton {
+    padding: 6px 12px;
+    font-size: 0.85rem;
+  }
+
+  .carImage {
+    height: 140px;
+  }
+
+  .pagination {
+    gap: 4px;
+    margin-top: 12px;
+  }
+
+  .pagination button {
+    padding: 5px 8px;
+    font-size: 0.85rem;
+  }
+
+  .searchInput {
+    padding: 6px;
+    font-size: 0.85rem;
+  }
+
+  .searchButton {
+    padding: 6px 10px;
+  }
+
+  .categories,
+  .recentPosts {
+    padding: 12px;
+  }
+
+  .categories h3,
+  .recentPosts h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .categoryList li {
+    margin-bottom: 8px;
+  }
+
+  .categoryList a {
+    font-size: 0.85rem;
+  }
+
+  .categoryList span {
+    font-size: 0.8rem;
+  }
+
+  .recentPosts .post a {
+    font-size: 0.85rem;
+  }
+
+  .recentPosts .post p {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 320px) {
+  .blogContainer {
+    padding: 5px;
+  }
+
+  .blogPosts {
+    gap: 12px;
+  }
+
+  .blogContent {
+    padding: 10px;
+  }
+
+  .blogContent h2 {
+    font-size: 1.2rem;
+  }
+
+  .blogContent .meta {
+    font-size: 0.65rem;
+    gap: 5px;
+  }
+
+  .blogContent p {
+    font-size: 0.8rem;
+  }
+
+  .readMoreButton {
+    padding: 5px 10px;
+    font-size: 0.8rem;
+  }
+
+  .carImage {
+    height: 120px;
+  }
+
+  .pagination {
+    gap: 3px;
+    margin-top: 10px;
+  }
+
+  .pagination button {
+    padding: 4px 6px;
+    font-size: 0.8rem;
+  }
+
+  .searchInput {
+    padding: 5px;
+    font-size: 0.8rem;
+  }
+
+  .searchButton {
+    padding: 5px 8px;
+  }
+
+  .categories,
+  .recentPosts {
+    padding: 10px;
+  }
+
+  .categories h3,
+  .recentPosts h3 {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+
+  .categoryList li {
+    margin-bottom: 6px;
+  }
+
+  .categoryList a {
+    font-size: 0.8rem;
+  }
+
+  .categoryList span {
+    font-size: 0.75rem;
+  }
+
+  .recentPosts .post a {
+    font-size: 0.8rem;
+  }
+
+  .recentPosts .post p {
+    font-size: 0.65rem;
+  }
+}
