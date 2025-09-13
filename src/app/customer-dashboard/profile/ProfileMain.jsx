@@ -233,11 +233,27 @@ const ProfileMain = () => {
         setIsEditingLicense(false);
     };
 
+    // Update the cards state to include the new fields
     const [cards, setCards] = useState([
-        { id: 2, type: "Mastercard", fullNumber: "5500 0000 0000 5678", last4: "5678", expiry: "09/2024" }
-    ]);
+        {
+            id: 2,
+            type: "Mastercard",
+            fullNumber: "5500 0000 0000 5678",
+            last4: "5678",
+            expiry: "09/2024",
+            cardholderName: "MAAZ AZIZ",
+            cvv: "123"
+        }
+    ])
     const [showAddCard, setShowAddCard] = useState(false);
-    const [newCard, setNewCard] = useState({ type: "", fullNumber: "", expiry: "" });
+    // Update the newCard state
+    const [newCard, setNewCard] = useState({
+        type: "",
+        fullNumber: "",
+        expiry: "",
+        cardholderName: "",
+        cvv: ""
+    });
 
     const handleNewCardChange = (e) => {
         const { name, value } = e.target;
@@ -545,121 +561,145 @@ const ProfileMain = () => {
                                                 </div>
                                             )}
                                         </div>
-                                        <div className="space-y-3">
-                                            <div>
-                                                <p className="text-sm text-gray-500">Display Name</p>
-                                                {isEditingPersonal ? (
-                                                    <input
-                                                        type="text"
-                                                        name="fullName"
-                                                        value={tempPersonalInfo.fullName}
-                                                        onChange={handlePersonalChange}
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
-                                                    />
-                                                ) : (
+
+                                        {!isEditingPersonal ? (
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-3 bg-gray-50 rounded">
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Display Name</p>
                                                     <p className="font-medium">{personalInfo.fullName}</p>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-500">Email Address</p>
-                                                {isEditingPersonal ? (
-                                                    <input
-                                                        type="email"
-                                                        name="email"
-                                                        value={tempPersonalInfo.email}
-                                                        onChange={handlePersonalChange}
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
-                                                    />
-                                                ) : (
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Email Address</p>
                                                     <p className="font-medium">{personalInfo.email}</p>
-                                                )}
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Phone Number</p>
+                                                    <p className="font-medium">{personalInfo.phoneCountryCode} {personalInfo.phoneNumber}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Gender</p>
+                                                    <p className="font-medium">{personalInfo.gender}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Date of Birth</p>
+                                                    <p className="font-medium">{personalInfo.dateOfBirth}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Nationality</p>
+                                                    <p className="font-medium">{personalInfo.nationality}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Country of Residence</p>
+                                                    <p className="font-medium">{personalInfo.countryOfResidence}</p>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <p className="text-sm text-gray-500">Phone Number</p>
-                                                {isEditingPersonal ? (
-                                                    <div className="flex gap-2">
+                                        ) : (
+                                            <motion.div
+                                                initial={{ opacity: 0, height: 0 }}
+                                                animate={{ opacity: 1, height: "auto" }}
+                                                className="mt-4 p-4 border border-indigo-200 rounded-lg"
+                                            >
+                                                <h4 className="text-md font-medium mb-2">Edit Personal Information</h4>
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                    <div>
+                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Display Name</label>
+                                                        <input
+                                                            type="text"
+                                                            name="fullName"
+                                                            value={tempPersonalInfo.fullName}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+                                                        <input
+                                                            type="email"
+                                                            name="email"
+                                                            value={tempPersonalInfo.email}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Phone Country Code</label>
                                                         <input
                                                             type="text"
                                                             name="phoneCountryCode"
                                                             value={tempPersonalInfo.phoneCountryCode}
                                                             onChange={handlePersonalChange}
-                                                            className="w-1/4 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                                             placeholder="+971"
                                                         />
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
                                                         <input
                                                             type="text"
                                                             name="phoneNumber"
                                                             value={tempPersonalInfo.phoneNumber}
                                                             onChange={handlePersonalChange}
-                                                            className="w-3/4 border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                                             placeholder="50 188 9924"
                                                         />
                                                     </div>
-                                                ) : (
-                                                    <p className="font-medium">{personalInfo.phoneCountryCode} {personalInfo.phoneNumber}</p>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-500">Gender</p>
-                                                {isEditingPersonal ? (
-                                                    <input
-                                                        type="text"
-                                                        name="gender"
-                                                        value={tempPersonalInfo.gender}
-                                                        onChange={handlePersonalChange}
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
-                                                    />
-                                                ) : (
-                                                    <p className="font-medium">{personalInfo.gender}</p>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-500">Date of Birth</p>
-                                                {isEditingPersonal ? (
-                                                    <input
-                                                        type="text"
-                                                        name="dateOfBirth"
-                                                        value={tempPersonalInfo.dateOfBirth}
-                                                        onChange={handlePersonalChange}
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
-                                                    />
-                                                ) : (
-                                                    <p className="font-medium">{personalInfo.dateOfBirth}</p>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-500">Nationality</p>
-                                                {isEditingPersonal ? (
-                                                    <input
-                                                        type="text"
-                                                        name="nationality"
-                                                        value={tempPersonalInfo.nationality}
-                                                        onChange={handlePersonalChange}
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
-                                                    />
-                                                ) : (
-                                                    <p className="font-medium">{personalInfo.nationality}</p>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-500">Country of Residence</p>
-                                                {isEditingPersonal ? (
-                                                    <input
-                                                        type="text"
-                                                        name="countryOfResidence"
-                                                        value={tempPersonalInfo.countryOfResidence}
-                                                        onChange={handlePersonalChange}
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
-                                                    />
-                                                ) : (
-                                                    <p className="font-medium">{personalInfo.countryOfResidence}</p>
-                                                )}
-                                            </div>
-                                        </div>
+                                                    <div>
+                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+                                                        <select
+                                                            name="gender"
+                                                            value={tempPersonalInfo.gender}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        >
+                                                            <option value="Male">Male</option>
+                                                            <option value="Female">Female</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Date of Birth</label>
+                                                        <input
+                                                            type="text"
+                                                            name="dateOfBirth"
+                                                            value={tempPersonalInfo.dateOfBirth}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                            placeholder="DD-MM-YYYY"
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Nationality</label>
+                                                        <input
+                                                            type="text"
+                                                            name="nationality"
+                                                            value={tempPersonalInfo.nationality}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Country of Residence</label>
+                                                        <input
+                                                            type="text"
+                                                            name="countryOfResidence"
+                                                            value={tempPersonalInfo.countryOfResidence}
+                                                            onChange={handlePersonalChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-2 mt-4 justify-end">
+                                                    <button onClick={cancelPersonal} className="px-4 py-2 border border-gray-300" style={{ borderRadius: "10px" }}>Cancel</button>
+                                                    <button onClick={savePersonal} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Save</button>
+                                                </div>
+                                            </motion.div>
+                                        )}
                                     </div>
                                 )}
 
+
                                 {/* My Documents Sub-Tab */}
+
                                 {activeAccountSubTab === "documents" && (
                                     <div className="border rounded-lg p-4">
                                         <div className="flex items-center justify-between mb-4">
@@ -705,8 +745,8 @@ const ProfileMain = () => {
                                                 animate={{ opacity: 1, height: "auto" }}
                                                 className="mt-4 p-4 border border-gray-200 rounded-lg"
                                             >
-                                                <h4 className="text-md font-medium mb-2">Add New Document</h4>
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <h4 className="text-md font-medium mb-2">Upload New Document</h4>
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                                     <div>
                                                         <label className="block text-sm font-medium text-gray-700 mb-1">Document Type</label>
                                                         <select
@@ -770,9 +810,9 @@ const ProfileMain = () => {
                                                         <p className="text-xs text-gray-500 mt-1">{newDocument.backCopy}</p>
                                                     </div>
                                                 </div>
-                                                <div className="flex gap-2 mt-4">
-                                                    <button onClick={addDocument} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Save</button>
+                                                <div className="flex gap-2 mt-4 justify-end">
                                                     <button onClick={() => setShowAddDocument(false)} className="px-4 py-2 border border-gray-300" style={{ borderRadius: "10px" }}>Cancel</button>
+                                                    <button onClick={addDocument} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Upload</button>
                                                 </div>
                                             </motion.div>
                                         )}
@@ -780,10 +820,10 @@ const ProfileMain = () => {
                                             <motion.div
                                                 initial={{ opacity: 0, height: 0 }}
                                                 animate={{ opacity: 1, height: "auto" }}
-                                                className="mt-4 p-4 border border-indigo-200 rounded-lg "
+                                                className="mt-4 p-4 border border-indigo-200 rounded-lg"
                                             >
                                                 <h4 className="text-md font-medium mb-2">Edit Document</h4>
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                                                     <div>
                                                         <label className="block text-sm font-medium text-gray-700 mb-1">Document Type</label>
                                                         <select
@@ -847,14 +887,15 @@ const ProfileMain = () => {
                                                         <p className="text-xs text-gray-500 mt-1">{editingDocument.backCopy}</p>
                                                     </div>
                                                 </div>
-                                                <div className="flex gap-2 mt-4">
-                                                    <button onClick={updateDocument} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Update</button>
+                                                <div className="flex gap-2 mt-4 justify-end">
                                                     <button onClick={() => setEditingDocument(null)} className="px-4 py-2 border border-gray-300" style={{ borderRadius: "10px" }}>Cancel</button>
+                                                    <button onClick={updateDocument} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Update</button>
                                                 </div>
                                             </motion.div>
                                         )}
                                     </div>
                                 )}
+
 
                                 {/* My Driving License Sub-Tab */}
                                 {activeAccountSubTab === "drivingLicense" && (
@@ -1361,6 +1402,8 @@ const ProfileMain = () => {
                         )}
 
                         {/* My Cards Tab */}
+                        // ... existing code ...
+
                         {activeTab === "myCards" && (
                             <motion.div
                                 key="myCards"
@@ -1393,6 +1436,9 @@ const ProfileMain = () => {
                                                 <div>
                                                     <p className="font-medium">{card.type} •••• {card.last4}</p>
                                                     <p className="text-sm text-gray-500">Expires {card.expiry}</p>
+                                                    {card.cardholderName && (
+                                                        <p className="text-sm text-gray-500">Cardholder: {card.cardholderName}</p>
+                                                    )}
                                                 </div>
                                                 <div className="flex gap-2">
                                                     <button className="text-indigo-600" onClick={() => startEditingCard(card)}>
@@ -1434,16 +1480,35 @@ const ProfileMain = () => {
                                             />
                                             <input
                                                 type="text"
-                                                name="expiry"
-                                                value={newCard.expiry}
+                                                name="cardholderName"
+                                                value={newCard.cardholderName}
                                                 onChange={handleNewCardChange}
-                                                placeholder="Expiry (MM/YYYY)"
+                                                placeholder="Cardholder Name"
                                                 className="w-full border my-1 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                             />
+                                            <div className="grid grid-cols-2 gap-2">
+                                                <input
+                                                    type="text"
+                                                    name="expiry"
+                                                    value={newCard.expiry}
+                                                    onChange={handleNewCardChange}
+                                                    placeholder="Expiry (MM/YYYY)"
+                                                    className="w-full border my-1 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                />
+                                                <input
+                                                    type="text"
+                                                    name="cvv"
+                                                    value={newCard.cvv}
+                                                    onChange={handleNewCardChange}
+                                                    placeholder="CVV"
+                                                    maxLength={4}
+                                                    className="w-full border my-1 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                />
+                                            </div>
                                         </div>
-                                        <div className="flex gap-2 mt-4">
-                                            <button onClick={addCard} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Save</button>
+                                        <div className="flex gap-2 mt-4 justify-end">
                                             <button onClick={() => setShowAddCard(false)} className="px-4 py-2 border border-gray-300" style={{ borderRadius: "10px" }}>Cancel</button>
+                                            <button onClick={addCard} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Save</button>
                                         </div>
                                     </motion.div>
                                 )}
@@ -1475,16 +1540,35 @@ const ProfileMain = () => {
                                             />
                                             <input
                                                 type="text"
-                                                name="expiry"
-                                                value={editingCard.expiry}
+                                                name="cardholderName"
+                                                value={editingCard.cardholderName}
                                                 onChange={handleEditCardChange}
-                                                placeholder="Expiry (MM/YYYY)"
+                                                placeholder="Cardholder Name"
                                                 className="w-full border rounded my-1 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                                             />
+                                            <div className="grid grid-cols-2 gap-2">
+                                                <input
+                                                    type="text"
+                                                    name="expiry"
+                                                    value={editingCard.expiry}
+                                                    onChange={handleEditCardChange}
+                                                    placeholder="Expiry (MM/YYYY)"
+                                                    className="w-full border rounded my-1 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                />
+                                                <input
+                                                    type="text"
+                                                    name="cvv"
+                                                    value={editingCard.cvv}
+                                                    onChange={handleEditCardChange}
+                                                    placeholder="CVV"
+                                                    maxLength={4}
+                                                    className="w-full border rounded my-1 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                />
+                                            </div>
                                         </div>
-                                        <div className="flex gap-2 mt-4">
-                                            <button onClick={updateCard} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Update</button>
+                                        <div className="flex gap-2 mt-4 justify-end">
                                             <button onClick={() => setEditingCard(null)} className="px-4 py-2 border border-gray-300" style={{ borderRadius: "10px" }}>Cancel</button>
+                                            <button onClick={updateCard} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Update</button>
                                         </div>
                                     </motion.div>
                                 )}
@@ -1496,11 +1580,11 @@ const ProfileMain = () => {
 
             {/* Add Driver Modal */}
             {showAddDriverModal && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+                <div className="fixed inset-0 bg-black mt-[50px] bg-opacity-50 flex items-center justify-center p-4 z-50">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         animate={{ opacity: 1, scale: 1 }}
-                        className="bg-white rounded-2xl p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto"
+                        className="bg-white rounded-2xl p-6 w-full max-w-5xl max-h-[80vh] overflow-y-auto"
                     >
                         <div className="flex justify-between items-center mb-6">
                             <h3 className="text-lg font-medium">Add New Driver</h3>
@@ -1508,7 +1592,7 @@ const ProfileMain = () => {
                                 <X size={24} />
                             </button>
                         </div>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div className="grid grid-cols-2 max-sm:grid-cols-1 md:grid-cols-4 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Driver Name</label>
                                 <input
@@ -1677,10 +1761,10 @@ const ProfileMain = () => {
                                 <p className="text-xs text-gray-500 mt-1">{newDriver.backCopy}</p>
                             </div>
                         </div>
-                        <div className="flex gap-2 mt-6">
+                        <div className="float-right gap-2 mt-6">
                             <button
                                 onClick={addDriver}
-                                className="px-4 py-2 bg-indigo-600 text-white"
+                                className="px-4 py-2 bg-indigo-600 mx-2 text-white"
                                 style={{ borderRadius: "10px" }}
                             >
                                 Save Driver

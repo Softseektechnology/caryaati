@@ -12,6 +12,7 @@
     "@emotion/cache": "^11.14.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@heroicons/react": "^2.2.0",
     "@heroui/date-picker": "^2.3.25",
     "@heroui/react": "^2.7.5",
     "@internationalized/date": "^3.7.0",
