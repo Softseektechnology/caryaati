@@ -29,7 +29,7 @@ const CarBookingForm: React.FC = () => {
     useEffect(() => {
         try {
             AOS.init({ duration: 400, once: true });
-            
+
             const startDateStr = localStorage.getItem('startDate');
             const endDateStr = localStorage.getItem('endDate');
             const defaultStartDate = new Date('2025-09-02T22:00:00+05:00');
@@ -80,10 +80,10 @@ const CarBookingForm: React.FC = () => {
             setCurrentStep(currentStep - 1);
         }
     };
-    
+
     const showStep = (step: number) => {
         if (step <= totalSteps) {
-          setCurrentStep(step);
+            setCurrentStep(step);
         }
     };
 
@@ -95,32 +95,32 @@ const CarBookingForm: React.FC = () => {
     ];
     const [selectedImage, setSelectedImage] = useState(carImages[0].src);
     const sliderSettings = {
-      dots: false,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 4,
-      slidesToScroll: 1,
-      arrows: false,
-      responsive: [
-      {
-        breakpoint: 767,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 400,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true
-        }
-      },
-    ]
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        arrows: false,
+        responsive: [
+            {
+                breakpoint: 767,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
+            },
+            {
+                breakpoint: 400,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    infinite: true,
+                    dots: true
+                }
+            },
+        ]
     };
 
     if (!isClient) {
@@ -140,8 +140,8 @@ const CarBookingForm: React.FC = () => {
                     {/* Stepper */}
                     <div className="relative max-w-4xl mx-auto mb-16">
                         <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 transform -translate-y-1/2"></div>
-                        <div 
-                            className="absolute top-1/2 left-0 h-0.5 bg-blue-600 transform -translate-y-1/2 transition-all duration-300 ease-in-out" 
+                        <div
+                            className="absolute top-1/2 left-0 h-0.5 bg-blue-600 transform -translate-y-1/2 transition-all duration-300 ease-in-out"
                             style={{ width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` }}
                         ></div>
                         <div className="relative flex justify-between items-center">
@@ -166,9 +166,9 @@ const CarBookingForm: React.FC = () => {
                                     {/* Left Side: Image Gallery */}
                                     <div className="flex-shrink-0 lg:w-1/2">
                                         <div className="relative overflow-hidden rounded-lg aspect-video mb-4">
-                                            <Image 
-                                                src={selectedImage} 
-                                                alt="Selected Car" 
+                                            <Image
+                                                src={selectedImage}
+                                                alt="Selected Car"
                                                 fill
                                                 className="object-cover"
                                             />
@@ -178,9 +178,9 @@ const CarBookingForm: React.FC = () => {
                                                 {carImages.map(img => (
                                                     <div key={img.id} className="px-2">
                                                         <div className={`relative h-16 rounded-md overflow-hidden border cursor-pointer transition-all duration-200 ${selectedImage === img.src ? 'border-blue-500 shadow-sm' : 'border-gray-200 hover:border-gray-300'}`} onClick={() => setSelectedImage(img.src)}>
-                                                            <Image 
-                                                                src={img.src} 
-                                                                alt={img.alt} 
+                                                            <Image
+                                                                src={img.src}
+                                                                alt={img.alt}
                                                                 fill
                                                                 className="object-cover"
                                                             />
@@ -201,7 +201,7 @@ const CarBookingForm: React.FC = () => {
                                                     <span className="bg-green-100 text-green-800 text-xs font-semibold px-3 py-1 rounded-full">Popular</span>
                                                 </div>
                                             </div>
-                                            <button 
+                                            <button
                                                 onClick={() => setCarDetails(true)}
                                                 className="flex items-center text-blue-600 hover:text-blue-700 transition-colors text-sm font-medium"
                                             >
@@ -211,7 +211,7 @@ const CarBookingForm: React.FC = () => {
                                                 </svg>
                                             </button>
                                         </div>
-                                        
+
                                         <div className="bg-red-50 border border-red-200 rounded-lg p-3 my-4">
                                             <p className="text-sm text-red-700 font-medium flex items-center">
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -220,7 +220,7 @@ const CarBookingForm: React.FC = () => {
                                                 High Demand - Only 1 Car Available
                                             </p>
                                         </div>
-                                        
+
                                         <div className="mb-6 p-4 bg-gray-50 rounded-lg">
                                             <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">1009.9 AED</h3>
                                             <p className="text-xs text-gray-500">Price for 30 Day(s) | Your Rental: 30 Day(s)</p>
@@ -229,25 +229,25 @@ const CarBookingForm: React.FC = () => {
                                         <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-center py-4 border-t border-b border-gray-200">
                                             <div className="p-2">
                                                 <div className="bg-gray-100 p-2 rounded-lg w-10 h-10 flex items-center justify-center mx-auto mb-2">
-                                                    <img src="/images/filter-icon/engin_img.png" className="h-5 w-5" alt="Engine"/>
+                                                    <img src="/images/filter-icon/engin_img.png" className="h-5 w-5" alt="Engine" />
                                                 </div>
                                                 <p className="text-xs text-gray-600">Engine<br /><span className="font-medium">1.5L</span></p>
                                             </div>
                                             <div className="p-2">
                                                 <div className="bg-gray-100 p-2 rounded-lg w-10 h-10 flex items-center justify-center mx-auto mb-2">
-                                                    <img src="/images/filter-icon/automatic-black.svg" className="h-5 w-5" alt="Transmission"/>
+                                                    <img src="/images/filter-icon/automatic-black.svg" className="h-5 w-5" alt="Transmission" />
                                                 </div>
                                                 <p className="text-xs text-gray-600">Fuel Policy<br /><span className="font-medium">Level to Level</span></p>
                                             </div>
                                             <div className="p-2">
                                                 <div className="bg-gray-100 p-2 rounded-lg w-10 h-10 flex items-center justify-center mx-auto mb-2">
-                                                    <img src="/images/filter-icon/ac-black.svg" className="h-5 w-5" alt="AC"/>
+                                                    <img src="/images/filter-icon/ac-black.svg" className="h-5 w-5" alt="AC" />
                                                 </div>
                                                 <p className="text-xs text-gray-600">Mileage<br /><span className="font-medium">4500 KM</span></p>
                                             </div>
                                             <div className="p-2">
                                                 <div className="bg-gray-100 p-2 rounded-lg w-10 h-10 flex items-center justify-center mx-auto mb-2">
-                                                    <img src="/images/filter-icon/luggage-black.svg" className="h-5 w-5" alt="Deposit"/>
+                                                    <img src="/images/filter-icon/luggage-black.svg" className="h-5 w-5" alt="Deposit" />
                                                 </div>
                                                 <p className="text-xs text-gray-600">Deposit<br /><span className="font-medium">1000 AED</span></p>
                                             </div>
@@ -315,7 +315,7 @@ const CarBookingForm: React.FC = () => {
                                 <Subcategory />
                             </div>
                         )}
-                        
+
                         {currentStep === 4 && (
                             <div>
                                 <div className="bg-white rounded-lg border border-gray-100 p-6 shadow-sm">
@@ -381,9 +381,9 @@ const CarBookingForm: React.FC = () => {
 
                         {/* Buttons */}
                         <div className="flex justify-between items-center mt-10">
-                            <button 
-                                onClick={prevStep} 
-                                disabled={currentStep === 1} 
+                            <button
+                                onClick={prevStep}
+                                disabled={currentStep === 1}
                                 className="flex items-center text-gray-600 font-medium py-2.5 px-6 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100"
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
@@ -391,8 +391,8 @@ const CarBookingForm: React.FC = () => {
                                 </svg>
                                 Previous
                             </button>
-                            <button 
-                                onClick={nextStep} 
+                            <button
+                                onClick={nextStep}
                                 className="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-8 rounded-lg transition-all shadow-sm hover:shadow-md"
                             >
                                 {currentStep === totalSteps ? 'Complete Booking' : 'Next'}

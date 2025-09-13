@@ -552,51 +552,28 @@ const ProfileMain = () => {
                                             <h3 className="font-medium flex items-center gap-2">
                                                 <User size={18} /> Personal Information
                                             </h3>
-                                            {!isEditingPersonal ? (
-                                                <button className="text-indigo-600 text-sm" onClick={startEditingPersonal}>Edit</button>
-                                            ) : (
-                                                <div className="flex gap-2">
-                                                    <button className="text-indigo-600 text-sm" onClick={savePersonal}>Save</button>
-                                                    <button className="text-gray-600 text-sm" onClick={cancelPersonal}>Cancel</button>
-                                                </div>
-                                            )}
                                         </div>
-
-                                        {!isEditingPersonal ? (
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-3 bg-gray-50 rounded">
-                                                <div>
-                                                    <p className="text-sm text-gray-500">Display Name</p>
-                                                    <p className="font-medium">{personalInfo.fullName}</p>
-                                                </div>
-                                                <div>
-                                                    <p className="text-sm text-gray-500">Email Address</p>
-                                                    <p className="font-medium">{personalInfo.email}</p>
-                                                </div>
-                                                <div>
-                                                    <p className="text-sm text-gray-500">Phone Number</p>
-                                                    <p className="font-medium">{personalInfo.phoneCountryCode} {personalInfo.phoneNumber}</p>
-                                                </div>
-                                                <div>
-                                                    <p className="text-sm text-gray-500">Gender</p>
-                                                    <p className="font-medium">{personalInfo.gender}</p>
-                                                </div>
-                                                <div>
-                                                    <p className="text-sm text-gray-500">Date of Birth</p>
-                                                    <p className="font-medium">{personalInfo.dateOfBirth}</p>
-                                                </div>
-                                                <div>
-                                                    <p className="text-sm text-gray-500">Nationality</p>
-                                                    <p className="font-medium">{personalInfo.nationality}</p>
-                                                </div>
-                                                <div>
-                                                    <p className="text-sm text-gray-500">Country of Residence</p>
-                                                    <p className="font-medium">{personalInfo.countryOfResidence}</p>
+                                        <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                            <div className="flex-1">
+                                                <p className="font-medium">{personalInfo.fullName}</p>
+                                                <p className="text-sm text-gray-500">Nationality {personalInfo.nationality}</p>
+                                                <div className="mt-2 grid grid-cols-2 gap-2 text-xs text-gray-500">
+                                                    <div><span className="font-medium">Email:</span> {personalInfo.email}</div>
+                                                    <div><span className="font-medium">Phone No:</span> {personalInfo.phoneCountryCode} {personalInfo.phoneNumber}</div>
+                                                    <div><span className="font-medium">Gender:</span> {personalInfo.gender}</div>
+                                                    <div><span className="font-medium">Date of Birth:</span> {personalInfo.dateOfBirth}</div>
+                                                    <div><span className="font-medium">Country of Residence:</span> {personalInfo.countryOfResidence}</div>
                                                 </div>
                                             </div>
-                                        ) : (
+                                            <div className="flex gap-2">
+                                                <button className="text-indigo-600" onClick={startEditingPersonal}>
+                                                    <Edit size={16} />
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {isEditingPersonal && (
                                             <motion.div
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: "auto" }}
                                                 className="mt-4 p-4 border border-indigo-200 rounded-lg"
                                             >
                                                 <h4 className="text-md font-medium mb-2">Edit Personal Information</h4>
@@ -706,7 +683,6 @@ const ProfileMain = () => {
                                             <h3 className="font-medium flex items-center gap-2">
                                                 <FileText size={18} /> My Documents
                                             </h3>
-                                            <button className="text-indigo-600 text-sm" onClick={() => setShowAddDocument(true)}>Upload</button>
                                         </div>
                                         <div className="space-y-3">
                                             {documents.map(doc => (
@@ -729,97 +705,14 @@ const ProfileMain = () => {
                                                         <button className="text-indigo-600" onClick={() => startEditingDocument(doc)}>
                                                             <Edit size={16} />
                                                         </button>
-                                                        <button className="text-indigo-600">
-                                                            <Download size={16} />
-                                                        </button>
-                                                        <button className="text-red-600" onClick={() => deleteDocument(doc.id)}>
-                                                            <Trash2 size={16} />
-                                                        </button>
+
                                                     </div>
                                                 </div>
                                             ))}
                                         </div>
-                                        {showAddDocument && (
-                                            <motion.div
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: "auto" }}
-                                                className="mt-4 p-4 border border-gray-200 rounded-lg"
-                                            >
-                                                <h4 className="text-md font-medium mb-2">Upload New Document</h4>
-                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                                                    <div>
-                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Document Type</label>
-                                                        <select
-                                                            name="type"
-                                                            value={newDocument.type}
-                                                            onChange={handleNewDocumentChange}
-                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                                        >
-                                                            <option value="Emirates ID">Emirates ID</option>
-                                                            <option value="Passport">Passport</option>
-                                                            <option value="Visit Visa">Visit Visa</option>
-                                                        </select>
-                                                    </div>
-                                                    <div>
-                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Document No</label>
-                                                        <input
-                                                            type="text"
-                                                            name="documentNo"
-                                                            value={newDocument.documentNo}
-                                                            onChange={handleNewDocumentChange}
-                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Document Expiry</label>
-                                                        <input
-                                                            type="text"
-                                                            name="expiryDate"
-                                                            value={newDocument.expiryDate}
-                                                            onChange={handleNewDocumentChange}
-                                                            placeholder="DD-MM-YYYY"
-                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Document Issue By</label>
-                                                        <input
-                                                            type="text"
-                                                            name="issueBy"
-                                                            value={newDocument.issueBy}
-                                                            onChange={handleNewDocumentChange}
-                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                                        />
-                                                    </div>
-                                                    <div>
-                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Attach Front Copy</label>
-                                                        <input
-                                                            type="file"
-                                                            onChange={(e) => handleNewDocumentFileChange(e, 'front')}
-                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                                        />
-                                                        <p className="text-xs text-gray-500 mt-1">{newDocument.frontCopy}</p>
-                                                    </div>
-                                                    <div>
-                                                        <label className="block text-sm font-medium text-gray-700 mb-1">Attach Back Copy</label>
-                                                        <input
-                                                            type="file"
-                                                            onChange={(e) => handleNewDocumentFileChange(e, 'back')}
-                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                                        />
-                                                        <p className="text-xs text-gray-500 mt-1">{newDocument.backCopy}</p>
-                                                    </div>
-                                                </div>
-                                                <div className="flex gap-2 mt-4 justify-end">
-                                                    <button onClick={() => setShowAddDocument(false)} className="px-4 py-2 border border-gray-300" style={{ borderRadius: "10px" }}>Cancel</button>
-                                                    <button onClick={addDocument} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Upload</button>
-                                                </div>
-                                            </motion.div>
-                                        )}
+                                        {/* Edit Document */}
                                         {editingDocument && (
                                             <motion.div
-                                                initial={{ opacity: 0, height: 0 }}
-                                                animate={{ opacity: 1, height: "auto" }}
                                                 className="mt-4 p-4 border border-indigo-200 rounded-lg"
                                             >
                                                 <h4 className="text-md font-medium mb-2">Edit Document</h4>
@@ -886,6 +779,12 @@ const ProfileMain = () => {
                                                         />
                                                         <p className="text-xs text-gray-500 mt-1">{editingDocument.backCopy}</p>
                                                     </div>
+                                                    <div>
+                                                        <img src="https://caryaati.com/erps/images/documents/sapro_doc_customer_11_1726743244.jpeg" alt="" className='max-h-[200px]' />
+                                                    </div>
+                                                    <div>
+                                                        <img src="https://caryaati.com/erps/images/documents/sapro_doc_customer_back_11_1726743245.jpeg" alt="" className='max-h-[200px]' />
+                                                    </div>
                                                 </div>
                                                 <div className="flex gap-2 mt-4 justify-end">
                                                     <button onClick={() => setEditingDocument(null)} className="px-4 py-2 border border-gray-300" style={{ borderRadius: "10px" }}>Cancel</button>
@@ -904,121 +803,130 @@ const ProfileMain = () => {
                                             <h3 className="font-medium flex items-center gap-2">
                                                 <FileText size={18} /> My Driving License
                                             </h3>
-                                            {!isEditingLicense ? (
-                                                <button className="text-indigo-600 text-sm" onClick={startEditingLicense}>Edit</button>
-                                            ) : (
-                                                <div className="flex gap-2">
-                                                    <button className="text-indigo-600 text-sm" onClick={saveLicense}>Save</button>
-                                                    <button className="text-gray-600 text-sm" onClick={cancelLicense}>Cancel</button>
+                                        </div>
+
+                                        <div className="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                            <div className="flex-1">
+                                                <p className="font-medium">{licenseInfo.documentType}</p>
+                                                <p className="text-sm text-gray-500">Document Number: {licenseInfo.documentNo}</p>
+                                                <div className="mt-2 grid grid-cols-2 gap-2 text-xs text-gray-500">
+                                                    <div><span className="font-medium">Expiry Date:</span> {licenseInfo.expiryDate}</div>
+                                                    <div><span className="font-medium">Issue Date:</span> {licenseInfo.issueDate}</div>
+                                                    <div><span className="font-medium">Date of Birth:</span> {licenseInfo.dateOfBirth}</div>
+                                                    <div><span className="font-medium">Front Copy:</span> {licenseInfo.frontCopy}</div>
+                                                    <div><span className="font-medium">Back Copy:</span> {licenseInfo.backCopy}</div>
                                                 </div>
-                                            )}
-                                        </div>
-                                        <div className="space-y-3">
-                                            <div>
-                                                <p className="text-sm text-gray-500">Document Type</p>
-                                                {isEditingLicense ? (
-                                                    <select
-                                                        name="documentType"
-                                                        value={tempLicenseInfo.documentType}
-                                                        onChange={handleLicenseChange}
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
-                                                    >
-                                                        <option value="UAE Driving License">UAE Driving License</option>
-                                                    </select>
-                                                ) : (
-                                                    <p className="font-medium">{licenseInfo.documentType}</p>
-                                                )}
                                             </div>
-                                            <div>
-                                                <p className="text-sm text-gray-500">Document No</p>
-                                                {isEditingLicense ? (
-                                                    <input
-                                                        type="text"
-                                                        name="documentNo"
-                                                        value={tempLicenseInfo.documentNo}
-                                                        onChange={handleLicenseChange}
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
-                                                    />
-                                                ) : (
-                                                    <p className="font-medium">{licenseInfo.documentNo}</p>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-500">Document Expiry</p>
-                                                {isEditingLicense ? (
-                                                    <input
-                                                        type="text"
-                                                        name="expiryDate"
-                                                        value={tempLicenseInfo.expiryDate}
-                                                        onChange={handleLicenseChange}
-                                                        placeholder="DD-MM-YYYY"
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
-                                                    />
-                                                ) : (
-                                                    <p className="font-medium">{licenseInfo.expiryDate}</p>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-500">Document Issue Date</p>
-                                                {isEditingLicense ? (
-                                                    <input
-                                                        type="text"
-                                                        name="issueDate"
-                                                        value={tempLicenseInfo.issueDate}
-                                                        onChange={handleLicenseChange}
-                                                        placeholder="DD-MM-YYYY"
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
-                                                    />
-                                                ) : (
-                                                    <p className="font-medium">{licenseInfo.issueDate}</p>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-500">Date of Birth</p>
-                                                {isEditingLicense ? (
-                                                    <input
-                                                        type="text"
-                                                        name="dateOfBirth"
-                                                        value={tempLicenseInfo.dateOfBirth}
-                                                        onChange={handleLicenseChange}
-                                                        placeholder="DD-MM-YYYY"
-                                                        className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
-                                                    />
-                                                ) : (
-                                                    <p className="font-medium">{licenseInfo.dateOfBirth}</p>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-500">Attach Copy Docs (Front)</p>
-                                                {isEditingLicense ? (
-                                                    <>
-                                                        <input
-                                                            type="file"
-                                                            onChange={(e) => handleLicenseFileChange(e, 'front')}
-                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                                        />
-                                                        <p className="text-xs text-gray-500 mt-1">{tempLicenseInfo.frontCopy}</p>
-                                                    </>
-                                                ) : (
-                                                    <p className="font-medium">{licenseInfo.frontCopy}</p>
-                                                )}
-                                            </div>
-                                            <div>
-                                                <p className="text-sm text-gray-500">Attach Copy Docs (Back)</p>
-                                                {isEditingLicense ? (
-                                                    <>
-                                                        <input
-                                                            type="file"
-                                                            onChange={(e) => handleLicenseFileChange(e, 'back')}
-                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-                                                        />
-                                                        <p className="text-xs text-gray-500 mt-1">{tempLicenseInfo.backCopy}</p>
-                                                    </>
-                                                ) : (
-                                                    <p className="font-medium">{licenseInfo.backCopy}</p>
-                                                )}
+                                            <div className="flex gap-2">
+                                                <button className="text-indigo-600" onClick={startEditingLicense}>
+                                                    <Edit size={16} />
+                                                </button>
+                                                {/* <button className="text-indigo-600 text-sm" onClick={saveLicense}>Save</button>
+                                                    <button className="text-gray-600 text-sm" onClick={cancelLicense}>Cancel</button> */}
                                             </div>
                                         </div>
+
+                                        {isEditingLicense && (
+
+                                            <div className="space-y-3">
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Document Type</p>
+                                                    {isEditingLicense ? (
+                                                        <select
+                                                            name="documentType"
+                                                            value={tempLicenseInfo.documentType}
+                                                            onChange={handleLicenseChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        >
+                                                            <option value="UAE Driving License">UAE Driving License</option>
+                                                        </select>
+                                                    ) : (
+                                                        <p className="font-medium">{licenseInfo.documentType}</p>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Document No</p>
+                                                        <input
+                                                            type="text"
+                                                            name="documentNo"
+                                                            value={tempLicenseInfo.documentNo}
+                                                            onChange={handleLicenseChange}
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Document Expiry</p>
+                                                        <input
+                                                            type="text"
+                                                            name="expiryDate"
+                                                            value={tempLicenseInfo.expiryDate}
+                                                            onChange={handleLicenseChange}
+                                                            placeholder="DD-MM-YYYY"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                        <p className="font-medium">{licenseInfo.expiryDate}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Document Issue Date</p>
+                                                        <input
+                                                            type="text"
+                                                            name="issueDate"
+                                                            value={tempLicenseInfo.issueDate}
+                                                            onChange={handleLicenseChange}
+                                                            placeholder="DD-MM-YYYY"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                        <p className="font-medium">{licenseInfo.issueDate}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Date of Birth</p>
+                                                        <input
+                                                            type="text"
+                                                            name="dateOfBirth"
+                                                            value={tempLicenseInfo.dateOfBirth}
+                                                            onChange={handleLicenseChange}
+                                                            placeholder="DD-MM-YYYY"
+                                                            className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200 font-medium"
+                                                        />
+                                                        <p className="font-medium">{licenseInfo.dateOfBirth}</p>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Attach Copy Docs (Front)</p>
+                                                        <>
+                                                            <input
+                                                                type="file"
+                                                                onChange={(e) => handleLicenseFileChange(e, 'front')}
+                                                                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                            />
+                                                            <p className="text-xs text-gray-500 mt-1">{tempLicenseInfo.frontCopy}</p>
+                                                        </>
+                                                        <p className="font-medium">{licenseInfo.frontCopy}</p>
+                                                           <div>
+                                                        <img src="https://caryaati.com/erps/images/documents/2023-05-05%2001:30:25-WhatsApp%20Image%202023-04-26%20at%2019.33.23.jpeg" alt="" className='max-h-[200px]' />
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <p className="text-sm text-gray-500">Attach Copy Docs (Back)</p>
+                                                        <>
+                                                            <input
+                                                                type="file"
+                                                                onChange={(e) => handleLicenseFileChange(e, 'back')}
+                                                                className="w-full border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+                                                            />
+                                                            <p className="text-xs text-gray-500 mt-1">{tempLicenseInfo.backCopy}</p>
+                                                        </>
+                                                        <p className="font-medium">{licenseInfo.backCopy}</p>
+                                                        <div>
+                                                        <img src="https://caryaati.com/erps/images/documents/2023-05-05%2001:30:25-WhatsApp%20Image%202023-04-26%20at%2019.33.46.jpeg" alt="" className='max-h-[200px]' />
+                                                    </div>
+                                                </div>
+                                                <div className="flex gap-2 mt-4 justify-end">
+                                                    <button onClick={cancelLicense} className="px-4 py-2 border border-gray-300" style={{ borderRadius: "10px" }}>Cancel</button>
+                                                    <button onClick={saveLicense} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Save</button>
+                                                </div>
+                                            </div>
+                                        )}
+
                                     </div>
                                 )}
                             </motion.div>
@@ -1057,10 +965,62 @@ const ProfileMain = () => {
                                     </div>
                                 </div>
 
+                                {/* Drivers Table */}
+                                <div className="overflow-x-auto">
+                                    <table className="w-full">
+                                        <thead className="bg-gray-50">
+                                            <tr>
+                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">S#</th>
+                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Driver Name</th>
+                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Arabic Name</th>
+                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nationality</th>
+                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Document No</th>
+                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="bg-white divide-y divide-gray-200">
+                                            {filteredDrivers.map((driver, index) => (
+                                                <tr key={driver.id} className="hover:bg-gray-50">
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{index + 1}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{driver.driverName}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{driver.arabicName || "-"}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{driver.nationality}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{driver.documentNo}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{driver.email}</td>
+                                                    <td className="px-6 py-4 whitespace-nowrap">
+                                                        <span className={`px-2 py-1 text-xs font-semibold ${driver.status === "Active" ? "bg-green-100 text-green-800" :
+                                                            driver.status === "Inactive" ? "bg-red-100 text-red-800" :
+                                                                "bg-yellow-100 text-yellow-800"
+                                                            }`}>
+                                                            {driver.status}
+                                                        </span>
+                                                    </td>
+                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                                        <div className="flex gap-2">
+                                                            <button
+                                                                onClick={() => startEditing(driver)}
+                                                                className="text-indigo-600 hover:text-indigo-900"
+                                                            >
+                                                                <Edit size={16} />
+                                                            </button>
+                                                            <button
+                                                                onClick={() => deleteDriver(driver.id)}
+                                                                className="text-red-600 hover:text-red-900"
+                                                            >
+                                                                <Trash2 size={16} />
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                
                                 {editingDriver && (
                                     <motion.div
-                                        initial={{ opacity: 0, height: 0 }}
-                                        animate={{ opacity: 1, height: "auto" }}
                                         className="mb-6 p-4 border border-indigo-200 rounded-lg"
                                     >
                                         <h3 className="text-md font-medium mb-2">Edit Driver</h3>
@@ -1252,59 +1212,6 @@ const ProfileMain = () => {
                                     </motion.div>
                                 )}
 
-                                {/* Drivers Table */}
-                                <div className="overflow-x-auto">
-                                    <table className="w-full">
-                                        <thead className="bg-gray-50">
-                                            <tr>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">S#</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Driver Name</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Arabic Name</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nationality</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Document No</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Action</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="bg-white divide-y divide-gray-200">
-                                            {filteredDrivers.map((driver, index) => (
-                                                <tr key={driver.id} className="hover:bg-gray-50">
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{index + 1}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{driver.driverName}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{driver.arabicName || "-"}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{driver.nationality}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{driver.documentNo}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{driver.email}</td>
-                                                    <td className="px-6 py-4 whitespace-nowrap">
-                                                        <span className={`px-2 py-1 text-xs font-semibold ${driver.status === "Active" ? "bg-green-100 text-green-800" :
-                                                            driver.status === "Inactive" ? "bg-red-100 text-red-800" :
-                                                                "bg-yellow-100 text-yellow-800"
-                                                            }`}>
-                                                            {driver.status}
-                                                        </span>
-                                                    </td>
-                                                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                                        <div className="flex gap-2">
-                                                            <button
-                                                                onClick={() => startEditing(driver)}
-                                                                className="text-indigo-600 hover:text-indigo-900"
-                                                            >
-                                                                <Edit size={16} />
-                                                            </button>
-                                                            <button
-                                                                onClick={() => deleteDriver(driver.id)}
-                                                                className="text-red-600 hover:text-red-900"
-                                                            >
-                                                                <Trash2 size={16} />
-                                                            </button>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </div>
 
                                 {filteredDrivers.length === 0 && (
                                     <div className="text-center py-12">
@@ -1402,7 +1309,6 @@ const ProfileMain = () => {
                         )}
 
                         {/* My Cards Tab */}
-                        // ... existing code ...
 
                         {activeTab === "myCards" && (
                             <motion.div
@@ -1415,13 +1321,13 @@ const ProfileMain = () => {
                             >
                                 <div className="flex items-center justify-between mb-6">
                                     <h2 className="text-lg font-semibold text-gray-800">My Cards</h2>
-                                    <button
+                                    {/* <button
                                         onClick={() => setShowAddCard(true)}
                                         className="flex items-center gap-2 px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition"
                                         style={{ borderRadius: "10px" }}
                                     >
                                         <Plus size={18} /> Add New Card
-                                    </button>
+                                    </button> */}
                                 </div>
 
                                 <div className="border rounded-lg p-4">
@@ -1444,16 +1350,13 @@ const ProfileMain = () => {
                                                     <button className="text-indigo-600" onClick={() => startEditingCard(card)}>
                                                         <Edit size={16} />
                                                     </button>
-                                                    <button className="text-red-600" onClick={() => deleteCard(card.id)}>
-                                                        <Trash2 size={16} />
-                                                    </button>
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
                                 </div>
 
-                                {showAddCard && (
+                                {/* {showAddCard && (
                                     <motion.div
                                         initial={{ opacity: 0, height: 0 }}
                                         animate={{ opacity: 1, height: "auto" }}
@@ -1511,12 +1414,10 @@ const ProfileMain = () => {
                                             <button onClick={addCard} className="px-4 py-2 bg-indigo-600 text-white" style={{ borderRadius: "10px" }}>Save</button>
                                         </div>
                                     </motion.div>
-                                )}
+                                )} */}
 
                                 {editingCard && (
                                     <motion.div
-                                        initial={{ opacity: 0, height: 0 }}
-                                        animate={{ opacity: 1, height: "auto" }}
                                         className="mt-4 p-4 border border-indigo-200 rounded-lg"
                                     >
                                         <h4 className="text-md font-medium mb-2">Edit Card</h4>
@@ -1763,18 +1664,18 @@ const ProfileMain = () => {
                         </div>
                         <div className="float-right gap-2 mt-6">
                             <button
-                                onClick={addDriver}
-                                className="px-4 py-2 bg-indigo-600 mx-2 text-white"
-                                style={{ borderRadius: "10px" }}
-                            >
-                                Save Driver
-                            </button>
-                            <button
                                 onClick={() => setShowAddDriverModal(false)}
                                 className="px-4 py-2 border border-gray-300"
                                 style={{ borderRadius: "10px" }}
                             >
                                 Cancel
+                            </button>
+                            <button
+                                onClick={addDriver}
+                                className="px-4 py-2 bg-indigo-600 mx-2 text-white"
+                                style={{ borderRadius: "10px" }}
+                            >
+                                Save Driver
                             </button>
                         </div>
                     </motion.div>
