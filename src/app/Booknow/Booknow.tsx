@@ -131,26 +131,34 @@ const CarBookingForm: React.FC = () => {
         <>
             <div className="bg-white min-h-screen">
                 <div className="container mx-auto px-4 py-8">
-                    {/* Header */}
-                    <div className="text-center mb-12">
-                        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Book Your Car</h1>
-                        <p className="text-gray-600 max-w-2xl mx-auto">Complete your booking in a few simple steps</p>
+                   {/* Header */}
+                    <div className="text-center mb-12" data-aos="fade-down">
+                        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-cyan-600">
+                            Book Your Dream Car
+                        </h1>
+                        <p className="text-gray-600 max-w-2xl mx-auto text-lg">Complete your booking in a few simple steps and hit the road in style</p>
                     </div>
 
-                    {/* Stepper */}
-                    <div className="relative max-w-4xl mx-auto mb-16">
-                        <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-gray-200 transform -translate-y-1/2"></div>
+                    {/* Enhanced Stepper */}
+                    <div className="relative max-w-4xl mx-auto mb-16" data-aos="fade-up">
+                        <div className="absolute top-1/2 left-0 right-0 h-1.5 bg-gray-200 transform -translate-y-1/2 rounded-full"></div>
                         <div
-                            className="absolute top-1/2 left-0 h-0.5 bg-blue-600 transform -translate-y-1/2 transition-all duration-300 ease-in-out"
+                            className="absolute top-1/2 left-0 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 transform -translate-y-1/2 rounded-full transition-all duration-500 ease-in-out"
                             style={{ width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` }}
                         ></div>
                         <div className="relative flex justify-between items-center">
                             {['Vehicle', 'Extras', 'Options', 'Details', 'Confirm'].map((label, index) => (
                                 <div key={label} className="z-20 text-center cursor-pointer group" onClick={() => showStep(index + 1)}>
-                                    <div className={`h-10 w-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 ease-in-out ${currentStep >= index + 1 ? 'bg-blue-600 text-white border-2 border-blue-600' : 'bg-white border-2 border-gray-300 text-gray-400'} ${currentStep === index + 1 ? 'ring-4 ring-blue-100 scale-110' : ''}`}>
-                                        {index + 1}
+                                    <div className={`h-12 w-12 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 ease-in-out shadow-lg ${currentStep >= index + 1 ? 'bg-gradient-to-br from-blue-600 to-cyan-500 text-white border-2 border-white ring-4 ring-blue-100' : 'bg-white border-2 border-gray-300 text-gray-400'} ${currentStep === index + 1 ? 'scale-110 shadow-xl' : ''}`}>
+                                        {currentStep > index + 1 ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                            </svg>
+                                        ) : (
+                                            index + 1
+                                        )}
                                     </div>
-                                    <p className={`mt-3 text-xs text-left font-medium w-20 ${currentStep >= index + 1 ? 'text-gray-900 font-semibold' : 'text-gray-400'} group-hover:text-gray-700`}>
+                                    <p className={`mt-3 text-sm text-left font-medium w-20 transition-all ${currentStep >= index + 1 ? 'text-gray-900 font-semibold' : 'text-gray-400'} group-hover:text-gray-700`}>
                                         {label}
                                     </p>
                                 </div>
