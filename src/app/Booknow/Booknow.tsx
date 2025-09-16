@@ -150,7 +150,7 @@ const CarBookingForm: React.FC = () => {
                                     <div className={`h-10 w-10 rounded-full flex items-center justify-center font-bold text-sm transition-all duration-300 ease-in-out ${currentStep >= index + 1 ? 'bg-blue-600 text-white border-2 border-blue-600' : 'bg-white border-2 border-gray-300 text-gray-400'} ${currentStep === index + 1 ? 'ring-4 ring-blue-100 scale-110' : ''}`}>
                                         {index + 1}
                                     </div>
-                                    <p className={`mt-3 text-xs font-medium w-20 ${currentStep >= index + 1 ? 'text-gray-900 font-semibold' : 'text-gray-400'} group-hover:text-gray-700`}>
+                                    <p className={`mt-3 text-xs text-left font-medium w-20 ${currentStep >= index + 1 ? 'text-gray-900 font-semibold' : 'text-gray-400'} group-hover:text-gray-700`}>
                                         {label}
                                     </p>
                                 </div>
@@ -161,7 +161,7 @@ const CarBookingForm: React.FC = () => {
                     {/* Main Content Area */}
                     <div className="mt-10">
                         {currentStep === 1 && (
-                            <div className="bg-white rounded-lg border border-gray-100 p-6 shadow-sm">
+                            <div className="bg-white">
                                 <div className="flex flex-col lg:flex-row gap-8">
                                     {/* Left Side: Image Gallery */}
                                     <div className="flex-shrink-0 lg:w-1/2">
@@ -271,7 +271,7 @@ const CarBookingForm: React.FC = () => {
                         )}
 
                         {currentStep === 2 && (
-                            <div className="bg-white rounded-lg border border-gray-100 p-6 shadow-sm">
+                            <div className="bg-white">
                                 <h2 className="text-xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-200 flex items-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
                                         <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
@@ -318,7 +318,7 @@ const CarBookingForm: React.FC = () => {
 
                         {currentStep === 4 && (
                             <div>
-                                <div className="bg-white rounded-lg border border-gray-100 p-6 shadow-sm">
+                                <div className="bg-white">
                                     <h2 className="text-xl font-bold text-gray-900 mb-6 pb-3 border-b border-gray-200 flex items-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-blue-600" viewBox="0 0 20 20" fill="currentColor">
                                             <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
@@ -385,6 +385,7 @@ const CarBookingForm: React.FC = () => {
                                 onClick={prevStep}
                                 disabled={currentStep === 1}
                                 className="flex items-center text-gray-600 font-medium py-2.5 px-6 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-100"
+                                style={{borderRadius: '10px'}}
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -393,7 +394,8 @@ const CarBookingForm: React.FC = () => {
                             </button>
                             <button
                                 onClick={nextStep}
-                                className="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-8 rounded-lg transition-all shadow-sm hover:shadow-md"
+                                className="flex items-center bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-8 transition-all shadow-sm hover:shadow-md"
+                                style={{borderRadius: '10px'}}
                             >
                                 {currentStep === totalSteps ? 'Complete Booking' : 'Next'}
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
