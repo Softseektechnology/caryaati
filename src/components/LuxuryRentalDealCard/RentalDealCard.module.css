@@ -1,0 +1,1362 @@
+.carCard {
+  display: flex;
+  /* Enhanced gradient with deeper colors */
+  background:
+    /* subtle light rim to bottom-right to mimic studio lighting */
+    radial-gradient(1200px 600px at 80% 70%, rgba(255,255,255,0.06), rgba(255,255,255,0) 12%),
+    /* soft top-left to bottom-right deep gradient */
+    linear-gradient(135deg, #0b0d10 0%, #121417 30%, #2a2f33 60%, #485158 100%);
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 16px;
+  padding-top: 26px;
+  padding-bottom: 26px;
+  gap: 16px;
+  font-family: Arial, sans-serif;
+  /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); */
+  box-shadow: 0 10px 30px rgba(2,6,12,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+  margin-left: 55px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add a subtle shine effect */
+.carCard::before{
+  content: "";
+  position: absolute;
+  left: -20%;
+  top: -50%;
+  width: 160%;
+  height: 200%;
+  transform: rotate(-18deg);
+  background: linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02) 30%, rgba(255,255,255,0) 70%);
+  filter: blur(28px);
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.carCard::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.28) 100%);
+  pointer-events: none;
+  mix-blend-mode: multiply;
+}
+
+.filtersBtn {
+  margin-left: 100px;
+}
+.filtersBtn:hover {
+  background: linear-gradient(90deg, #00aaff, #42C3F7);
+}
+
+.middleFlipWrapper {
+  perspective: 1000px;
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+}
+
+.middleFlipper {
+  position: relative;
+  width: 100%;
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+
+.flipped {
+  transform: rotateY(180deg);
+}
+
+.middleContent {
+  backface-visibility: hidden;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.back {
+  transform: rotateY(180deg);
+  /* background: linear-gradient(135deg, #0c0c0c, #1a1a1a) !important; */
+  padding: 10px;
+  padding-left: 2px;
+  padding-right: 2px;
+  border-radius: 12px;
+  margin-top: 10px;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 270px;
+  overflow: visible;
+}
+
+.image {
+  border-radius: 8px;
+  height: 180px;
+  width: 100%;
+  /* box-shadow: 0px 0px 10px -3px #feb321; */
+}
+.image {
+  box-shadow: 0 30px 50px rgba(255,183,28,0.12), 0 8px 18px rgba(0,0,0,0.6);
+  border-radius: 8px;
+}
+
+.image1 {
+  border-radius: 8px;
+  width: 100px;
+  height: 40px;
+  margin-left: -100px;
+}
+
+.brand {
+  font-size: 12px;
+  text-align: center;
+  margin-top: 6px;
+  font-weight: 600;
+  color: #555;
+}
+
+.middle {
+  flex: 1;
+}
+
+.titleRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0px;
+}
+
+.titleRow h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0;
+}
+.titleRow h4 {
+  color: #ffffff;
+  font-weight: 600;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.infoIcon {
+  font-size: 16px;
+  color: #999;
+}
+
+.subtext {
+  font-size: 14px;
+  color: #e0e0e0 !important; /* Lighter text for better readability */
+  margin-bottom: 8px;
+}
+
+.icons span {
+  margin-right: 12px;
+  font-size: 14px;
+  color: #444;
+}
+
+.location {
+  margin: 28px 0px 0px 0px;
+  font-size: 14px;
+  color: #333;
+}
+
+.pickupLink {
+  font-size: 16px;
+  color: #feb321;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
+
+.navbarSearchButton {
+  background: linear-gradient(90deg, #0080F6, #00aaff);
+  border: none;
+  border-radius: 8px;
+  padding: 0 15px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  gap: 10px;
+  /* min-width: 30px; */
+  font-family: 'Poppins', sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.navbarSearchButton:hover {
+  background: linear-gradient(90deg, #00aaff, #42C3F7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 128, 246, 0.3);
+}
+
+.navbarSearchButton:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.features {
+  columns: 2;
+  padding-left: 0px;
+  font-size: 13px;
+  color: black;
+  margin: 10px 0;
+}
+
+.providerRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #222;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+
+.provider {
+  /* margin-top: 20px; */
+}
+
+.right {
+  text-align: right;
+  min-width: 140px;
+  border-left: 1px solid #3a3a3a; /* Slightly lighter border */
+}
+.provider {
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #e0e0e0 !important; /* Lighter text */
+}
+.features {
+  display: column;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.featureItem {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+  color: #e0e0e0 !important; /* Lighter text */
+}
+
+.price {
+  font-size: 22px;
+  font-weight: bold;
+  color: #42C3F7 !important; /* Brighter accent color */
+}
+.note {
+  font-size: 12px;
+  color: #888;
+}
+
+.dealBtn {
+  margin-top: 0px;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #0080F6, #00aaff);
+  border: none;
+  padding: 10px 16px;
+  width: 130px;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 128, 246, 0.3);
+}
+.dealBtn:hover {
+  background: linear-gradient(90deg, #00aaff, #42C3F7);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 128, 246, 0.4);
+}
+.detailBtn {
+  border: none;
+  font-size: 14px;
+  padding: 8px 12px;
+  color: white;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  /* background: rgba(255, 255, 255, 0.1); */
+  transition: all 0.2s ease;
+}
+
+.rightArrow, .leftArrow {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+  border: 1px solid #3a3a3a !important;
+}
+
+.rightArrow:hover, .leftArrow:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+
+.container {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  max-width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Left side map */
+.mapWrapper {
+  flex: 1;
+  min-width: 300px;
+  height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.searchSection {
+  padding: 3rem 0 2rem;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tabs {
+  width: 70%;
+  max-width: 1200px;
+  margin: 0 auto 10px auto;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.tabList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.tabItem {
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px 8px 0 0;
+  background: #f0f0f0;
+  transition: background-color 0.3s;
+}
+
+.tabItem.active {
+  background: #fff;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.tabItem:hover {
+  background: #e0e0e0;
+}
+
+.searchBarContainer {
+  width: 70%;
+  max-width: 1200px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  margin: 0 auto;
+}
+
+.searchForm {
+  margin: 0;
+  width: 100%;
+}
+
+.searchFormInner {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+.formGroup {
+  flex: 0 0 auto;
+}
+
+.formGroup:first-child {
+  width: 400px;
+}
+
+.advancedFirstRow {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.advancedColumn {
+  flex: 1;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}
+
+.advancedSearchRow {
+  display: flex;
+  align-items: stretch;
+  gap: 15px;
+  width: 100%;
+  margin-top: 15px;
+}
+
+.advancedField {
+  flex: 1;
+  min-width: 150px;
+  position: relative;
+}
+
+.advancedLabel {
+  position: absolute;
+  top: -10px;
+  left: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #333;
+  background: #fff;
+  padding: 0 4px;
+  z-index: 1;
+}
+
+.priceRangeContainer {
+  flex: 1;
+  position: relative;
+  min-width: 150px;
+}
+
+.priceRangeTrigger {
+  border: 1px solid #ddd !important;
+  height: 50px !important;
+  padding: 0 12px;
+  padding-top: 8px;
+  font-size: 1rem;
+  border-radius: 4px !important;
+  color: #333 !important;
+  background: #f9f9f9;
+  transition: background 0.3s, border-color 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.priceRangeTrigger.hasValues {
+  font-weight: 600;
+  color: #feb321;
+}
+
+.priceRangeTrigger:focus,
+.priceRangeTrigger:hover {
+  outline: none;
+  background: #fff;
+  border-color: #feb321 !important;
+}
+
+.priceRangeInputs {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  margin-top: 10px;
+}
+
+.priceRangeInputs.active {
+  display: flex;
+}
+
+.priceInputWrapper {
+  flex: 1;
+  position: relative;
+}
+
+.priceInput {
+  border: 1px solid #ddd !important;
+  border-right: none !important;
+  height: 50px !important;
+  padding: 0 12px;
+  padding-top: 8px;
+  font-size: 1rem;
+  border-radius: 4px 0 0 4px !important;
+  color: #333 !important;
+  background: #f9f9f9;
+  transition: background 0.3s, border-color 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.priceInput:last-child {
+  border-radius: 0 4px 4px 0 !important;
+  border-right: 1px solid #ddd !important;
+}
+
+.priceInput:focus {
+  outline: none;
+  background: #fff;
+  border-color: #feb321 !important;
+}
+
+.priceDash {
+  margin: 0 5px;
+  font-size: 1rem;
+  color: #333;
+}
+
+.priceUnderline {
+  height: 2px;
+  background-color: #ff0000;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: none;
+}
+
+.priceRangeContainer.active .priceUnderline {
+  display: block;
+}
+
+.buttonRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.searchButton {
+  background-color: #feb321;
+  border: none;
+  border-radius: 8px;
+  padding: 0 20px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.3s, transform 0.1s;
+  gap: 8px;
+  width: 150px;
+}
+
+/* Switch styles for toggle switches in CarCard */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 18px;
+  /* Reduced from 22px */
+  height: 16px;
+  /* Reduced from 20px */
+  margin-right: 6px;
+  /* Reduced from 8px for better alignment */
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.sliderBox {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #444 !important;
+  /* Default (off) background color */
+  transition: 0.4s;
+  border-radius: 16px;
+  /* Adjusted for smaller size */
+  height: 12px;
+  /* Reduced from 15px */
+  width: 20px;
+  /* Reduced from 25px */
+}
+
+.sliderBox:before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  /* Reduced from 11px */
+  width: 8px;
+  /* Reduced from 11px */
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked+.sliderBox {
+  /* background-color: #ffc107; */
+  background-color: #0080F6 !important;
+  /* Theme color for checked state */
+}
+
+input:checked+.sliderBox:before {
+  transform: translateX(8px);
+  /* Adjusted for smaller width (20px - 8px - 4px for padding) */
+}
+.location span {
+  background: #feb321 !important;
+  box-shadow: 0px 0px 20px -3px goldenrod;
+  /* background: rgba(255, 255, 255, 0.1) !important; */
+  border: 1px solid #3a3a3a;
+}
+
+
+.searchButton:hover {
+  background-color: #e5a21e;
+  transform: translateY(-1px);
+}
+
+.searchButton:active {
+  transform: translateY(0);
+}
+
+.searchInput,
+.searchInputs {
+  border: 1px solid #ddd !important;
+  height: 50px !important;
+  padding: 0 12px;
+  padding-top: 8px;
+  font-size: 1rem;
+  border-radius: 4px !important;
+  color: #333 !important;
+  background: #f9f9f9;
+  transition: background 0.3s, border-color 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.searchInputs {
+  width: 100pxpx;
+  /* Retained for Basic Search only */
+}
+
+.advancedDatePicker {
+  border: 1px solid #ddd !important;
+  height: 50px !important;
+  padding: 0 12px;
+  font-size: 1rem;
+  border-radius: 4px !important;
+  color: #333 !important;
+  background: #f9f9f9;
+  transition: background 0.3s, border-color 0.3s;
+  width: 100% !important;
+  box-sizing: border-box;
+}
+
+
+.searchInput:focus,
+.searchInputs:focus,
+.advancedInput:focus,
+.advancedDatePicker:focus,
+.priceRangeTrigger:focus,
+.priceInput:focus {
+  outline: none;
+  background: #fff;
+  border-color: #feb321 !important;
+}
+
+.searchInput::placeholder,
+.searchInputs::placeholder,
+.advancedInput::placeholder,
+.advancedDatePicker::placeholder,
+.priceRangeTrigger::placeholder,
+.priceInput::placeholder {
+  color: #999 !important;
+}
+
+.react-datepicker {
+  font-family: Arial, sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.react-datepicker__input-container {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+.react-datepicker__input-container input {
+  width: 100% !important;
+  height: 100%;
+  padding: 0 12px;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.react-datepicker__triangle {
+  display: none;
+}
+
+@media (min-width: 1347px) and (max-width: 1465px) {
+  .switchFeatures {
+    columns: 1;
+    height: 120px;
+    overflow: auto;
+    gap: 5px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .carCard {
+    width: 95vw;
+  }
+}
+
+@media (max-width: 1200px) {
+  .formGroup:first-child {
+    width: 50%;
+  }
+
+  .searchInputs {
+    width: 40%;
+  }
+
+  .searchButton {
+    width: 120px;
+  }
+
+  .advancedSearchRow {
+    flex-wrap: wrap;
+  }
+
+  .advancedField {
+    flex: 1 1 40%;
+  }
+
+  .priceRangeInputs {
+    flex-wrap: wrap;
+  }
+
+  .priceInputWrapper {
+    flex: 1 1 45%;
+  }
+
+  .buttonRow {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 992px) {
+  .searchFormInner {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .formGroup:first-child {
+    width: 100%;
+  }
+
+  .searchInputs {
+    width: 100%;
+  }
+
+  .searchButton {
+    width: 100%;
+    border-radius: 8px;
+  }
+
+  .advancedFirstRow {
+    flex-wrap: wrap;
+  }
+
+  .advancedColumn {
+    flex: 1 1 100%;
+  }
+
+  .advancedSearchRow {
+    flex-wrap: wrap;
+  }
+
+  .advancedField {
+    flex: 1 1 100%;
+  }
+
+  .priceRangeInputs {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .priceInputWrapper {
+    flex: 1 1 100%;
+  }
+
+  .priceDash {
+    display: none;
+  }
+
+  .buttonRow {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 576px) {
+  .searchSection {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .tabs {
+    width: 100%;
+    padding: 0 0.5rem;
+  }
+
+  .tabList {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .tabItem {
+    flex: 1;
+    text-align: center;
+  }
+
+  .searchBarContainer {
+    padding: 15px;
+    width: 100%;
+    border-radius: 8px;
+    margin: 0 auto;
+  }
+
+  .searchFormInner {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .formGroup:first-child {
+    width: 100%;
+  }
+
+  .advancedFirstRow {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .advancedColumn {
+    flex: 1 1 100%;
+  }
+
+  .searchInput,
+  .searchInputs,
+  .advancedDatePicker {
+    border: 1px solid #ddd !important;
+    border-radius: 6px !important;
+    height: 48px !important;
+    padding: 0 12px;
+    padding-top: 8px;
+    font-size: 0.85rem !important;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    width: 100%;
+  }
+
+  .searchInputs {
+    min-width: 320px !important;
+    max-width: 100%;
+  }
+
+  .react-datepicker__input-container input {
+    font-size: 0.85rem !important;
+    width: 100% !important;
+    min-width: 320px !important;
+    max-width: 100% !important;
+  }
+
+  .searchButton {
+    border-radius: 6px;
+    height: 48px;
+    width: 100%;
+    padding: 0 20px;
+    font-size: 1rem;
+  }
+
+  .advancedSearchRow {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .advancedField {
+    flex: 1 1 100%;
+  }
+
+  .priceRangeInputs {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .priceInputWrapper {
+    flex: 1 1 100%;
+  }
+
+  .priceDash {
+    display: none;
+  }
+
+  .buttonRow {
+    justify-content: center;
+  }
+
+  .react-datepicker {
+    width: 100%;
+    font-size: 0.85rem;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .react-datepicker__month-container {
+    width: 100%;
+  }
+
+  .react-datepicker__time-container {
+    width: 70px;
+  }
+
+  .react-datepicker__time-list {
+    max-height: 140px;
+  }
+
+  .react-datepicker__day-name,
+  .react-datepicker__day,
+  .react-datepicker__time-list-item {
+    width: 2rem;
+    line-height: 2rem;
+    margin: 0.1rem;
+  }
+
+  .advancedLabel {
+    font-size: 0.75rem;
+    top: -8px;
+    left: 10px;
+  }
+}
+
+
+/* Existing CSS for the car card remains unchanged */
+
+/* Fixed map styling */
+.mapWrapper {
+  position: absolute;
+  /* Place the map immediately after the header */
+  top: 140px;
+  right: 0;
+  /* Approx. 4 columns out of 12 on a Bootstrap grid */
+  width: 32.66%;
+  /* Set the height as full viewport height minus header and footer (80px each) */
+  overflow: hidden;
+  z-index: 800;
+  /* transition: all;
+  transition-duration: 0.2s; */
+  height: 80vh;
+}
+
+/* When map should scroll with page (sticky/fixed) */
+.mapFixed {
+  position: fixed;
+  top: 140px;
+  right: 0;
+  width: 32.66%;
+  height: 100%;
+  z-index: 800;
+}
+
+
+/* When map should stop scrolling (becomes absolute again) */
+.mapAbsolute {
+  position: absolute;
+  top: unset;
+  bottom: 0;
+  right: 0;
+  width: 32.66%;
+  /* height: auto; */
+  z-index: 800;
+  transform: translateY(-50px);
+}
+
+
+.map {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+
+@media (max-width: 1420px) {
+  .left {
+    width: 250px;
+  }
+
+  .features {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 767px) {
+  .carCard {
+    margin-left: 0px;
+  }
+  .filtersBtn{
+    margin-left: 30px;
+  }
+
+  .left {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1347px) {
+  .carCard {
+    position: relative;
+    /* margin-right: 10px; */
+
+  }
+
+  .detailBtnMore {
+    right: 0;
+  }
+
+  .detailBtnBack {
+    left: 0;
+  }
+
+
+
+}
+
+
+/* @media (max-width: 1347px) {
+  .middle {
+    width: 100%;
+  }
+} */
+
+@media (max-width: 1280px) {
+  .carCard {
+    justify-self: center;
+  }
+}
+
+@media (max-width: 1347px) {
+  .carCard {
+    width: 85vw;
+    /* position: relative; */
+    /* justify-self: center; */
+    /* margin-left: 55px; */
+  }
+
+  .mapWrapper {
+    position: static;
+    width: 85%;
+    height: 300px;
+    margin-left: 60px;
+    margin-top: 10px;
+    margin-bottom: 50px;
+    justify-self: center;
+    display: none;
+  }
+
+
+}
+
+
+
+@media (max-width: 1025px) {
+  .crossLine {
+    float: left;
+    top: -12px;
+  }
+
+  /* .mapWrapper {
+    position: static;
+    width: 100%;
+    height: 300px;
+    margin-top: 30px;
+    } */
+  .middle {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .right {
+    text-align: left;
+    border-left: none;
+    border-top: 1px solid #ccc;
+    padding-top: 0px;
+    min-width: unset;
+    margin-top: 0px;
+  }
+
+  .left {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 16px;
+    text-align: center;
+    width: 60%;
+    justify-items: center;
+    position: relative;
+    /* left: 30%; */
+  }
+
+  .image {
+    width: 100%;
+    text-align: center;
+    justify-self: center;
+    height: 200px;
+  }
+
+  .carCard {
+    flex-direction: column;
+    width: 80vw;
+    position: relative;
+    justify-self: center;
+  }
+
+  .image1 {
+    width: 100px;
+    height: 40px;
+    margin-left: 0;
+  }
+
+  .middle {
+    width: 100%;
+    /* padding-bottom: 40px; */
+  }
+
+  .providerRow {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .dealBtn {
+    float: right;
+    top: -40px;
+  }
+
+  .dealBtnMore {
+    right: -5.5%;
+  }
+
+  .dealBtnBack {
+    left: -3.5%;
+  }
+
+}
+
+@media (max-width: 767px) {
+  .image {
+    height: 260px;
+  }
+
+  .searchToggle {
+    margin-left: 0;
+  }
+
+  .carCard {
+    width: 92vw;
+    overflow: hidden;
+  }
+
+  .icons span {
+    font-size: 12px;
+  }
+
+  .titleRow h3 {
+    font-size: 16px;
+  }
+
+  .left {
+    width: 100%;
+  }
+
+  .slider {
+    left: 0%;
+    /* justify-items: center; */
+    /* justify-items: center; */
+  }
+
+  .rightArrow {
+    top: 25%;
+    right: 3.5%;
+    /* width: 25px; */
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .leftArrow {
+    top: 25%;
+    left: -2%;
+    /* right: 30px; */
+    /* width: 25px; */
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+
+  .subtext {
+    font-size: 14px;
+  }
+
+  .location {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .features {
+    columns: 1;
+  }
+
+  .carCard {
+    height: 1150px;
+  }
+
+  .right {
+    margin-top: 100px;
+  }
+
+  .dealBtnBack {
+    bottom: -7.4%;
+  }
+}
+
+@media (max-width: 639px) {
+  .slider {
+    left: 0%;
+  }
+
+  .middle {
+    margin-bottom: 0px;
+  }
+
+  .detailBtnBack {
+    bottom: -7.4%;
+  }
+
+}
+
+@media (max-width: 379px) {
+  .middle {
+    margin-bottom: 130px;
+  }
+}
+
+@media (max-width: 386px) {
+  .slider {
+    left: -3%;
+  }
+
+  .right {
+    margin-top: 0px;
+  }
+
+  .image {
+    height: 160px;
+  }
+
+  .carCard {
+    height: 1080px;
+  }
+
+}
+
+@media (max-width: 339px) {
+  .middle {
+    /* margin-bottom: 170px; */
+  }
+
+  .carCard {
+    height: 1095px;
+  }
+
+  .slider {
+    left: -5%;
+  }
+
+  .rightArrow {
+    top: 20%;
+    right: -2%;
+    /* width: 25px; */
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .image {
+    height: 170px;
+  }
+
+  .middle {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+}
+
+@media (max-width: 321px) {
+  .subject {
+    left: -2px;
+    top: -50px;
+  }
+
+  .right {
+    padding-bottom: -100px;
+  }
+}
+
+@media (max-width: 326px) {
+  .middle {
+    margin-bottom: 0px;
+  }
+
+  .right {
+    margin-top: 130px;
+    padding-bottom: -70px;
+  }
+}

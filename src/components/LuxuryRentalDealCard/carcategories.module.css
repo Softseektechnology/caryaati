@@ -1,0 +1,239 @@
+
+.carTypeContainer {
+  margin-top: 0.5rem;
+}
+
+.carType {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #ff0000;
+  color: #fff;
+  padding: 0.25rem 0.5rem;
+  border-radius: 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  z-index: 1;
+}
+
+.categoryHeading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #000;
+  margin-top: 2rem; /* Gap above the heading */
+  margin-bottom: 1rem; /* Gap below the heading */
+  text-align: left;
+}
+
+.categoryDescription {
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 1.5rem; /* Gap below the paragraph */
+  text-align: left;
+  max-width: 900px;
+}
+
+.issueBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.providerAndLocation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem; /* Space between rows */
+  background-color: #f5f5f5; /* Light grey background for standard cards */
+  padding: 0.5rem; /* Add padding for better appearance */
+  border-radius: 5px; /* Optional: Add slight border radius */
+}
+
+.providerRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.locationRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.providerContainer {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.providerPlaceholder {
+  width: 50px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.providerLogo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.greenDot {
+  width: 8px;
+  height: 8px;
+  background-color: #28a745;
+  border-radius: 50%;
+}
+
+
+.chargesContainer {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 1rem; /* Gap between charges and inquiry buttons */
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.chargeItem {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 0.3rem;
+  flex: 1;
+}
+
+.chargeLabel {
+  font-size: 0.8rem;
+  color: #666;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.chargePrice {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.chargeCurrency {
+  font-size: 0.7rem;
+  color: #666;
+}
+
+.inquiryButtons {
+  display: flex;
+  justify-content: space-between;
+  gap: 5px;
+  flex-wrap: nowrap !important;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  min-width: 0;
+  margin-bottom: 1rem;
+}
+
+.callButton {
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  color: #000;
+  transition: color 0.3s;
+  padding: 0;
+}
+
+.callButton:hover {
+  background: transparent;
+  color: #feb321;
+}
+
+.callButton svg {
+  font-size: 1.8em;
+  margin-right: 0;
+  color: #000;
+  filter: brightness(1.4) contrast(1.2);
+  vector-effect: non-scaling-stroke;
+}
+
+.whatsappButton {
+  border: none;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  color: #25D366;
+  transition: color 0.3s;
+  padding: 0;
+}
+
+.whatsappButton:hover {
+  background: transparent;
+  color: #1eb554;
+}
+
+.whatsappButton svg {
+  font-size: 1.8em;
+  margin-right: 0;
+  color: #25D366;
+  filter: brightness(1.4) contrast(1.2);
+  vector-effect: non-scaling-stroke;
+}
+
+.icon {
+  font-size: 1.8rem;
+}
+
+.bookNowButton {
+  background-color: #0080F6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  width: 100px;
+  height: 40px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.bookNowButton:hover {
+  background-color: #42C3F7;
+  color: #fff;
+}
+
+/* Location Icons for Standard Cards */
+.locationIcons {
+  display: flex;
+  align-items: center;
+  gap: 0.1rem;
+}
+
+.locationIcon {
+  font-size: 1.5em;
+  color: #000;
+  filter: brightness(1.4) contrast(1.2);
+  vector-effect: non-scaling-stroke;
+}
+
+.locationText {
+  font-size: 0.75rem;
+  color: #000;
+  margin-left: 0.2rem;
+}
