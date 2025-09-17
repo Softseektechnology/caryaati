@@ -13,6 +13,7 @@ import RentalLayout from '../../../components/RentalDealCard/RentalDealCard';
 import ResultsSortBar from '../../../components/ResultsSortBar/ResultsSortBar';
 import PriceAnalysisNotification from '../../../components/PriceAnalysisNotification/Price';
 import Trackprice from '../../../components/PriceAnalysisNotification/Trackprices';
+import { CaryaatiContext } from '@/app/ContextApi/CaryaatiStore';
 // Define the Car interface (kept for potential future use)
 interface Car {
   name: string;
@@ -37,6 +38,7 @@ export default function RentACarListings() {
     priceRange: 5000,
     carType: 'Any',
   });
+  let {separateFilter} = CaryaatiContext();
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
@@ -63,7 +65,7 @@ export default function RentACarListings() {
   };
 
   return (
-    <div className={styles.container}>
+<div className={styles.container}>
       <Navbar onMenuToggle={toggleSidebar} isHome={false} onUserToggle={toggleUserDropdown} />
       <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
       <UserDropdown isOpen={isUserDropdownOpen} />
@@ -72,12 +74,12 @@ export default function RentACarListings() {
         <Row>
           <div className='relative z-[998] bg-white'>
           <div className='fixed top-[70px] py-2 z-[998] bg-white'>
-            <div className='absolute z-[998]'>
+            <div className={`absolute z-[998] ${separateFilter ? 'hidden' : ''}`} style={{display: separateFilter ? 'none' : '' }}>
           <CustomCheckboxDropdown />
             </div>
             </div>
           </div>
-          <div className='fixed top-[60px] py-[40px] z-[995] bg-white right-0 left-0'> </div>
+          <div className={`fixed top-[60px] py-[40px] z-[995] bg-white right-0 left-0 ${separateFilter === true ? 'hidden' : ''}`}> </div>
           <div className={`relative top-[40px] ${styles.rentalLayout} max-[725px]:ml-0 max-xl:justify-center max-xl:justify-items-center`}>
           {/* Add the ResultsSortBar component below the filter bar */}
                       {/* <ResultsSortBar resultCount={375} defaultSort="Our recommendation" /> */}

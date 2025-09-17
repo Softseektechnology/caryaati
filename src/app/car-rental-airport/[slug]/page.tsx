@@ -13,6 +13,7 @@ import RentalLayout from '../../../components/RentalDealCard/RentalDealCard';
 import ResultsSortBar from '../../../components/ResultsSortBar/ResultsSortBar';
 import PriceAnalysisNotification from '../../../components/PriceAnalysisNotification/Price';
 import Trackprice from '../../../components/PriceAnalysisNotification/Trackprices';
+import { CaryaatiContext } from '@/app/ContextApi/CaryaatiStore';
 // Define the Car interface (kept for potential future use)
 interface Car {
   name: string;
@@ -34,6 +35,7 @@ export default function RentACarListings() {
     priceRange: 5000,
     carType: 'Any',
   });
+    let { separateFilter } = CaryaatiContext();
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
@@ -63,33 +65,33 @@ export default function RentACarListings() {
   };
 
   return (
-    <div className={styles.container}>
+   <div className={styles.container}>
       <Navbar onMenuToggle={toggleSidebar} isHome={false} onUserToggle={toggleUserDropdown} />
       <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
       <UserDropdown isOpen={isUserDropdownOpen} />
 
       <main style={{ flex: 1, padding: '2rem' }}>
-              <Row>
-                <div className='relative z-[998] bg-white'>
-                <div className='fixed top-[70px] py-2 z-[998] bg-white'>
-                  <div className='absolute z-[998]'>
-                <CustomCheckboxDropdown />
-                  </div>
-                  </div>
-                </div>
-                <div className='fixed top-[60px] py-[40px] z-[995] bg-white right-0 left-0'> </div>
-                <div className='relative top-[40px] max-[725px]:ml-0 max-xl:justify-center max-xl:justify-items-center'>
-                {/* Add the ResultsSortBar component below the filter bar */}
-                            {/* <ResultsSortBar resultCount={375} defaultSort="Our recommendation" /> */}
-                       {/* Add the PriceAnalysisNotification component below the ResultsSortBar */}
-                {/* <PriceAnalysisNotification /> */}
-                 {/* Add the trackprice component below the ResultsSortBar */}
-                 {/* <Trackprice /> */}
-                <RentalLayout />
-                </div>
-               
-              </Row>
-            </main>
+        <Row>
+          <div className='relative z-[998] bg-white'>
+          <div className='fixed top-[70px] py-2 z-[998] bg-white'>
+            <div className={`absolute z-[998] ${separateFilter ? 'hidden' : ''}`} style={{display: separateFilter ? 'none' : '' }}>
+          <CustomCheckboxDropdown />
+            </div>
+            </div>
+          </div>
+          <div className={`fixed top-[60px] py-[40px] z-[995] bg-white right-0 left-0 ${separateFilter === true ? 'hidden' : ''}`}> </div>
+          <div className={`relative top-[40px] ${styles.rentalLayout} max-[725px]:ml-0 max-xl:justify-center max-xl:justify-items-center`}>
+          {/* Add the ResultsSortBar component below the filter bar */}
+                      {/* <ResultsSortBar resultCount={375} defaultSort="Our recommendation" /> */}
+                 {/* Add the PriceAnalysisNotification component below the ResultsSortBar */}
+          {/* <PriceAnalysisNotification /> */}
+           {/* Add the trackprice component below the ResultsSortBar */}
+           {/* <Trackprice /> */}
+          <RentalLayout />
+          </div>
+         
+        </Row>
+      </main>
 
       <Footer />
     </div>
