@@ -31,43 +31,34 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <Navbar
-        onMenuToggle={() => {
-          setIsSidebarOpen(!isSidebarOpen);
-          setIsDropdownOpen(false);
-        }}
-        onUserToggle={() => {
-          setIsDropdownOpen(!isDropdownOpen);
-          setIsSidebarOpen(false);
-        }}
-        isHome={true}
-      />
-      <Sidebar isOpen={isSidebarOpen} onClose={handleSidebarClose} />
-      <UserDropdown isOpen={isDropdownOpen} />
-      <main className={`${styles.mainContent}`}>
-        {/* Section with background color */}
-        <div className={`${styles.backgroundSection} max-lg:bg-[#0080F6]`}>
-          <div className={`container text-center mb-45 max-xl:mb-15 mt-15 ${styles.contentWrapper}`}>
-            <h1 className={`${styles.mainHeading}`}>Caryaati - Seamless Car Rental Solutions</h1>
-            <div className={styles.componentWrapper}>
-              <Carcategory />
-            </div>
-            <div className={`${styles.componentWrapper} xl:h-[300px] xl:max-h-[300px]`}>
-              <SearchEngine />
-            </div>
-          </div>
+          <Navbar onMenuToggle={toggleSidebar} isHome={false} onUserToggle={toggleUserDropdown} />
+          <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
+          <UserDropdown isOpen={isUserDropdownOpen} />
+    
+          <main style={{ flex: 1, padding: '2rem' }}>
+            <Row>
+              <div className='relative z-[998] bg-white'>
+              <div className='fixed top-[70px] py-2 z-[998] bg-white'>
+                <div className={`absolute z-[998] ${separateFilter ? 'hidden' : ''}`} style={{display: separateFilter ? 'none' : '' }}>
+              <CustomCheckboxDropdown />
+                </div>
+                </div>
+              </div>
+              <div className={`fixed top-[60px] py-[40px] z-[995] bg-white right-0 left-0 ${separateFilter === true ? 'hidden' : ''}`}> </div>
+              <div className={`relative top-[40px] ${styles.rentalLayout} max-[725px]:ml-0 max-xl:justify-center max-xl:justify-items-center`}>
+              {/* Add the ResultsSortBar component below the filter bar */}
+                          {/* <ResultsSortBar resultCount={375} defaultSort="Our recommendation" /> */}
+                     {/* Add the PriceAnalysisNotification component below the ResultsSortBar */}
+              {/* <PriceAnalysisNotification /> */}
+               {/* Add the trackprice component below the ResultsSortBar */}
+               {/* <Trackprice /> */}
+              <RentalLayout />
+              </div>
+             
+            </Row>
+          </main>
+    
+          <Footer />
         </div>
-        <div className='absolute overflow-hidden top-[0%] max-xl:top-[-450px] max-lg:hidden brightness-60'>
-          <video src="/videos/bg-video.mp4" autoPlay muted loop preload='auto' className='max-xl:h-[1600px] max-lg:hidden'></video>
-        </div>
-        {/* Section without background color */}
-        <div className="container relative" style={{ top: '50px' }}>
-          <Subcategory /> {/* Includes the heading */}
-        </div>
-      </main>
-      <DocumentsInfo />
-      <FAQPage />
-      <Footer />
-    </div>
   );
 }
