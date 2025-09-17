@@ -44,7 +44,12 @@
   mix-blend-mode: multiply;
 }
 
-
+.filtersBtn {
+  margin-left: 100px;
+}
+.filtersBtn:hover {
+  background: linear-gradient(90deg, #00aaff, #42C3F7);
+}
 
 .middleFlipWrapper {
   perspective: 1000px;
@@ -1031,6 +1036,9 @@ input:checked+.sliderBox:before {
 @media (max-width: 767px) {
   .carCard {
     margin-left: 0px;
+  }
+  .filtersBtn{
+    margin-left: 30px;
   }
 
   .left {

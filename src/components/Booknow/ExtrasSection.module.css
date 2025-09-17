@@ -349,3 +349,49 @@
 .packageOption {
   /* Minimal styles to avoid overriding Tailwind */
 }
+.filterSidebar {
+  box-shadow: -5px 0px 25px rgba(0, 0, 0, 0.1);
+}
+
+.filterCategory {
+  transition: all 0.3s ease;
+}
+
+.filterCategory:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.accordionIcon {
+  transition: transform 0.3s ease;
+}
+
+.accordionOpen .accordionIcon {
+  transform: rotate(180deg);
+}
+
+/* Smooth transitions for filter elements */
+.filterItem {
+  transition: all 0.2s ease;
+}
+
+.filterItem:hover {
+  background-color: #f8f9fa;
+}
+
+/* Custom scrollbar for the filter sidebar */
+.filterSidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.filterSidebar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.filterSidebar::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.filterSidebar::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
