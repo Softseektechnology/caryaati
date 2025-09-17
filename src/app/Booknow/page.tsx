@@ -3,7 +3,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Slider from 'react-slick';
 
 // Layout & Form Components
 import Navbar from '../../components/nevegation-header/Navbar';
@@ -11,14 +10,12 @@ import Footer from '../../components/foorter/Footer';
 import UserDropdown from '../../components/customer-dashboard/user-dashboard';
 import Sidebar from '../../components/multiplepages/Sidebar-multiplelinks';
 import Form from '../../components/Form/Bookform';
-import CustomDateRangePicker from '@/components/search-engine/CustomDateRangePicker';
 import Subcategory from '@/components/homepage-subcategory/allCarscategory';
+import DetailSection from '@/components/LuxuryRentalDealCard/DetailSection';
 
 // Styling
 import 'aos/dist/aos.css';
 import AOS from 'aos';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import styles from './booknow.module.css';
 
 // NOTE: Add Font Awesome to your project's layout for these icons to appear.
@@ -30,11 +27,7 @@ interface CarDetailsModalProps {
 }
 const CarDetailsModal: React.FC<CarDetailsModalProps> = ({ onClose }) => {
     const modalRef = useRef<HTMLDivElement>(null);
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-    const [activeTab, setActiveTab] = useState('specifications');
     const [isBookmarked, setIsBookmarked] = useState(false);
-
-    const carImages = ["/images/model_sp_596_639.webp", "/images/live1.jpg", "/images/live2.jpg", "/images/live3.jpg"];
 
     useEffect(() => {
         const handleOutsideClick = (event: MouseEvent) => {
@@ -51,20 +44,18 @@ const CarDetailsModal: React.FC<CarDetailsModalProps> = ({ onClose }) => {
         };
     }, [onClose]);
 
-    const nextImage = () => setCurrentImageIndex((prev) => (prev === carImages.length - 1 ? 0 : prev + 1));
-    const prevImage = () => setCurrentImageIndex((prev) => (prev === 0 ? carImages.length - 1 : prev - 1));
     const toggleBookmark = () => setIsBookmarked(!isBookmarked);
 
     return (
-        <div className="fixed inset-0 bg-opacity-80 flex items-center backdrop-brightness-75 justify-center z-50 p-4 backdrop-blur-[3px]">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl relative max-w-5xl w-full max-h-[90vh] overflow-y-auto shadow-2xl" ref={modalRef}>
                 <div className="sticky top-0 bg-gradient-to-r from-blue-600 to-purple-600 z-10 flex justify-between items-center px-6 py-4 shadow-md">
                     <div>
-                        <h2 className="text-2xl font-bold text-white">Nissan Sunny 2020</h2>
+                        <h2 className="text-2xl font-bold text-white">Nissan Sunny 2026</h2>
                         <p className="text-blue-100">Economy Sedan | Perfect for City Driving</p>
                     </div>
                     <div className="flex items-center space-x-4">
-                        <button onClick={toggleBookmark} className="p-2 rounded-full bg-opacity-20 hover:bg-opacity-30 transition-all">
+                        <button onClick={toggleBookmark} className="p-2 rounded-full bg-black/20 hover:bg-black/30 transition-all">
                             <svg xmlns="http://www.w3.org/2000/svg" className={`h-6 w-6 ${isBookmarked ? 'text-yellow-400' : 'text-white'}`} fill={isBookmarked ? "currentColor" : "none"} viewBox="0 0 24 24" stroke="currentColor">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
                             </svg>
@@ -76,85 +67,8 @@ const CarDetailsModal: React.FC<CarDetailsModalProps> = ({ onClose }) => {
                         </button>
                     </div>
                 </div>
-                <div className="relative p-6 bg-gray-100">
-                    <div className="relative h-80 w-full overflow-hidden rounded-xl">
-                        <Image src={carImages[currentImageIndex]} alt="Nissan Sunny" fill className="object-cover transition-transform duration-500 hover:scale-105" priority />
-                        <button onClick={prevImage} className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-60">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-                        </button>
-                        <button onClick={nextImage} className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-40 text-white p-2 rounded-full hover:bg-opacity-60">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                        </button>
-                    </div>
-                    <div className="flex mt-4 space-x-3 overflow-x-auto pb-2">
-                        {carImages.map((img, index) => (
-                            <div key={index} onClick={() => setCurrentImageIndex(index)} className={`flex-shrink-0 w-20 h-16 relative cursor-pointer rounded-lg overflow-hidden border-2 ${currentImageIndex === index ? 'border-blue-500' : 'border-transparent'}`}>
-                                <Image src={img} alt={`Thumbnail ${index + 1}`} fill className="object-cover" />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-                <div className="border-b border-gray-200 px-6">
-                    <nav className="flex space-x-8">
-                        {[{ id: 'specifications', label: 'Specifications', icon: '⚙️' }, { id: 'features', label: 'Features', icon: '✨' }, { id: 'rental', label: 'Rental Info', icon: '📋' }, { id: 'notes', label: 'Notes', icon: '📝' }].map((tab) => (
-                            <button key={tab.id} onClick={() => setActiveTab(tab.id)} className={`py-4 px-1 font-medium text-sm flex items-center border-b-2 transition-colors ${activeTab === tab.id ? 'border-blue-500 text-blue-600' : 'border-transparent text-gray-500 hover:text-gray-700'}`}>
-                                <span className="mr-2">{tab.icon}</span>{tab.label}
-                            </button>
-                        ))}
-                    </nav>
-                </div>
-                <div className="p-6">
-                    {activeTab === 'specifications' && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div className="bg-gray-50 p-5 rounded-xl">
-                                <h3 className="text-xl font-semibold mb-4">Vehicle Specifications</h3>
-                                <ul className="space-y-3">
-                                    {[{ label: 'Engine', value: '1.5L 4-Cylinder' }, { label: 'Transmission', value: 'Auto' }, { label: 'Fuel Type', value: 'Petrol' }, { label: 'Fuel Policy', value: 'Level to Level' }, { label: 'Mileage Limit', value: '4500 KM' }, { label: 'Seating', value: '5 Adults' }, { label: 'Luggage', value: '3 Bags' }].map((item, index) => (
-                                        <li key={index} className="flex justify-between py-2 border-b last:border-b-0">
-                                            <span className="text-gray-600">{item.label}</span>
-                                            <span className="font-medium">{item.value}</span>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div className="bg-gray-50 p-5 rounded-xl">
-                                <h3 className="text-xl font-semibold mb-4">Performance</h3>
-                                <div className="grid grid-cols-2 gap-4">
-                                    {[{ label: 'Horsepower', value: '110 HP' }, { label: 'Top Speed', value: '180 km/h' }, { label: '0-100 km/h', value: '11.5s' }, { label: 'Fuel Economy', value: '16 km/L' }].map((item, index) => (
-                                        <div key={index} className="bg-white p-3 rounded-lg shadow-sm text-center">
-                                            <div className="text-sm text-gray-500">{item.label}</div>
-                                            <div className="font-semibold mt-1">{item.value}</div>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    )}
-                     {activeTab === 'features' && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            {[ { title: 'Interior Features', items: ['Air Conditioning', 'Bluetooth', 'Touchscreen', 'USB Ports', 'Keyless Entry'] }, { title: 'Safety Features', items: ['ABS Brakes', 'Airbags', 'Rearview Camera', 'Parking Sensors'] } ].map((section) => (
-                                <div key={section.title} className="bg-gray-50 p-5 rounded-xl">
-                                    <h3 className="text-xl font-semibold mb-4">{section.title}</h3>
-                                    <ul className="grid grid-cols-1 gap-3">
-                                        {section.items.map((feature, index) => (
-                                            <li key={index} className="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-green-500 mr-3" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" /></svg>{feature}</li>
-                                        ))}
-                                    </ul>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                    {activeTab === 'rental' && <div>Rental Information Content...</div>}
-                    {activeTab === 'notes' && <div>Additional Notes Content...</div>}
-                </div>
-                <div className="sticky bottom-0 bg-white border-t px-4 py-2 flex justify-between items-center rounded-b-2xl">
-                    <div>
-                        <p className="text-sm">Total for 30 days</p>
-                        <p className="text-2xl font-bold text-blue-600">1009.9 AED</p>
-                    </div>
-                    <div className="flex space-x-3">
-                        <button className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 shadow-md">Reserve Now</button>
-                    </div>
+                 <div className="p-6">
+                    <p>Details about the Nissan Sunny 2026...</p>
                 </div>
             </div>
         </div>
@@ -311,6 +225,10 @@ const BookingPage: React.FC = () => {
     const [isClient, setIsClient] = useState(false);
     const [selectedImage, setSelectedImage] = useState('/images/model_sp_596_639.webp');
     
+    const [bookingdates, setbookingdates] = useState<string>("Booking Dates");
+    const [mileageOption, setMileageOption] = useState<'limited' | 'unlimited'>('limited');
+
+
     const totalSteps: number = 5;
     const router = useRouter();
 
@@ -333,7 +251,14 @@ const BookingPage: React.FC = () => {
         setIsClient(true);
     }, []);
 
-    // Calculate number of days for pricing
+    // Helper to format dates for display
+    const formatDateTime = (date: Date | null): string => {
+        if (!date) return '';
+        const options: Intl.DateTimeFormatOptions = { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true };
+        return date.toLocaleString('en-US', options).replace(',', ' |');
+    };
+
+    // Calculate costs based on selections
     const calculateDays = () => {
         const [start, end] = formData.dateRange;
         if (start && end) {
@@ -344,8 +269,11 @@ const BookingPage: React.FC = () => {
         return 1;
     };
     const rentalDays = calculateDays();
-    const pricePerDay = 33.66; // Base price for Nissan Sunny per day
+    const pricePerDay = 33.66;
     const totalBasePrice = rentalDays * pricePerDay;
+    const mileageCost = mileageOption === 'unlimited' ? 6.55 * rentalDays : 0;
+    const finalTotal = totalBasePrice + mileageCost;
+
 
     // Handlers for booking flow
     const handleDateRangeChange = (startDate: Date | null, endDate: Date | null) => setFormData({ ...formData, dateRange: [startDate, endDate] });
@@ -353,13 +281,14 @@ const BookingPage: React.FC = () => {
     const prevStep = () => currentStep > 1 ? setCurrentStep(currentStep - 1) : null;
     const showStep = (step: number) => step <= totalSteps ? setCurrentStep(step) : null;
     
-    const carImages = [{ id: 1, src: '/images/model_sp_596_639.webp', alt: 'Nissan Sunny Front' }, { id: 2, src: '/images/live1.jpg', alt: 'Nissan Sunny Side' }, { id: 3, src: '/images/live2.jpg', alt: 'Nissan Sunny Interior' }, { id: 4, src: '/images/live3.jpg', alt: 'Nissan Sunny Back' }];
-    const sliderSettings = { dots: false, infinite: true, speed: 500, slidesToShow: 4, slidesToScroll: 1, arrows: false, responsive: [{ breakpoint: 767, settings: { slidesToShow: 3 } }, { breakpoint: 400, settings: { slidesToShow: 2 } }] };
+    const carImages = [{ id: 1, src: '/images/model_sp_596_639.webp' }, { id: 2, src: '/images/live1.jpg' }, { id: 3, src: '/images/live2.jpg' }, { id: 4, src: '/images/live3.jpg' }];
     
+    const handleEditDateTime = () => console.log("Edit date and time clicked!");
+
     if (!isClient) return <div className="min-h-screen bg-white flex items-center justify-center"><p>Loading...</p></div>;
 
     return (
-        <div className="bg-gray-50">
+        <div className="bg-gray-100">
             <Navbar onMenuToggle={toggleSidebar} isHome={true} onUserToggle={toggleUserDropdown} />
             <Sidebar isOpen={isSidebarOpen} onClose={toggleSidebar} />
             <UserDropdown isOpen={isUserDropdownOpen} />
@@ -371,7 +300,6 @@ const BookingPage: React.FC = () => {
                         <p className="text-gray-600 max-w-2xl mx-auto text-lg">Complete your booking in a few simple steps and hit the road in style</p>
                     </div>
 
-                    {/* STEPPER IS NOW RESTORED */}
                     <div className="relative max-w-4xl mx-auto mb-16" data-aos="fade-up">
                         <div className="absolute top-1/2 left-0 right-0 h-1.5 bg-gray-200 -translate-y-1/2 rounded-full"></div>
                         <div className="absolute top-1/2 left-0 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-500 -translate-y-1/2 rounded-full transition-all duration-500" style={{ width: `${((currentStep - 1) / (totalSteps - 1)) * 100}%` }}></div>
@@ -389,45 +317,92 @@ const BookingPage: React.FC = () => {
 
                     <div className="mt-10">
                         {currentStep === 1 && (
-                            <div className="grid lg:grid-cols-5 gap-8 items-start">
+                            <div className="flex flex-col lg:flex-row gap-8 items-stretch">
                                 {/* Left Side: Vehicle Card */}
-                                <div className="lg:col-span-3 bg-slate-900 text-white rounded-2xl p-6 shadow-2xl">
-                                    <h2 className="text-3xl font-bold">Nissan Sunny <span className="text-gray-400 font-light">or similar</span></h2>
-                                    <p className="text-gray-300 mb-4">Compact Sedan Automatic</p>
-                                    
-                                    <div className="flex items-center space-x-3 mb-6">
-                                        <div className="flex items-center bg-slate-800 rounded-full px-3 py-1 text-sm"><svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zm-1.558 4.772a.75.75 0 00-1.06-1.06-4.5 4.5 0 00-6.384 6.384.75.75 0 001.06-1.06A3 3 0 015.535 12H5a.5.5 0 010-1h.535zM14.5 6a3 3 0 100-6 3 3 0 000 6zM13 10.5c0-1.518.82-2.823 2-3.5V6a.5.5 0 00-1 0v1.126a4.502 4.502 0 00-2.372 1.487.75.75 0 001.06 1.06A3 3 0 0113 10.5z"></path></svg>5</div>
-                                        <div className="flex items-center bg-slate-800 rounded-full px-3 py-1 text-sm"><svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M5 4a1 1 0 00-1 1v2a1 1 0 001 1h10a1 1 0 001-1V5a1 1 0 00-1-1H5zm0 6a1 1 0 00-1 1v5a1 1 0 001 1h10a1 1 0 001-1v-5a1 1 0 00-1-1H5z" clipRule="evenodd"></path></svg>3</div>
-                                        <div className="flex items-center bg-slate-800 rounded-full px-3 py-1 text-sm"><svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20"><path d="M10.75 4.75a.75.75 0 00-1.5 0v4.5h-4.5a.75.75 0 000 1.5h4.5v4.5a.75.75 0 001.5 0v-4.5h4.5a.75.75 0 000-1.5h-4.5v-4.5z"></path><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm0 1.5a9.5 9.5 0 100-19 9.5 9.5 0 000 19z" clipRule="evenodd"></path></svg>Automatic</div>
+                                <div className="lg:w-3/5 bg-white text-gray-800 rounded-2xl p-6 shadow-xl space-y-4">
+                                    <div>
+                                        <h2 className="text-3xl font-bold">Nissan Sunny 2026</h2>
+                                        <div className="flex items-center space-x-2 mt-2">
+                                            <span className="bg-red-600 text-white text-xs font-semibold px-3 py-1 rounded-full">Sedan</span>
+                                            <span className="bg-yellow-400 text-white text-xs font-semibold px-3 py-1 rounded-full">Featured</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {/* FIX: Title size reduced */}
+                                        <h3 className="font-semibold text-base mb-2">Specification</h3>
+                                        <div className="flex items-center space-x-6 text-gray-500">
+                                            <span className="flex items-center text-sm"><svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>x 3</span>
+                                            <span className="flex items-center text-sm"><svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>x 5</span>
+                                            <span className="flex items-center text-sm"><svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>Automatic</span>
+                                            <span className="flex items-center text-sm"><svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16V8a2 2 0 00-4 0v8m-4 0h12m-4-8a4 4 0 100-8 4 4 0 000 8z"></path></svg>A/C</span>
+                                        </div>
                                     </div>
                                     
-                                    <div className="relative overflow-hidden rounded-lg aspect-video mb-4 bg-slate-800"><Image src={selectedImage} alt="Selected Car" fill className="object-contain" priority/></div>
-                                    <Slider {...sliderSettings}>
-                                        {carImages.map(img => (<div key={img.id} className="px-2"><div className={`relative h-16 rounded-md overflow-hidden border-2 cursor-pointer ${selectedImage === img.src ? 'border-blue-500' : 'border-slate-700'}`} onClick={() => setSelectedImage(img.src)}><Image src={img.src} alt={img.alt} fill className="object-cover" /></div></div>))}
-                                    </Slider>
+                                    <div className="flex gap-4 h-80">
+                                        <div className="flex flex-col space-y-3">
+                                            {carImages.map((img) => (<div key={img.id} className={`relative w-20 h-full cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${selectedImage === img.src ? 'border-blue-500' : 'border-transparent'}`} onClick={() => setSelectedImage(img.src)}><Image src={img.src} alt={`Thumbnail ${img.id}`} fill className="object-cover" /></div>))}
+                                        </div>
+                                        {/* FIX: Background color removed */}
+                                        <div className="relative flex-1 rounded-lg overflow-hidden"><Image src={selectedImage} alt="Selected Car" fill className="object-contain" priority/></div>
+                                    </div>
 
-                                    <div className="mt-6 pt-6 border-t border-slate-700">
-                                        <div className="flex items-center text-green-400 mb-4"><svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path></svg>Unlimited kilometers available</div>
-                                        <div className="flex items-baseline"><p className="text-4xl font-bold">{pricePerDay.toFixed(2)} AED</p><p className="text-gray-400 ml-2">/ day</p></div>
+                                    {/* FIX: DetailSection aligned to the right */}
+                                    <div className="flex justify-between items-baseline pt-4 border-t border-gray-200">
+                                        <div className="flex items-baseline"><p className="text-4xl font-bold">{pricePerDay.toFixed(2)} AED</p><p className="text-gray-500 ml-2">/ day</p></div>
+                                        <DetailSection/>
                                     </div>
+
                                 </div>
 
                                 {/* Right Side: Booking Panel */}
-                                <div className="lg:col-span-2 bg-white rounded-2xl p-6 shadow-xl sticky top-24">
-                                     <h3 className="text-2xl font-bold text-gray-900 mb-1">Your Booking Details</h3>
-                                     <p className="text-gray-500 mb-6">Select your rental period</p>
-                                    
-                                    <CustomDateRangePicker value={formData.dateRange} onChange={handleDateRangeChange} placeholder="Select Dates" isCarCard={false} />
-                                    
-                                    <div className="mt-6 pt-6 border-t border-gray-200">
-                                        <div className="space-y-3 text-gray-600">
-                                            <div className="flex justify-between"><span>Base Rate ({rentalDays} {rentalDays > 1 ? 'days' : 'day'})</span><span className="font-medium text-gray-900">{totalBasePrice.toFixed(2)} AED</span></div>
-                                            <div className="flex justify-between text-sm"><span>Taxes & Fees</span><span className="font-medium text-gray-900">{(totalBasePrice * 0.05).toFixed(2)} AED</span></div>
+                                <div className="lg:w-2/5 bg-white rounded-2xl p-6 shadow-xl flex flex-col">
+                                    <div>
+                                        <div className="bg-gray-800 text-white rounded-xl p-4 flex justify-between items-center mb-6">
+                                            <div>
+                                                <p className="font-semibold text-lg">{bookingdates}</p>
+                                                <p className="text-sm text-gray-300">{formatDateTime(formData.dateRange[0])} - {formatDateTime(formData.dateRange[1])}</p>
+                                            </div>
+                                            <button onClick={handleEditDateTime} className="p-2 rounded-full hover:bg-gray-700 transition-colors">
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" /></svg>
+                                            </button>
                                         </div>
-                                        <div className="flex justify-between items-center mt-4 pt-4 border-t border-gray-200">
-                                            <span className="text-xl font-bold text-gray-900">Total</span>
-                                            <span className="text-2xl font-bold text-blue-600">{(totalBasePrice * 1.05).toFixed(2)} AED</span>
+                                        
+                                        <div className="space-y-4">
+                                            <label className="text-lg font-semibold text-gray-800">Mileage</label>
+                                            <div onClick={() => setMileageOption('limited')} className={`p-4 border rounded-lg cursor-pointer flex justify-between items-center transition-all ${mileageOption === 'limited' ? 'border-black ring-2 ring-black' : 'border-gray-300'}`}>
+                                                <div className="flex items-center">
+                                                    <div className="w-5 h-5 border-2 rounded-full flex items-center justify-center mr-3">{mileageOption === 'limited' && <div className="w-2.5 h-2.5 bg-black rounded-full"></div>}</div>
+                                                    <div>
+                                                        <p className="font-semibold">1,200 km</p>
+                                                        <p className="text-xs text-gray-500">+0.64 AED / for every additional km</p>
+                                                    </div>
+                                                </div>
+                                                <p className="font-semibold">Included</p>
+                                            </div>
+                                            <div onClick={() => setMileageOption('unlimited')} className={`p-4 border rounded-lg cursor-pointer flex justify-between items-center transition-all ${mileageOption === 'unlimited' ? 'border-black ring-2 ring-black' : 'border-gray-300'}`}>
+                                                <div className="flex items-center">
+                                                    <div className="w-5 h-5 border-2 rounded-full flex items-center justify-center mr-3">{mileageOption === 'unlimited' && <div className="w-2.5 h-2.5 bg-black rounded-full"></div>}</div>
+                                                    <div>
+                                                        <p className="font-semibold">Unlimited kilometers</p>
+                                                        <p className="text-xs text-gray-500">All kilometers are included in the price</p>
+                                                    </div>
+                                                </div>
+                                                <p className="font-semibold">+ {(6.55 * rentalDays).toFixed(2)} AED</p>
+                                            </div>
                                         </div>
+                                    </div>
+                                    
+                                    <div className="mt-auto pt-6">
+                                        <div className="flex justify-between items-baseline mb-4">
+                                            <div>
+                                                <p className="text-2xl font-bold text-gray-900">{finalTotal.toFixed(2)} AED total</p>
+                                                <p className="text-sm text-gray-500">{(finalTotal / rentalDays).toFixed(2)} AED /day</p>
+                                            </div>
+                                        </div>
+                                        {/* FIX: Button style updated */}
+                                        <button onClick={nextStep} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-xl transition-transform transform hover:scale-105 shadow-lg">
+                                            Next
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -438,11 +413,13 @@ const BookingPage: React.FC = () => {
                         {currentStep === 4 && <Form />}
                         {currentStep === 5 && <div>Confirmation Summary...</div>}
 
-                        {/* Buttons are now consistent for all steps */}
-                        <div className="flex justify-between items-center mt-10">
-                            <button onClick={prevStep} disabled={currentStep === 1} className="py-2.5 px-6 rounded-lg disabled:opacity-50 hover:bg-gray-100 font-medium">Previous</button>
-                            <button onClick={nextStep} className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-8 rounded-lg shadow-md hover:shadow-lg transition-all">{currentStep === totalSteps ? 'Complete Booking' : 'Next'}</button>
-                        </div>
+                        {currentStep > 1 && (
+                            <div className="flex justify-between items-center mt-10">
+                                <button onClick={prevStep} className="py-2.5 px-6 rounded-xl hover:bg-gray-200 font-medium">Previous</button>
+                                {/* FIX: Button style updated */}
+                                <button onClick={nextStep} className="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 px-8 rounded-xl shadow-md hover:shadow-lg transition-all">{currentStep === totalSteps ? 'Complete Booking' : 'Next'}</button>
+                            </div>
+                        )}
                     </div>
                 </div>
             </main>
