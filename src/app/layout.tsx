@@ -2,6 +2,7 @@ import '../app/globals.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import { Poppins } from "next/font/google";
+import { CaryaatiProvider } from './ContextApi/CaryaatiStore';
 
 
 // import AuthProvider from './AuthProvider';
@@ -29,7 +30,9 @@ export default function RootLayout({ children }) {
       </head>
       <body className={poppins.className}>
         {/* <AuthProvider> */}
+        <CaryaatiProvider>
         {children}
+        </CaryaatiProvider>
         {/* </AuthProvider> */}
         </body>
     </html>

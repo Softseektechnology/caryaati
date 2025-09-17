@@ -479,7 +479,7 @@ export default function Sidebar({ isOpen: initialIsOpen = false, onClose, isDash
                     <Link href="/special-car/mid-size" onClick={handleClose}>Mid-Size Cars on Rent</Link>
                   </li>
                   <li>
-                    <Link href="/special-car/luxury" onClick={handleClose}>Luxury Cars on Rent</Link>
+                    <Link href="/luxury-cars-for-rent" onClick={handleClose}>Luxury Cars on Rent</Link>
                   </li>
                   <li>
                     <Link href="/special-car/premium" onClick={handleClose}>Premium Cars on Rent</Link>

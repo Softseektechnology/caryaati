@@ -12,6 +12,7 @@ import { SlidersHorizontal } from "lucide-react";
 import ResultsSortBar from "../ResultsSortBar/ResultsSortBar";
 import PriceAnalysisNotification from "../PriceAnalysisNotification/Price";
 import Trackprice from "../PriceAnalysisNotification/Trackprices";
+import { CaryaatiContext } from "@/app/ContextApi/CaryaatiStore";
 
 const CustomCheckboxDropdown = ({
   options,
@@ -770,11 +771,13 @@ export default function SearchForm() {
     estatecar: "Estate Car",
     "open-air": "Open Air",
   };
+  const { separateFilter } = CaryaatiContext();
+
 
   if (!isMounted) return null;
 
   return (
-    <div className={styles.searchSection}>
+    <div className={`${styles.searchSection} ${separateFilter === true ? 'hidden': ''}`} style={{display: separateFilter === true ? 'none': ''}}>
       <div className={styles.filterBar}>
         <div className={styles.filterContainer} ref={filterContainerRef}>
           <CustomCheckboxDropdown

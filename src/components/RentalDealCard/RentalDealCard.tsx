@@ -6,6 +6,7 @@ import { Form } from 'react-bootstrap';
 import CustomDateRangePicker from '@/components/search-engine/CustomDateRangePicker';
 import { useParams, useRouter } from 'next/navigation';
 import ResultsSortBar from '../ResultsSortBar/ResultsSortBar';
+import { CaryaatiContext } from '@/app/ContextApi/CaryaatiStore';
 
 interface ImageItem {
   id: number;
@@ -15,18 +16,35 @@ interface ImageItem {
 
 export default function CarAndMapLayout() {
   const [searchOpen, setSearchOpen] = useState(false);
-  const [carCard, setCarCard] = useState(true);
+  const [filtersVisible, setFiltersVisible] = useState(false);
+  const [isMapSticky, setIsMapSticky] = useState(true);
+  const [isFiltersSticky, setIsFiltersSticky] = useState(true);
+  const [isMounted, setIsMounted] = useState(false);
+
+  const { separateFilter, setSeparateFilter } = CaryaatiContext();
   const [formData, setFormData] = useState({
     location: '',
     dateRange: [null, null] as [Date | null, Date | null],
+    rating: '',
+    policies: '',
+    supplier: '',
+    pickupLocation: '',
+    paymentType: '',
+    priceRange: [1000, 10000] as [number, number],
   });
 
-  const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
   const params = useParams();
   const slugFromUrl = Array.isArray(params?.slug)
     ? params?.slug[params?.slug.length - 1]
     : params?.slug || '';
+
+  const [cars, setCars] = useState<any[]>([]);
+  const [visibleCars, setVisibleCars] = useState(10);
+
+  useEffect(() => {
+    setSeparateFilter(filtersVisible);
+  }, [filtersVisible, setSeparateFilter]);
 
   useEffect(() => {
     setIsMounted(true);
@@ -63,6 +81,111 @@ export default function CarAndMapLayout() {
     }
   }, [slugFromUrl]);
 
+  useEffect(() => {
+    const sentinel = document.getElementById('scroll-end-marker');
+    if (sentinel && isMounted) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          const isSticky = !entry.isIntersecting;
+          setIsMapSticky(isSticky);
+          setIsFiltersSticky(isSticky);
+        },
+        {
+          root: null, // Use viewport as root
+          threshold: 0, // Trigger when sentinel is fully out of view
+          rootMargin: '0px 0px 0px 0px', // No margin
+        }
+      );
+      observer.observe(sentinel);
+      return () => observer.disconnect();
+    }
+  }, [visibleCars, isMounted]);
+
+  const toggleFilters = () => {
+    setFiltersVisible(!filtersVisible);
+  };
+
+  const handleRatingToggle = (value: string) => {
+    const values = formData.rating ? formData.rating.split(',') : [];
+    if (values.includes(value)) {
+      const newValues = values.filter((v) => v !== value);
+      setFormData({ ...formData, rating: newValues.join(',') });
+      localStorage.setItem('rating', newValues.join(','));
+    } else {
+      const newValues = [...values, value];
+      setFormData({ ...formData, rating: newValues.join(',') });
+      localStorage.setItem('rating', newValues.join(','));
+    }
+  };
+
+  const handlePoliciesToggle = (value: string) => {
+    const values = formData.policies ? formData.policies.split(',') : [];
+    if (values.includes(value)) {
+      const newValues = values.filter((v) => v !== value);
+      setFormData({ ...formData, policies: newValues.join(',') });
+      localStorage.setItem('policies', newValues.join(','));
+    } else {
+      const newValues = [...values, value];
+      setFormData({ ...formData, policies: newValues.join(',') });
+      localStorage.setItem('policies', newValues.join(','));
+    }
+  };
+
+  const handleSupplierToggle = (value: string) => {
+    const values = formData.supplier ? formData.supplier.split(',') : [];
+    if (values.includes(value)) {
+      const newValues = values.filter((v) => v !== value);
+      setFormData({ ...formData, supplier: newValues.join(',') });
+      localStorage.setItem('supplier', newValues.join(','));
+    } else {
+      const newValues = [...values, value];
+      setFormData({ ...formData, supplier: newValues.join(',') });
+      localStorage.setItem('supplier', newValues.join(','));
+    }
+  };
+
+  const handlePickupLocationToggle = (value: string) => {
+    const values = formData.pickupLocation ? formData.pickupLocation.split(',') : [];
+    if (values.includes(value)) {
+      const newValues = values.filter((v) => v !== value);
+      setFormData({ ...formData, pickupLocation: newValues.join(',') });
+      localStorage.setItem('pickupLocation', newValues.join(','));
+    } else {
+      const newValues = [...values, value];
+      setFormData({ ...formData, pickupLocation: newValues.join(',') });
+      localStorage.setItem('pickupLocation', newValues.join(','));
+    }
+  };
+
+  const handlePaymentTypeToggle = (value: string) => {
+    const values = formData.paymentType ? formData.paymentType.split(',') : [];
+    if (values.includes(value)) {
+      const newValues = values.filter((v) => v !== value);
+      setFormData({ ...formData, paymentType: newValues.join(',') });
+      localStorage.setItem('paymentType', newValues.join(','));
+    } else {
+      const newValues = [...values, value];
+      setFormData({ ...formData, paymentType: newValues.join(',') });
+      localStorage.setItem('paymentType', newValues.join(','));
+    }
+  };
+
+  const resetFilters = () => {
+    setFormData({
+      ...formData,
+      rating: '',
+      policies: '',
+      supplier: '',
+      pickupLocation: '',
+      paymentType: '',
+      priceRange: [1000, 10000],
+    });
+    localStorage.removeItem('rating');
+    localStorage.removeItem('policies');
+    localStorage.removeItem('supplier');
+    localStorage.removeItem('pickupLocation');
+    localStorage.removeItem('paymentType');
+  };
 
   const dummyCars = Array.from({ length: 30 }, (_, i) => ({
     id: i + 1,
@@ -95,7 +218,7 @@ export default function CarAndMapLayout() {
       id: 1,
       src: typeof window !== 'undefined'
         ? localStorage.getItem('carImage') || '/images/cars/32_sedan_white.png'
-        : '/images/cars/32_sedan_white.png', // Add leading '/' for public folder
+        : '/images/cars/32_sedan_white.png',
       alt: 'Nissan Sunny',
     },
     {
@@ -125,15 +248,13 @@ export default function CarAndMapLayout() {
     },
   ];
 
-  const [cars, setCars] = useState<any[]>([]);
-  const [visibleCars, setVisibleCars] = useState(10);
-  const [isMapSticky, setIsMapSticky] = useState(true);
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
   const handleDateRangeChange = (startDate: Date | null, endDate: Date | null) => {
-    console.log('Selected Range:', startDate?.toLocaleString(), endDate?.toLocaleString()); // Debug
+    console.log('Selected Range:', startDate?.toLocaleString(), endDate?.toLocaleString());
     setFormData({
       ...formData,
       dateRange: [startDate, endDate],
@@ -167,16 +288,6 @@ export default function CarAndMapLayout() {
       setCars(data);
     };
     fetchCars();
-  }, []);
-
-  useEffect(() => {
-    const sentinel = document.getElementById('scroll-end-marker');
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsMapSticky(!entry.isIntersecting),
-      { root: null, threshold: 0.1 }
-    );
-    if (sentinel) observer.observe(sentinel);
-    return () => sentinel && observer.disconnect();
   }, []);
 
   return (
@@ -267,22 +378,239 @@ export default function CarAndMapLayout() {
         </div>
       </div>
 
+            <div
+              className={`${styles.filtersWrapper} ${separateFilter ? '' : 'hidden'} ${isFiltersSticky ? '' : styles.filtersAbsolute}`}
+            >
+              <div className="p-6 bg-white">
+                <div className="flex justify-between items-center mb-6">
+                  <h2 className="text-xl font-semibold">Filters</h2>
+                  <button onClick={toggleFilters} className="text-gray-500 hover:text-gray-700">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                  </button>
+                </div>
+      
+                {/* Price Range */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-4">Price Range</h3>
+                  <div className="px-2">
+                    <input
+                      type="range"
+                      min="0"
+                      max="10000"
+                      value={formData.priceRange[0]}
+                      onChange={(e) => setFormData({ ...formData, priceRange: [parseInt(e.target.value), formData.priceRange[1]] })}
+                      className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer"
+                    />
+                    <input
+                      type="range"
+                      min="0"
+                      max="10000"
+                      value={formData.priceRange[1]}
+                      onChange={(e) => setFormData({ ...formData, priceRange: [formData.priceRange[0], parseInt(e.target.value)] })}
+                      className="w-full h-2 bg-blue-100 rounded-lg appearance-none cursor-pointer mt-2"
+                    />
+                  </div>
+                  <div className="flex justify-between text-sm text-gray-600 mt-2">
+                    <span>AED {formData.priceRange[0]}</span>
+                    <span>AED {formData.priceRange[1]}</span>
+                  </div>
+                </div>
+      
+                {/* Rating */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-4">Rating</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { value: '4.5', label: '4.5+', price: 'AED 2,552' },
+                      { value: '4', label: '4+', price: 'AED 2,552' },
+                      { value: '3.5', label: '3.5+', price: 'AED 1,268' },
+                      { value: '3', label: '3+', price: 'AED 2,552' },
+                    ].map((rating) => (
+                      <div
+                        key={rating.value}
+                        onClick={() => handleRatingToggle(rating.value)}
+                        className={`px-4 py-3 border rounded-md cursor-pointer transition-colors ${formData.rating.split(',').includes(rating.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <div className={`w-5 h-5 border rounded-sm mr-2 flex items-center justify-center ${formData.rating.split(',').includes(rating.value) ? 'bg-blue-600 border-blue-600' : 'border-gray-400'}`}>
+                              {formData.rating.split(',').includes(rating.value) && (
+                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                </svg>
+                              )}
+                            </div>
+                            <span>{rating.label}</span>
+                          </div>
+                          <span className="text-sm text-gray-600">{rating.price}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+      
+                {/* Policies */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-4">Policies</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { value: 'Free-cancellation', label: 'Free Cancellation', price: 'AED 1,268' },
+                      { value: 'fair', label: 'Fair Fuel Policy', price: 'AED 2,552' },
+                      { value: 'unlimited', label: 'Unlimited mileage', price: 'AED 2,552' },
+                    ].map((policy) => (
+                      <div
+                        key={policy.value}
+                        onClick={() => handlePoliciesToggle(policy.value)}
+                        className={`px-4 py-3 border rounded-md cursor-pointer transition-colors ${formData.policies.split(',').includes(policy.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <div className={`w-5 h-5 border rounded-sm mr-2 flex items-center justify-center ${formData.policies.split(',').includes(policy.value) ? 'bg-blue-600 border-blue-600' : 'border-gray-400'}`}>
+                              {formData.policies.split(',').includes(policy.value) && (
+                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                </svg>
+                              )}
+                            </div>
+                            <span>{policy.label}</span>
+                          </div>
+                          <span className="text-sm text-gray-600">{policy.price}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+      
+                {/* Supplier */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-4">Supplier</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { value: 'Free-cancellation', label: 'Free Cancellation', price: 'AED 1,268' },
+                      { value: 'fair', label: 'Fair Fuel Policy', price: 'AED 2,552' },
+                      { value: 'unlimited', label: 'Unlimited mileage', price: 'AED 2,552' },
+                    ].map((supplier) => (
+                      <div
+                        key={supplier.value}
+                        onClick={() => handleSupplierToggle(supplier.value)}
+                        className={`px-4 py-3 border rounded-md cursor-pointer transition-colors ${formData.supplier.split(',').includes(supplier.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <div className={`w-5 h-5 border rounded-sm mr-2 flex items-center justify-center ${formData.supplier.split(',').includes(supplier.value) ? 'bg-blue-600 border-blue-600' : 'border-gray-400'}`}>
+                              {formData.supplier.split(',').includes(supplier.value) && (
+                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                </svg>
+                              )}
+                            </div>
+                            <span>{supplier.label}</span>
+                          </div>
+                          <span className="text-sm text-gray-600">{supplier.price}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+      
+                {/* Pickup Location */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-4">Pickup Location</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { value: 'at', label: 'At Terminal', price: 'AED 1,450' },
+                      { value: 'shu', label: 'Shuttle', price: 'AED 1,600' },
+                      { value: 'call', label: 'Call for pick-up', price: 'AED 1,950' },
+                    ].map((location) => (
+                      <div
+                        key={location.value}
+                        onClick={() => handlePickupLocationToggle(location.value)}
+                        className={`px-4 py-3 border rounded-md cursor-pointer transition-colors ${formData.pickupLocation.split(',').includes(location.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <div className={`w-5 h-5 border rounded-sm mr-2 flex items-center justify-center ${formData.pickupLocation.split(',').includes(location.value) ? 'bg-blue-600 border-blue-600' : 'border-gray-400'}`}>
+                              {formData.pickupLocation.split(',').includes(location.value) && (
+                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                </svg>
+                              )}
+                            </div>
+                            <span>{location.label}</span>
+                          </div>
+                          <span className="text-sm text-gray-600">{location.price}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+      
+                {/* Payment Type */}
+                <div className="mb-6">
+                  <h3 className="text-lg font-semibold text-gray-700 mb-4">Payment Type</h3>
+                  <div className="grid grid-cols-2 gap-3">
+                    {[
+                      { value: 'now', label: 'Pay now', price: 'AED 1,450' },
+                      { value: 'par', label: 'Partial Prepayment', price: 'AED 1,600' },
+                      { value: 'pay', label: 'Pay at counter', price: 'AED 1,950' },
+                    ].map((payment) => (
+                      <div
+                        key={payment.value}
+                        onClick={() => handlePaymentTypeToggle(payment.value)}
+                        className={`px-4 py-3 border rounded-md cursor-pointer transition-colors ${formData.paymentType.split(',').includes(payment.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center">
+                            <div className={`w-5 h-5 border rounded-sm mr-2 flex items-center justify-center ${formData.paymentType.split(',').includes(payment.value) ? 'bg-blue-600 border-blue-600' : 'border-gray-400'}`}>
+                              {formData.paymentType.split(',').includes(payment.value) && (
+                                <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                                </svg>
+                              )}
+                            </div>
+                            <span>{payment.label}</span>
+                          </div>
+                          <span className="text-sm text-gray-600">{payment.price}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+      
+                {/* Action Buttons */}
+                <div className="flex space-x-4 pt-4 border-t border-gray-200 sticky bottom-0 bg-white pb-4">
+                  <button
+                    onClick={resetFilters}
+                    className="flex-1 py-3 px-4 bg-gray-200 text-gray-800 rounded-md font-medium hover:bg-gray-300 transition-colors"
+                  >
+                    Reset
+                  </button>
+                  <button
+                    onClick={toggleFilters}
+                    className="flex-1 py-3 px-4 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors"
+                  >
+                    Apply Filters
+                  </button>
+                </div>
+              </div>
+            </div>
+
       <div id="scroll-end-marker" style={{ height: '1px' }}></div>
 
       <div
-        className={`${styles.mapWrapper} ${isMapSticky ? styles.mapFixed : styles.mapAbsolute
-          }`}
-        style={{ zIndex: '0' }}
-      >
-        <iframe
-          className={styles.map}
-          title="Rental Location Map"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.1695071737676!2d55.36443667534433!3d25.253174827315214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43474bb87a6f%3A0x44d6df1b20a0ac32!2sDubai%20International%20Airport!5e0!3m2!1sen!2sae!4v1648378305617!5m2!1sen!2sae"
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-        ></iframe>
-      </div>
+              className={`${styles.mapWrapper} ${separateFilter ? 'hidden' : ''} ${isMapSticky ? styles.mapFixed : styles.mapAbsolute}`}
+            >
+              <iframe
+                className={styles.map}
+                title="Rental Location Map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3609.1695071737676!2d55.36443667534433!3d25.253174827315214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f43474bb87a6f%3A0x44d6df1b20a0ac32!2sDubai%20International%20Airport!5e0!3m2!1sen!2sae!4v1648378305617!5m2!1sen!2sae"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
     </>
   );
 }

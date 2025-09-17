@@ -1,14 +1,13 @@
- /* .resultsSortBar { */
-  /* display: flex; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
-  /* padding: 10px 20px; */
-  /* width: 60%; */
-  /* background-color: #f0f3f5; */
-  /* flex-wrap: wrap; */
-  /* gap: 10px; */
-
-/* }  */
+.resultsSortBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  width: 60%;
+  background-color: #f0f3f5;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
 .resultsCount {
   font-size: 16px;
@@ -65,69 +64,87 @@
   cursor: pointer;
 }
 
-/* ✅ Responsive Styles */
+/* Switch styles for toggle switches in CarCard */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 12px;
+  margin-right: 6px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.sliderBox {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: background-color 0.4s;
+  border-radius: 12px;
+}
+
+.sliderBox:before {
+  position: absolute;
+  content: "";
+  height: 8px;
+  width: 8px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  transition: transform 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .sliderBox {
+  background-color: #ffc107;
+}
+
+input:checked + .sliderBox:before {
+  transform: translateX(8px);
+}
+
+/* Responsive Styles */
 @media (max-width: 1347px) {
-  .resultsSortBar{
-    /* margin-left: 0px; */
-    /* justify-self: center; */
-    /* width: 70%; */
+  .resultsSortBar {
     margin-left: 90px;
     width: 84.7vw;
   }
 }
+
 @media (max-width: 1280px) {
-  .resultsSortBar{
+  .resultsSortBar {
     margin-left: 60px;
   }
 }
+
 @media (max-width: 1025px) {
   .resultsSortBar {
     width: 79.4vw;
     margin-left: 58px;
   }
 }
+
 @media (max-width: 600px) {
-  .resultsCount{
+  .resultsCount {
     font-size: 12px;
   }
 }
-/* @media (min-width: 640px) {
-  .resultsSortBar{
-    margin-left: 0px;
-    width: 90vw;
-  }
-} */
+
 @media (max-width: 767px) {
   .resultsSortBar {
     margin-left: 0;
     justify-self: center;
   }
-
-  /* .sortContainer { */
-    /* width: 100%; */
-    /* position: relative; */
-    /* left: 30px; */
-    /* justify-content: space-between; */
-  /* } */
-/* 
-  .resultsCount {
-    font-size: 14px;
-  }
-
-  .sortDropdown {
-    font-size: 13px;
-  }
-
-  .sortOption {
-    font-size: 13px;
-  }
-
-  .infoIcon {
-    margin-left: auto;
-  } */
 }
 
-/* @media (max-width: 616px) {} */
 @media (max-width: 480px) {
   .sortDropdownMenu {
     min-width: 100%;

@@ -1021,7 +1021,27 @@ input:checked+.sliderBox:before {
   height: 100%;
   border: none;
 }
+.filtersWrapper {
+  position: fixed;
+  top: 80px; /* Adjust based on your header height */
+  right: 0;
+  width: 32.66%; /* Matches the width of the Filters section */
+  height: calc(100vh - 80px); /* Full viewport height minus header */
+  overflow-y: auto;
+  z-index: 800;
+  transition: all 0.2s;
+}
 
+.filtersAbsolute {
+  position: absolute;
+  top: unset;
+  bottom: 0;
+  right: 0;
+  width: 32.66%; /* Matches the width of the Filters section */
+  height: auto;
+  z-index: 800;
+  transform: translateY(-50px); /* Matches mapAbsolute transform */
+}
 
 @media (max-width: 1420px) {
   .left {
@@ -1043,6 +1063,13 @@ input:checked+.sliderBox:before {
 
   .left {
     width: 100%;
+  }
+  .filtersWrapper {
+    width: 100%; /* Full width on smaller screens */
+  }
+
+  .filtersAbsolute {
+    width: 100%; /* Full width on smaller screens */
   }
 }
 
