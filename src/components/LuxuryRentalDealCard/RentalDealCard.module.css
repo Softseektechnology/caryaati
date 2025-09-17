@@ -6,7 +6,7 @@
     radial-gradient(1200px 600px at 80% 70%, rgba(255,255,255,0.06), rgba(255,255,255,0) 12%),
     /* soft top-left to bottom-right deep gradient */
     linear-gradient(135deg, #0b0d10 0%, #121417 30%, #2a2f33 60%, #485158 100%);
-  border: 1px solid #2a2a2a;
+  border: 2px solid #feb321;
   border-radius: 12px;
   padding: 16px;
   padding-top: 26px;
@@ -15,7 +15,7 @@
   font-family: Arial, sans-serif;
   /* box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25); */
   /* box-shadow: 0 10px 30px rgba(2,6,12,0.6), inset 0 1px 0 rgba(255,255,255,0.02); */
-  margin-left: 55px;
+  margin-left: 15px;
   width: 100%;
   position: relative;
   overflow: hidden;
@@ -45,7 +45,7 @@
 }
 
 .filtersBtn {
-  margin-left: 100px;
+  margin-left: 60px;
 }
 .filtersBtn:hover {
   background: linear-gradient(90deg, #00aaff, #42C3F7);
