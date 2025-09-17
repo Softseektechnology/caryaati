@@ -235,7 +235,7 @@ export default function CarAndMapLayout() {
       </button>
       
       {/* Filters Panel */}
-      <div className={`z-[1000] transition-all duration-300 bg-white ${filtersVisible ? 'right-0' : 'right-[-100%]'} overflow-y-auto fixed top-0 bottom-0 w-[90%] md:w-96 shadow-2xl`}>
+      <div className={`z-[1000] transition-all duration-300 bg-white ${filtersVisible ? 'right-0' : 'right-[-100%]'} overflow-y-auto fixed top-0 bottom-0 w-[90%] md:w-130 shadow-2xl`}>
         <div className="p-6">
           <div className="flex justify-between items-center mb-6 pb-4 border-b">
             <h2 className="text-2xl font-bold text-gray-800">Filters</h2>
