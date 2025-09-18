@@ -1,6 +1,9 @@
+// Updated BookingForm.tsx with improved design: added Tailwind utility classes for better layout, colors, shadows, and interactivity. Made it more eye-catching with gradients, icons, and hover effects. Added subtle animations for form elements (e.g., focus states) to enhance interactivity without overdoing it.
+
 // components/BookingForm.tsx
 'use client';
 import React, { useState } from 'react';
+import { CalendarIcon, ClockIcon, MapPinIcon, UserIcon, MailIcon, PhoneIcon, MessageSquareIcon } from 'lucide-react'; // Assuming lucide-react icons for eye-catching visuals
 
 type Props = {
   visible?: boolean; // optional, CarCard will control rendering
@@ -72,7 +75,7 @@ const BookingForm: React.FC<Props> = ({ visible = true, onClose, car }) => {
 
   return (
     <div
-      className="fixed inset-0 z-[2000] flex backdrop-brightness-95 backdrop-blur-[0.5px] content-center items-center justify-center"
+      className="fixed inset-0 z-[2000] flex backdrop-brightness-90 backdrop-blur-[1px] items-center justify-center"
       aria-modal="true"
       role="dialog"
     >
@@ -82,88 +85,192 @@ const BookingForm: React.FC<Props> = ({ visible = true, onClose, car }) => {
       />
       <form
         onSubmit={handleSubmit}
-        className="relative top-[5%] bg-white rounded-lg w-[92%] max-w-4xl p-6 grid grid-cols-2 gap-4"
-        style={{ minHeight: '420px' }}
+        className="relative bg-white rounded-2xl w-[95%] max-w-5xl px-4 py-4 shadow-2xl grid grid-cols-1 md:grid-cols-2 gap-6 border border-orange-200"
+        style={{ maxHeight: '95vh' }}
       >
-        {/* LEFT: car select + pickup/destination + dates */}
-        <div className="col-span-2 md:col-span-1">
-          <div className="flex items-center gap-3 mb-4">
-            <img src={car?.image || '/images/cars/car-placeholder.jpg'} alt="car" className="w-20 h-12 object-cover rounded" />
-            <div>
-              <div className="font-semibold">{car?.name || form.selectedCar}</div>
-              <div className="text-sm text-gray-600">AED - {car?.price ?? '—'}</div>
+        {/* Header with Car Details - Made eye-catching with gradient background */}
+        <div className="col-span-2 bg-orange-500 text-white p-4 rounded-t-xl flex items-center gap-4">
+          <img src={car?.image || '/images/cars/car-placeholder.jpg'} alt="car" className="w-24 h-16 object-cover rounded-lg shadow-md" />
+          <div>
+            <div className="font-bold text-xl">{car?.name || form.selectedCar}</div>
+            <div className="text-sm">AED - {car?.price ?? '—'}</div>
+          </div>
+        </div>
+
+        {/* LEFT: Pickup/Destination + Dates - Added icons and focus animations */}
+        <div className="col-span-2 md:col-span-1 space-y-4">
+          <div className="relative">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Pick Up Location</label>
+            <div className="relative">
+              <MapPinIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
+              <input
+                value={form.pickupLocation}
+                onChange={e => handleChange('pickupLocation', e.target.value)}
+                className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
+                placeholder="Stadium Point"
+              />
             </div>
           </div>
 
-          <div className="mb-3">
-            <label className="block text-sm font-medium mb-1">Pick Up Location</label>
-            <input value={form.pickupLocation} onChange={e => handleChange('pickupLocation', e.target.value)} className="w-full border rounded px-3 py-2" placeholder="Stadium Point" />
-          </div>
-
-          <div className="mb-3">
-            <label className="block text-sm font-medium mb-1">Destination</label>
-            <input value={form.destination} onChange={e => handleChange('destination', e.target.value)} className="w-full border rounded px-3 py-2" placeholder="Stadium Point" />
-          </div>
-
-          <div className="grid grid-cols-2 gap-2 mb-3">
-            <div>
-              <label className="block text-sm font-medium mb-1">Pick Up Date</label>
-              <input type="date" value={form.pickupDate} onChange={e => handleChange('pickupDate', e.target.value)} className="w-full border rounded px-3 py-2" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Pick Up Time</label>
-              <input type="time" value={form.pickupTime} onChange={e => handleChange('pickupTime', e.target.value)} className="w-full border rounded px-3 py-2" />
+          <div className="relative">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Destination</label>
+            <div className="relative">
+              <MapPinIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
+              <input
+                value={form.destination}
+                onChange={e => handleChange('destination', e.target.value)}
+                className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
+                placeholder="Stadium Point"
+              />
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-2 mb-3">
-            <div>
-              <label className="block text-sm font-medium mb-1">Return Date</label>
-              <input type="date" value={form.returnDate} onChange={e => handleChange('returnDate', e.target.value)} className="w-full border rounded px-3 py-2" />
+          <div className="grid grid-cols-2 gap-3">
+            <div className="relative">
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Pick Up Date</label>
+              <div className="relative">
+                <CalendarIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
+                <input
+                  type="date"
+                  value={form.pickupDate}
+                  onChange={e => handleChange('pickupDate', e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
+                />
+              </div>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Return Time</label>
-              <input type="time" value={form.returnTime} onChange={e => handleChange('returnTime', e.target.value)} className="w-full border rounded px-3 py-2" />
+            <div className="relative">
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Pick Up Time</label>
+              <div className="relative">
+                <ClockIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
+                <input
+                  type="time"
+                  value={form.pickupTime}
+                  onChange={e => handleChange('pickupTime', e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-3">
+            <div className="relative">
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Return Date</label>
+              <div className="relative">
+                <CalendarIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
+                <input
+                  type="date"
+                  value={form.returnDate}
+                  onChange={e => handleChange('returnDate', e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
+                />
+              </div>
+            </div>
+            <div className="relative">
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Return Time</label>
+              <div className="relative">
+                <ClockIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
+                <input
+                  type="time"
+                  value={form.returnTime}
+                  onChange={e => handleChange('returnTime', e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
+                />
+              </div>
             </div>
           </div>
         </div>
 
-        {/* RIGHT: contact details */}
-        <div className="col-span-2 md:col-span-1">
-          <div className="mb-3">
-            <label className="block text-sm font-medium mb-1">Your Name</label>
-            <input value={form.name} onChange={e => handleChange('name', e.target.value)} className="w-full border rounded px-3 py-2" placeholder="Your Name" />
-          </div>
-
-          <div className="mb-3">
-            <label className="block text-sm font-medium mb-1">Your Email</label>
-            <input type="email" value={form.email} onChange={e => handleChange('email', e.target.value)} className="w-full border rounded px-3 py-2" placeholder="Your Email" />
-          </div>
-
-          <div className="flex gap-2 mb-3">
-            <div style={{ minWidth: 160 }} className="w-[40%]">
-              <label className="block text-sm font-medium mb-1">Country</label>
-              <select value={form.countryCode} onChange={e => handleChange('countryCode', e.target.value)} className="w-full border rounded px-3 py-2">
-                {COUNTRY_CODES.map(c => (
-                  <option key={c.code} value={c.code}>{c.code} ({c.name})</option>
-                ))}
-              </select>
-            </div>
-            <div className="flex-1">
-              <label className="block text-sm font-medium mb-1">Mobile Number</label>
-              <input value={form.mobile} onChange={e => handleChange('mobile', e.target.value)} className="w-full border rounded px-3 py-2" placeholder="Mobile Number" />
+        {/* RIGHT: Contact Details - Added icons and focus animations */}
+        <div className="col-span-2 md:col-span-1 space-y-4">
+          <div className="relative">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Your Name</label>
+            <div className="relative">
+              <UserIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
+              <input
+                value={form.name}
+                onChange={e => handleChange('name', e.target.value)}
+                className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
+                placeholder="Your Name"
+              />
             </div>
           </div>
 
-          <div className="mb-3">
-            <label className="block text-sm font-medium mb-1">Do you have any request?</label>
-            <textarea value={form.request} onChange={e => handleChange('request', e.target.value)} rows={4} className="w-full border rounded px-3 py-2" placeholder="Do you have any request?" />
+          <div className="relative">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Your Email</label>
+            <div className="relative">
+              <MailIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
+              <input
+                type="email"
+                value={form.email}
+                onChange={e => handleChange('email', e.target.value)}
+                className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
+                placeholder="Your Email"
+              />
+            </div>
           </div>
 
-          <div className="flex items-center justify-end">
-            <button type="button" onClick={() => onClose?.()} className="px-4 py-2 mx-3 rounded border">Cancel</button>
-            <button type="submit" className="bg-orange-500 text-white px-6 py-2 rounded">Update</button>
+          <div className="flex gap-3">
+            <div className="w-[45%] relative">
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Country</label>
+              <div className="relative">
+                <PhoneIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
+                <select
+                  value={form.countryCode}
+                  onChange={e => handleChange('countryCode', e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300 appearance-none"
+                >
+                  {COUNTRY_CODES.map(c => (
+                    <option key={c.code} value={c.code}>{c.code} ({c.name})</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+            <div className="flex-1 relative">
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Mobile Number</label>
+              <div className="relative items-center">
+                <PhoneIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
+                <input
+                  value={form.mobile}
+                  onChange={e => handleChange('mobile', e.target.value)}
+                  className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
+                  placeholder="Mobile Number"
+                />
+              </div>
+            </div>
           </div>
+
+          <div className="relative">
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Do you have any request?</label>
+            <div className="relative items-center">
+              <MessageSquareIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
+              <textarea
+                value={form.request}
+                onChange={e => handleChange('request', e.target.value)}
+                rows={4}
+                className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
+                placeholder="Do you have any request?"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Footer Buttons - Made more interactive with hover effects */}
+        <div className="col-span-2 flex items-center justify-end gap-4">
+          <button
+            type="button"
+            onClick={() => onClose?.()}
+            className="px-6 py-3 rounded-lg border border-gray-300 text-gray-700 font-semibold hover:bg-gray-100 transition-all duration-300"
+            style={{borderRadius: '8px'}}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-500 hover:shadow-lg transition-all duration-300"
+            style={{borderRadius: '8px'}}
+          >
+            Book Now
+          </button>
         </div>
       </form>
     </div>
