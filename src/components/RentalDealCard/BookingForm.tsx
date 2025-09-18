@@ -1,4 +1,4 @@
-// Updated BookingForm.tsx with improved design: added Tailwind utility classes for better layout, colors, shadows, and interactivity. Made it more eye-catching with gradients, icons, and hover effects. Added subtle animations for form elements (e.g., focus states) to enhance interactivity without overdoing it.
+// Updated BookingForm.tsx with dropdown for car selection: Replaced the static car display in the header with a dropdown select allowing selection from multiple cars (added 3 sample car options). Ensured at least 2-3 cars in the dropdown. Removed any linear gradient usage, including on hover for the submit button.
 
 // components/BookingForm.tsx
 'use client';
@@ -9,6 +9,12 @@ type Props = {
   visible?: boolean; // optional, CarCard will control rendering
   onClose?: () => void;
   car?: { name?: string; image?: string; price?: string | number };
+};
+
+type Car = {
+  name: string;
+  image: string;
+  price: string | number;
 };
 
 const COUNTRY_CODES = [
@@ -46,8 +52,15 @@ const COUNTRY_CODES = [
 ];
 
 const BookingForm: React.FC<Props> = ({ visible = true, onClose, car }) => {
+  const availableCars: Car[] = [
+    ...(car ? [{ name: car.name || 'Select Car', image: car.image || '/images/cars/car-placeholder.jpg', price: car.price ?? '—' }] : []),
+    { name: 'Tesla Model 3', image: '/images/tesla.jpg', price: 200 },
+    { name: 'BMW X5', image: '/images/bmw.jpg', price: 300 },
+    { name: 'Audi A4', image: '/images/audi.jpg', price: 250 },
+  ];
+
   const [form, setForm] = useState({
-    selectedCar: car?.name || 'Select Car',
+    selectedCar: car?.name || availableCars[0]?.name || 'Select Car',
     pickupLocation: '',
     destination: '',
     pickupDate: '',
@@ -60,6 +73,8 @@ const BookingForm: React.FC<Props> = ({ visible = true, onClose, car }) => {
     mobile: '',
     request: '',
   });
+
+  const selectedCarObj = availableCars.find(c => c.name === form.selectedCar) || availableCars[0];
 
   const handleChange = (k: keyof typeof form, v: string) => setForm(prev => ({ ...prev, [k]: v }));
 
@@ -80,20 +95,28 @@ const BookingForm: React.FC<Props> = ({ visible = true, onClose, car }) => {
       role="dialog"
     >
       <div
-        className="absolute inset-0 bg-opacity-40"
+        className="absolute inset-0"
         onClick={() => onClose?.()}
       />
       <form
         onSubmit={handleSubmit}
-        className="relative bg-white rounded-2xl w-[95%] max-w-5xl px-4 py-4 shadow-2xl grid grid-cols-1 md:grid-cols-2 gap-6 border border-orange-200"
+        className="relative bg-white rounded-2xl w-[95%] max-w-5xl px-2 py-2 shadow-2xl grid grid-cols-1 md:grid-cols-2 gap-6 border border-orange-200"
         style={{ maxHeight: '95vh' }}
       >
-        {/* Header with Car Details - Made eye-catching with gradient background */}
+        {/* Header with Car Dropdown - Replaced static display with dropdown for selecting from multiple cars */}
         <div className="col-span-2 bg-orange-500 text-white p-4 rounded-t-xl flex items-center gap-4">
-          <img src={car?.image || '/images/cars/car-placeholder.jpg'} alt="car" className="w-24 h-16 object-cover rounded-lg shadow-md" />
-          <div>
-            <div className="font-bold text-xl">{car?.name || form.selectedCar}</div>
-            <div className="text-sm">AED - {car?.price ?? '—'}</div>
+          <img src={selectedCarObj.image} alt="car" className="w-24 h-16 object-cover rounded-lg shadow-md" />
+          <div className="flex flex-col w-full">
+            <select
+              value={form.selectedCar}
+              onChange={e => handleChange('selectedCar', e.target.value)}
+              className="bg-transparent text-white font-bold text-xl border-none appearance-none focus:outline-none cursor-pointer"
+            >
+              {availableCars.map(c => (
+                <option key={c.name} value={c.name} className="text-black">{c.name}</option>
+              ))}
+            </select>
+            <div className="text-sm">AED - {selectedCarObj.price}</div>
           </div>
         </div>
 
@@ -266,7 +289,7 @@ const BookingForm: React.FC<Props> = ({ visible = true, onClose, car }) => {
           </button>
           <button
             type="submit"
-            className="bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:from-orange-600 hover:to-orange-500 hover:shadow-lg transition-all duration-300"
+            className="bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 hover:shadow-lg transition-all duration-300"
             style={{borderRadius: '8px'}}
           >
             Book Now

@@ -1,12 +1,4 @@
-/* Styles from ExtrasSection.module.css */
-.extrasContainer {
-    background: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-    margin-bottom: 20px;
-    overflow: hidden;
-}
-
+/* Styles from ExtrasSection */
 .packageCard {
     flex: 1;
     min-width: 180px;
@@ -20,58 +12,43 @@
     flex-direction: column;
     justify-content: space-between;
 }
-
 .packageCard:hover {
     border-color: #6b7280;
     background: #fff;
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
 }
-
 .selectedCard {
     border-color: #4f46e5;
     background: #f3f4f6;
 }
-
 .cardHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
 .icon {
     font-size: 22px;
     color: #4f46e5;
 }
-
 .radioCircle {
     width: 18px;
     height: 18px;
     border: 2px solid #9ca3af;
     border-radius: 50%;
 }
-
 .radioSelected {
     background: #4f46e5;
     border-color: #4f46e5;
 }
-
 .cardBody {
     margin-top: 10px;
     text-align: left;
 }
-
 .cardTitle {
     font-size: 14px;
     font-weight: 600;
     color: #1f2937;
 }
-
-.cardDuration {
-    font-size: 13px;
-    color: #6b7280;
-    margin-top: 4px;
-}
-
 .cardPrice {
     font-size: 14px;
     font-weight: bold;
@@ -79,16 +56,10 @@
     margin-top: 6px;
 }
 
-.dropdownContent {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s ease-in-out;
+/* Styles from Bookform */
+.formInput:hover {
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
 }
-
-.dropdownOpen {
-    max-height: 1000px;
-}
-
-.rotated {
-    transform: rotate(180deg);
+.fileInput {
+    /* Keeping this minimal as we use a label for styling */
 }
