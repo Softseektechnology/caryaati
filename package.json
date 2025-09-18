@@ -19,7 +19,7 @@
     "@mui/material": "^6.4.7",
     "@mui/material-nextjs": "^6.4.3",
     "@mui/x-date-pickers": "^8.10.0",
-    "@react-google-maps/api": "^2.20.6",
+    "@react-google-maps/api": "^2.20.7",
     "@types/react-datepicker": "^6.2.0",
     "aos": "^2.3.4",
     "axios": "^1.10.0",

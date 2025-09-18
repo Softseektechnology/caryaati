@@ -8,7 +8,7 @@ import { Telephone, Whatsapp, Star, Tag } from 'react-bootstrap-icons';
 import styles from './carcategories.module.css';
 import { Car, cars } from '../../data/carsData';
 import QuickBooking from './Modalbox';
-import InquiryButtton from '@/components/RentalDealCard/InquiryButtton';
+import InquiryButtton from '@/components/RentalDealCard/InquiryButton';
 import DetailSection from '@/components/RentalDealCard/DetailSection';
 
 interface SubcategoryProps {

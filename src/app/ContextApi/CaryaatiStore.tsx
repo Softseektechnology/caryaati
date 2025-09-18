@@ -7,6 +7,8 @@ import { createContext, useContext, useState, ReactNode } from 'react';
 interface UserContextType {
   separateFilter: any; // Use a more specific type if known
   setSeparateFilter: (value: any) => void; // Use a more specific type if known
+  bookingForm: any; // Use a more specific type if known
+  SetBookingForm: (value: any) => void; // Use a more specific type if known
 }
 
 // Initialize the context with a default value.
@@ -21,10 +23,14 @@ interface UserProviderProps {
 export function CaryaatiProvider({ children }: UserProviderProps) {
   // Replace 'any' with the actual type of your filter state
   const [separateFilter, setSeparateFilter] = useState<any>(null);
+  const [bookingForm, setBookingForm] = useState<any>(false);
+  
 
   const value = {
     separateFilter,
     setSeparateFilter,
+    bookingForm,
+    setBookingForm,
   };
 
   return (

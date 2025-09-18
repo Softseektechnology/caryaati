@@ -26,7 +26,7 @@ export default function CarCategories() {
     { name: 'SUV', link: '/cars-for-rent/suv', image: '/images/category-images/suv.webp' },
     { name: 'Off-Road', link: '/cars-for-rent/off-road', image: '/images/category-images/off-road.webp' },
     { name: 'Sports', link: '/cars-for-rent/sports', image: '/images/category-images/sports.webp' },
-    { name: 'Luxury', link: '/cars-for-rent/luxury', image: '/images/category-images/luxury.webp' },
+    { name: 'Luxury', link: '/luxury-cars-for-rent', image: '/images/category-images/luxury.webp' },
   ];
 
   const handleCategoryClick = (link: string) => {
