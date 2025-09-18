@@ -1,302 +1,132 @@
-// Updated BookingForm.tsx with dropdown for car selection: Replaced the static car display in the header with a dropdown select allowing selection from multiple cars (added 3 sample car options). Ensured at least 2-3 cars in the dropdown. Removed any linear gradient usage, including on hover for the submit button.
-
-// components/BookingForm.tsx
 'use client';
 import React, { useState } from 'react';
-import { CalendarIcon, ClockIcon, MapPinIcon, UserIcon, MailIcon, PhoneIcon, MessageSquareIcon } from 'lucide-react'; // Assuming lucide-react icons for eye-catching visuals
+import { CalendarIcon, ChevronDownIcon, MessageSquareIcon } from 'lucide-react';
 
-type Props = {
-  visible?: boolean; // optional, CarCard will control rendering
-  onClose?: () => void;
-  car?: { name?: string; image?: string; price?: string | number };
-};
-
-type Car = {
-  name: string;
-  image: string;
-  price: string | number;
-};
-
-const COUNTRY_CODES = [
-  { code: '+1', name: 'United States' },
-  { code: '+7', name: 'Russia' },
-  { code: '+20', name: 'Egypt' },
-  { code: '+27', name: 'South Africa' },
-  { code: '+30', name: 'Greece' },
-  { code: '+31', name: 'Netherlands' },
-  { code: '+32', name: 'Belgium' },
-  { code: '+33', name: 'France' },
-  { code: '+34', name: 'Spain' },
-  { code: '+36', name: 'Hungary' },
-  { code: '+39', name: 'Italy' },
-  { code: '+44', name: 'United Kingdom' },
-  { code: '+49', name: 'Germany' },
-  { code: '+61', name: 'Australia' },
-  { code: '+62', name: 'Indonesia' },
-  { code: '+63', name: 'Philippines' },
-  { code: '+64', name: 'New Zealand' },
-  { code: '+65', name: 'Singapore' },
-  { code: '+66', name: 'Thailand' },
-  { code: '+81', name: 'Japan' },
-  { code: '+82', name: 'South Korea' },
-  { code: '+84', name: 'Vietnam' },
-  { code: '+86', name: 'China' },
-  { code: '+91', name: 'India' },
-  { code: '+92', name: 'Pakistan' },
-  { code: '+93', name: 'Afghanistan' },
-  { code: '+94', name: 'Sri Lanka' },
-  { code: '+98', name: 'Iran' },
-  { code: '+212', name: 'Morocco' },
-  { code: '+216', name: 'Tunisia' },
-  // ... agar chahen to aur add kar dein (ye sample list complete karne ke liye expand kar sakte hain)
-];
-
-const BookingForm: React.FC<Props> = ({ visible = true, onClose, car }) => {
-  const availableCars: Car[] = [
-    ...(car ? [{ name: car.name || 'Select Car', image: car.image || '/images/cars/car-placeholder.jpg', price: car.price ?? '—' }] : []),
-    { name: 'Tesla Model 3', image: '/images/tesla.jpg', price: 200 },
-    { name: 'BMW X5', image: '/images/bmw.jpg', price: 300 },
-    { name: 'Audi A4', image: '/images/audi.jpg', price: 250 },
+const BookingForm: React.FC = () => {
+  const cars = [
+    { name: 'Toyota RAV4 2023', price: 250, image: '/images/tesla.jpg' },
+    { name: 'BMW X5', price: 300, image: '/images/bmw.jpg' },
+    { name: 'Audi A4', price: 220, image: '/images/audi.jpg' }
   ];
 
-  const [form, setForm] = useState({
-    selectedCar: car?.name || availableCars[0]?.name || 'Select Car',
-    pickupLocation: '',
-    destination: '',
-    pickupDate: '',
-    pickupTime: '',
-    returnDate: '',
-    returnTime: '',
-    name: '',
-    email: '',
-    countryCode: '+93',
-    mobile: '',
-    request: '',
-  });
-
-  const selectedCarObj = availableCars.find(c => c.name === form.selectedCar) || availableCars[0];
-
-  const handleChange = (k: keyof typeof form, v: string) => setForm(prev => ({ ...prev, [k]: v }));
+  const [selectedCar, setSelectedCar] = useState(cars[0]);
+  const [days, setDays] = useState('');
+  const [pickupDate, setPickupDate] = useState('');
+  const [dropoffDate, setDropoffDate] = useState('');
+  const [message, setMessage] = useState('');
+  const [openDropdown, setOpenDropdown] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: call API or lift state up. For now: console
-    console.log('Booking form submit', form);
-    // close form
-    onClose?.();
+    console.log({ selectedCar, days, pickupDate, dropoffDate, message });
   };
 
-  if (!visible) return null;
-
   return (
-    <div
-      className="fixed inset-0 z-[2000] flex backdrop-brightness-90 backdrop-blur-[1px] items-center justify-center"
-      aria-modal="true"
-      role="dialog"
+    <div className='fixed z-[2000] top-0 right-0 bottom-0 left-0 items-center content-center backdrop-blur-[1px] backdrop-brightness-90'>
+    <form
+      onSubmit={handleSubmit}
+      className="bg-white rounded-xl shadow-lg max-w-3xl mx-auto border border-gray-200 overflow-hidden"
     >
-      <div
-        className="absolute inset-0"
-        onClick={() => onClose?.()}
-      />
-      <form
-        onSubmit={handleSubmit}
-        className="relative bg-white rounded-2xl w-[95%] max-w-5xl px-2 py-2 shadow-2xl grid grid-cols-1 md:grid-cols-2 gap-6 border border-orange-200"
-        style={{ maxHeight: '95vh' }}
-      >
-        {/* Header with Car Dropdown - Replaced static display with dropdown for selecting from multiple cars */}
-        <div className="col-span-2 bg-orange-500 text-white p-4 rounded-t-xl flex items-center gap-4">
-          <img src={selectedCarObj.image} alt="car" className="w-24 h-16 object-cover rounded-lg shadow-md" />
-          <div className="flex flex-col w-full">
-            <select
-              value={form.selectedCar}
-              onChange={e => handleChange('selectedCar', e.target.value)}
-              className="bg-transparent text-white font-bold text-xl border-none appearance-none focus:outline-none cursor-pointer"
-            >
-              {availableCars.map(c => (
-                <option key={c.name} value={c.name} className="text-black">{c.name}</option>
-              ))}
-            </select>
-            <div className="text-sm">AED - {selectedCarObj.price}</div>
-          </div>
-        </div>
-
-        {/* LEFT: Pickup/Destination + Dates - Added icons and focus animations */}
-        <div className="col-span-2 md:col-span-1 space-y-4">
-          <div className="relative">
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Pick Up Location</label>
-            <div className="relative">
-              <MapPinIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
-              <input
-                value={form.pickupLocation}
-                onChange={e => handleChange('pickupLocation', e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
-                placeholder="Stadium Point"
-              />
-            </div>
-          </div>
-
-          <div className="relative">
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Destination</label>
-            <div className="relative">
-              <MapPinIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
-              <input
-                value={form.destination}
-                onChange={e => handleChange('destination', e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
-                placeholder="Stadium Point"
-              />
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <div className="relative">
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Pick Up Date</label>
-              <div className="relative">
-                <CalendarIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
-                <input
-                  type="date"
-                  value={form.pickupDate}
-                  onChange={e => handleChange('pickupDate', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
-                />
-              </div>
-            </div>
-            <div className="relative">
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Pick Up Time</label>
-              <div className="relative">
-                <ClockIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
-                <input
-                  type="time"
-                  value={form.pickupTime}
-                  onChange={e => handleChange('pickupTime', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-3">
-            <div className="relative">
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Return Date</label>
-              <div className="relative">
-                <CalendarIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
-                <input
-                  type="date"
-                  value={form.returnDate}
-                  onChange={e => handleChange('returnDate', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
-                />
-              </div>
-            </div>
-            <div className="relative">
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Return Time</label>
-              <div className="relative">
-                <ClockIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
-                <input
-                  type="time"
-                  value={form.returnTime}
-                  onChange={e => handleChange('returnTime', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* RIGHT: Contact Details - Added icons and focus animations */}
-        <div className="col-span-2 md:col-span-1 space-y-4">
-          <div className="relative">
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Your Name</label>
-            <div className="relative">
-              <UserIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
-              <input
-                value={form.name}
-                onChange={e => handleChange('name', e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
-                placeholder="Your Name"
-              />
-            </div>
-          </div>
-
-          <div className="relative">
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Your Email</label>
-            <div className="relative">
-              <MailIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
-              <input
-                type="email"
-                value={form.email}
-                onChange={e => handleChange('email', e.target.value)}
-                className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
-                placeholder="Your Email"
-              />
-            </div>
-          </div>
-
-          <div className="flex gap-3">
-            <div className="w-[45%] relative">
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Country</label>
-              <div className="relative">
-                <PhoneIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
-                <select
-                  value={form.countryCode}
-                  onChange={e => handleChange('countryCode', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300 appearance-none"
-                >
-                  {COUNTRY_CODES.map(c => (
-                    <option key={c.code} value={c.code}>{c.code} ({c.name})</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-            <div className="flex-1 relative">
-              <label className="block text-sm font-semibold text-gray-700 mb-1">Mobile Number</label>
-              <div className="relative items-center">
-                <PhoneIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
-                <input
-                  value={form.mobile}
-                  onChange={e => handleChange('mobile', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
-                  placeholder="Mobile Number"
-                />
-              </div>
-            </div>
-          </div>
-
-          <div className="relative">
-            <label className="block text-sm font-semibold text-gray-700 mb-1">Do you have any request?</label>
-            <div className="relative items-center">
-              <MessageSquareIcon className="absolute left-3 top-3 h-5 w-5 text-orange-500" />
-              <textarea
-                value={form.request}
-                onChange={e => handleChange('request', e.target.value)}
-                rows={4}
-                className="w-full border border-gray-300 rounded-lg px-10 py-3 focus:border-orange-500 focus:ring-2 focus:ring-orange-300 transition-all duration-300"
-                placeholder="Do you have any request?"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Footer Buttons - Made more interactive with hover effects */}
-        <div className="col-span-2 flex items-center justify-end gap-4">
-          <button
-            type="button"
-            onClick={() => onClose?.()}
-            className="px-6 py-3 rounded-lg border border-gray-300 text-gray-700 font-semibold hover:bg-gray-100 transition-all duration-300"
-            style={{borderRadius: '8px'}}
+      {/* Car Section with Image and Dropdown */}
+      <div className="relative bg-[#0080F6] text-white p-4 flex items-center gap-4">
+        <img
+          src={selectedCar.image}
+          alt={selectedCar.name}
+          className="w-28 h-20 object-cover rounded-lg shadow-md"
+        />
+        <div className="flex flex-col w-full relative">
+          <div
+            className="flex items-center justify-between cursor-pointer font-semibold text-lg"
+            onClick={() => setOpenDropdown(!openDropdown)}
           >
-            Cancel
-          </button>
+            {selectedCar.name} - AED {selectedCar.price}
+            <ChevronDownIcon className={`ml-2 h-5 w-5 transition-transform ${openDropdown ? 'rotate-180' : ''}`} />
+          </div>
+          {openDropdown && (
+            <div className="absolute top-full mt-1 w-full bg-white text-black border border-gray-200 rounded-lg shadow-lg z-10">
+              {cars.map((car) => (
+                <div
+                  key={car.name}
+                  onClick={() => { setSelectedCar(car); setOpenDropdown(false); }}
+                  className="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center gap-3"
+                >
+                  <img src={car.image} alt={car.name} className="w-12 h-8 object-cover rounded" />
+                  {car.name} - AED {car.price}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="p-6 space-y-6">
+        {/* Days */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">Days</label>
+          <input
+            type="number"
+            value={days}
+            onChange={(e) => setDays(e.target.value)}
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#00aaff] focus:outline-none"
+            placeholder="Enter number of days"
+          />
+        </div>
+
+        {/* Pickup & Dropoff Dates */}
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">Pickup Date</label>
+            <div className="relative">
+              <CalendarIcon className="absolute left-3 top-3 h-5 w-5 text-[#0080F6]" />
+              <input
+                type="date"
+                value={pickupDate}
+                onChange={(e) => setPickupDate(e.target.value)}
+                className="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-3 focus:ring-2 focus:ring-[#00aaff] focus:outline-none"
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">Dropoff Date</label>
+            <div className="relative">
+              <CalendarIcon className="absolute left-3 top-3 h-5 w-5 text-[#0080F6]" />
+              <input
+                type="date"
+                value={dropoffDate}
+                onChange={(e) => setDropoffDate(e.target.value)}
+                className="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-3 focus:ring-2 focus:ring-[#00aaff] focus:outline-none"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Message */}
+        <div>
+          <label className="block text-sm font-semibold text-gray-700 mb-2">Message</label>
+          <div className="relative">
+            <MessageSquareIcon className="absolute left-3 top-3 h-5 w-5 text-[#0080F6]" />
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-3 focus:ring-2 focus:ring-[#00aaff] focus:outline-none"
+              placeholder="Write your message here..."
+            />
+          </div>
+        </div>
+
+        {/* Submit */}
+        <div className="flex justify-end">
           <button
             type="submit"
-            className="bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 hover:shadow-lg transition-all duration-300"
+            className="bg-[#0080F6] hover:bg-[#00aaff] text-white px-6 py-3 rounded-lg font-semibold shadow hover:opacity-90 transition"
             style={{borderRadius: '8px'}}
           >
             Book Now
           </button>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
+      </div>
   );
 };
 
