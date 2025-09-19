@@ -190,8 +190,8 @@ export default function CarAndMapLayout() {
   const dummyCars = Array.from({ length: 30 }, (_, i) => ({
     id: i + 1,
     name: `${typeof window !== 'undefined'
-        ? localStorage.getItem('carName') || 'Mitsubishi'
-        : 'Mitsubishi'
+      ? localStorage.getItem('carName') || 'Mitsubishi'
+      : 'Mitsubishi'
       } ${i + 1}`,
     company: `Company ${i + 1}`,
     price: `${1000 + i * 50} AED`,
@@ -367,8 +367,10 @@ export default function CarAndMapLayout() {
         </div>
       </div>
 
+      {/* Filters Section */}
+
       <div
-        className={`${styles.filtersWrapper} ${separateFilter ? '' : 'hidden'} ${isFiltersSticky ? '' : styles.filtersAbsolute}`}
+        className={`${styles.filtersWrapper} ${separateFilter ? '' : 'hidden'} border-l-2 border-t-2 border-b-2 border-gray-300 rounded-md  ${isFiltersSticky ? '' : styles.filtersAbsolute}`}
       >
         <div className="p-6 bg-white">
           <div className="flex justify-between items-center mb-6">
@@ -420,7 +422,7 @@ export default function CarAndMapLayout() {
                 <div
                   key={rating.value}
                   onClick={() => handleRatingToggle(rating.value)}
-                  className={`px-4 py-3 border rounded-md cursor-pointer transition-colors ${formData.rating.split(',').includes(rating.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
+                  className={`px-2 py-2 border rounded-md cursor-pointer transition-colors ${formData.rating.split(',').includes(rating.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -431,9 +433,9 @@ export default function CarAndMapLayout() {
                           </svg>
                         )}
                       </div>
-                      <span>{rating.label}</span>
+                      <span className='text-[14px]'>{rating.label}</span>
                     </div>
-                    <span className="text-sm text-gray-600">{rating.price}</span>
+                    <span className="text-[12px] text-gray-600">{rating.price}</span>
                   </div>
                 </div>
               ))}
@@ -452,7 +454,7 @@ export default function CarAndMapLayout() {
                 <div
                   key={policy.value}
                   onClick={() => handlePoliciesToggle(policy.value)}
-                  className={`px-4 py-3 border rounded-md cursor-pointer transition-colors ${formData.policies.split(',').includes(policy.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
+                  className={`px-2 py-2 border rounded-md cursor-pointer transition-colors ${formData.policies.split(',').includes(policy.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -463,9 +465,9 @@ export default function CarAndMapLayout() {
                           </svg>
                         )}
                       </div>
-                      <span>{policy.label}</span>
+                      <span className='text-[14px]'>{policy.label}</span>
                     </div>
-                    <span className="text-sm text-gray-600">{policy.price}</span>
+                    <span className="text-[12px] text-gray-600">{policy.price}</span>
                   </div>
                 </div>
               ))}
@@ -484,7 +486,7 @@ export default function CarAndMapLayout() {
                 <div
                   key={supplier.value}
                   onClick={() => handleSupplierToggle(supplier.value)}
-                  className={`px-4 py-3 border rounded-md cursor-pointer transition-colors ${formData.supplier.split(',').includes(supplier.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
+                  className={`px-2 py-2 border rounded-md cursor-pointer transition-colors ${formData.supplier.split(',').includes(supplier.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -495,9 +497,9 @@ export default function CarAndMapLayout() {
                           </svg>
                         )}
                       </div>
-                      <span>{supplier.label}</span>
+                      <span className='text-[14px]'>{supplier.label}</span>
                     </div>
-                    <span className="text-sm text-gray-600">{supplier.price}</span>
+                    <span className="text-[12px] text-gray-600">{supplier.price}</span>
                   </div>
                 </div>
               ))}
@@ -516,7 +518,7 @@ export default function CarAndMapLayout() {
                 <div
                   key={location.value}
                   onClick={() => handlePickupLocationToggle(location.value)}
-                  className={`px-4 py-3 border rounded-md cursor-pointer transition-colors ${formData.pickupLocation.split(',').includes(location.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
+                  className={`px-2 py-2 border rounded-md cursor-pointer transition-colors ${formData.pickupLocation.split(',').includes(location.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -527,9 +529,9 @@ export default function CarAndMapLayout() {
                           </svg>
                         )}
                       </div>
-                      <span>{location.label}</span>
+                      <span className='text-[14px]'>{location.label}</span>
                     </div>
-                    <span className="text-sm text-gray-600">{location.price}</span>
+                    <span className="text-[12px] text-gray-600">{location.price}</span>
                   </div>
                 </div>
               ))}
@@ -548,7 +550,7 @@ export default function CarAndMapLayout() {
                 <div
                   key={payment.value}
                   onClick={() => handlePaymentTypeToggle(payment.value)}
-                  className={`px-4 py-3 border rounded-md cursor-pointer transition-colors ${formData.paymentType.split(',').includes(payment.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
+                  className={`px-2 py-2 border rounded-md cursor-pointer transition-colors ${formData.paymentType.split(',').includes(payment.value) ? 'bg-blue-100 border-blue-500' : 'border-gray-300 hover:bg-gray-50'}`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center">
@@ -559,9 +561,9 @@ export default function CarAndMapLayout() {
                           </svg>
                         )}
                       </div>
-                      <span>{payment.label}</span>
+                      <span className='text-[14px]'>{payment.label}</span>
                     </div>
-                    <span className="text-sm text-gray-600">{payment.price}</span>
+                    <span className="text-[12px] text-gray-600">{payment.price}</span>
                   </div>
                 </div>
               ))}
@@ -572,13 +574,15 @@ export default function CarAndMapLayout() {
           <div className="flex space-x-4 pt-4 border-t border-gray-200 sticky bottom-0 bg-white pb-4">
             <button
               onClick={resetFilters}
-              className="flex-1 py-3 px-4 bg-gray-200 text-gray-800 rounded-md font-medium hover:bg-gray-300 transition-colors"
+              className="flex-1 py-3 px-4 mx-2 bg-gray-200 text-gray-800 rounded-md font-medium hover:bg-gray-300 transition-colors"
+              style={{ borderRadius: '8px' }}
             >
               Reset
             </button>
             <button
               onClick={toggleFilters}
-              className="flex-1 py-3 px-4 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors"
+              className="flex-1 py-3 px-4 mx-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition-colors"
+              style={{ borderRadius: '8px' }}
             >
               Apply Filters
             </button>
@@ -598,6 +602,7 @@ export default function CarAndMapLayout() {
           referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       </div>
+      <hr className='bg-gray-400 border-gray-400' />
     </>
   );
 }

@@ -229,34 +229,11 @@ const CarCard: React.FC<CarProps> = ({
   // Function to get icon components
   const getIconComponent = (iconName: string) => {
     switch (iconName) {
-      case 'Suitcase':
-        return <span className="material-icons">luggage</span>;
-      case 'People':
-        return <span className="material-icons">groups</span>;
-      case 'Gear':
-        return <span className="material-icons">settings</span>;
-      case 'Snow':
-        return <span className="material-icons">ac_unit</span>;
-      case 'FaMoneyBill':
-        return <span className="material-icons">attach_money</span>;
-      case 'Speedometer':
-        return <span className="material-icons">speed</span>;
-      case 'Shield':
-        return <span className="material-icons">security</span>;
-      case 'CreditCard':
-        return <span className="material-icons">credit_card</span>;
-      case 'PiEngineFill':
-        return <span className="material-icons">build</span>;
-      case 'FaPalette':
-        return <span className="material-icons">palette</span>;
-      case 'BsFillFuelPumpDieselFill':
-        return <span className="material-icons">local_gas_station</span>;
-      case 'GiCarDoor':
-        return <span className="material-icons">directions_car</span>;
-      case 'Info':
-        return <span className="material-icons">info</span>;
-      default:
-        return null;
+      case 'Suitcase': return <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#434343"><path d="M304-172q-24.75 0-42.37-17.63Q244-207.25 244-232v-408q0-24.75 17.63-42.38Q279.25-700 304-700h88v-68q0-24.75 17.63-42.38Q427.25-828 452-828h56q24.75 0 42.38 17.62Q568-792.75 568-768v68h88q24.75 0 42.38 17.62Q716-664.75 716-640v408q0 24.75-17.62 42.37Q680.75-172 656-172v12q0 11-8.5 19.5T628-132q-11 0-19.5-8.5T600-160v-12H360v12q0 11-8.5 19.5T332-132q-11 0-19.5-8.5T304-160v-12Zm88-108h28v-312h-28v312Zm148 0h28v-312h-28v312ZM420-700h120v-68q0-14-9-23t-23-9h-56q-14 0-23 9t-9 23v68Z"/></svg>;
+      case 'People': return <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#434343"><path d="M52-262v-26q0-35 38-58.5t97-23.5q8 0 18 1t22 3q-8 15-11.5 30.5T212-305v43H52Zm240 0v-39q0-21.84 13-39.92Q318-359 344-372t60-19.5q34-6.5 75.6-6.5 42.4 0 76.4 6.5 34 6.5 60 19.5t39 31.08q13 18.08 13 39.92v39H292Zm456 0v-42.7q0-17.08-3.5-32.19T734-366q13-2 22.5-3t17.5-1q59 0 96.5 23.5T908-288v26H748ZM186.73-407q-20.73 0-35.23-14.69Q137-436.38 137-457q0-20 14.69-34.5T187-506q20 0 35 14.5t15 34.8q0 19.7-14.45 34.7-14.45 15-35.82 15ZM774-407q-20 0-35-15t-15-34.7q0-20.3 15-34.8 15-14.5 35.19-14.5 20.81 0 35.31 14.5Q824-477 824-457q0 20.62-14.37 35.31Q795.25-407 774-407Zm-293.65-21Q448-428 425-450.75T402-506q0-33.15 22.75-55.58Q447.5-584 480-584q33.15 0 55.58 22.32Q558-539.35 558-506.35 558-474 535.68-451q-22.33 23-55.33 23Z"/></svg>;
+      case 'Gear': return <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#434343"><path d="m416-132-14-112q-21-6-46.5-20T313-294l-103 44-64-112 89-67q-2-12-3.5-25t-1.5-25q0-11 1.5-23.5T235-531l-89-67 64-110 102 43q20-17 43.5-30.5T401-716l15-112h128l14 113q26 9 45.5 20.5T644-665l106-43 64 110-93 70q4 14 4.5 25.5t.5 22.5q0 10-1 21.5t-4 28.5l91 68-64 112-104-45q-21 18-42 30.5T558-245l-14 113H416Zm62-260q37 0 62.5-25.5T566-480q0-37-25.5-62.5T478-568q-37 0-62.5 25.5T390-480q0 37 25.5 62.5T478-392Z"/></svg>;
+      case 'Snow': return <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#434343"><path d="M466-106v-202L310-154l-20-20 176-176v-116H350L174-290l-20-20 154-156H106v-28h202L154-650l20-20 176 176h116v-116L290-786l20-20 156 154v-202h28v202l156-154 20 20-176 176v116h116l176-176 20 20-154 156h202v28H652l154 156-20 20-176-176H494v116l176 176-20 20-156-154v202h-28Z"/></svg>;
+      default: return null;
     }
   };
 
@@ -600,14 +577,12 @@ const CarCard: React.FC<CarProps> = ({
         <section className='justify-center top-0 bottom-0 right-0 left-0 backdrop-blur-[1px] backdrop-brightness-90 z-[1000] fixed justify-items-center'>
           <section
             className="w-full max-w-[500px] relative top-[90px] left-[-20px] justify-center justify-self-center mx-auto"
-            data-aos="fade-up"
-            data-aos-delay="200"
           >
-            <button className='absolute top-3 right-3' onClick={() => setBookingForm(false)}><FaCross /></button>
+            <button className='absolute top-1 right-1' onClick={() => setBookingForm(false)}><svg xmlns="http://www.w3.org/2000/svg" height="26px" viewBox="0 -960 960 960" width="26px" fill="#434343"><path d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z" /></svg></button>
             <div className="bg-white rounded-[20px] shadow-xl p-6 overflow-hidden">
               <div className="flex mb-8">
                 <button
-                  className={`flex-1 py-4 bg-gray-100 text-gray-600 font-semibold transition-all duration-300 ${!isSignup ? 'bg-gradient-to-r from-blue-600 to-cyan-400 text-white rounded-t-[10px]' : ''
+                  className={`flex-1 py-4 bg-gray-100 text-gray-600 font-semibold ${!isSignup ? 'bg-cyan-400 text-white rounded-t-[10px]' : ''
                     }`}
                   style={{ backgroundColor: !isSignup ? '#155dfc' : '#f3f4f6', borderTopRightRadius: '8px', borderTopLeftRadius: '8px' }}
                   onClick={() => setIsSignup(false)}
@@ -616,7 +591,7 @@ const CarCard: React.FC<CarProps> = ({
                   Login
                 </button>
                 <button
-                  className={`flex-1 py-4 bg-gray-100 text-gray-600 font-semibold transition-all duration-300 ${isSignup ? 'bg-gradient-to-r from-blue-600 to-cyan-400 text-white rounded-t-[10px]' : ''
+                  className={`flex-1 py-4 bg-gray-100 text-gray-600 font-semibold ${isSignup ? 'bg-cyan-400 text-white rounded-t-[10px]' : ''
                     }`}
                   style={{ backgroundColor: isSignup ? '#155dfc' : '#f3f4f6', borderTopRightRadius: '8px', borderTopLeftRadius: '8px' }}
                   onClick={() => setIsSignup(true)}
@@ -625,7 +600,7 @@ const CarCard: React.FC<CarProps> = ({
                   Signup
                 </button>
               </div>
-              <div className="animate-[fadeIn_0.5s_ease]">
+              <div className="">
                 {!isSignup ? (
                   <div ref={loginFormRef}>
                     <div className="flex flex-row gap-2 mb-6">
@@ -712,11 +687,9 @@ const CarCard: React.FC<CarProps> = ({
                     </div>
                     <button
                       type="button"
-                      className="w-full p-3 bg-gradient-to-r from-blue-600 to-cyan-400 text-white rounded-lg font-semibold text-base hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
-                      ref={buttonRef}
-                      onMouseEnter={handleHover}
-                      onMouseLeave={handleLeave}
+                      className="w-full p-3 bg-blue-600 text-white rounded-lg font-semibold text-base hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
                       onClick={() => handleSubmit(false)}
+                      style={{ backgroundColor: '#155dfc' }}
                       aria-label="Login"
                     >
                       Login
@@ -791,10 +764,8 @@ const CarCard: React.FC<CarProps> = ({
                     </div>
                     <button
                       type="button"
-                      className="w-full p-3 bg-gradient-to-r from-blue-600 to-cyan-400 text-white rounded-lg font-semibold text-base hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
-                      ref={buttonRef}
-                      onMouseEnter={handleHover}
-                      onMouseLeave={handleLeave}
+                      className="w-full p-3 bg-cyan-600 text-white rounded-lg font-semibold text-base hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300"
+                      style={{ backgroundColor: '#155dfc' }}
                       onClick={() => handleSubmit(true)}
                       aria-label="Signup"
                     >

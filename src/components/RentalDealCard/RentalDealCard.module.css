@@ -949,7 +949,7 @@ input:checked + .sliderBox:before {
   position: fixed;
   top: 80px; /* Adjust based on your header height */
   right: 0;
-  width: 32.66%; /* Matches the width of the Filters section */
+  width: 34.66%; /* Matches the width of the Filters section */
   height: calc(100vh - 80px); /* Full viewport height minus header */
   overflow-y: auto;
   z-index: 800;
@@ -961,7 +961,7 @@ input:checked + .sliderBox:before {
   top: unset;
   bottom: 0;
   right: 0;
-  width: 32.66%; /* Matches the width of the Filters section */
+  width: 34.66%; /* Matches the width of the Filters section */
   height: auto;
   z-index: 800;
   transform: translateY(-50px); /* Matches mapAbsolute transform */
