@@ -368,7 +368,7 @@ const BookingPage: React.FC = () => {
                                                 <p><strong>Phone:</strong> 971562762345</p>
                                                 <p><strong>Mobile:</strong> 971562762345</p>
                                                 <p><strong>Address:</strong> Ground Floor, Mermaid Beach Hotel, Ajman Corniche, Ajman, UAE</p>
-                                                <p className="mt-2"><strong>Operation Hours:</strong> 9</p>
+                                                <p className="mt-2"><strong>Operation Hours:</strong> 19</p>
                                             </div>
                                         </div>
                                     </div>
