@@ -16,9 +16,10 @@ interface NavbarProps {
   onMenuToggle: () => void;
   onUserToggle: () => void;
   isHome: boolean;
+  luxury: boolean;
 }
 
-export default function Navbar({ onMenuToggle, onUserToggle, isHome }: NavbarProps) {
+export default function Navbar({ onMenuToggle, onUserToggle, isHome, luxury }: NavbarProps) {
   const [formData, setFormData] = useState({
     location: '',
     dateRange: [null, null] as [Date | null, Date | null],
@@ -103,7 +104,7 @@ export default function Navbar({ onMenuToggle, onUserToggle, isHome }: NavbarPro
 
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-white border-bottom" style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1000 }}>
+      <nav className={`navbar navbar-expand-lg ${ luxury === true ? styles.gradient : `bg-white`} border-bottom`} style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1000 }}>
         <div className="container-fluid">
           <div className="d-flex align-items-center">
             <button className={styles.hamburger} onClick={onMenuToggle}>
@@ -124,11 +125,12 @@ export default function Navbar({ onMenuToggle, onUserToggle, isHome }: NavbarPro
                 name="location"
                 value={formData.location}
                 onChange={handleInputChange}
-                className={styles.navbarSearchInput}
+                className={`${styles.navbarSearchInput} ${luxury === true ? `text-white`: ``}`}
                 aria-label="Search location"
                 />
                 <div className='w-[415px]'>
               <CustomDateRangePicker
+                luxury={true}
                 value={formData.dateRange}
                 onChange={handleDateRangeChange}
                 placeholder="Select date and time range"

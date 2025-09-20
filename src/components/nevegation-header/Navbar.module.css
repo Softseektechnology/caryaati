@@ -30,6 +30,14 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
   padding: 10px 0;
 }
+.gradient{
+  background:
+    /* subtle light rim to bottom-right to mimic studio lighting */
+    radial-gradient(1200px 600px at 80% 70%, rgba(255,255,255,0.06), rgba(255,255,255,0) 12%),
+    /* soft top-left to bottom-right deep gradient */
+    linear-gradient(135deg, #0b0d10 0%, #121417 30%, #2a2f33 60%, #485158 100%);
+  border-bottom: 2px solid #feb321;
+}
 
 .navbarSearchForm {
   display: flex;
@@ -39,7 +47,6 @@
   max-width: 900px;
   width: 100%;
   /* padding: 2px 18px; */
-  background: #ffffff;
   border-radius: 12px;
   /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
 }

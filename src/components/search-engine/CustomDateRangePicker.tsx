@@ -9,9 +9,10 @@ interface CustomDateRangePickerProps {
   onChange: (startDate: Date | null, endDate: Date | null) => void;
   placeholder: string;
   isCarCard: boolean;
+  luxury: boolean;
 }
 
-const CustomDateRangePicker: React.FC<CustomDateRangePickerProps> = ({ value, onChange, placeholder, isCarCard }) => {
+const CustomDateRangePicker: React.FC<CustomDateRangePickerProps> = ({ value, onChange, placeholder, isCarCard, luxury }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(value[0]);
   const [endDate, setEndDate] = useState<Date | null>(value[1]);
